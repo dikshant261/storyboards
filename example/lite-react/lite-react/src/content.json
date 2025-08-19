@@ -1,0 +1,24 @@
+{
+    "heading":{
+        "title": "Multiples Of a Number"
+    },
+    "box": {
+        "subheading": "Explore how many rods of different lengths can be made by joining multiple 2-unit rods.​",
+        "button": "Next​"
+    },
+    "multiples": {
+        "subheading": "The following are different lengths that can be made by joining multiple 2-unit rods.​",
+        "button": "Next",
+        "button2": "Previous"
+    },
+    "table": {
+        "subheading": "The following numbers can be expressed as:​",
+        "button": "Next",
+        "button2": "Previous"
+    },
+    "multiples2": {
+        "subheading": "Multiples Of 2​",
+        "button": "Next",
+        "button2": "Previous"
+    }
+}

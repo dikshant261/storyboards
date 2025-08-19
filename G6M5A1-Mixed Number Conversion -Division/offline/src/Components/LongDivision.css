@@ -1,0 +1,133 @@
+.ld-underline-correct {
+    background: #2ecc40 !important;
+}
+
+.ld-underline-incorrect {
+    background: lightcoral !important;
+}
+
+/* Correct and incorrect coloring */
+.ld-correct {
+    color: #2ecc40 !important;
+    /* green */
+}
+
+.ld-incorrect {
+    color: lightcoral !important;
+}
+
+:root {
+    --ld-bg: #0e3a4a;
+    /* deep teal/blue */
+    --ld-white: #ffffff;
+    /* white */
+    --ld-accent: #ff6f6f;
+    /* soft red/pink */
+}
+
+/* container */
+.ld-wrap {
+    position: relative;
+    padding: 1.67vh 0.83vw 2.04vh 0.83vw;
+
+    display: inline-block;
+    aspect-ratio: 16 / 9;
+    min-width: 15.9vw;
+}
+
+/* SVG sits behind text */
+.ld-bracket {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+/* shared number style */
+.ld-number {
+    position: absolute;
+    font-weight: 600;
+    line-height: 1;
+    user-select: none;
+}
+
+/* colors */
+.ld-divisor,
+.ld-dividend {
+    color: var(--ld-white);
+}
+
+.ld-quotient,
+.ld-subtract,
+.ld-mark {
+    color: var(--ld-accent);
+}
+
+/* positions (based on the SVG viewBox proportions) */
+.ld-divisor {
+    /* left of the curve */
+    left: 2vw;
+    top: 0.9vh;
+    font-size: 2.2vw
+}
+
+.ld-dividend {
+    /* inside the bracket just right of the curve */
+    left: 8vw;
+    top: 3vh;
+    font-size: 2.3vw
+}
+
+.ld-quotient {
+    /* above the top bar */
+    left: 7vw;
+    top: -4vh;
+    font-size: 2.3vw;
+}
+
+/* subtraction line block */
+.ld-subtract {
+    left: 6.6vw;
+    /* slightly left to accommodate the minus sign */
+    top: 9vh;
+    font-size: 2.3vw;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.6vw;
+    padding-bottom: 0.4vw;
+    position: absolute;
+}
+
+.ld-minus {
+    margin-right: 0.2vw;
+}
+
+.ld-subtract-num {
+    position: relative;
+}
+
+/* underline matching accent */
+.ld-underline {
+    position: absolute;
+    left: 2vw;
+    /* under the number (tuned for the default spacing) */
+    right: -0.2vw;
+    bottom: -0.2vw;
+    height: 0.3vw;
+    background: var(--ld-accent);
+    border-radius: 2px;
+    content: "";
+}
+
+/* mark (e.g., X) below */
+.ld-mark {
+    left: 9vw;
+    top: 15vh;
+    font-size: 2.5vw
+}
+
+/* make it look crisp on small sizes */
+@media (max-width: 42vw) {
+    .ld-wrap {
+        padding: 1.4vw;
+    }
+}

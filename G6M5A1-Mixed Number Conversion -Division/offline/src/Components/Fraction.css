@@ -1,0 +1,38 @@
+.fraction-groups {
+    display: flex;
+    gap: 1vw;
+}
+
+.fraction-yellow {
+    background: #ffe066;
+    border-radius: 0.5vw;
+    padding: 0.2vw 0.7vw;
+}
+
+.fraction-incorrect {
+    background: lightcoral;
+    border-radius: 0.5vw;
+    padding: 0.2vw 0.7vw;
+}
+.fraction-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap:2vw;
+    color: var(--primary-color);
+    font-size: 5vw;
+}
+
+.fraction-line {
+    background-color: #fff;
+    height: 0.2vw;
+    width: 100%;
+}
+
+.right-fraction{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

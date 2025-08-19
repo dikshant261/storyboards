@@ -1,0 +1,50 @@
+.mixed-numbers-container {
+  text-align: center;
+  padding: 50px 20px;
+  min-height: 100vh;
+  color: var(--primary-color);
+  
+}
+
+.title {
+  color: var(--secondary-color);
+  font-size: 3vw;
+  margin-bottom: 5vh;
+}
+
+.highlight-text {
+  color: var(--primary-color);
+  font-size: 2vw;
+  line-height: 1.5;
+}
+
+.orange-text {
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+.normal-text {
+  font-size: 1.5vw;
+  margin-top: 4vh;
+}
+
+.quote {
+  font-style: italic;
+}
+
+.start-btn {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  font-size: 1.8vw;
+  padding: 1vw 2vw;
+  margin-top: 3vh;
+  border: none;
+  border-radius: 0.8vw;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top:8vh;
+}
+
+.start-btn:hover {
+  background-color: #7a5b43;
+}

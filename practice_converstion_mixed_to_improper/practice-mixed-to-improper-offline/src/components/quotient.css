@@ -1,0 +1,14 @@
+.quotient-container{
+    background-color: #9bc0e3;
+    border: 0.1vw solid #fff;
+    border-radius: 0.2vw;
+    padding: 1.5vh;
+    font-size: 2vw;
+    color: #333333;
+    cursor: pointer;
+    text-shadow: 0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.2);
+}
+
+.quotient-container:hover {
+    background-color: #0091c4;
+}

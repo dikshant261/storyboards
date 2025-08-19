@@ -1,0 +1,17 @@
+.fade-section {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.fade-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+}
+.fade-out {
+        opacity: 0 !important;
+        transform: translateY(30px) !important;
+}
+.container {
+        background-color: var(--background-color);
+        height: 100vh;
+}

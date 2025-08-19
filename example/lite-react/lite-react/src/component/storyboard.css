@@ -1,0 +1,213 @@
+.container{
+    font-family: 'Arial', sans-serif;
+    margin: 1vh;
+    transition: all 0.3s ease;
+}
+.header{
+    width: 100%;
+    height: 10vh;
+    background-color:#8469c5;
+    text-align: center;
+    padding: 1vh;
+    color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vh;
+    border-radius: 1vh;
+}
+
+.storyboard-subheading{
+    width: 100%;
+    height: 12vh;
+    background-color: rgb(240, 245, 255);
+    text-align: center;
+    padding: 1vh;
+    color: #0e0707;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vh;
+    border-radius: 1vh;
+    transition: all 0.3s ease;
+}
+
+.tale-data{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+    flex-wrap: wrap;
+    padding: 2vh;
+    min-height: 30vh;
+}
+
+.table-data-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vh;
+    background-color: rgb(155,192,255);
+    border-radius: 1vh;
+    padding: 2vh;
+    position: relative;
+    min-width: 9vh;
+    min-height: 15vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.5s ease-out;
+    margin-top: 1vh;
+}
+
+.table-data-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.table-data-box span {
+    font-size: 2.5vh;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+.result-box{
+    position: absolute;
+    bottom: -2vh;
+    background-color: rgb(103, 78, 167);
+    border-radius: 1.5vh;
+    padding: 1.5vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 6vh;
+    text-align: center;
+}
+
+.result-box span {
+    font-size: 2vh;
+    font-weight: bold;
+    color: white;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add staggered animation for table boxes */
+.table-data-box:nth-child(1) { animation-delay: 0.1s; }
+.table-data-box:nth-child(2) { animation-delay: 0.2s; }
+.table-data-box:nth-child(3) { animation-delay: 0.3s; }
+.table-data-box:nth-child(4) { animation-delay: 0.4s; }
+.table-data-box:nth-child(5) { animation-delay: 0.5s; }
+.table-data-box:nth-child(6) { animation-delay: 0.6s; }
+.table-data-box:nth-child(7) { animation-delay: 0.7s; }
+.table-data-box:nth-child(8) { animation-delay: 0.8s; }
+.table-data-box:nth-child(9) { animation-delay: 0.9s; }
+.table-data-box:nth-child(10) { animation-delay: 1.0s; }
+
+.table-bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 4vh;
+    margin-top: 2vh;
+    background-color: rgb(240, 245, 255);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table-bottom-container .next-button {
+    width: 12vh;
+    height: 5vh;
+    background-color: rgb(103, 78, 167);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vh;
+    color: white;
+    font-weight: bold;
+    border: 0.5vh solid rgb(132, 101, 211);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.table-bottom-container .next-button:hover {
+    background-color: rgb(103, 78, 190);
+    transform: scale(1.1);
+}
+
+/* Component transition animations */
+.subheading-container {
+    transition: all 0.3s ease;
+}
+
+.content-container {
+    transition: all 0.3s ease;
+}
+
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.slide-in {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-out {
+    opacity: 0;
+    transform: translateX(100px);
+}
+
+/* Smooth page transitions */
+.container {
+    transition: all 0.3s ease;
+}
+
+/* Animation for component mounting */
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Apply animations to components */
+.content-container > * {
+    animation: slideInFromRight 0.5s ease-out;
+}
+
+.subheading-container > * {
+    animation: fadeInUp 0.5s ease-out;
+}

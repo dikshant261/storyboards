@@ -1,0 +1,45 @@
+:root {
+  --background-color: #000000;
+  --primary-color: #ffffff;
+  --secondary-color: #ffab40;
+  --success-color: #809438;
+  --success-second-color: #92d050;
+  --error-color: #ea9999;
+  --glass-background-color: rgb(255, 171, 64, 0.3);
+  --option-background:#eeeeee;
+  --option-text-color:#073763;
+  --option-border-color:#cccccc;
+  --option-hover-background: #787877;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+.container {
+        background-color: var(--background-color);
+        height: 100vh;
+        animation: fadeInOutlet 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+        /* For smoother appearance on mount */
+}
+
+@keyframes fadeInOutlet {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.98);
+        filter: blur(8px);
+    }
+    60% {
+        opacity: 0;
+        transform: translateY(-8px) scale(1.01);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}

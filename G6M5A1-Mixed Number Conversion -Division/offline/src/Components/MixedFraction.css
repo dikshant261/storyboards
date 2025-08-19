@@ -1,0 +1,62 @@
+.mf-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  font-family: Arial, sans-serif;
+  padding: 2vh;
+  border-radius: 1vw;
+}
+
+/* fraction layout */
+.mf-fraction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 5vh;
+  font-weight: bold;
+  color: white;
+}
+
+.mf-line {
+  width: 5vw;
+  height: 0.4vh;
+  background: white;
+  margin: 0.4vh 0;
+}
+
+/* left fraction (improper) */
+.mf-num,
+.mf-den {
+  font-size: 4vh;
+}
+
+/* equal sign */
+.mf-equal {
+  font-size: 4vh;
+  font-weight: bold;
+  color: white;
+}
+
+/* mixed number */
+.mf-mixed {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+/* quotient part */
+.mf-quotient {
+  font-size: 4.5vh;
+  font-weight: bold;
+  color: #3cc95c; /* green */
+}
+
+/* remainder fraction (styled differently) */
+.remainder {
+  color: #f9b227; /* orange */
+}
+
+.mf-mixed .mf-line {
+  background: #f9b227;
+}
