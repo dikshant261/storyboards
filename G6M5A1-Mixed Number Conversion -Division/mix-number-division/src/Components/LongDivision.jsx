@@ -1,57 +1,157 @@
-import React, { useEffect } from "react";
-import DivisionBracket from "./DivisionBracket.svg.jsx";
+import React, { useEffect, useState } from "react";
 import "./LongDivision.css";
-
-/**
- * Long-division layout using the SVG bracket.
- * Pass any numbers you like; strings also work.
- */
-const LongDivision = ({ currentQuotient, questionData }) => {
-  const [isCorrect, setIsCorrect] = React.useState(false);
-  const [mark, setMark] = React.useState(false);
-  const [showSubtract, setShowSubtract] = React.useState(false);
-  const [subtract, setSubtract] = React.useState(null);
-  let multiply = currentQuotient * questionData.divisor;
-  const [hasAttempted, setHasAttempted] = React.useState(false);
-  useEffect(() => {
-    if (currentQuotient !== null && currentQuotient !== undefined) {
-      setHasAttempted(true);
-    }
-    if (currentQuotient === questionData.correctAnswer) {
-      setSubtract(questionData.dividend - multiply);
-      setIsCorrect(true);
-      setMark(false);
-      setShowSubtract(true);
-    } else if (multiply > questionData.dividend) {
-      setMark(true);
-      setShowSubtract(false);
-      setSubtract(null);
-    } else if (multiply < questionData.dividend) {
-      setShowSubtract(true);
-      setMark(false);
-      setSubtract(questionData.dividend - multiply);
-    }
-  }, [currentQuotient, questionData]);
+const LongDivision = ({
+  currentQuotient,
+  questionData,
+  showLongDivision,
+  showSimplyAnswer,
+}) => {
+  let multiply = questionData.divisor * currentQuotient;
+  let remainder = questionData.dividend - multiply;
   return (
-    <div className="ld-wrap">
-      {/* SVG bracket */}
-      <DivisionBracket className="ld-bracket" />
+    <div className="division-box">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="23.9 17.9 4.2 2.2"
+        className={`svg-position ${
+          showLongDivision ? "bracket-draw-animate" : ""
+        }`}
+      >
+        <path
+          d="M 28 18 V 18 H 24 Q 25 19 24 20"
+          stroke="#fff"
+          stroke-width="0.1"
+          fill="none"
+        />
+      </svg>
 
-      {/* Numbers positioned relative to the bracket */}
-      <div className="ld-number ld-divisor">{questionData.divisor}</div>
-      <div className="ld-number ld-dividend">{questionData.dividend}</div>
-      <div className={`ld-number ld-quotient ${isCorrect ? 'ld-correct' : 'ld-incorrect'}`}>{currentQuotient}</div>
+      <div className="left-division">
+        <div
+          className="ld-source ld-divisor"
+          style={{
+            position: "absolute",
+            top: "0",
 
-      {currentQuotient !== null && (
-        <div className={`ld-number ld-subtract ${isCorrect ? 'ld-correct' : 'ld-incorrect'}`}>
-          <span className="ld-minus">-</span>
-          <span className="ld-subtract-num">{multiply}</span>
-          <span className={`ld-underline ${isCorrect ? 'ld-underline-correct' : 'ld-underline-incorrect'}`} />
+            left: questionData.dividend === 9 ? "-40%" : "-40%",
+          }}
+        >
+          <p>{questionData.divisor}</p>
+          {showSimplyAnswer && (
+            <span className="ld-copy ld-copy-divisor">
+              {questionData.divisor}
+            </span>
+          )}
         </div>
-      )}
+      </div>
+      <div
+        className="right-division"
+        style={{
+          marginLeft: "2vw",
+        }}
+      >
+        <div className="ld-source ld-quotient">
+          <p
+            className={`quotient-align ${
+              currentQuotient === questionData.correctAnswer ? "fly-right" : ""
+            }`}
+            style={{
+              backgroundColor:
+                currentQuotient === null
+                  ? "white"
+                  : currentQuotient === questionData.correctAnswer
+                  ? "transparent"
+                  : "transparent",
+              color:
+                currentQuotient === questionData.correctAnswer
+                  ? "var(--success-second-color)"
+                  : "lightcoral"
+            }}
+          >
+            {currentQuotient}
+          </p>
+          {showSimplyAnswer && (
+            <span className="ld-copy ld-copy-quotient">{currentQuotient}</span>
+          )}
+        </div>
 
-      {mark && <div className={`ld-number ld-mark ld-incorrect`}>X</div>}
-  {hasAttempted && subtract!==null && <div className={`ld-number ld-mark ${isCorrect ? 'ld-correct' : 'ld-incorrect'}`}>{subtract}</div>}
+        <p
+          style={{
+            marginTop: "1vh",
+            // marginLeft: "0.5vw",
+          }}
+        >
+          {questionData.dividend}
+        </p>
+        {currentQuotient !== null && (
+          <div
+            style={{
+              color:
+                currentQuotient === questionData.correctAnswer
+                  ? "var(--success-second-color)"
+                  : "lightcoral",
+              position: "relative",
+            }}
+          >
+            <p
+              style={{
+                position: "absolute",
+                color: "white",
+                bottom: "-1vh",
+                left: "-50%",
+                fontSize: "4vw",
+                color:
+                  currentQuotient === questionData.correctAnswer
+                    ? "var(--success-second-color)"
+                    : "lightcoral",
+              }}
+            >
+              -
+            </p>
+            <p className="multiply">{multiply}</p>
+          </div>
+        )}
+        {currentQuotient !== null && <div className="line-div"></div>}
+        {currentQuotient !== null &&
+          currentQuotient !== questionData.correctAnswer && (
+            <div
+              className="ld-source ld-remainder"
+              style={{
+                color: "lightcoral",
+                display:'flex',
+                justifyContent:'center',
+                alignItems:"center"
+              }}
+            >
+              {multiply > questionData.dividend ? (
+                <p>X</p>
+              ) : (
+                <p>{questionData.dividend - multiply}</p>
+              )}
+              {multiply <= questionData.dividend && showSimplyAnswer && (
+                <span className="ld-copy ld-copy-remainder">
+                  {questionData.dividend - multiply}
+                </span>
+              )}
+            </div>
+          )}
+
+        {currentQuotient === questionData.correctAnswer && (
+          <div
+            className="ld-source ld-remainder"
+            style={{
+              color:
+                currentQuotient === questionData.correctAnswer
+                  ? "var(--secondary-color)"
+                  : "lightcoral",
+            }}
+          >
+            <p>{remainder}</p>
+            {showSimplyAnswer && (
+              <span className="ld-copy ld-copy-remainder">{remainder}</span>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

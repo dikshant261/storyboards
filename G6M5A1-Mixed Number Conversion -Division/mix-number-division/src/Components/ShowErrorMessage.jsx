@@ -11,7 +11,7 @@ const ShowErrorMessage = ({ quotient, questionData }) => {
           Yay! There are {questionData.correctAnswer} complete wholes of{" "}
           {questionData.divisor} and then
           <br />
-          {remainder} parts of 5 left out as a remainder.
+          {remainder} part of 5 left out as a remainder.
         </div>
       ) : multiply > questionData.dividend ? (
         <div className="error">
@@ -20,9 +20,9 @@ const ShowErrorMessage = ({ quotient, questionData }) => {
           This is not proper division. Try again!
         </div>
       ) : (
-        <div className="success">
+        <div className="error">
           Oops! There is another complete whole of {questionData.divisor} in the{" "}
-          {rem2}<br /> parts that are left! This is not proper division. Try
+          {rem2}<br /> part that are left! This is not proper division. Try
           again!
         </div>
       )}

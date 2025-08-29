@@ -1,6 +1,4 @@
-body{
-  background-color: rgb(0, 0, 0, 0.2);
-}
+
 .container {
   display: flex;
   justify-content: center;
@@ -11,10 +9,14 @@ body{
 }
 
 .container-heading {
-  font-size: 2vw;
+  font-size: 2.5vw;
   color: var(--secondary-color);
   text-align: center;
-  height: 9vh;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
 }
 
 .main-content {
@@ -30,9 +32,9 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 65vh;
-  background-color: rgb(0, 0, 0, 0.3);
-  border: 0.3vw solid var(--secondary-color);
+  height: 63vh;
+  /* background-color:rgb(9, 36, 73,0.5);
+  border: 0.3vw solid rgb(13, 30, 55); */
   border-radius: 1vw;
   width: 30vw;
 }
@@ -40,10 +42,10 @@ body{
 .container-footer {
   font-size: 2vw;
   color: var(--secondary-color);
-  background-color: var(--glass-background-color);
+  /* background-color: var(--glass-background-color); */
   text-align: center;
   height: 13vh;
-  border: 0.2vw solid var(--secondary-color);
+  /* border: 0.2vw solid var(--secondary-color); */
   border-radius: 0.7vw;
   width: 93vw;
   display: flex;
@@ -56,15 +58,16 @@ body{
   justify-content: center;
   align-items: center;
   height: 8vh;
-  background-color: rgb(0, 0, 0, 0.2);
-  border: 0.1vw solid var(--secondary-color);
+  /* background-color: rgb(0, 0, 0, 0.2); */
+  /* border: 0.1vw solid var(--secondary-color); */
   border-radius: 0.7vw;
   margin-bottom: 0.5vh;
   width: 80vw;
+  position: relative;
 }
 
 .container-footer-heading {
-  font-size: 1.5vw;
+  font-size: 2.2vw;
   color: var(--secondary-color);
   text-align: center;
 }
@@ -73,7 +76,7 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.2vw;
+  padding: 1vw;
   color: black;
   background-color: var(--box-background);
   cursor: pointer;
@@ -97,12 +100,15 @@ body{
 
 .quotient-Button {
   padding: 0.4vw;
-  font-size: 2.5vw;
+  font-size: 3vw;
   cursor: pointer;
   background-color: var(--box-background);
   border: none;
   border-radius: 0.3vw;
   color: black;
+  width: 5vw;
+  font-weight: 700;
+  box-shadow: 0.3vw 0 0 rgb(0,0,0,0.8);
 }
 
 .quotient-Button:disabled {
@@ -112,6 +118,31 @@ body{
 
 .quotient-Button:hover {
   background-color: rgb(222, 222, 120);
+}
+
+/* Correct answer styling */
+.quotient-Button.correct-answer {
+    background-color: #90EE90 !important; /* lightgreen */
+    color: #006400 !important; /* dark green text */
+    transition: background-color 0.5s ease;
+}
+
+/* Incorrect answer styling - first red, then lightgray */
+.quotient-Button.incorrect-answer {
+    background-color: lightcoral !important; /* lightgray */
+    color: black !important; /* dark red text */
+    transition: background-color 0.5s ease;
+}
+
+/* Initial red state for incorrect answers */
+.quotient-Button.incorrect-answer:not(:disabled) {
+    background-color: #FF6B6B !important; /* red */
+}
+
+/* Disabled state styling */
+.quotient-Button:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
 }
 
 .error-button-align {
@@ -128,10 +159,11 @@ body{
   background-color: var(--box-background);
   text-align: center;
   position: absolute;
-  bottom: 1vh;
-  right: 1vh;
+  bottom: 0vh;
+  right: -13vh;
   cursor: pointer;
-  padding: 0.5vw;
+  width: 10vw;
+  height: 6vh;
   border-radius: 0.4vw;
   border: none;
 }
@@ -247,8 +279,8 @@ body{
 
 .line-heading-1 {
   position: absolute;
-  bottom: 70vh;
-  left: 70vw;
+  top: 12%;
+  left: 70%;
   font-size: 2vw;
   color: var(--success-second-color);
   font-size: 2vw;
@@ -256,8 +288,8 @@ body{
 
 .line-heading-2 {
   position: absolute;
-  bottom: 40vh;
-  left: 70vw;
+  bottom: 30%;
+  left: 60%;
   font-size: 2vw;
   color: var(--secondary-color);
   font-size: 2vw;
@@ -316,7 +348,6 @@ body{
 .footer-button:hover,
 .next-button:hover {
   transform: scale(1.05);
-  background-color: #4cafef;
   /* Adjust to match theme */
 }
 
@@ -363,4 +394,78 @@ body{
   to {
     text-shadow: 0 0 15px rgba(0, 150, 255, 0.9);
   }
+}
+.scale-up {
+  /* display: inline-block; */
+  transform: scale(0);
+  animation: scaleUp 1.3s ease-out forwards;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1); /* little bounce effect */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.slide-right {
+  position: relative;
+  animation: slideRight 2s ease-out forwards;
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(10px); /* overshoot for smoothness */
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.slide-left {
+  position: relative;
+  animation: slideLeft 2s ease-out forwards;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(100px); /* start off-screen right */
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(-10px); /* overshoot a little */
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);     /* settle in place */
+    opacity: 1;
+  }
+}
+.hand-img{
+  width: 5vw;
+  height: 7vh;
+  object-fit: contain;
+  position:absolute;
+  bottom: -3vh;
+  left:6vw;
+}
+.hand-img-1{
+  width: 5vw;
+  height: 7vh;
+  object-fit: contain;
+  position:absolute;
+  bottom: 0vh;
+  right:-4vw;
 }

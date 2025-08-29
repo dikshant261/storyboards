@@ -4,6 +4,9 @@ import Fraction from "./Fraction";
 import Option from "./Option";
 import ErrorAndSuccess from "./ErrorAndSuccess";
 import AnimationBoard from "./AnimationBoard";
+import correct from "../assets/correct.mp3";
+import wrong from "../assets/wrong.mp3";
+import hand from "../assets/tap.gif";
 const questions = [
   {
     remainder: 2,
@@ -66,21 +69,34 @@ const Main = ({ completeActivity }) => {
     numerator: null,
     denominator: null,
   });
-
+  // Track which options have been selected (by value string)
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const playCorrect = () => {
+    const audio = new Audio(correct);
+    audio.play();
+  };
+  const playWrong = () => {
+    const audio = new Audio(wrong);
+    audio.play();
+  };
   const handleError = (numerator, denominator) => {
     let [numiratorAns, denomiratorAns] = currentQuestion.correctOption
       .split("/")
       .map(Number);
-    console.log("Numerator:", numiratorAns, "Denominator:", denomiratorAns);
+    const valueStr = `${numerator}/${denominator}`;
+    setSelectedOptions((prev) =>
+      prev.includes(valueStr) ? prev : [...prev, valueStr]
+    );
     if (numerator === numiratorAns && denominator === denomiratorAns) {
-      console.log("Correct answer selected");
       setOptionData({ numerator, denominator });
+      playCorrect();
       setError("success");
       setShowTapNext(false);
       setErrorShow(true);
       setShowNext1(true);
     } else {
       setOptionData({ numerator, denominator });
+      playWrong();
       setError("error");
       setErrorShow(true);
     }
@@ -114,6 +130,8 @@ const Main = ({ completeActivity }) => {
     setErrorShow(false);
     setShowNext1(false);
     setError("");
+    setShowTapNext(true);
+    setSelectedOptions([]); // Reset selected options for next question
   };
 
   const handleReplayAnimation = () => {
@@ -155,12 +173,31 @@ const Main = ({ completeActivity }) => {
               <div className="option-item-grid">
                 {currentQuestion.options.map((option, index) => {
                   const [num, denom] = option.split("/").map(Number);
+                  const valueStr = `${num}/${denom}`;
+                  const isSelected = selectedOptions.includes(valueStr);
+                  const isCorrect =
+                    error === "success" &&
+                    option === currentQuestion.correctOption;
+                  const isWrong =
+                    error === "error" &&
+                    isSelected &&
+                    option !== currentQuestion.correctOption;
+                  let disabled = false;
+                  if (isSelected) {
+                    disabled = true;
+                  } else if (error === "success") {
+                    disabled = true;
+                  }
                   return (
                     <Option
                       key={index}
                       numerator={num}
                       denominator={denom}
                       onClick={() => handleError(num, denom)}
+                      disabled={disabled}
+                      isCorrect={isCorrect}
+                      isWrong={isWrong}
+                      isDashed={isSelected}
                     />
                   );
                 })}
@@ -168,7 +205,12 @@ const Main = ({ completeActivity }) => {
             </div>
           )}
           {showRestartButtonAnimation && (
-            <div className="restart-button-animation">
+            <div
+              className="restart-button-animation"
+              style={{
+                position: "relative",
+              }}
+            >
               <button
                 className="next-btn"
                 style={{
@@ -178,6 +220,7 @@ const Main = ({ completeActivity }) => {
               >
                 Replay <br /> transformation
               </button>
+              <img src={hand} alt="hand" className="hand-img" />
             </div>
           )}
           {errorShow && (
@@ -197,7 +240,12 @@ const Main = ({ completeActivity }) => {
           </h2>
         )}
         {showReplayHeading && (
-          <h2 className="footer-heading">
+          <h2
+            className="footer-heading"
+            style={{
+              fontSize: "2.3vw",
+            }}
+          >
             Tap ‘Replay’ to see the animation again, or ‘Next’ for another
             challenge.
           </h2>
@@ -205,14 +253,28 @@ const Main = ({ completeActivity }) => {
       </div>
       <div className="footer-two">
         {showNext1 && (
-          <button className="next-btn" onClick={handleNext}>
-            Next
-          </button>
+          <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <button className="next-btn" onClick={handleNext}>
+              Next
+            </button>
+            
+          </div>
         )}
         {showNextTwo && (
-          <button className="next-btn" onClick={handleNextQuestion}>
-            Next
-          </button>
+          <div
+            style={{
+              position: "relative",
+            }}
+          >
+            <button className="next-btn" onClick={handleNextQuestion}>
+              Next
+            </button>
+            
+          </div>
         )}
       </div>
     </div>

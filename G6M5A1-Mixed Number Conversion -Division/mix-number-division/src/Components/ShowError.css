@@ -1,6 +1,6 @@
 .error {
-    color: black;
-    font-size: 1.5vw;
+    color: white;
+    font-size: 2.5vw;
     text-align: center;
     background-color: var(--error-color);
     padding: 0.3vw;
@@ -8,10 +8,10 @@
 }
 
 .success {
-    color: black;
-    font-size: 1.5vw;
+    color: white;
+    font-size: 2.5vw;
     text-align: center;
-    background-color: var(--success-color);
+    background-color: var(--success-second-color);
     padding: 0.3vw;
     border-radius: 0.5vw;
 }

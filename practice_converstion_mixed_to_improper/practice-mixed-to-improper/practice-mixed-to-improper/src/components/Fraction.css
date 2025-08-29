@@ -1,0 +1,22 @@
+.fraction-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap:2vw;
+    color: var(--primary-color);
+    font-size: 8vw;
+}
+
+.fraction-line {
+    background-color: #fff;
+    height: 0.2vw;
+    width: 100%;
+}
+
+.right-fraction{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

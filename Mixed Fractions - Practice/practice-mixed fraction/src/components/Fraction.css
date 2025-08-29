@@ -5,7 +5,7 @@
     flex-direction: row;
     gap:2vw;
     color: var(--primary-color);
-    font-size: 5vw;
+    font-size: 7vw;
 }
 
 .fraction-line {
@@ -19,4 +19,42 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+/* Ensure animated and static lines overlap without affecting layout height */
+.line-wrapper{
+    position: relative;
+    width: 100%;
+    height: 0.2vw; /* match .fraction-line height */
+    overflow: visible;
+}
+
+.line-wrapper .fraction-line{
+    position: absolute;
+    left: 0;
+    top: 0;
+    will-change: transform, opacity, filter;
+}
+
+/* Animated duplicate of the fraction line that flies to the right */
+.fly-object{
+    animation: flyOutRight var(--fly-duration, 900ms) cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    transform-origin: left center;
+}
+
+@keyframes flyOutRight{
+    0%{
+        transform: translate(0, 0) scaleY(1);
+        opacity: 1;
+        filter: blur(0px);
+    }
+    60%{
+        transform: translate(var(--fly-x-60, 20vw), var(--fly-y-60, -6vh)) scaleY(1.05);
+        opacity: 0.85;
+        filter: blur(0.3px);
+    }
+    100%{
+        transform: translate(var(--fly-x-100, 40vw), var(--fly-y-100, -10vh)) scaleY(0.95);
+        opacity: 0;
+        filter: blur(0.6px);
+    }
 }

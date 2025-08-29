@@ -1,17 +1,17 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  // Main entry point should be index.js to mount React app
   entry: {
     main: "./src/index.js",
-    outlet: "./src/Outlet.jsx", // main entry for React app
-    components: "./src/components/index.js", // your custom components
+    outlet: "./src/Outlet.jsx",
+    components: "./src/components/index.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].js", // will produce reactBundle.js & components.js
+    filename: "[name].js",
     publicPath: "./",
   },
   module: {
@@ -28,17 +28,39 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"], // Extract CSS files
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff2?|ttf|eot)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/[name][ext]", // ensures assets go to /assets
+        },
+      },
+      {
+        test: /\.(mp3)$/i,
+        type: "asset/resource",
+        generator: {
+          filename: "assets/[name][ext]",
+        },
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
-      chunks: ["main", "outlet", "components"], // include main (React) and components bundles in HTML
+      chunks: ["main", "outlet", "components"],
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css", // will produce main.css & components.css
+      filename: "[name].css",
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "src/assets"),
+          to: "assets",
+        },
+      ],
     }),
   ],
   resolve: {
@@ -47,7 +69,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: "all",
-      minSize: 0, // allows splitting even small modules
+      minSize: 0,
     },
   },
   devServer: {

@@ -28,7 +28,7 @@
 /* left fraction (improper) */
 .mf-num,
 .mf-den {
-  font-size: 4vh;
+  font-size: 6vw;
 }
 
 /* equal sign */
@@ -47,9 +47,10 @@
 
 /* quotient part */
 .mf-quotient {
-  font-size: 4.5vh;
+  font-size: 5vw;
   font-weight: bold;
-  color: #3cc95c; /* green */
+   color:var(--success-second-color);
+  
 }
 
 /* remainder fraction (styled differently) */
@@ -59,4 +60,17 @@
 
 .mf-mixed .mf-line {
   background: #f9b227;
+}
+
+/* Merge targets pulse when pieces arrive */
+.mf-merge-ready .mf-merge-target-quotient,
+.mf-merge-ready .mf-merge-target-remainder,
+.mf-merge-ready .mf-merge-target-divisor {
+  animation: mfPulse 0.6s ease 1.8s both;
+}
+
+@keyframes mfPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+  50% { transform: scale(1.12); box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
 }

@@ -1,0 +1,44 @@
+.error-align{
+    margin: 5vh 2vw;
+}
+.error-message{
+    background-color: var(--error-color);
+    color:black;
+    font-size: 2vw;
+    border-radius: 0.8vw;
+    padding: 1vh 2vw;
+    text-align: center;
+}
+.error-message-align{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap:2vw;
+}
+.success-message{
+    background-color: var(--success-color);
+    color:black;
+    font-size: 2vw;
+    border-radius: 0.8vw;
+    padding: 1vh 2vw;
+}
+.align-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.2vh;
+}
+.align-message-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.2vh;
+}
+.align-line{
+    width:2vw;
+    height: 0.1vh;
+    background-color: black;
+}

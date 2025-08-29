@@ -1,0 +1,42 @@
+.error-message {
+    background-color: var(--error-color);
+    font-size: 2vw;
+    border-radius: 0.3vw;
+    color: var(--primary-color);
+    padding: 0.3vw;
+    margin: 0.2vw;
+    text-align: center;
+    /* position: fixed;
+    top: -30%;
+    right: 2%; */
+}
+
+.error-2 {
+       background-color: var(--error-color);
+    font-size: 1.5vw;
+    border-radius: 0.3vw;
+    color: var(--primary-color);
+    padding: 0.3vw;
+    margin: 0.2vw;
+    text-align: center;
+    position: fixed;
+    top: 2%;
+    right: 2%;
+    white-space: pre-line;
+    width: 90%;
+}
+
+.success {
+    background-color: var(--success-second-color);
+    font-size: 1.5vw;
+    border-radius: 0.5vw;
+    color: var(--primary-color);
+    padding: 0.3vw;
+    margin: 0.2vw;
+    text-align: center;
+    position: fixed;
+    top: 4%;
+    right: 4%;
+    white-space: pre-line;
+    width: 90%;
+}

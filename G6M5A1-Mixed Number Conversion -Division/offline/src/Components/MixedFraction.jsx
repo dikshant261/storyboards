@@ -1,12 +1,12 @@
 import React from "react";
 import "./MixedFraction.css";
 
-const MixedFraction = ({ numerator, denominator }) => {
+const MixedFraction = ({ numerator, denominator, showSimplyAnswer }) => {
   const quotient = Math.floor(numerator / denominator);
   const remainder = numerator % denominator;
 
   return (
-    <div className="mf-container">
+    <div className={`mf-container ${showSimplyAnswer ? "mf-merge-ready" : ""}`}>
       {/* Improper fraction */}
       <div className="mf-fraction">
         <div className="mf-num">{numerator}</div>
@@ -18,13 +18,13 @@ const MixedFraction = ({ numerator, denominator }) => {
 
       {/* Mixed number */}
       <div className="mf-mixed">
-        <div className="mf-quotient">{quotient}</div>
+        <div className="mf-quotient mf-merge-target-quotient">{quotient}</div>
         <div className="mf-fraction">
-          <div className="mf-num remainder" style={{
+          <div className="mf-num remainder mf-merge-target-remainder" style={{
             borderBottom:'none'
           }}>{remainder}</div>
           <div className="mf-line"></div>
-          <div className="mf-den remainder"
+          <div className="mf-den remainder mf-merge-target-divisor"
           style={{
             borderBottom:'none'
           }}>{denominator}</div>

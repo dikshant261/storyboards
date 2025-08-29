@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunklite_react=self.webpackChunklite_react||[]).push([[892],{564:(s,e,t)=>{s.exports=t.p+"assets/correct.mp3"},949:(s,e,t)=>{s.exports=t.p+"assets/tap.gif"},957:(s,e,t)=>{s.exports=t.p+"assets/wrong.mp3"}}]);

@@ -1,72 +1,87 @@
 .activity-container {
-    color: white;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    padding: 3vw;
-    max-width: 70vw;
-    margin: auto;
-    height: 100vh;
+  color: white;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 3vw;
+  /* max-width: 70vw; */
+  /* margin: auto; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .title {
-    font-size: 3vw;
-    font-weight: bold;
-    color: orange;
+  font-size: 3vw;
+  font-weight: bold;
+  color: orange;
 }
 
 .description {
-    font-size: 1.3vw;
-    margin-top: 2.5vw;
-    line-height: 1.5;
+  font-size: 2.5vw;
+  margin-top: 2.5vw;
+  line-height: 1.5;
 }
 
 .formula {
-    margin: 2.5vw 0;
-    font-size: 2vw;
+  margin: 2.5vw 0;
+  font-size: 2vw;
 }
 
 .highlight {
-    color: orange;
-    font-weight: bold;
+  color: orange;
+  font-weight: bold;
 }
 
 .fraction {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    margin-left: 0.8vw;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  margin-left: 0.8vw;
 }
 
 .remainder {
-    display: block;
-    border-bottom: 0.2vw solid white;
-    padding: 0 0.4vw;
-    font-weight: bold;
-    color: orange;
+  display: block;
+  border-bottom: 0.2vw solid white;
+  padding: 0 0.4vw;
+  font-weight: bold;
+  color: orange;
 }
 
 .denominator {
-    display: block;
-    padding: 0 0.4vw;
-    font-weight: bold;
+  display: block;
+  padding: 0 0.4vw;
+  font-weight: bold;
 }
 
 .instruction {
-    margin: 2.5vw 0;
-    font-size: 1.2vw;
+  margin: 2.5vw 0;
+  font-size: 2vw;
 }
 
 .start-over-btn {
-    background-color: #8b5e3c;
-    border: none;
-    padding: 1.5vw 2.5vw;
-    font-size: 1vw;
-    color: white;
-    border-radius: 0.8vw;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: var(--secondary-color);
+  border: none;
+  padding: 1.5vw 2.5vw;
+  font-size: 2vw;
+  color: rgb(13, 13, 13);
+  border-radius: 0.8vw;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .start-over-btn:hover {
-    background-color: #a9744d;
+  background-color: #a9744d;
+}
+.hand-align {
+  position: relative;
+}
+.hand-img {
+  width: 5vw;
+  height: 7vh;
+  object-fit: contain;
+  position: absolute;
+  bottom: -3vh;
+  left: 6vw;
 }

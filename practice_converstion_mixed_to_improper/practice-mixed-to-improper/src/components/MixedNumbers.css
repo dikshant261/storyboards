@@ -1,9 +1,11 @@
 .mixed-numbers-container {
   text-align: center;
-  padding: 50px 20px;
   min-height: 100vh;
   color: var(--primary-color);
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .title {
@@ -11,10 +13,11 @@
   font-size: 3vw;
   margin-bottom: 5vh;
 }
-
+.content-size{
+  font-size: 2.3vw;
+}
 .highlight-text {
   color: var(--primary-color);
-  font-size: 2vw;
   line-height: 1.5;
 }
 
@@ -24,17 +27,18 @@
 }
 
 .normal-text {
-  font-size: 1.5vw;
   margin-top: 4vh;
 }
 
 .quote {
   font-style: italic;
 }
-
+.hand-align{
+  position: relative;
+}
 .start-btn {
   background-color: var(--secondary-color);
-  color: var(--primary-color);
+  color: black;
   font-size: 1.8vw;
   padding: 1vw 2vw;
   margin-top: 3vh;
@@ -43,8 +47,17 @@
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   margin-top:8vh;
+  font-weight: 800;
 }
 
 .start-btn:hover {
   background-color: #7a5b43;
+}
+.hand-img{
+  width: 5vw;
+  height: 7vh;
+  object-fit: contain;
+  position:absolute;
+  bottom: -3vh;
+  left:3vw;
 }

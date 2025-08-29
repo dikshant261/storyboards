@@ -1,6 +1,6 @@
 .error-message {
     color: black;
-    font-size: 1.5vw;
+    font-size: 2.5vw;
     background-color: lightcoral;
     padding: 0.1vw;
     margin-left: 0.4vw;
@@ -10,7 +10,7 @@
 
 .success-message {
     color: black;
-    font-size: 1.5vw;
+    font-size: 3vw;
     background-color:var(--success-second-color);
     padding: 0.2vw;
     margin-left: 0.4vw;

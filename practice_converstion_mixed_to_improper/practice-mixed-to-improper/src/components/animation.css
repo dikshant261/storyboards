@@ -7,6 +7,7 @@
 .mixed-fraction {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .whole-number {
@@ -17,16 +18,35 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-direction: column;
 }
 
 .numerator {
     border-bottom: 2px solid white;
     padding: 0 5px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
 }
+
 
 .denominator {
     padding: 0 0.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
 }
+
+.improper-fraction .divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
 
 .equals {
     margin: 0 1.5vw;
@@ -46,12 +66,14 @@
 }
 
 .divider {
-    border-top: 0.2vw solid white;
-    padding: 0 1vw;
+    background-color: white;
+    height: 1vh;
     margin-top: 0.5vw;
     width: 100%;
 }
-
+.instruction-align{
+    position: relative;
+}
 .h-line {
     width: 3vw;
     height: 0.3vh;
@@ -74,11 +96,12 @@
 }
 
 .x-icon {
-    font-size: 1vw;
+    font-size: 4vw;
     position: absolute;
-    color: var(--secondary-color);
-    top: 54vh;
-    left: 17vw;
+    color: #ffab40;
+    top: 0vh;
+    left: 0vw;
+    color: white;
 }
 .h-line-1 {
     width: 3vw;
@@ -105,8 +128,8 @@
     font-size: 2vw;
     position: absolute;
     color: var(--secondary-color);
-    top: 30vh;
-    left: 16.8vw;
+    bottom: 10%;
+    left: 0vw;
 }
 
 /* .arrow {

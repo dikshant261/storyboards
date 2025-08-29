@@ -1,0 +1,226 @@
+.page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.page-container-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25vw;
+    height: 100vh;
+}
+
+.page-container-left p {
+    font-size: 2vw;
+    color: white;
+    margin-bottom: 2vw;
+    text-align: center;
+}
+
+.page-container-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.page-container-right-main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.page-container-right-main-car {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 28%;
+    width: 60vw;
+    height: 70vh;
+}
+
+.page-container-right-main-keypad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 15vw;
+    height: 70vh;
+    /* border: 0.2vw solid wheat; */
+}
+
+.subtraction-align-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.subtraction-minus-line {
+    width: 2vw;
+    height: 0.9vh;
+    background-color: white;
+    border: 0.1 solid rgb(179, 175, 175);
+}
+
+.subtraction-image-box {
+    width: 5vw;
+    height: 8vh;
+    border: 0.3vw solid #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 2.5vw;
+    background-color: lightgray;
+    box-shadow:
+        inset -3px -3px 5px #bbb,
+        /* top-left highlight */
+        inset 3px 3px 5px #444;
+}
+
+.correct {
+    border-color: green;
+    background-color: #98e498;
+    box-shadow:
+        inset -3px -3px 5px rgb(49, 133, 49),
+        /* top-left highlight */
+        inset 3px 3px 5px #81dd81;
+
+}
+
+.wrong {
+    border-color: red;
+    background-color: #ec4141;
+    box-shadow:
+        inset -3px -3px 5px rgb(139, 34, 34),
+        /* top-left highlight */
+        inset 3px 3px 5px #d43133;
+}
+
+.page-container-right-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75vw;
+    height: 18vh;
+    /* border: 0.2vw solid wheat; */
+}
+
+.page-container-right-footer h3 {
+    font-size: 2.5vw;
+    color: white;
+    text-align: center;
+}
+
+.start-button {
+    width: 11vw;
+    height: 7vh;
+    font-size: 2.4vw;
+    color: black;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    transition: 0.4s;
+    font-weight: 900;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-button:hover {
+    background-color: rgb(191, 177, 97);
+}
+
+.slide-right {
+    animation: slide-right 1.3s ease-in forwards;
+}
+
+@keyframes slide-right {
+    0% {
+        opacity: 0;
+        transform: translate(6vw, 12vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0vw, 0vh);
+    }
+}
+.slide-left {
+    animation: slide-left 1.3s ease-in forwards;
+}
+
+@keyframes slide-left {
+    0% {
+        opacity: 0;
+        transform: translate(-6vw, -10vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0vw, 0vh);
+    }
+}
+
+.slide-mid {
+    animation: slide-mid 1.3s ease-in forwards;
+}
+
+@keyframes slide-mid {
+    0% {
+        opacity: 0;
+        transform: translate(0vw, -6vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0vw, 0vh);
+    }
+}
+
+.scale-up {
+    animation:scale-up 1.3s ease-in forwards;
+}
+
+@keyframes scale-up {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform:scale(1);
+    }
+}
+
+.show-in {
+    animation:show-in 1.8s ease-in forwards;
+}
+
+@keyframes show-in {
+    0% {
+        opacity: 0;
+        
+    }
+    30%{
+        opacity: 0.4;
+    }
+    60%{
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 1;
+    }
+}

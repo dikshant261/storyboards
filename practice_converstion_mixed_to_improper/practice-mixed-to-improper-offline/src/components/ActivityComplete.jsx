@@ -1,40 +1,41 @@
 import React from "react";
-import "./ActivityCompleted.css";
-
-const ActivityCompleted = () => {
+import "./MixedNumbers.css";
+import hand from '../assets/tap.gif';
+const ActivityComplete = () => {
+  const refreshPage = () => {
+    window.location.reload(); // Reloads the current page
+  };
   return (
-    <div className="activity-container">
+    <div className="mixed-numbers-container">
       <h1 className="title">Activity Completed!</h1>
+      <div className="content-size">
+      <p className="highlight-text">
+        <strong className="orange-text">Mixed Numbers</strong> and{" "}
+        <strong className="orange-text">Improper Fractions</strong>
+        are used
+        <br /> to denote numbers that are <br />
+        <span className="orange-text">greater than One Whole!</span>
+      </p>
 
-      <p className="description">
-        Improper Fractions and Mixed Numbers represents numbers that are greater than One Whole!
+      <p className="normal-text">
+        From a mixed number, we simply multiply the denominator
+        <br /> with the whole number and add the numerator
         <br />
-        Every improper fraction can be converted to a mixed number using division:
+        to get the numerator of the improper fraction!
       </p>
 
-      <div className="formula">
-        <p>
-          <span className="highlight">Numerator</span> ÷{" "}
-          <span className="highlight">Denominator</span> gives us,
-        </p>
-        <p>
-          Mixed Number = Quotient{" "}
-          <span className="fraction">
-            <span className="remainder">Remainder</span>
-            <span className="denominator">Denominator</span>
-          </span>
-        </p>
-      </div>
-
-      <p className="instruction">
-        Tap “Start Over” to repeat this activity...
+      <p className="normal-text">
+        Tap <span className="quote">“Start Over”</span> to repeat this activity…
       </p>
-
-      <button className="start-over-btn" onClick={() => window.location.reload()}>
+</div>
+     <div className="hand-align">
+      <button className="start-btn" onClick={refreshPage}>
         Start Over
       </button>
+      <img src={hand} alt="hand" className="hand-img"/>
+      </div>
     </div>
   );
 };
 
-export default ActivityCompleted;
+export default ActivityComplete;

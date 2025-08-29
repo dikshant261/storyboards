@@ -21,7 +21,7 @@
     flex-direction: row;
     gap:2vw;
     color: var(--primary-color);
-    font-size: 5vw;
+    font-size: 7vw;
 }
 
 .fraction-line {
@@ -35,4 +35,36 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+/* Fly and merge animation when starting long division */
+/* Only animate a copy of the fraction line, keep items static */
+.fraction-line {
+    position: relative;
+}
+
+.fraction-line-copy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0.2vw;
+    background-color: #fff;
+    transform-origin: left center;
+    animation: lineFlyOut 1.2s ease-in-out forwards;
+}
+
+@keyframes lineFlyOut {
+    0% {
+        transform: translate(0, 0) scaleX(1);
+        opacity: 1;
+    }
+    /* 40% {
+        transform: translate(-10vw, -2vh) scaleX(1.1);
+        opacity: 1;
+    } */
+    100% {
+        transform: translate(-30vw, -7vh) scaleX(0.2);
+        opacity: 0;
+    }
 }

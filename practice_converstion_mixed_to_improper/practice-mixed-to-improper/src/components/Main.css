@@ -7,7 +7,7 @@
 }
 
 .main-heading {
-    font-size: 6vh;
+    font-size: 5vh;
     height: 8vh;
     color: var(--secondary-color);
     font-weight: bold;
@@ -21,6 +21,7 @@
     justify-content: center;
     color: var(--primary-color);
     gap: 2vw;
+    /* height: 100vh; */
 }
 
 .fraction-part {
@@ -29,7 +30,7 @@
     align-items: center;
     width: 70vw;
     height: 70vh;
-    border: 0.3vw solid var(--secondary-color);
+    /* border: 0.3vw solid var(--secondary-color); */
     border-radius: 1vw;
 }
 
@@ -40,9 +41,9 @@
     flex-direction: column;
     width: 25vw;
     height: 70vh;
-    border: 0.3vw solid var(--secondary-color);
+    /* border: 0.3vw solid var(--secondary-color); */
     border-radius: 1vw;
-    background-color: var(--glass-background-color);
+    /* background-color: var(--glass-background-color); */
 }
 
 /* .option-align{
@@ -52,25 +53,25 @@
 } */
 .option-item-grid {
     display: grid;
-    grid-template-columns: repeat(2, 20vh);
+    grid-template-columns: repeat(2, 24vh);
     justify-content: center;
-    grid-template-rows: repeat(2, 6vw);
+    grid-template-rows: repeat(2, 9vw);
     gap: 0.5vw;
 }
 
 .footer-one {
     width: 97%;
     height: 8vh;
-    border: 0.2vw solid var(--secondary-color);
+    /* border: 0.2vw solid var(--secondary-color); */
     border-radius: 0.7vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(38, 37, 37, 0.8);
+    /* background-color: rgba(38, 37, 37, 0.8); */
 }
 
 .footer-heading {
-    font-size: 4vh;
+    font-size: 6vh;
     color: var(--secondary-color);
     font-weight: bold;
     margin: 0;
@@ -78,7 +79,7 @@
 
 .footer-two {
     width: 97%;
-
+    height: 7vh;
     display: flex;
     justify-content: end;
     align-items: center;

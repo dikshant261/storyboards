@@ -1,0 +1,127 @@
+/* .container {
+    background-color: var(--background-color);
+    height: 100vh;
+} */
+
+.container-flow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+}
+
+.left-flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-color);
+    height: 95vh;
+    width: 30vw;
+    padding: 1vw;
+
+}
+
+.left-flow p {
+    text-align: center;
+    font-size: 2.5vw;
+}
+
+.adjust-heading {
+    margin-top: 2vh;
+}
+
+.car-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+}
+
+
+
+.car-containe-item-one {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: rgb(0, 0, 0, 0.3);
+    height: 78vh;
+    width: 70vw;
+    border-radius: 0.4vw;
+    flex-direction: column;
+    gap: 12vw;
+    padding-left: 3vw;
+}
+
+.car-containe-item-one h2 {
+    color: var(--primary-color);
+    font-size: 2vw;
+    padding-left: 9vw;
+    padding-top: 2vh;
+}
+
+.heading-align {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.car-box {
+    width: 4vw;
+    height: 7vh;
+    border: 0.3vw solid #666;
+    background-color: lightgray;
+    box-shadow:
+        inset -3px -3px 5px #bbb,
+        /* top-left highlight */
+        inset 3px 3px 5px #444;
+}
+
+.footer-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-color);
+    height: 15vh;
+    width: 70vh;
+    font-size: 1.5vw;
+}
+
+.start-btn {
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 0.3vw;
+    padding: 0.7vw;
+    font-size: 2vw;
+    color: #000;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    position: absolute;
+    top: 38vh;
+    right: 7vh;
+}
+
+.start-btn:hover {
+    background-color: rgb(234, 170, 92);
+}
+
+.fade-slide-in {
+  opacity: 0;
+  transform: translateY(20px); /* start slightly below */
+  animation: fadeSlideIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

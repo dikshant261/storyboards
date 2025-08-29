@@ -1,0 +1,59 @@
+.arrow-align-one {
+    position: absolute;
+    width: 4vw;
+    height: 20vh;
+    top: -31%;
+    left: -11%;
+}
+
+.arrow-align-two {
+    position: absolute;
+    width: 5vw;
+    height: 20vh;
+    top: -40%;
+    right: -19%;
+    transform: rotate(90deg);
+}
+
+.arrow-line {
+    position: absolute;
+    bottom: -101%;
+    left: 51%;
+    height: 8vh;
+    width: 0.3vw;
+    background-color: gold;
+}
+
+.total-number {
+    font-size: 1.5vw;
+    padding: 0.3vw;
+    border: 0.2vw solid gold;
+    position: absolute;
+    bottom: -82%;
+    color: white;
+    text-align: center;
+    left: -31%;
+}
+
+.take-away {
+    font-size: 1.5vw;
+    padding: 0.3vw;
+    border: 0.2vw solid gold;
+    position: absolute;
+    bottom: -153%;
+    color: white;
+    text-align: center;
+    left: 32%;
+}
+
+.ramains {
+    font-size: 1.5vw;
+    padding: 0.3vw;
+    border: 0.2vw solid gold;
+    position: absolute;
+    top: 127%;
+    color: white;
+    text-align: center;
+    /* width: 8vw; */
+    right: -38%;
+}

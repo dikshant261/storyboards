@@ -1,0 +1,135 @@
+.fade-in {
+    animation: fadeIn 1s ease-in 1s;
+    /* 1s delay */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.division-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-size: 4vw;
+    color: white;
+    gap: 1vw;
+    position: relative;
+}
+
+.left-division {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 16vh;
+    /* margin-right: 3vw; */
+}
+
+.right-division {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    align-items: end;
+}
+
+.quotient-align {
+    position: absolute;
+    top: -8vh;
+    right: 0vw;
+    /* left: 0; */
+    font-size: 4vw;
+    background-color: #fff;
+    color: black;
+    border-radius: 0.3vw;
+    padding: 0.2vw;
+    width: 4vw;
+    text-align: center;
+    height: 7vh;
+    transition: background-color 0.3s ease;
+
+}
+
+.line-div {
+    height: 0.4vh;
+    width: 100%;
+    background-color: white;
+}
+
+.multiply {
+    padding-left: 0vh;
+}
+
+.svg-position {
+    position: absolute;
+    top: 0vh;
+    left: 1vw;
+    height: 12vh;
+    width: 9vw;
+}
+
+.rem-box-div {
+    background-color: white;
+    width: 4vw;
+    height: 6vh;
+    border-radius: 0.4vw;
+    margin-top: 1vh;
+}
+
+.rem-fly {
+    transition: background-color 0.3s ease;
+}
+
+.fly-right {
+    animation: flyOutIn 1.5s ease-in-out;
+}
+
+/* Keyframes: move → pop → back */
+@keyframes flyOutIn {
+    0% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+
+    40% {
+        transform: translateX(12vw) scale(1.2);
+        opacity: 0.9;
+    }
+
+    80% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+.fly-object {
+  position: relative;
+  font-size: 3rem;
+  animation: flyOut 3s ease-in-out forwards;
+}
+
+@keyframes flyOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(300px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(500px);
+    opacity: 0;
+  }
+}

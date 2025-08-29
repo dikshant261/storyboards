@@ -8,9 +8,11 @@ const ErrorAndSuccess = ({ optionData, error }) => {
       {error === "success" ? (
         <p className="success-message">Success! The answer is correct.</p>
       ) : optionData.numerator < optionData.denominator ? (
-        <p className="error-message">
+        <p className="error-message" style={{
+          fontSize:"1.6vw"
+        }}>
           Opps!{" "}
-          <span className="align-message error-message-align">
+          <span className="align-message">
             <span>{optionData.numerator}</span>
             <span className="align-line"></span>
             <span>{optionData.denominator}</span>

@@ -5,6 +5,10 @@ import LongDivision from "./LongDivision";
 import Fraction from "./Fraction";
 import ShowErrorMessage from "./ShowErrorMessage";
 import MixedFraction from "./MixedFraction";
+import DynamicText from "./DynamicText";
+import correct from "../assets/correct.mp3";
+import wrong from "../assets/wrong.mp3";
+import hand from '../assets/tap.gif';
 
 const question = [
   {
@@ -63,18 +67,37 @@ const Main = ({ activity }) => {
     setShowTapQuotient(true);
     setShowQuotientOption(true);
   };
-
+  const playCorrect = () => {
+    const audio = new Audio(correct);
+    audio.play();
+  };
+  const playWrong = () => {
+    const audio = new Audio(wrong);
+    audio.play();
+  };
   const handleQuotientOption = (option) => {
     setShowError(true);
     setDisabledOptions((prev) => new Set(prev).add(option));
     if (option === currentQuestion.correctAnswer) {
+      playCorrect();
       setCurrentQuotient(option);
+      
       setShowCorrectAnswer(true);
       setShowNextOne(true);
       setShowTapQuotient(false);
     } else {
+      playWrong();
       setCurrentQuotient(option);
       setShowCorrectAnswer(false);
+      
+      // Add delay before changing incorrect answer from red to lightgray
+      setTimeout(() => {
+        setDisabledOptions((prev) => {
+          const newSet = new Set(prev);
+          newSet.add(option);
+          return newSet;
+        });
+      }, 500); // 500ms delay to show red first
     }
   };
   const handleNextOne = () => {
@@ -119,11 +142,11 @@ const Main = ({ activity }) => {
     if (showAnimation) {
       const timer1 = setTimeout(() => {
         setAnimatioStepOne(true);
-      }, 2000);
+      }, 1000);
       const timer2 = setTimeout(() => {
         setAnimatioStepTwo(true);
         setShowNextTwo(true);
-      }, 4000);
+      }, 2000);
       return () => {
         clearTimeout(timer1);
         clearTimeout(timer2);
@@ -180,7 +203,11 @@ const Main = ({ activity }) => {
         )}
       </div>
       <div className="main-content fade-in">
-        <div className="main-content-item fade-in">
+        <div
+          className={`main-content-item  ${
+            showLongDivision ? "slide-left" : ""
+          }`}
+        >
           <Boxes
             currentQuotient={currentQuotient}
             dividend={currentQuestion.dividend}
@@ -190,20 +217,27 @@ const Main = ({ activity }) => {
         </div>
 
         {showLongDivision && (
-          <div className="main-content-item fade-in">
+          <div className="main-content-item  scale-up">
             <LongDivision
               currentQuotient={currentQuotient}
               questionData={currentQuestion}
+              showLongDivision={showLongDivision}
+              showSimplyAnswer={showSimplyAnswer}
             />
           </div>
         )}
-        <div className="main-content-item fade-in">
+        <div
+          className={`main-content-item  ${
+            showLongDivision ? "slide-right" : ""
+          }`}
+        >
           {showSingleFraction && (
             <Fraction
               numerator={currentQuestion.dividend}
               denominator={currentQuestion.divisor}
               questionData={currentQuestion}
               currentQuotient={currentQuotient}
+              showLongDivision={showLongDivision}
             />
           )}
           {showSimplyAnswer && (
@@ -211,6 +245,7 @@ const Main = ({ activity }) => {
               <MixedFraction
                 numerator={currentQuestion.dividend}
                 denominator={currentQuestion.divisor}
+                showSimplyAnswer={showSimplyAnswer}
               />
             </div>
           )}
@@ -218,17 +253,26 @@ const Main = ({ activity }) => {
       </div>
       <div className="container-footer fade-in">
         {startDivision && (
-          <div>
+          <div style={{
+            position:"relative"
+          }}>
             <button className="footer-button" onClick={handleStartDivision}>
               Express as Division
             </button>
+            <img src={hand} alt="hand" className="hand-img" />
           </div>
         )}
         <div className="error-button-align">
           {showQuotientOption && (
             <div className="option-align fade-in">
               <button
-                className="quotient-Button"
+                className={`quotient-Button ${
+                  disabledOptions.has(currentQuestion.option[0])
+                    ? currentQuestion.option[0] === currentQuestion.correctAnswer
+                      ? "correct-answer"
+                      : "incorrect-answer"
+                    : ""
+                }`}
                 onClick={() => handleQuotientOption(currentQuestion.option[0])}
                 disabled={
                   showCorrectAnswer ||
@@ -238,7 +282,13 @@ const Main = ({ activity }) => {
                 {currentQuestion.option[0]}
               </button>
               <button
-                className="quotient-Button"
+                className={`quotient-Button ${
+                  disabledOptions.has(currentQuestion.option[1])
+                    ? currentQuestion.option[1] === currentQuestion.correctAnswer
+                      ? "correct-answer"
+                      : "incorrect-answer"
+                    : ""
+                }`}
                 onClick={() => handleQuotientOption(currentQuestion.option[1])}
                 disabled={
                   showCorrectAnswer ||
@@ -248,7 +298,13 @@ const Main = ({ activity }) => {
                 {currentQuestion.option[1]}
               </button>
               <button
-                className="quotient-Button"
+                className={`quotient-Button ${
+                  disabledOptions.has(currentQuestion.option[2])
+                    ? currentQuestion.option[2] === currentQuestion.correctAnswer
+                      ? "correct-answer"
+                      : "incorrect-answer"
+                    : ""
+                }`}
                 onClick={() => handleQuotientOption(currentQuestion.option[2])}
                 disabled={
                   showCorrectAnswer ||
@@ -269,10 +325,21 @@ const Main = ({ activity }) => {
             </div>
           )}
           {showSimplify && (
-            <div>
-              <button className="footer-button" onClick={handleSimplify}>
+            <div style={{
+              position:"relative"
+            }}>
+              <button className="footer-button" onClick={handleSimplify}
+              style={{
+                width:"18vw",
+                height:"6vh",
+                fontSize:"2.5vw",
+                fontWeight:500
+              }}
+              >
                 Simplify
               </button>
+              <img src={hand} alt="hand" className="hand-img" />
+
             </div>
           )}
         </div>
@@ -294,9 +361,12 @@ const Main = ({ activity }) => {
           </button>
         )}
         {showNextTwo && (
+          <div className="relative"> 
           <button className="next-btn" onClick={handleNextTwo}>
             Next
           </button>
+
+          </div>
         )}
         {showNextOne && <h4 className="container-footer-heading">Tap Next.</h4>}
         {showNextTwo && (
@@ -311,20 +381,61 @@ const Main = ({ activity }) => {
 
       {showAnimation && (
         <div>
-          <div>
+          <div >
             {animationStepOne && (
               <div>
-                <div className="line-1 fadeIn"></div>
-                <div className="line-2 fadeIn"></div>
-                <div className="line-heading-1 fadeIn">Whole</div>
+                <p className="line-heading-1">Whole</p>
+              <div
+                style={{
+                  aspectRatio: "16 / 9",
+                  position: "absolute",
+                  top: "15vh",
+                  right: "13vw",
+                  width: "35%",
+                  height: "10%",
+                  transform: "rotate(14deg)",
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="6.9 3.5906 12.2 2.509"
+                >
+                  <path
+                    d="M 7 6 C 12 2 16 4 19 6"
+                    stroke="var(--success-second-color)"
+                    stroke-width="0.1"
+                    fill="none"
+                  />
+                </svg>
+                
+              </div>
               </div>
             )}
             {animationStepTwo && (
               <div>
-                <div className="line-3 fadeIn"></div>
-                <div className="line-4 fadeIn"></div>
-                <div className="line-5 fadeIn"></div>
-                <div className="line-heading-2">Fraction</div>
+                <p  className="line-heading-2">Fractional</p>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "40vh",
+                  right: "12%",
+                  width: "42%",
+                  height: "10vh",
+                  transform: "rotate(0deg)",
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0.9 7.9 49.2 19.28"
+                >
+                  <path
+                    d="M 1 8 C 4 27 24 36 50 11"
+                    stroke="#fff"
+                    stroke-width="0.3"
+                    fill="none"
+                  />
+                </svg>
+              </div>
               </div>
             )}
           </div>

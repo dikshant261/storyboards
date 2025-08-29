@@ -4,7 +4,7 @@
 .error-message{
     background-color: var(--error-color);
     color:black;
-    font-size: 1.7vw;
+    font-size: 2vw;
     border-radius: 0.8vw;
     padding: 1vh 2vw;
     text-align: center;
@@ -19,7 +19,7 @@
 .success-message{
     background-color: var(--success-color);
     color:black;
-    font-size: 1.7vw;
+    font-size: 2vw;
     border-radius: 0.8vw;
     padding: 1vh 2vw;
 }

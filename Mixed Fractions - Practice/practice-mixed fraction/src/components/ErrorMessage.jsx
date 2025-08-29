@@ -17,9 +17,9 @@ const ErrorMessage = ({ quotient, questionData }) => {
         </div>
       ) : (
         <div className="error-message">
-          Oops! There is another complete whole of {questionData.divisor} in the{" "}
-          {questionData.divisor * quotient - questionData.dividend} <br />
-          parts that are left.
+          Oops! There is another complete whole of {questionData.divisor} in the
+           {" "}{questionData.dividend-questionData.divisor * quotient} <br />
+          part that are left.
         </div>
       )}
     </div>

@@ -1,0 +1,22 @@
+.car-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.car {
+    width: 8vw;
+    object-fit: contain;
+}
+.car-md{
+    width: 8vw;
+    object-fit: contain;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.car-md:hover{
+    transform: scale(1.2);
+}

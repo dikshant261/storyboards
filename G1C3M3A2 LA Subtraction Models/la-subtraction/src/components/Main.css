@@ -1,0 +1,169 @@
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5vw;
+    padding-top: 0.3vw;
+}
+
+.main-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 97vh;
+    border: 0.3vw solid var(--secondary-color);
+    background-color: var(--primary-color);
+    color: black;
+    width: 18vw;
+    border-radius: 0.4vw;
+}
+
+.main-left p {
+    font-size: 1.5vw;
+    margin-bottom: 8vh;
+    font-weight: 400;
+    text-align: center;
+}
+
+.main-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.3vw;
+}
+
+.main-right-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.7vw;
+}
+
+.main-right-item-one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 77vh;
+    width: 58vw;
+    border: 0.3vw solid var(--secondary-color);
+    background-color: rgb(0, 0, 0, 0.3);
+    border-radius: 0.4vw;
+}
+
+.main-right-item-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4vh;
+    border: 0.3vw solid var(--secondary-color);
+    background-color: var(--glass-background-color);
+    border-radius: 0.3vw;
+    width: 20vw;
+    height: 77vh;
+}
+
+.main-right-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 78.7vw;
+    height: 10vh;
+    border: 0.2vw solid var(--secondary-color);
+    background-color: rgba(43, 43, 43, 0.7);
+    border-radius: 0.4vw;
+}
+
+.main-right-footer h2 {
+    font-size: 2vw;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.main-right-footer-two {
+    display: flex;
+    justify-content:end;
+    align-items: center;
+    width: 78.7vw;
+    height: 7vh;
+}
+
+.check-button {
+    background-color: var(--secondary-color);
+    padding: 0.4vw;
+    font-size: 2vw;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.3vw;
+    color: black;
+    transition: 0.2s;
+}
+
+.check-button:hover {
+    background-color: rgb(136, 99, 51);
+    transform: scale(1.2);
+}
+.adjust-top{
+    position: absolute;
+    top:3vh;
+}
+
+.main-heading-align{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:1vw;
+}
+.main-car-box {
+    width: 4vw;
+    height: 7vh;
+    color: white;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+}
+.next-button{
+    background-color: var(--secondary-color);
+    width: 5vw;
+    height: 6vh;
+    color: black;
+    cursor: pointer;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 0.4vw;
+    transition: 0.3s;
+}
+.next-button:hover{
+  background-color: rgb(250, 181, 96);
+  transform: scale(1.1);
+}
+.fade-slide-in {
+  opacity: 0;
+  transform: translateY(20px); /* start slightly below */
+  animation: fadeSlideIn 0.8s ease-out forwards;
+}
+.fade-slide-in-right {
+  opacity: 0;
+  transform: translateX(20px); /* start slightly below */
+  animation: fadeSlideInRight 0.8s ease-out forwards;
+}
+@keyframes fadeSlideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

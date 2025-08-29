@@ -1,8 +1,19 @@
-export { default as ActivityComplete } from './ActivityComplete.jsx';
-export { default as ErrorMessage } from './ErrorMessage.jsx';
-export { default as Division } from './Division.jsx';
-export { default as Fraction } from './Fraction.jsx';
-export { default as MixedFraction } from './MixedFraction.jsx';
-export { default as Quotient } from './Quotient.jsx';
-export { default as Main } from './Main.jsx';
-export { default as ReamainderError } from './ReamainderError.jsx';
+
+
+import * as ActivityComplete from './ActivityComplete.jsx';
+import * as AnimationBoard from './AnimationBoard.jsx';
+import * as ErrorAndSuccess from './ErrorAndSuccess.jsx';
+import * as Fraction from './Fraction.jsx';
+import * as Main from './Main.jsx';
+import * as MixedNumbers from './MixedNumbers.jsx';
+import * as Option from './Option.jsx';
+
+export {
+	ActivityComplete,
+	AnimationBoard,
+	ErrorAndSuccess,
+	Fraction,
+	Main,
+	MixedNumbers,
+	Option
+};

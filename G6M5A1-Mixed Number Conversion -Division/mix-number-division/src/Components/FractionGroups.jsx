@@ -29,7 +29,7 @@ const FractionGroups = ({ numerator, denominator, chosenQuotient, correctAnswer 
     }
   }, [correctAnswer, chosenQuotient]);
   return (
-    <div style={{ display: "flex", gap: "10px", fontSize: "20px" }}>
+    <div style={{ display: "flex", gap: "1vw", fontSize: "3vw" }}>
       {groups.map((g, idx) => {
         const [num, den] = g.split("/");
         // Color last fraction based on showCorrectAnswer
@@ -37,11 +37,11 @@ const FractionGroups = ({ numerator, denominator, chosenQuotient, correctAnswer 
         let color = undefined;
         let dividerColor = "#ffffffff";
         if (isLast) {
-          color = showCorrectAnswer ? "#2ecc40" : "lightcoral";
+          color = showCorrectAnswer ? "var(--secondary-color)" : "lightcoral";
           dividerColor = color;
         }
         return (
-          <span key={idx} style={{ display: "flex", flexDirection: "column", alignItems: "center", fontSize: "3vw", color }}>
+          <span key={idx} style={{ display: "flex", flexDirection: "column", alignItems: "center", fontSize: "4vw", color }}>
             <span>{num}</span>
             <span style={{ borderBottom: `2px solid ${dividerColor}`, width: "1.5em", margin: "2px 0" }}></span>
             <span>{den}</span>

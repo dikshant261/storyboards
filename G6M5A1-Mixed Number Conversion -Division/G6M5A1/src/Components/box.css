@@ -1,0 +1,73 @@
+.box-container{
+    position: relative;
+}
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    width: 5vw;
+    border: 0.15vw solid #222;
+    border-radius: 0.7vw;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2eafc 100%);
+    box-shadow: 0 2px 8px 0 rgba(60, 60, 60, 0.12), 0 1.5px 3px 0 rgba(60, 60, 60, 0.10);
+    font-weight: 600;
+    font-size: 2vw;
+    transition: box-shadow 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.box:hover {
+    box-shadow: 0 4px 16px 0 rgba(60, 60, 60, 0.18), 0 3px 6px 0 rgba(60, 60, 60, 0.15);
+    transform: scale(1.06);
+}
+
+.box-green {
+    background: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%) !important;
+    border-color: #2ecc40;
+    color: #155724;
+}
+.box-yellow {
+    background: linear-gradient(135deg, #fff9c4 0%, #ffe066 100%) !important;
+    border-color: #ffe066;
+    color: #7c6f00;
+}
+.box-blue {
+    background: linear-gradient(135deg, #a1c4fd 0%, #3498db 100%) !important;
+    border-color: #3498db;
+    color: #0d3050;
+}
+.box-lightcoral {
+    background: linear-gradient(135deg, #ffb6b6 0%, #ff7f7f 100%) !important;
+    border-color: #e57373;
+    color: #7f2323;
+}
+.box-lightgreen {
+    background: linear-gradient(135deg, #b2f7b8 0%, #90ee90 100%) !important;
+    border-color: #43a047;
+    color: #1b5e20;
+}
+
+.box-direction{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    /* gap:1vw; */
+    margin-bottom: 2vw;
+}
+
+/* Remove margin after the last row */
+.box-direction:last-child {
+    margin-bottom: 0;
+}
+
+.box-lines{
+    position: absolute;
+    top: -5%;
+    left: 0;
+    width: 0;
+    height: 100%;
+    border-left: 0.3vw dotted rgb(255, 255, 255);
+    z-index: -1;
+}

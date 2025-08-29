@@ -1,0 +1,76 @@
+.mf-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2vw;
+  font-family: Arial, sans-serif;
+  padding: 2vh;
+  border-radius: 1vw;
+}
+
+/* fraction layout */
+.mf-fraction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 5vh;
+  font-weight: bold;
+  color: white;
+}
+
+.mf-line {
+  width: 5vw;
+  height: 0.4vh;
+  background: white;
+  margin: 0.4vh 0;
+}
+
+/* left fraction (improper) */
+.mf-num,
+.mf-den {
+  font-size: 6vw;
+}
+
+/* equal sign */
+.mf-equal {
+  font-size: 4vh;
+  font-weight: bold;
+  color: white;
+}
+
+/* mixed number */
+.mf-mixed {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+/* quotient part */
+.mf-quotient {
+  font-size: 5vw;
+  font-weight: bold;
+   color:var(--success-second-color);
+  
+}
+
+/* remainder fraction (styled differently) */
+.remainder {
+  color: #f9b227; /* orange */
+}
+
+.mf-mixed .mf-line {
+  background: #f9b227;
+}
+
+/* Merge targets pulse when pieces arrive */
+.mf-merge-ready .mf-merge-target-quotient,
+.mf-merge-ready .mf-merge-target-remainder,
+.mf-merge-ready .mf-merge-target-divisor {
+  animation: mfPulse 0.6s ease 1.8s both;
+}
+
+@keyframes mfPulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+  50% { transform: scale(1.12); box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+}

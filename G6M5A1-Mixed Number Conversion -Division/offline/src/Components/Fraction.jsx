@@ -6,6 +6,7 @@ const Fraction = ({
   denominator,
   questionData,
   currentQuotient,
+  showLongDivision,
 }) => {
   const showSingleFraction = questionData === null || currentQuotient === null || currentQuotient === undefined;
   return (
@@ -13,7 +14,9 @@ const Fraction = ({
       {showSingleFraction ? (
         <div className="right-fraction">
           <div>{numerator}</div>
-          <div className="fraction-line"></div>
+          <div className="fraction-line">
+            {showLongDivision && <div className="fraction-line-copy"></div>}
+          </div>
           <div>{denominator}</div>
         </div>
       ) : (

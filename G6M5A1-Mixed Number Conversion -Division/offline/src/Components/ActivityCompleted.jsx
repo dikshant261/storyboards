@@ -1,5 +1,6 @@
 import React from "react";
 import "./ActivityCompleted.css";
+import hand from '../assets/tap.gif';
 
 const ActivityCompleted = () => {
   return (
@@ -29,10 +30,13 @@ const ActivityCompleted = () => {
       <p className="instruction">
         Tap “Start Over” to repeat this activity...
       </p>
-
+      <div className="hand-align">
       <button className="start-over-btn" onClick={() => window.location.reload()}>
         Start Over
       </button>
+      <img src={hand} alt="hand" className="hand-img" />
+
+      </div>
     </div>
   );
 };

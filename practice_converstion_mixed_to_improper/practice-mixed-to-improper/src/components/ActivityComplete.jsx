@@ -1,6 +1,6 @@
 import React from "react";
 import "./MixedNumbers.css";
-
+import hand from '../assets/tap.gif';
 const ActivityComplete = () => {
   const refreshPage = () => {
     window.location.reload(); // Reloads the current page
@@ -8,12 +8,12 @@ const ActivityComplete = () => {
   return (
     <div className="mixed-numbers-container">
       <h1 className="title">Activity Completed!</h1>
-
+      <div className="content-size">
       <p className="highlight-text">
         <strong className="orange-text">Mixed Numbers</strong> and{" "}
         <strong className="orange-text">Improper Fractions</strong>
         are used
-        <br />s to denote numbers that are <br />
+        <br /> to denote numbers that are <br />
         <span className="orange-text">greater than One Whole!</span>
       </p>
 
@@ -27,10 +27,13 @@ const ActivityComplete = () => {
       <p className="normal-text">
         Tap <span className="quote">“Start Over”</span> to repeat this activity…
       </p>
-
+</div>
+     <div className="hand-align">
       <button className="start-btn" onClick={refreshPage}>
         Start Over
       </button>
+      <img src={hand} alt="hand" className="hand-img"/>
+      </div>
     </div>
   );
 };
