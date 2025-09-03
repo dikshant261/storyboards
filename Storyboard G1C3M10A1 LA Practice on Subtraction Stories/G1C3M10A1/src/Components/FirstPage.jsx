@@ -2,7 +2,9 @@ import React from "react";
 import click from "../assets/click.mp3";
 import "./FirstPage.css";
 import imageone from "../assets/imageone.png";
+import { useTranslation } from "react-i18next";
 const FirstPage = ({ onClose }) => {
+  const {t}=useTranslation();
   const clickAudio = new Audio(click);
   clickAudio.preload = "auto"; // ensures it's loaded early
 
@@ -20,12 +22,10 @@ const FirstPage = ({ onClose }) => {
     <div className="contianer">
       <div className="container-left">
         <p className="slide-right">
-          The picture
-          <br /> represents a<br /> subtraction story.
+          {t("thePicture")}
         </p>
         <p className="slide-left">
-          Make a subtraction
-          <br /> story and build a<br /> subtraction sentence.
+          {t("writeStory")}
         </p>
       </div>
       <div className="container-right">

@@ -22,7 +22,8 @@
     color: white;
     text-align: center;
     line-height: 2.8vw;
-
+    white-space: pre-line;
+    padding-bottom: 1vw;
 }
 
 .frame-contianer-right {
@@ -44,6 +45,8 @@
     width: 70vw;
     height: 70vh;
     position: relative;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1vw;
 }
 
 .story {
@@ -58,12 +61,16 @@
     top: 0%;
 
 }
-.story p{
+
+.story p {
     font-size: 3vw;
     color: white;
     font-weight: 500;
     text-align: center;
+    white-space: pre-line;
+
 }
+
 .frame-image-container {
     width: 50%;
     /* height: 30vw; */
@@ -115,6 +122,7 @@
         inset -3px -3px 5px #bbb,
         /* top-left highlight */
         inset 3px 3px 5px #444;
+
 }
 
 .box-size {
@@ -123,10 +131,42 @@
     font-size: 3.5vw;
     border: 0.3vw solid #cea008;
     background-color: #ffd550;
-    box-shadow:
-        inset -3px -3px 5px #e3c254,
-        /* top-left highlight */
-        inset 3px 3px 5px #988a5c;
+    animation: pulse-box 1.5s infinite;
+}
+
+/* Pulse with both inset + glow */
+@keyframes pulse-box {
+    0% {
+        transform: scale(1);
+        box-shadow:
+            inset -3px -3px 5px #e3c254,
+            /* top-left highlight */
+            inset 3px 3px 5px #988a5c,
+            /* bottom-right shadow */
+            0 0 5px var(--secondary-color),
+            0 0 10px var(--secondary-color),
+            0 0 20px var(--secondary-color);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow:
+            inset -3px -3px 5px #e3c254,
+            inset 3px 3px 5px #988a5c,
+            0 0 20px var(--secondary-color),
+            0 0 40px var(--secondary-color),
+            0 0 60px var(--secondary-color);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow:
+            inset -3px -3px 5px #e3c254,
+            inset 3px 3px 5px #988a5c,
+            0 0 5px var(--secondary-color),
+            0 0 10px var(--secondary-color),
+            0 0 20px var(--secondary-color);
+    }
 }
 
 .frame-container-left-navigation {
@@ -149,6 +189,7 @@
     transition: 0.4s;
     display: flex;
     justify-content: center;
+    animation: pulse 1.5s infinite;
 }
 
 .frame-start-button:hover {
@@ -231,11 +272,61 @@
     border: none;
     cursor: pointer;
     transition: 0.4s;
+    position: absolute;
+    animation: pulse 1.5s infinite;
+    bottom: 5%;
+    right: 1%;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px var(--secondary-color),
+            0 0 10px var(--secondary-color),
+            0 0 20px var(--secondary-color);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px var(--secondary-color),
+            0 0 40px var(--secondary-color),
+            0 0 60px var(--secondary-color);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px var(--secondary-color),
+            0 0 10px var(--secondary-color),
+            0 0 20px var(--secondary-color);
+    }
+}
+
+.tap-gif-frame {
+    position: absolute;
+    bottom: 0%;
+    right: 8%;
+}
+
+.tap-gif-width-frame {
+    width: 3vw;
+    object-fit: contain;
+}
+
+.next-button-left {
+    width: 8vw;
+    height: 6vh;
+    background-color: var(--secondary-color);
+    border-radius: 0.4vw;
+    color: black;
+    font-size: 2vw;
+    border: none;
+    cursor: pointer;
+    transition: 0.4s;
     /* display: flex;
     justify-content: center; */
     position: absolute;
     bottom: 5%;
-    right: 1%;
+    left: 1%;
 }
 
 .next-button:hover {
@@ -258,6 +349,7 @@
     flex-direction: column;
     gap: 5vh;
 }
+
 .slide-right {
     animation: slide-right 1.3s ease-in forwards;
 }
@@ -273,6 +365,7 @@
         transform: translate(0vw, 0vh);
     }
 }
+
 .slide-left {
     animation: slide-left 1.3s ease-in forwards;
 }
@@ -306,7 +399,7 @@
 }
 
 .scale-up {
-    animation:scale-up 1.3s ease-in forwards;
+    animation: scale-up 1.3s ease-in forwards;
 }
 
 @keyframes scale-up {
@@ -317,18 +410,18 @@
 
     100% {
         opacity: 1;
-        transform:scale(1);
+        transform: scale(1);
     }
 }
 
 .show-in {
-    animation:show-in 1.3s ease-in forwards;
+    animation: show-in 1.3s ease-in forwards;
 }
 
 @keyframes show-in {
     0% {
         opacity: 0;
-        
+
     }
 
     100% {

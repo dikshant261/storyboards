@@ -2,7 +2,11 @@ import React from "react";
 import click from "../assets/click.mp3";
 import "./FirstPage.css";
 import imageone from "../assets/imageone.png";
+import { useTranslation } from "react-i18next";
+import tap from '../assets/tap.gif';
+import ReusableButton from "./TapButton";
 const FirstPage = ({ onClose }) => {
+  const {t}=useTranslation();
   const clickAudio = new Audio(click);
   clickAudio.preload = "auto"; // ensures it's loaded early
 
@@ -20,14 +24,10 @@ const FirstPage = ({ onClose }) => {
     <div className="contianer">
       <div className="container-left">
         <p className="slide-right">
-          The picture and
-          <br /> subtraction
-          <br /> sentence
-          <br /> represents a<br /> subtraction story
+          {t("thePicture")}
         </p>
         <p className="slide-left">
-          Write a subtraction <br />
-          story.{" "}
+          {t("writeStory")}
         </p>
       </div>
       <div className="container-right">
@@ -54,19 +54,23 @@ const FirstPage = ({ onClose }) => {
         </div>
         <div className="container-left-option ">
           <div className="slide-mid"> 
-          <button
+          {/* <button
             className="start-button"
             onClick={() => {
               handleStart();
             }}
           >
-            Start
+            {t("start")}
           </button>
+          <div className="tap-gif">
+            <img src={tap} alt="tap" className="tap-gif-width"/>
+          </div> */}
+          <ReusableButton label={t("start")}/>
           </div>
         </div>
         <div className="container-left-navigation">
           <h3 className="footer-heading">
-            <h2 className="slide-left">Tap Start...</h2>
+            <h2 className="slide-left">{t("tapStart")}</h2>
           </h3>
         </div>
       </div>

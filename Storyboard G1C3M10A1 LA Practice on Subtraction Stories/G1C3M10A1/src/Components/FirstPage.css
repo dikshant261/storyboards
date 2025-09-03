@@ -22,7 +22,7 @@
     color: white;
     text-align: center;
     line-height: 2.8vw;
-
+    white-space: pre-line;
 }
 
 .contianer-right {

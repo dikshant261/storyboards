@@ -1,0 +1,49 @@
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.start-button {
+  background-color: var(--secondary-color);
+  border-radius: 0.4vw;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  animation: pulse 1.5s infinite;
+  font-weight: bold;
+}
+
+.start-button:hover {
+  transform: scale(1.05);
+}
+
+.tap-gif {
+  margin-top: 0.5rem;
+}
+
+.tap-gif-width {
+  width: 50px; /* default size, can override via props */
+  height: auto;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 5px var(--secondary-color),
+                0 0 10px var(--secondary-color),
+                0 0 20px var(--secondary-color);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--secondary-color),
+                0 0 40px var(--secondary-color),
+                0 0 60px var(--secondary-color);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 5px var(--secondary-color),
+                0 0 10px var(--secondary-color),
+                0 0 20px var(--secondary-color);
+  }
+}

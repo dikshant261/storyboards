@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtraction Learning App</title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="Outlet.css">
+    <link rel="stylesheet" href="components/FirstPage.css">
+    <link rel="stylesheet" href="components/FrameOne.css">
+    <link rel="stylesheet" href="components/Option.css">
+    <link rel="stylesheet" href="components/ErrorMessage.css">
+    <link rel="stylesheet" href="components/Keypad.css">
+    <link rel="stylesheet" href="components/SubtractionSentance.css">
+
+
+
+
+
+    <!-- React and ReactDOM -->
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+
+    <!-- Babel removed - using React.createElement instead of JSX -->
+
+    <!-- Language Configuration -->
+    <script>
+        // Set the default language here
+        // Available languages: 'en' (English), 'id' (Indonesian)
+        window.APP_LANGUAGE = 'en'; // Change this to 'id' for Indonesian
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="i18n.js"></script>
+    <script src="Outlet.js"></script>
+    <script src="components/FirstPage.js"></script>
+    <script src="components/Option.js"></script>
+    <script src="components/SecondPage.js"></script>
+    <script src="components/ThirdPage.js"></script>
+    <script src="components/FrameOne.js"></script>
+    <script src="components/FrameTwo.js"></script>
+    <script src="components/FrameThird.js"></script>
+    <script src="components/SubtractionSectanceOne.js"></script>
+    <script src="components/SubtractionSentanceTwo.js"></script>
+    <script src="components/SubtractionSentanceThree.js"></script>
+    <script src="components/ErrorMessage.js"></script>
+    <script src="components/Keypad.js"></script>
+
+
+
+
+    <script>
+        ReactDOM.render(
+            React.createElement(Outlet, null),
+            document.getElementById("root")
+        );
+    </script>
+
+</body>
+
+</html>

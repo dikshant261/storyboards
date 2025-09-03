@@ -5,8 +5,10 @@ import Keypad from "./Keypad";
 import click from "../assets/click.mp3";
 import wrong from "../assets/wrong.mp3";
 import right from "../assets/correct.mp3";
-const correctNumber=["6","2","4"];
-const SubtractionSentanceOne = ({onNext}) => {
+import { useTranslation } from "react-i18next";
+const correctNumber = ["6", "2", "4"];
+const SubtractionSentanceOne = ({ onNext }) => {
+  const { t } = useTranslation();
   const [numbers, setNumbers] = useState({
     number1: "",
     number2: "",
@@ -97,31 +99,16 @@ const SubtractionSentanceOne = ({onNext}) => {
       play(wrongAudioRef);
     }
   };
-const handleNext=()=>{
+  const handleNext = () => {
     setErrorShow(false);
     setKeypadShow(true);
     onNext();
-}
+  };
   return (
     <div className="subtraction">
       <div className="subtraction-left">
-        <p className="slide-left">
-          Writing the
-          <br /> subtraction
-          <br /> Story.✅
-        </p>
-        <p className="slide-right">
-          Writing Subtraction
-          <br /> sentence:
-          <br />
-          For the given
-          <br /> picture and story,
-          <br />
-          fill the subtraction
-          <br /> sentence using
-          <br />
-          numpad and check.
-        </p>
+        <p className="slide-left">{t("writingStory")}✅</p>
+        <p className="slide-right">{t("writingNumpad")}</p>
       </div>
 
       <div className="subtraction-right">
@@ -132,10 +119,7 @@ const handleNext=()=>{
             </div>
 
             <div className="sentance-story slide-mid">
-              <p>
-                6 children were playing.
-                <br />2 children left the game, then 4 children remained.
-              </p>
+              <p>{t("storyOneText")}</p>
             </div>
 
             <div className="subtraction-align-box slide-right">
@@ -182,18 +166,16 @@ const handleNext=()=>{
 
           <div className="subtraction-right-main-two scale-up">
             {/* checkNumber is now defined and passed */}
-            
-                
-              <Keypad
-                onNumberClick={handleKeypadInput}
-                checkNumber={checkNumber}
-                numbers={numbers}
-                correctNumber={correctNumber}
-                erroShow={erroShow}
-                keypadShow={keypadShow}
-                setErrorShow={() => setErrorShow(false)}
-              />
-            
+
+            <Keypad
+              onNumberClick={handleKeypadInput}
+              checkNumber={checkNumber}
+              numbers={numbers}
+              correctNumber={correctNumber}
+              erroShow={erroShow}
+              keypadShow={keypadShow}
+              setErrorShow={() => setErrorShow(false)}
+            />
           </div>
         </div>
 
@@ -203,11 +185,13 @@ const handleNext=()=>{
             position: "relative",
           }}
         >
-          {keypadShow && <h3 className="slide-left">Tap the numbers to enter and then tap check.</h3>}
-          {showNext && <h3 className="slide-left">Tap ▶ for next question.</h3>}
+          {keypadShow && <h3 className="slide-left">{t("tapCheck")}</h3>}
+          {showNext && <h3 className="slide-left">{t("tapNextQuestion")}</h3>}
           {showNext && (
             <div>
-              <button className="subtraction-next-button" onClick={handleNext}>▶</button>
+              <button className="subtraction-next-button" onClick={handleNext}>
+                ▶
+              </button>
             </div>
           )}
         </div>

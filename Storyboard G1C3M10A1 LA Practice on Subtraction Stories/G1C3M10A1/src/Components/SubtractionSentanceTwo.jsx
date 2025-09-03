@@ -5,8 +5,10 @@ import Keypad from "./Keypad";
 import click from "../assets/click.mp3";
 import wrong from "../assets/wrong.mp3";
 import right from "../assets/correct.mp3";
-const correctNumber=["6","4","2"];
-const SubtractionSentanceTwo = ({onNext}) => {
+import { useTranslation } from "react-i18next";
+const correctNumber = ["6", "4", "2"];
+const SubtractionSentanceTwo = ({ onNext }) => {
+  const { t } = useTranslation();
   const [numbers, setNumbers] = useState({
     number1: "",
     number2: "",
@@ -97,30 +99,15 @@ const SubtractionSentanceTwo = ({onNext}) => {
       play(wrongAudioRef);
     }
   };
-const handleNext=()=>{
+  const handleNext = () => {
     setErrorShow(false);
     onNext();
-}
+  };
   return (
     <div className="subtraction">
       <div className="subtraction-left">
-        <p className="slide-left">
-          Writing the
-          <br /> subtraction
-          <br /> Story.✅
-        </p>
-        <p className="slide-right">
-          Writing Subtraction
-          <br /> sentence:
-          <br />
-          For the given
-          <br /> picture and story,
-          <br />
-          fill the subtraction
-          <br /> sentence using
-          <br />
-          numpad and check.
-        </p>
+        <p className="slide-left">{t("writingStory")}✅</p>
+        <p className="slide-right">{t("writingNumpad")}</p>
       </div>
 
       <div className="subtraction-right">
@@ -130,16 +117,14 @@ const handleNext=()=>{
               <img src={imageone} className="subtraction-image" alt="story" />
             </div>
 
-            <div className="sentance-story" style={{
-                height:"14%",
-                fontSize:'1.5vw'
-            }}>
-              <p className="slide-left">
-                6 children were total.
-                <br />
-                4 children are wearing blue shirt, then
-                <br /> Remaining 2 are wearing white shirt.
-              </p>
+            <div
+              className="sentance-story"
+              style={{
+                height: "14%",
+                fontSize: "1.5vw",
+              }}
+            >
+              <p className="slide-left">{t("storyTwoText")}</p>
             </div>
 
             <div className="subtraction-align-box slide-mid">
@@ -186,17 +171,16 @@ const handleNext=()=>{
 
           <div className="subtraction-right-main-two scale-up">
             {/* checkNumber is now defined and passed */}
-            
-              <Keypad
-                onNumberClick={handleKeypadInput}
-                checkNumber={checkNumber}
-                numbers={numbers}
-                correctNumber={correctNumber}
-                keypadShow={keypadShow}
-                erroShow={erroShow}
-                setErrorShow={() => setErrorShow(false)}
-              />
-        
+
+            <Keypad
+              onNumberClick={handleKeypadInput}
+              checkNumber={checkNumber}
+              numbers={numbers}
+              correctNumber={correctNumber}
+              keypadShow={keypadShow}
+              erroShow={erroShow}
+              setErrorShow={() => setErrorShow(false)}
+            />
           </div>
         </div>
 
@@ -206,11 +190,16 @@ const handleNext=()=>{
             position: "relative",
           }}
         >
-          {keypadShow && <h3 className="slide-left">Tap the numbers to enter and then tap check.</h3>}
-          {showNext && <h3 className="slide-left">Tap ▶ for next question.</h3>}
+          {keypadShow && <h3 className="slide-left">{t("tapCheck")}</h3>}
+          {showNext && <h3 className="slide-left">{t("tapNextQuestion")}</h3>}
           {showNext && (
             <div>
-              <button className="subtraction-next-button slide-left" onClick={handleNext}>▶</button>
+              <button
+                className="subtraction-next-button slide-left"
+                onClick={handleNext}
+              >
+                ▶
+              </button>
             </div>
           )}
         </div>

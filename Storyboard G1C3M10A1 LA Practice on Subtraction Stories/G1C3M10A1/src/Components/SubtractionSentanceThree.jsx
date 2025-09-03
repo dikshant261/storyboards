@@ -5,8 +5,10 @@ import Keypad from "./Keypad";
 import click from "../assets/click.mp3";
 import wrong from "../assets/wrong.mp3";
 import right from "../assets/correct.mp3";
+import { useTranslation } from "react-i18next";
 const correctNumber = ["6", "1", "5"];
 const SubtractionSentanceThree = ({ onNext }) => {
+  const {t}=useTranslation();
   const [numbers, setNumbers] = useState({
     number1: "",
     number2: "",
@@ -104,23 +106,8 @@ const SubtractionSentanceThree = ({ onNext }) => {
   return (
     <div className="subtraction">
       <div className="subtraction-left">
-        <p className="slide-left">
-          Writing the
-          <br /> subtraction
-          <br /> Story.✅
-        </p>
-        <p className="slide-right">
-          Writing Subtraction
-          <br /> sentence:
-          <br />
-          For the given
-          <br /> picture and story,
-          <br />
-          fill the subtraction
-          <br /> sentence using
-          <br />
-          numpad and check.
-        </p>
+        <p className="slide-left">{t("writingStory")}✅</p>
+        <p className="slide-right">{t("writingNumpad")}</p>
       </div>
 
       <div className="subtraction-right">
@@ -132,9 +119,7 @@ const SubtractionSentanceThree = ({ onNext }) => {
 
             <div className="sentance-story">
               <p className="slide-left">
-                Mother served 6 cakes.
-                <br />
-                The boy ate 1 cake. 5 cakes remain.
+                {t("storyThreeText")}
               </p>
             </div>
 
@@ -202,8 +187,8 @@ const SubtractionSentanceThree = ({ onNext }) => {
             position: "relative",
           }}
         >
-          {keypadShow && <h3 className="slide-mid">Tap the numbers to enter and then tap check.</h3>}
-          {showNext && <h3 className="slide-right">Tap ▶ for next question.</h3>}
+          {keypadShow && <h3 className="slide-mid">{t("tapCheck")}</h3>}
+          {showNext && <h3 className="slide-right">{t("tapNextQuestion")}</h3>}
           {showNext && (
             <div>
               <button

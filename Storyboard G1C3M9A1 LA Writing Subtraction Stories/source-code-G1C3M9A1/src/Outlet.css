@@ -1,6 +1,0 @@
-.outlet {
-  background-image: url('./assets/bg.png');
-  background-size: cover;      /* or 'contain' */
-  background-position: center; /* center the image */
-  background-repeat: no-repeat;
-}

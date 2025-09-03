@@ -3,6 +3,7 @@ import "./Keypad.css";
 import hint from "../assets/hint.png";
 import click from "../assets/click.mp3";
 import ErrorMessage from "./ErrorMessage";
+import { useTranslation } from "react-i18next";
 const Keypad = ({
   onNumberClick,
   checkNumber,
@@ -13,6 +14,7 @@ const Keypad = ({
   keypadShow
 }) => {
   const [hintMessage, setHintMessage] = useState(false);
+  const {t}=useTranslation();
   const clickAudio = new Audio(click);
   clickAudio.preload = "auto"; // ensures it's loaded early
   const clickHandle = () => {
@@ -33,20 +35,14 @@ const Keypad = ({
   return (
     <div className="keypad-container">
       {keypadShow && <button className="hint-btn" onClick={handleHint}>
-        show{" "}
+        {t("show")}
         <span className="icon">
           <img src={hint} alt="bulb" className="bulb" />
         </span>
       </button>}
       {hintMessage && (
         <p className="hint-message">
-          Use numbers in
-          <br /> the story to write
-          <br /> a sentence in the
-          <br /> form of “the
-          <br /> whole – part
-          <br /> taken away = part
-          <br /> that is left”.
+          {t("hintMessage")}
         </p>
       )}
       {
@@ -72,7 +68,7 @@ const Keypad = ({
       </div>}
 
       {keypadShow && <button className="check-btn" onClick={() => checkNumber()}>
-        CHECK
+        {t("check")}
       </button>}
     </div>
   );

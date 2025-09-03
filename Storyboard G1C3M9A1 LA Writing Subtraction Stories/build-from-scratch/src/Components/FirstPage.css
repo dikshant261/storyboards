@@ -1,0 +1,226 @@
+.contianer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 3vw;
+}
+
+.container-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    /* border: 0.2vw solid white; */
+    width: 30%;
+    height: 100vh;
+}
+
+.container-left p {
+    font-size: 2.3vw;
+    color: white;
+    text-align: center;
+    line-height: 2.8vw;
+    white-space: pre-line;
+}
+
+.contianer-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vw;
+
+}
+
+.contianer-img-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 0.2vw solid white; */
+    flex-direction: column;
+    gap: 1vw;
+    width: 70vw;
+    height: 70vh;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 0.5vw;
+}
+
+.image-container {
+    width: 50%;
+    /* height: 30vw; */
+    border-radius: 3vw;
+    overflow: hidden;
+    /* border: 0.2vw solid black; */
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.container-left-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    height: 20vh;
+    /* border: 0.2vw solid wheat; */
+}
+
+.align-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.minus-line {
+    width: 2vw;
+    height: 0.9vh;
+    background-color: white;
+    border: 0.1 solid rgb(179, 175, 175);
+}
+
+.image-box {
+    width: 5vw;
+    height: 8vh;
+    border: 0.3vw solid #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+    background-color: lightgray;
+    box-shadow:
+        inset -3px -3px 5px #bbb,
+        /* top-left highlight */
+        inset 3px 3px 5px #444;
+}
+
+.container-left-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70vw;
+    height: 10vh;
+}
+
+.start-button {
+    width: 12vw;
+    height: 9vh;
+    background-color: var(--secondary-color);
+    border-radius: 0.4vw;
+    color: black;
+    font-size: 2.5vw;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    transition: 0.4s;
+    animation: pulse 1.5s infinite;
+    position: relative;
+}
+
+/* Glow Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px var(--secondary-color),
+                    0 0 10px var(--secondary-color),
+                    0 0 20px var(--secondary-color);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px var(--secondary-color),
+                    0 0 40px var(--secondary-color),
+                    0 0 60px var(--secondary-color);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px var(--secondary-color),
+                    0 0 10px var(--secondary-color),
+                    0 0 20px var(--secondary-color);
+    }
+}
+
+.tap-gif{
+        position: absolute;
+    bottom: -55%;
+    left: 28%;
+}
+.tap-gif-width{
+    width: 5vw;
+    object-fit: contain;
+}
+.footer-heading {
+    font-size: 2vw;
+    color: white;
+}
+
+.slide-right {
+    animation: slide-right 1.3s ease-in forwards;
+}
+
+@keyframes slide-right {
+    0% {
+        opacity: 0;
+        transform: translate(6vw, 12vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0vw, 0vh);
+    }
+}
+
+.slide-left {
+    animation: slide-left 1.3s ease-in forwards;
+}
+
+@keyframes slide-left {
+    0% {
+        opacity: 0;
+        transform: translate(-6vw, -10vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0vw, 0vh);
+    }
+}
+
+.slide-mid {
+    animation: slide-mid 1.3s ease-in forwards;
+}
+
+@keyframes slide-mid {
+    0% {
+        opacity: 0;
+        transform: translate(0vw, -6vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0vw, 0vh);
+    }
+}
+
+.scale-up {
+    animation: scale-up 1.3s ease-in forwards;
+}
+
+@keyframes scale-up {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

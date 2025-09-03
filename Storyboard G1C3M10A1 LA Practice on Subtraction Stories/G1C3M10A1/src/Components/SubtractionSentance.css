@@ -22,6 +22,7 @@
     color: white;
     text-align: center;
     margin-bottom: 2vw;
+    white-space: pre-line;
 }
 
 .subtraction-right {
@@ -65,20 +66,23 @@
     border: 0.2vw soild white;
 
 }
-.sentance-story{
+
+.sentance-story {
     background-color: #eeeeee;
     color: black;
     font-size: 2vw;
     color: black;
-    width: 45vw;
-    height: 10vh;
+    width: 70%;
+    height: 17%;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 0.2vw;
     border-radius: 1vw;
+    white-space: pre-line;
 }
+
 .subtraction-align-box {
     display: flex;
     flex-direction: row;
@@ -109,10 +113,11 @@
         /* top-left highlight */
         inset 3px 3px 5px #444;
 }
+
 .correct {
-  border-color: green;
-  background-color: #98e498;
-  box-shadow:
+    border-color: green;
+    background-color: #98e498;
+    box-shadow:
         inset -3px -3px 5px rgb(49, 133, 49),
         /* top-left highlight */
         inset 3px 3px 5px #81dd81;
@@ -120,13 +125,14 @@
 }
 
 .wrong {
-  border-color: red;
-  background-color: #ec4141;
-  box-shadow:
+    border-color: red;
+    background-color: #ec4141;
+    box-shadow:
         inset -3px -3px 5px rgb(139, 34, 34),
         /* top-left highlight */
         inset 3px 3px 5px #d43133;
 }
+
 .subtraction-right-main-two {
     display: flex;
     justify-content: center;
@@ -144,11 +150,13 @@
     width: 70vw;
     /* border: 0.2vw solid white; */
 }
-.subtraction-right-footer h3{
+
+.subtraction-right-footer h3 {
     font-size: 2vw;
     color: white;
     text-align: center;
 }
+
 .subtraction-next-button {
     width: 8vw;
     height: 6vh;

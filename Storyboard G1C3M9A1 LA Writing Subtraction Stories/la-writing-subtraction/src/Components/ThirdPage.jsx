@@ -2,7 +2,9 @@ import React from "react";
 import click from "../assets/click.mp3";
 import "./FirstPage.css";
 import imagethree from "../assets/imagethree.png";
+import { useTranslation } from "react-i18next";
 const ThirdPage = ({ onClose }) => {
+  const {t}=useTranslation();
   const clickAudio = new Audio(click);
   clickAudio.preload = "auto"; // ensures it's loaded early
 
@@ -20,14 +22,10 @@ const ThirdPage = ({ onClose }) => {
     <div className="contianer">
       <div className="container-left">
         <p className="slide-right">
-          The picture and
-          <br /> subtraction
-          <br /> sentence
-          <br /> represents a<br /> subtraction story
+          {t("thePicture")}
         </p>
         <p className="slide-left">
-          Write a subtraction <br />
-          story.{" "}
+          {t("writeStory")}
         </p>
       </div>
       <div className="container-right">
@@ -60,13 +58,13 @@ const ThirdPage = ({ onClose }) => {
               handleStart();
             }}
           >
-            Start
+            {t("start")}
           </button>
           </div>
         </div>
         <div className="container-left-navigation">
           <h3 className="footer-heading">
-            <h2 className="slide-left">Tap Start...</h2>
+            <h2 className="slide-left">{t("tapStart")}</h2>
           </h3>
         </div>
       </div>

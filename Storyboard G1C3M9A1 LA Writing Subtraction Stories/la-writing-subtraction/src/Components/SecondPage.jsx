@@ -2,7 +2,10 @@ import React from "react";
 import click from "../assets/click.mp3";
 import "./FirstPage.css";
 import imagetwo from "../assets/imagetwo.png";
+import { useTranslation } from "react-i18next";
+import tap from '../assets/tap.gif'
 const SecondPage = ({ onClose }) => {
+  const { t } = useTranslation();
   const clickAudio = new Audio(click);
   clickAudio.preload = "auto"; // ensures it's loaded early
 
@@ -19,16 +22,8 @@ const SecondPage = ({ onClose }) => {
   return (
     <div className="contianer">
       <div className="container-left">
-        <p className="slide-right">
-          The picture and
-          <br /> subtraction
-          <br /> sentence
-          <br /> represents a<br /> subtraction story
-        </p>
-        <p className="slide-left">
-          Write a subtraction <br />
-          story.{" "}
-        </p>
+        <p className="slide-right">{t("thePicture")}</p>
+        <p className="slide-left">{t("writeStory")}</p>
       </div>
       <div className="container-right">
         <div className="contianer-img-item">
@@ -53,20 +48,23 @@ const SecondPage = ({ onClose }) => {
           </div>
         </div>
         <div className="container-left-option ">
-          <div className="slide-mid"> 
-          <button
-            className="start-button"
-            onClick={() => {
-              handleStart();
-            }}
-          >
-            Start
-          </button>
+          <div className="slide-mid">
+            <button
+              className="start-button"
+              onClick={() => {
+                handleStart();
+              }}
+            >
+              {t("start")}
+            </button>
+            <div className="tap-gif">
+              <img src={tap} alt="tap" className="tap-gif-width" />
+            </div>
           </div>
         </div>
         <div className="container-left-navigation">
           <h3 className="footer-heading">
-            <h2 className="slide-left">Tap Start...</h2>
+            <h2 className="slide-left">{t("tapStart")}</h2>
           </h3>
         </div>
       </div>

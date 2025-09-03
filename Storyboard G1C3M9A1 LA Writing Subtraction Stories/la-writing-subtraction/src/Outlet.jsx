@@ -18,6 +18,10 @@ const Outlet = () => {
        setFirst(false);
        setFrameOne(true);
     } 
+    const handlePrev=()=>{
+      setFrameOne(false);
+      setFirst(true);
+    }
     const handleFrameOne=()=>{
         setFrameOne(false);
         setSecond(true);
@@ -37,7 +41,7 @@ const Outlet = () => {
   return (
     <div className="outlet">
       {first && <FirstPage onClose={handleFirst}/>}
-      {frameOne && <FrameOne onNext={handleFrameOne}/>}
+      {frameOne && <FrameOne onNext={handleFrameOne} onPrev={handlePrev}/>}
       {second && <SecondPage onClose={handleSecond}/>}
       {frameTwo && <FrameTwo onNext={handleFrameTwo}/>}
       {third && <ThirdPage onClose={handleThird}/>}

@@ -6,6 +6,7 @@ import click from "../assets/click.mp3";
 import Option from "./Option";
 import wrong from "../assets/wrong.mp3";
 import right from "../assets/correct.mp3";
+import { useTranslation } from "react-i18next";
 const FrameOne = ({ onNext }) => {
   const [sideHeadingOne, setSideHeadingOne] = useState(true);
   const [stepOne, setStepOne] = useState(false);
@@ -14,7 +15,7 @@ const FrameOne = ({ onNext }) => {
   const [stepFour, setStepFour] = useState(false);
   const [stepFive, setStepFive] = useState(false);
   const [arrowAnimation, setArrowAnimation] = useState(false);
-
+  const { t } = useTranslation();
   useEffect(() => {
     const timer = setTimeout(() => {
       setArrowAnimation(true);
@@ -102,21 +103,12 @@ const FrameOne = ({ onNext }) => {
               className="slide-left"
               style={{
                 fontWeight: 900,
-                marginBottom:"2vw"
+                marginBottom: "2vw",
               }}
             >
-              Write the <br />
-              subtraction story
-              <br /> first.
+              {t("subtractionStoryFirst")}
             </p>
-            <p>
-              A subtraction story
-              <br /> tells the total
-              <br /> number, how much
-              <br /> part is taken away
-              <br /> and how much
-              <br /> remain.
-            </p>
+            <p>{t("sideHeadingOne")}</p>
           </div>
         )}
         {stepOne && (
@@ -125,20 +117,17 @@ const FrameOne = ({ onNext }) => {
               style={{
                 fontWeight: 900,
                 textAlign: "left",
+                marginBottom: "1vw",
               }}
             >
-              Step 1: Write
-              <br /> about the total
-              <br /> number.
+              {t("stepOne")}
             </p>
             <p
               style={{
                 textAlign: "left",
               }}
             >
-              Choose the option
-              <br /> that matches the
-              <br /> story in the picture.
+              {t("chooseOption")}
             </p>
           </div>
         )}
@@ -149,9 +138,7 @@ const FrameOne = ({ onNext }) => {
                 textAlign: "left",
               }}
             >
-              Step 1: Write about
-              <br /> the total number.
-              <br /> ✅
+              {t("stepOne")} ✅
             </p>
             <p
               style={{
@@ -159,11 +146,7 @@ const FrameOne = ({ onNext }) => {
                 textAlign: "left",
               }}
             >
-              <b>
-                Step 2: Write
-                <br /> about how much
-                <br /> is taken away.
-              </b>
+              {t("stepTwo")}
             </p>
             <p
               style={{
@@ -171,9 +154,7 @@ const FrameOne = ({ onNext }) => {
                 textAlign: "left",
               }}
             >
-              Choose the option <br />
-              that matches the
-              <br /> story in the picture.
+              {t("chooseOption")}
             </p>
           </div>
         )}
@@ -184,19 +165,14 @@ const FrameOne = ({ onNext }) => {
                 textAlign: "left",
               }}
             >
-              Step 1: Write about
-              <br /> the total number.
-              <br /> ✅
+              {t("stepOne")} ✅
             </p>
             <p
               style={{
                 textAlign: "left",
               }}
             >
-              Step 2: Write
-              <br /> about how much
-              <br /> is taken away.
-              <br />✅
+              {t("stepTwo")} ✅
             </p>
             <p
               style={{
@@ -204,11 +180,7 @@ const FrameOne = ({ onNext }) => {
                 textAlign: "left",
               }}
             >
-              <b>
-                Step 3: Write
-                <br /> about how many
-                <br /> remain.
-              </b>
+              {t("stepThree")}
             </p>
             <p
               style={{
@@ -216,9 +188,7 @@ const FrameOne = ({ onNext }) => {
                 textAlign: "left",
               }}
             >
-              Choose the option <br />
-              that matches the
-              <br /> story in the picture.
+              {t("chooseOption")}
             </p>
           </div>
         )}
@@ -229,31 +199,21 @@ const FrameOne = ({ onNext }) => {
                 textAlign: "left",
               }}
             >
-              Step 1: Write about
-              <br /> the total number.
-              <br /> ✅
+              {t("stepOne")} ✅
             </p>
             <p
               style={{
                 textAlign: "left",
               }}
             >
-              Step 2: Write
-              <br /> about how much
-              <br /> is taken away.
-              <br />✅
+              {t("stepTwo")} ✅
             </p>
             <p
               style={{
                 textAlign: "left",
               }}
             >
-              <b>
-                Step 3: Write
-                <br /> about how many
-                <br /> remain.
-                <br />✅
-              </b>
+              <b>{t("stepThree")} ✅</b>
             </p>
             <p
               style={{
@@ -261,9 +221,7 @@ const FrameOne = ({ onNext }) => {
                 textAlign: "left",
               }}
             >
-              Write all these
-              <br /> steps together in
-              <br /> the form of story.{" "}
+              {t("allStep")}
             </p>
           </div>
         )}
@@ -276,45 +234,35 @@ const FrameOne = ({ onNext }) => {
                 marginBottom: "2vw",
               }}
             >
-              Make a note of
-              <br /> this subtraction
-              <br /> story.
+              {t("makeNote")}
             </p>
             <p
               style={{
                 textAlign: "left",
               }}
             >
-              Remember the <br />
-              steps:{" "}
+              {t("rememberStep")}
             </p>
             <p
               style={{
                 textAlign: "left",
               }}
             >
-              <b>Step 1</b>: Write about
-              <br /> the total number.
-              <br /> ✅
+              {t("stepOne")} ✅
             </p>
             <p
               style={{
                 textAlign: "left",
               }}
             >
-              <b>Step 2</b>: Write
-              <br /> about how much
-              <br /> is taken away.
-              <br />✅
+              {t("stepTwo")}✅
             </p>
             <p
               style={{
                 textAlign: "left",
               }}
             >
-              <b>Step 3</b>: Write
-              <br /> about how many
-              <br /> remain.✅
+              {t("stepThree")}✅
             </p>
           </div>
         )}
@@ -322,14 +270,7 @@ const FrameOne = ({ onNext }) => {
       <div className="frame-container-right">
         <div className="frame-contianer-img-item">
           {stepFive && (
-            <div className="story scale-up">
-              <p>
-                6 children were playing.
-                <br />
-                2 children left the game, then
-                <br /> 4 children remained.
-              </p>
-            </div>
+            <div className="story scale-up"><p>{t("storyOneText")}</p></div>
           )}
           <div className="frame-image-container">
             <img src={imageone} alt="image" className="frame-image scale-up" />
@@ -340,21 +281,21 @@ const FrameOne = ({ onNext }) => {
             <div className="option-align">
               <div className="option-align-col slide-right">
                 <Option
-                  content={"6 children are playing."}
+                  content={t("storyOne.optionOne")}
                   onClick={() => handleOptionOne(1)}
                 />
                 <Option
-                  content={"6 children are sitting."}
+                  content={t("storyOne.optionTwo")}
                   onClick={() => handleOptionOne(2)}
                 />
               </div>
               <div className="option-align-col slide-left">
                 <Option
-                  content={"6 children are sleeping."}
+                  content={t("storyOne.optionThree")}
                   onClick={() => handleOptionOne(3)}
                 />
                 <Option
-                  content={"6 children are studying."}
+                  content={t("storyOne.optionFour")}
                   onClick={() => handleOptionOne(4)}
                 />
               </div>
@@ -364,21 +305,21 @@ const FrameOne = ({ onNext }) => {
             <div className="option-align">
               <div className="option-align-col slide-right">
                 <Option
-                  content={"2 children woke up."}
+                  content={t("storyOne.optionFive")}
                   onClick={() => handleOptionTwo(1)}
                 />
                 <Option
-                  content={"2 children left the game."}
+                  content={t("storyOne.optionSix")}
                   onClick={() => handleOptionTwo(2)}
                 />
               </div>
               <div className="option-align-col slide-left">
                 <Option
-                  content={"2 children ate the chocolates."}
+                  content={t("storyOne.optionSeven")}
                   onClick={() => handleOptionTwo(3)}
                 />
                 <Option
-                  content={"2 children slept."}
+                  content={t("storyOne.optionEight")}
                   onClick={() => handleOptionTwo(4)}
                 />
               </div>
@@ -388,21 +329,21 @@ const FrameOne = ({ onNext }) => {
             <div className="option-align">
               <div className="option-align-col slide-left">
                 <Option
-                  content={"4 children remain."}
+                  content={t("storyOne.optionNine")}
                   onClick={() => handleOptionThree(1)}
                 />
                 <Option
-                  content={"4 children went away."}
+                  content={t("storyOne.optionTen")}
                   onClick={() => handleOptionThree(2)}
                 />
               </div>
               <div className="option-align-col slide-right">
                 <Option
-                  content={"4 children were in total."}
+                  content={t("storyOne.optionEleven")}
                   onClick={() => handleOptionThree(3)}
                 />
                 <Option
-                  content={"4 children went to study."}
+                  content={t("storyOne.optionTwelve")}
                   onClick={() => handleOptionThree(4)}
                 />
               </div>
@@ -422,7 +363,7 @@ const FrameOne = ({ onNext }) => {
                 }}
                 onClick={handleStory}
               >
-                MAKE A STORY
+                {t("makeStory")}
               </button>
             </div>
           )}
@@ -435,32 +376,32 @@ const FrameOne = ({ onNext }) => {
         >
           {sideHeadingOne && (
             <h2 className="frame-footer-heading slide-right">
-              Tap ▶ to continue.
+              {t("tapContinue")}
             </h2>
           )}
           {stepOne && (
             <h2 className="frame-footer-heading slide-right">
-              Tap the correct option.
+              {t("tapCorrect")}
             </h2>
           )}
           {stepTwo && (
             <h2 className="frame-footer-heading slide-right">
-              Tap the correct option.
+              {t("tapCorrect")}
             </h2>
           )}
           {stepThree && (
             <h2 className="frame-footer-heading slide-right">
-              Tap the correct option.
+              {t("tapCorrect")}
             </h2>
           )}
           {stepFour && (
             <h2 className="frame-footer-heading slide-right">
-              Tap MAKE A STORY.
+              {t("tapStory")}
             </h2>
           )}
           {stepFive && (
             <h2 className="frame-footer-heading slide-left">
-              Tap ▶ to continue.
+              {t("tapContinue")}
             </h2>
           )}
           <div>
