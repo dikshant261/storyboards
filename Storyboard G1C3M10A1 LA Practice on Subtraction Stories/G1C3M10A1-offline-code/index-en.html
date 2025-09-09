@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtraction Learning App</title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/Outlet.css">
+    <link rel="stylesheet" href="css/ErrorMessage.css">
+    <link rel="stylesheet" href="css/FirstPage.css">
+    <link rel="stylesheet" href="css/Keypad.css">
+    <link rel="stylesheet" href="css/ReusableButton.css">
+    <link rel="stylesheet" href="css/Option.css">
+    <link rel="stylesheet" href="css/SubtractionSentance.css">
+    <link rel="stylesheet" href="css/FrameOne.css">
+
+
+
+
+    <!-- React and ReactDOM -->
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+
+    <!-- Babel removed - using React.createElement instead of JSX -->
+
+    <!-- Language Configuration -->
+    <script>
+        // Set the default language here
+        // Available languages: 'en' (English), 'id' (Indonesian)
+        window.APP_LANGUAGE = 'en'; // Change this to 'id' for Indonesian
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/Outlet.js"></script>
+    <script src="js/Page.js"></script>
+    <script src="js/Frame.js"></script>
+    <script src="js/Option.js"></script>
+    <script src="js/ReusableButton.js"></script>
+    <script src="js/ErrorMessage.js"></script>
+    <script src="js/Keypad.js"></script>
+    <script src="js/SubtractionSentanceOne.js"></script>
+
+
+
+
+
+    <script>
+        ReactDOM.render(
+            React.createElement(Outlet, null),
+            document.getElementById("root")
+        );
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+.keypad-container {
+    width: 18vw;
+    /* padding: 2vh 2vw; */
+    border-radius: 1vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+    background-color: #88771a33;
+    
+}
+
+.hint-btn {
+    width: 11vw;
+    height: 8vh;
+    background-color: var(--secondary-color);
+    color: black;
+    font-size: 2vw;
+    font-weight: bold;
+    border: none;
+    border-radius: 1vh;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 0.4vw; */
+    margin-bottom: 0vh;
+    transition: 0.3s;
+    border: 0.2vw solid rgb(132, 119, 45);
+}
+
+
+
+.message-box {
+    width: 15vw;
+    height: 25vh;
+    border: 0.2vw dashed #eee;
+    border-radius: 0.4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bulb {
+    width: 4vw;
+    object-fit: contain;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5vh;
+    width: 12vw;
+    margin-bottom: 2vh;
+    text-align: center;
+    justify-content: center;
+}
+
+.zero {
+    grid-column: 2;
+    /* places 0 in the middle column */
+}
+
+.keyapd-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keypad-grid button {
+    background-color: #ffdb58;
+    border: 0.3vw solid #88771a;
+    border-radius: 0.8vh;
+    font-size: 2.2vw;
+    font-weight: bold;
+    cursor: pointer;
+    height: 7vh;
+    transition: 0.3s;
+    width: 4vw;
+}
+
+.keypad-grid button:hover {
+    background-color: #f5c842;
+    transform: scale(1.1);
+}
+
+.check-btn {
+    width: 10vw;
+    height: 9vh;
+    background-color: var(--secondary-color);
+    color: black;
+    font-size: 2vw;
+    font-weight: bold;
+    border: none;
+    border-radius: 1vh;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    transition: 0.3s;
+    border: 0.2vw solid rgb(132, 119, 45);
+}
+
+.check-btn:hover {
+    background-color: rgb(136, 99, 51);
+    transform: scale(1.2);
+}
+
+.hint-message {
+    /* background-color: white; */
+    font-size: 1.3vw;
+    border-radius: 0.3vw;
+    color: white;
+    /* padding: 0.3vw; */
+    /* margin: 0.2vw; */
+    text-align: center;
+    /* position: fixed; */
+    top: 2%;
+    right: 7%;
+    white-space: pre-line;
+}
