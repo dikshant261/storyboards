@@ -1,0 +1,71 @@
+.fraction-blue-dashed {
+    border: 0.3vw dashed #2196f3 !important;
+    border-radius: 0.8vw;
+    padding: 0.4vw;
+}
+.fraction-salmon-dashed {
+    border: 0.3vw dashed salmon !important;
+}
+.fraction-blue-solid {
+    border: 0.3vw solid #2196f3 !important;
+}
+.fraction-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0vw;
+}
+.fraction{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    gap: 0.4vw;
+}
+.fraction p{
+    font-size: 6vw;
+    color: white;
+    font-weight: 600;
+}
+.fraction-option{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction: column;
+    gap: 0.4vw;
+}
+.fraction-option p{
+    font-size: 3vw;
+    color: white;
+    font-weight: 600;
+}
+.fraction-line{
+    width: 5vw;
+    height: 0.4vh;
+    background-color: white;
+}
+.multiply {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4vw; /* adjust as needed */
+  font-weight: bold;
+  color: white;
+}
+
+.multiply .top {
+  display: block;
+}
+
+.multiply .line {
+  width: 100%;
+  height: 0.4vh;
+  background: white;
+  
+}
+
+.multiply .bottom {
+  display: block;
+}

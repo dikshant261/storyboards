@@ -1,0 +1,61 @@
+.scene-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4vw;
+    height: 100vh;
+}
+
+.scene-container-heading {
+    font-size: 3vw;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1vw;
+}
+
+.scene-container-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4vw;
+    width: 98vw;
+    height: 73.7vh;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1vw;
+    padding-top:3vw ;
+}
+
+.scene-container-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 15vh;
+    width: 98vw;
+}
+
+.scene-container-footer p {
+    font-size: 3vw;
+    text-align: center;
+    color: white;
+}
+.nxt-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9vw;
+    height: 7vh;
+    background-color: var(--secondary-color);
+    border: 0.3vw solid rgb(85, 64, 12);
+    border-radius: 0.8vw;
+    cursor: pointer;
+    font-size: 3vw;
+}
+.tap{
+    width: 3vw;
+    object-fit: contain;
+    margin-top: -2vw;
+}
