@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtraction Learning App</title>
+
+    <!-- CSS Styles -->
+
+        <link rel="stylesheet" href="css/errormessage.css">
+        <link rel="stylesheet" href="css/fraction.css">
+        <link rel="stylesheet" href="css/Keypad.css">
+        <link rel="stylesheet" href="css/Outlet.css">
+        <link rel="stylesheet" href="css/ReusableButton.css">
+        <link rel="stylesheet" href="css/scene.css">
+        <link rel="stylesheet" href="css/scenetwo.css">
+        <link rel="stylesheet" href="css/startpage.css">
+    
+
+
+
+
+
+
+    <!-- React and ReactDOM -->
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+
+    <!-- Babel removed - using React.createElement instead of JSX -->
+
+    <!-- Language Configuration -->
+    <script>
+        // ====================================
+        // APP CONFIGURATION
+        // ====================================
+        //
+        // QUICK LANGUAGE SETUP:
+        // To force English: Set FORCE_LANGUAGE to 'en'
+        // To force Indonesian: Set FORCE_LANGUAGE to 'id'
+        // To use auto-detection: Set FORCE_LANGUAGE to null
+        //
+        const APP_CONFIG = {
+           
+            // Language Settings
+            FORCE_LANGUAGE: 'en', // Force English language
+           
+            // Supported languages (only English and Indonesian)
+            SUPPORTED_LANGUAGES: ['en', 'id'],
+           
+            // Default language if no preference is found
+            DEFAULT_LANGUAGE: 'en'
+        };
+       
+        // Initialize language after all scripts are loaded
+        function initializeLanguage() {
+            // Initialize i18n system with APP_CONFIG available
+            if (typeof i18n !== 'undefined' && typeof i18n.initLanguage === 'function') {
+                i18n.initLanguage();
+            }
+           
+            let langToUse;
+           
+            // Check if language is forced in configuration
+            if (APP_CONFIG.FORCE_LANGUAGE && APP_CONFIG.SUPPORTED_LANGUAGES.includes(APP_CONFIG.FORCE_LANGUAGE)) {
+                langToUse = APP_CONFIG.FORCE_LANGUAGE;
+                console.log(`🌐 Language forced to: ${langToUse}`);
+            } else {
+                // Auto-detect language from browser or use saved preference
+                const browserLang = navigator.language.startsWith('id') ? 'id' : 'en';
+                const savedLang = localStorage.getItem('appLanguage') || browserLang || APP_CONFIG.DEFAULT_LANGUAGE;
+               
+                // Ensure it's a supported language
+                langToUse = APP_CONFIG.SUPPORTED_LANGUAGES.includes(savedLang) ? savedLang : APP_CONFIG.DEFAULT_LANGUAGE;
+                console.log(`🌐 Language auto-detected: ${langToUse}`);
+            }
+           
+            // Set the language in the i18n system
+            if (typeof i18n !== 'undefined' && typeof i18n.setLanguage === 'function') {
+                i18n.setLanguage(langToUse);
+            }
+        }
+       
+        // Save language preference
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('appLanguage', i18n.getCurrentLanguage());
+        });
+       
+        // Initialize App (Simplified)
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                console.log('Math Learning Applet initialized!');
+                console.log('Supported languages:', APP_CONFIG.SUPPORTED_LANGUAGES.join(', '));
+                console.log('Use setAppLanguage("en") or setAppLanguage("id") to change language');
+            }, 1000);
+        });
+       
+        // Make APP_CONFIG globally available
+        window.APP_CONFIG = APP_CONFIG;
+       
+        // Utility function to change language programmatically (for debugging)
+        window.setAppLanguage = function(langCode) {
+            if (APP_CONFIG.SUPPORTED_LANGUAGES.includes(langCode)) {
+                if (typeof i18n !== 'undefined' && i18n.setLanguage(langCode)) {
+                    console.log(`🌐 Manual language change to: ${langCode}`);
+                    location.reload();
+                    return true;
+                }
+            }
+            console.warn(`Language '${langCode}' not supported. Supported languages:`, APP_CONFIG.SUPPORTED_LANGUAGES);
+            return false;
+        };
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="js/data.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/ErrorMessage.js"></script>
+    <script src="js/ErrorMessageTwo.js"></script>
+    <script src="js/End.js"></script>
+    <script src="js/Fraction.js"></script>
+    <script src="js/Keypad.js"></script>
+    <script src="js/MultiplyFraction.js"></script>
+    <script src="js/NextPart.js"></script>
+    <script src="js/Outlet.js"></script>
+    <script src="js/PlayAudio.js"></script>
+    <script src="js/ReusableButton.js"></script>
+    <script src="js/SceneFour.js"></script>
+    <script src="js/SceneOne.js"></script>
+    <script src="js/SceneThree.js"></script>
+    <script src="js/SceneTwo.js"></script>
+    <script src="js/StartPage.js"></script>
+
+
+
+
+
+
+
+
+
+
+    <script>
+        // Initialize language after all scripts are loaded
+        initializeLanguage();
+        
+        ReactDOM.render(
+            React.createElement(Outlet, null),
+            document.getElementById("root")
+        );
+    </script>
+
+</body>
+
+</html>

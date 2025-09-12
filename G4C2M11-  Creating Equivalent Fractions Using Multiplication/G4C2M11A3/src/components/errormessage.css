@@ -2,49 +2,49 @@
 
     background-color: salmon;
     color: white;
-    font-size: 3vw;
+    font-size: 1.8vw;
     text-align: center;
     white-space: pre-line;
     margin: 0.3vw;
     border-radius: 1vw;
     border: 0.3vw dashed;
     position: fixed;
-    bottom: 18%;
+    top: 18%;
     right: 2%;
-    width: 26vw;
+    width: 24vw;
 }
 
 .success-message {
-    background-color: lightgreen;
-    color: white;
-    font-size: 3vw;
+        background-color: lawngreen;
+    color: black;
+    font-size: 1.5vw;
     text-align: center;
     white-space: pre-line;
     margin: 0.3vw;
-    border-radius: 1vw;
+    border-radius: 1.5vw;
     border: 0.3vw dashed;
     position: fixed;
-    bottom: 18%;
+    top: 18%;
     right: 2%;
-    width: 26vw;
+    width: 24vw;
+    font-weight: 000;
 }
 
-.option-fraction-error {
-    display: flex;
+.success-message .fraction-inline-align {
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.success-message .fraction-question-two {
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.success-message-align {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
-.fraction-line-error {
-    width: 2vw;
-    height: 0.5vh;
-    background-color: white;
+.success-message .fraction-question-line {
+    width: 100%;
+    height: 0.3vh;
+    background-color: currentColor;
 }

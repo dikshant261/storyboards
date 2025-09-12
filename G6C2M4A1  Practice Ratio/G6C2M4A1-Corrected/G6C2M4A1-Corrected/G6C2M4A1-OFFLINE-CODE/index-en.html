@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtraction Learning App</title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/Outlet.css">
+    <link rel="stylesheet" href="css/ReusableButton.css">
+    <link rel="stylesheet" href="css/catimage.css">
+    <link rel="stylesheet" href="css/errormessage.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/option.css">
+    <link rel="stylesheet" href="css/ResultBox.css">
+    <link rel="stylesheet" href="css/startpage.css">
+    <link rel="stylesheet" href="css/TableImage.css">
+    <link rel="stylesheet" href="css/TriangleImage.css">
+    <link rel="stylesheet" href="css/AppleImage.css">
+
+
+
+
+
+    <!-- React and ReactDOM -->
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+
+    <!-- Babel removed - using React.createElement instead of JSX -->
+
+    <!-- Language Configuration -->
+    <script>
+        // ====================================
+        // APP CONFIGURATION
+        // ====================================
+        // 
+        // QUICK LANGUAGE SETUP:
+        // To force English: Set FORCE_LANGUAGE to 'en'
+        // To force Indonesian: Set FORCE_LANGUAGE to 'id'
+        // To use auto-detection: Set FORCE_LANGUAGE to null
+        // 
+        const APP_CONFIG = {
+            
+            // Language Settings
+            
+            // Supported languages (only English and Indonesian)
+            SUPPORTED_LANGUAGES: ['en', 'id'],
+            
+            // Default language if no preference is found
+            DEFAULT_LANGUAGE: 'id'
+        };
+        
+        // Initialize language after data.js is loaded
+        function initializeLanguage() {
+            // Initialize i18n system with APP_CONFIG available
+            if (typeof i18n !== 'undefined' && typeof i18n.initLanguage === 'function') {
+                i18n.initLanguage();
+            }
+            
+            let langToUse;
+            
+            // Check if language is forced in configuration
+            if (APP_CONFIG.FORCE_LANGUAGE && APP_CONFIG.SUPPORTED_LANGUAGES.includes(APP_CONFIG.FORCE_LANGUAGE)) {
+                langToUse = APP_CONFIG.FORCE_LANGUAGE;
+                console.log(`🌐 Language forced to: ${langToUse}`);
+            } else {
+                // Auto-detect language from browser or use saved preference
+                const browserLang = navigator.language.startsWith('id') ? 'id' : 'en';
+                const savedLang = localStorage.getItem('appLanguage') || browserLang || APP_CONFIG.DEFAULT_LANGUAGE;
+                
+                // Ensure it's a supported language
+                langToUse = APP_CONFIG.SUPPORTED_LANGUAGES.includes(savedLang) ? savedLang : APP_CONFIG.DEFAULT_LANGUAGE;
+                console.log(`🌐 Language auto-detected: ${langToUse}`);
+            }
+            
+            // Set the language in the i18n system
+            if (typeof i18n !== 'undefined' && typeof i18n.setLanguage === 'function') {
+                i18n.setLanguage(langToUse);
+            }
+        }
+        
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait a bit for data.js to load, then initialize language
+            setTimeout(initializeLanguage, 100);
+        });
+        
+        // Save language preference
+        window.addEventListener('beforeunload', function() {
+            localStorage.setItem('appLanguage', i18n.getCurrentLanguage());
+        });
+        
+        // Initialize App (Simplified)
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                console.log('Ratio Learning Applet initialized!');
+                console.log('Supported languages:', APP_CONFIG.SUPPORTED_LANGUAGES.join(', '));
+                console.log('Use setAppLanguage("en") or setAppLanguage("id") to change language');
+                console.log('Current language:', typeof i18n !== 'undefined' ? i18n.getCurrentLanguage() : 'unknown');
+            }, 1000);
+        });
+        
+        // Make APP_CONFIG globally available
+        window.APP_CONFIG = APP_CONFIG;
+        
+        // Utility function to change language programmatically (for debugging)
+        window.setAppLanguage = function(langCode) {
+            if (APP_CONFIG.SUPPORTED_LANGUAGES.includes(langCode)) {
+                if (typeof i18n !== 'undefined' && i18n.setLanguage(langCode)) {
+                    console.log(`🌐 Manual language change to: ${langCode}`);
+                    location.reload();
+                    return true;
+                }
+            }
+            console.warn(`Language '${langCode}' not supported. Supported languages:`, APP_CONFIG.SUPPORTED_LANGUAGES);
+            return false;
+        };
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/Outlet.js"></script>
+    <script src="js/ReusableButton.js"></script>
+    <script src="js/Catimage.js"></script>
+    <script src="js/DogAndCatOption.js"></script>
+    <script src="js/ErrorMessage.js"></script>
+    <script src="js/FooterButtons.js"></script>
+    <script src="js/Main.js"></script>
+    <script src="js/MainFive.js"></script>
+    <script src="js/MainFour.js"></script>
+    <script src="js/MainSix.js"></script>
+    <script src="js/MainThree.js"></script>
+    <script src="js/MainTwo.js"></script>
+    <script src="js/PlayAudio.js"></script>
+    <script src="js/RepersentinRatio.js"></script>
+    <script src="js/ResultBox.js"></script>
+    <script src="js/ResultBoxTwo.js"></script>
+    <script src="js/ReusableButton.js"></script>
+    <script src="js/StartPage.js"></script>
+    <script src="js/TableImage.js"></script>
+    <script src="js/TableMessage.js"></script>
+    <script src="js/TableOption.js"></script>
+    <script src="js/TriangleBox.js"></script>
+    <script src="js/TriangleImage.js"></script>
+    <script src="js/AppleMessage.js"></script>
+    <script src="js/AppleImage.js"></script>
+    <script src="js/ActivityComplete.js"></script>
+    <script src="js/AppleOption.js"></script>
+    
+
+
+
+
+
+
+
+    <script>
+        ReactDOM.render(
+            React.createElement(Outlet, null),
+            document.getElementById("root")
+        );
+    </script>
+
+</body>
+
+</html>

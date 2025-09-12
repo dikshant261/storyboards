@@ -1,0 +1,17 @@
+.table-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1vw;
+}
+.table-image{
+    width: 23vw;
+    object-fit: contain;
+}
+.table-text{
+    font-size: 2.5vw;
+    color: var(--secondary-color);
+    white-space: pre-line;
+    text-align: center;
+}

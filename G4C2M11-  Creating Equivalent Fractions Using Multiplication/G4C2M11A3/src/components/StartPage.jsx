@@ -7,7 +7,7 @@ const StartPage = ({ onClose }) => {
   const { t } = useTranslation();
   return (
     <div className="start-page-container">
-      <div className="top-heading">{t("reapeatedAddition")}</div>
+      <div className="top-heading">{t("Equivalent_Fractions")}</div>
       <div className="sub-heading">{t("we_multiply")}</div>
       <div className="sub-heading">{t("let_find")}</div>
       <div className="top-margin">

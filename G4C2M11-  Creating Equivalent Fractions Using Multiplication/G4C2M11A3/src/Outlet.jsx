@@ -1,135 +1,135 @@
 import React, { useState } from "react";
 import "./Outlet.css";
 import StartPage from "./components/StartPage";
+import SceneOne from "./components/SceneOne";
 import SceneTwo from "./components/SceneTwo";
-import SceneThree from "./components/SceneThree";
+import NextPart from "./components/NextPart";
 import SceneFour from "./components/SceneFour";
-import SceneFive from "./components/SceneFive";
-import SceneSix from "./components/SceneSix";
-import ActivityComplete from "./components/ActivityCompleted";
-import { useTranslation } from "react-i18next";
+import End from "./components/End";
+import SceneThree from "./components/ScenThree";
 const question = [
-  [2, 5, 3],
-  [1, 3, 4],
-  [4, 5, 3],
-  [2, 7, 5],
-  [1, 6, 4],
-  [3, 10, 3],
+  [1, 5, 5, 25],
+  [1, 6, 2, 12],
+  [2, 3, 6, 9],
+  [3, 5, 15, 25],
 ];
-const numberString = [
-  "two_fifth",
-  "one_thirds",
-  "four_fifths",
-  "two_sevenths",
-  "one_sixths",
-  "three_tenths",
+const questionDivide = [
+  [4, 16, 1, 4],
+  [2, 18, 1, 9],
+  [6, 15, 2, 5],
+  [12, 21, 4, 7],
 ];
 const Outlet = () => {
-  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndexDivide, setCurrentIndexDivide] = useState(0);
   const [start, setStart] = useState(true);
+  const [sceneOne, setSceneOne] = useState(false);
   const [sceneTwo, setSceneTwo] = useState(false);
-  const [scenethree, setSceneThree] = useState(false);
+  const [nextPart, setNextPart] = useState(false);
+  const [sceneThree, setSceneThree] = useState(false);
   const [sceneFour, setSceneFour] = useState(false);
-  const [sceneFive, setSceneFive] = useState(false);
-  const [sceneSix, setSceneSix] = useState(false);
-  const [complete, setComplete] = useState(false);
-  const handleSceneTwo = () => {
+  const [end, setEnd] = useState(false);
+  const startClose = () => {
     setStart(false);
+    setSceneOne(true);
+  };
+  const handleSceneOne = () => {
+    setSceneOne(false);
     setSceneTwo(true);
   };
-  const handleSceneThree = () => {
-    setSceneTwo(false);
-    setSceneThree(true);
-  };
-  const handleSceneFour = () => {
-    setSceneThree(false);
-    setSceneFour(true);
-  };
-  const handleSceneFive = () => {
-    setSceneFour(false);
-    setSceneFive(true);
-  };
-  const handleSceneSix = () => {
-    setSceneFive(false);
-    setSceneSix(true);
-  };
-  const handleSceneSeven = () => {
+  const handleSceneTwo = () => {
     if (currentIndex + 1 === question.length) {
-      setSceneSix(false);
-      setComplete(true);
-    } else {
-      setCurrentIndex((prev) => prev + 1);
-      setSceneSix(false);
-      setSceneTwo(true);
+      setSceneTwo(false);
+      setNextPart(true);
+      return;
     }
+    setCurrentIndex((prev) => prev + 1);
+    setSceneTwo(false);
+    setSceneOne(true);
   };
+
   const handlePrevOne = () => {
     if (currentIndex === 0) {
-      setSceneTwo(false);
+      setSceneOne(false);
       setStart(true);
     } else {
       setCurrentIndex((prev) => prev - 1);
-      setSceneTwo(false);
-      setSceneSix(true);
+      setSceneOne(false);
+      setSceneTwo(true);
     }
   };
-  const handlePrevTwo=()=>{
+  const handlePrevTwo = () => {
+    setSceneTwo(false);
+    setSceneOne(true);
+  };
+  const currentQuestion = question[currentIndex];
+  const handleDivide = () => {
+    setNextPart(false);
+    setSceneThree(true);
+  };
+  const handleSceneThree = () => {
     setSceneThree(false);
-    setSceneTwo(true);
-  }
-  const handlePrevThree=()=>{
+    setSceneFour(true);
+  };
+  const handleSceneFour = () => {
+    if (currentIndexDivide + 1 === questionDivide.length) {
+      setSceneFour(false);
+      setEnd(true);
+      return;
+    } else {
+      setCurrentIndexDivide((prev) => prev + 1);
+      setSceneFour(false);
+      setSceneThree(true);
+    }
+  };
+  const handlePrevThree = () => {
+    if (currentIndexDivide === 0) {
+      setSceneThree(false);
+      setNextPart(true);
+    } else {
+      setCurrentIndexDivide((prev) => prev - 1);
+      setSceneThree(false);
+      setSceneFour(true);
+    }
+  };
+  const handlePrevFour = () => {
     setSceneFour(false);
     setSceneThree(true);
-  }
-  const handlePrevFour=()=>{
-    setSceneFive(false);
-    setSceneFour(true);
-  }
-  const handlePrevFive=()=>{
-    setSceneSix(false);
-    setSceneFive(true);
-  }
-  const currentQuestion = question[currentIndex];
+  };
+  const currentQuestionDivide = questionDivide[currentIndexDivide];
   return (
     <div className="outlet">
-      {start && <StartPage onClose={handleSceneTwo} />}
-      {sceneTwo && (
-        <SceneTwo
+      {start && <StartPage onClose={startClose} />}
+      {sceneOne && (
+        <SceneOne
           question={currentQuestion}
-          onNext={handleSceneThree}
+          onNext={handleSceneOne}
           onPrev={handlePrevOne}
         />
       )}
-      {scenethree && (
-        <SceneThree question={currentQuestion} onNext={handleSceneFour} onPrev={handlePrevTwo}/>
-      )}
-      {sceneFour && (
-        <SceneFour
+      {sceneTwo && (
+        <SceneTwo
           question={currentQuestion}
-          flag={0}
-          numberString={t(numberString[currentIndex])}
-          onNext={handleSceneFive}
+          onNext={handleSceneTwo}
+          onPrev={handlePrevTwo}
+        />
+      )}
+      {nextPart && <NextPart onClose={handleDivide} />}
+      {sceneThree && (
+        <SceneThree
+          question={currentQuestionDivide}
+          onNext={handleSceneThree}
           onPrev={handlePrevThree}
         />
       )}
-      {sceneFive && (
-        <SceneFive
-          question={currentQuestion}
-          flag={1}
-          onNext={handleSceneSix}
+      {sceneFour && (
+        <SceneFour
+          question={currentQuestionDivide}
           onPrev={handlePrevFour}
+          onNext={handleSceneFour}
         />
       )}
-      {sceneSix && (
-        <SceneSix
-          question={currentQuestion}
-          flag={1}
-          onNext={handleSceneSeven}
-          onPrev={handlePrevFive}
-        />
-      )}
-      {complete && <ActivityComplete />}
+      {end && <End />}
     </div>
   );
 };
