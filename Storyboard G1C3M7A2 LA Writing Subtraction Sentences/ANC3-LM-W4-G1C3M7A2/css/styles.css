@@ -1,0 +1,1270 @@
+/* ============================================================================
+ * CSS DESIGN TOKENS & COLOR VARIABLES
+ * ============================================================================ */
+
+:root {
+    /* ========================================
+     * Primary Color Palette
+     * ======================================== */
+    --color-primary: #007bff;
+    --color-primary-dark: #0056b3;
+    --color-primary-light: #66b3ff;
+    
+    --color-secondary: #6c757d;
+    --color-secondary-dark: #495057;
+    --color-secondary-light: #adb5bd;
+    
+    --color-success: #28a745;
+    --color-success-dark: #1e7e34;
+    --color-success-light: #66cc66;
+    
+    --color-warning: #ffc107;
+    --color-warning-dark: #e0a800;
+    --color-warning-light: #ffed4e;
+    
+    --color-danger: #dc3545;
+    --color-danger-dark: #bd2130;
+    --color-danger-light: #ff6666;
+    
+    --color-info: #17a2b8;
+    --color-info-dark: #138496;
+    --color-info-light: #5bc0de;
+
+    /* ========================================
+     * Grayscale Palette
+     * ======================================== */
+    --color-white: #FFFFFF;
+    --color-white-dark: #D9D9D9;
+    --color-gray-100: #f8f9fa;
+    --color-gray-200: #e9ecef;
+    --color-gray-300: #dee2e6;
+    --color-gray-400: #ced4da;
+    --color-gray-500: #adb5bd;
+    --color-gray-600: #6c757d;
+    --color-gray-700: #495057;
+    --color-gray-800: #343a40;
+    --color-gray-900: #212529;
+    --color-black: #000000;
+
+    /* ========================================
+     * UI Component Colors
+     * ======================================== */
+    --color-button-next: #FF9900;
+    --color-button-next-hover: #e58900;
+    --color-button-previous: #6699CC;
+    --color-button-previous-hover: #5588bb;
+    --color-button-disabled: #999999;
+    
+    --color-quiz-correct: #4CAF50;
+    --color-quiz-correct-bg: rgba(76, 175, 80, 0.9);
+    --color-quiz-correct-bg-light: rgba(76, 175, 80, 0.1);
+    
+    --color-quiz-incorrect: #FF5252;
+    --color-quiz-incorrect-bg: rgba(255, 82, 82, 0.9);
+    --color-quiz-incorrect-bg-light: rgba(255, 82, 82, 0.1);
+    
+    --color-dialog-bg: rgba(255, 255, 255, 0.95);
+    --color-dialog-border: transparent;
+    --color-dialog-text: #2C3E50;
+
+    /* ========================================
+     * Background & Overlay Colors
+     * ======================================== */
+    --color-overlay-dark: rgba(0, 0, 0, 0.8);
+    --color-overlay-light: rgba(255, 255, 255, 0.1);
+    --color-backdrop: rgba(0, 0, 0, 0.3);
+    
+    --background-main-image: url('../assets/bg.png');
+    --background-color: #000000;
+    --background-overlay-opacity: 0.0;
+
+    /* ========================================
+     * Border & Shadow Variables
+     * ======================================== */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 15px;
+    --border-radius-xl: 20px;
+    --border-radius-full: 50%;
+    
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 15px;
+    
+    /* ========================================
+     * Animation Variables
+     * ======================================== */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    --animation-pulse-duration: 2s;
+    --animation-highlight-duration: 1.5s;
+    
+    /* ========================================
+     * Z-Index Scale - Logical Stacking Order
+     * ======================================== */
+    --z-base: 1;           /* Base content layer */
+    --z-content: 10;       /* Page content elements */
+    --z-elevated: 20;      /* Slightly elevated content */
+    --z-header: 30;        /* Page headers and navigation */
+    --z-floating: 40;      /* Floating elements */
+    --z-dropdown: 50;      /* Dropdown menus */
+    --z-modal: 60;         /* Modal dialogs */
+    --z-tooltip: 70;       /* Tooltips and hints */
+    --z-button: 80;        /* Interactive buttons */
+    --z-notification: 90;  /* Notifications and alerts */
+    --z-overlay: 100;      /* Development overlays */
+    --z-debug: 110;        /* Debug tools and overlays */
+
+    /* ========================================
+     * Legacy Variables (for compatibility)
+     * ======================================== */
+    --main-background-image: var(--background-color);
+    --overlay-opacity: var(--background-overlay-opacity);
+    --dialogue-box-fill-color: var(--color-dialog-bg);
+    --dialogue-border-color: var(--color-dialog-border);
+    --container-border-radius: var(--border-radius-md);
+    --clr-white: var(--color-white);
+    --clr-white-dark: var(--color-white-dark);
+}
+
+/* ============================================================================
+ * CORE APPLICATION STYLES
+ * ============================================================================
+ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: var(--background-color) var(--background-main-image) center center / cover no-repeat;
+}
+
+/* ============================================================================
+ * BASE STYLES & RESET
+ * ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: var(--background-color) var(--background-main-image) center center / cover no-repeat;
+}
+
+/* ============================================================================
+ * LAYOUT & CONTAINERS
+ * ============================================================================ */
+
+/* ========================================
+ * Main Application Container
+ * ======================================== */
+.main-container {
+    width: 100vw;
+    height: 100vh;
+    border-radius: var(--border-radius-md);
+    background: var(--background-color) var(--background-main-image) center center / cover no-repeat;
+    overflow: hidden;
+    margin: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    pointer-events: auto;
+}
+
+.main-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-black);
+    opacity: var(--background-overlay-opacity);
+    pointer-events: none;
+    z-index: var(--z-base);
+    border-radius: var(--border-radius-md);
+}
+
+/* ============================================================================
+ * MATH APP COMPONENT STYLES
+ * ============================================================================
+ */
+
+/* Main Application Container */
+/* ========================================
+ * Math App Main Container
+ * ======================================== */
+.math-app-container {
+    width: 100vw;
+    height: 100vh;
+    background: var(--background-color) var(--background-main-image) center center / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    pointer-events: auto;
+}
+
+/* Header Component Styles */
+.math-app-header {
+    justify-content: space-between;
+}
+
+.math-app-header-left {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1vw, 16px);
+    width: clamp(100px, 12vw, 200px);
+}
+
+.math-app-header-center {
+    flex: 1;
+    text-align: center;
+}
+
+.math-app-header-right {
+    width: clamp(100px, 12vw, 200px);
+}
+
+.math-app-header-dropdown-label {
+    font-size: clamp(12px, 2vw, 16px);
+    font-weight: normal;
+    color: white;
+}
+
+.math-app-header-dropdown {
+    font-size: clamp(12px, 2vw, 16px);
+    padding: clamp(4px, 0.5vw, 8px) clamp(8px, 1vw, 16px);
+    border-radius: clamp(4px, 0.5vw, 8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    min-width: clamp(80px, 10vw, 120px);
+}
+
+/* Dialog Component Styles */
+.math-app-dialog-container {
+    z-index: var(--z-content);
+}
+
+.math-app-dialog-bubble {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.math-app-dialog-tail {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: var(--z-elevated);
+}
+
+.math-app-dialog-tail-south {
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+}
+
+.math-app-dialog-tail-north {
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+}
+
+.math-app-dialog-tail-left {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.math-app-dialog-tail-right {
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.math-app-dialog-text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: pre-line;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+/* Quiz Panel Styles */
+.math-app-quiz-panel {
+    z-index: var(--z-modal);
+    position: absolute;
+    display: flex;
+    box-sizing: border-box;
+}
+
+.math-app-quiz-panel-two-column {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 0px;
+}
+
+.math-app-quiz-panel-left-column {
+    flex: 0 0 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.math-app-quiz-panel-right-column {
+    flex: 0 0 60%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: rgba(50, 50, 50, 0.95);
+    border-radius: 15px;
+}
+
+.math-app-quiz-panel-description {
+    font-size: 28px;
+    line-height: 1.3;
+    text-align: center;
+    color: #ffffff;
+    font-weight: bold;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.math-app-quiz-panel-header-section {
+    flex: 0 0 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.math-app-quiz-panel-header {
+    margin: 0;
+    text-align: center;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    width: 80%;
+    max-width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.math-app-quiz-panel-buttons-section {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.math-app-quiz-panel-button {
+    width: 70%;
+    min-height: 55px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 3px solid #333;
+    color: #333;
+}
+
+.math-app-quiz-panel-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.math-app-quiz-panel-button-correct {
+    background-color: rgba(102, 204, 102, 0.9);
+    border-color: #66cc66;
+    border: 3px solid #66cc66;
+}
+
+.math-app-quiz-panel-button-incorrect {
+    background-color: rgba(255, 102, 102, 0.9);
+    border-color: #ff6666;
+    border: 3px solid #ff6666;
+}
+
+.math-app-quiz-panel-feedback-section {
+    flex: 0 0 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.math-app-quiz-panel-feedback {
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    font-size: 19px;
+    font-weight: bold;
+    line-height: 1.3;
+    padding: 20px;
+    border: 2px solid;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.math-app-quiz-panel-feedback-correct {
+    color: #4CAF50;
+    border-color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.math-app-quiz-panel-feedback-incorrect {
+    color: #FF5252;
+    border-color: #FF5252;
+    background-color: rgba(255, 82, 82, 0.1);
+}
+
+.math-app-quiz-panel-single-column {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.math-app-quiz-panel-single-feedback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+}
+
+/* ========================================
+ * GRID COMPONENTS
+ * Interactive grid systems and mathematical layouts
+ * ======================================== */
+
+/* Grid Container */
+.math-app-grid-container {
+    position: relative;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Grid Cells */
+.math-app-grid-cell {
+    position: absolute;
+    box-sizing: border-box;
+    transition: var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+    z-index: var(--z-base);
+}
+
+.math-app-grid-cell:hover {
+    background-color: var(--color-overlay-light);
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+
+
+/* Grid Cell Highlighting */
+.math-app-grid-cell-highlighted {
+    background-color: rgba(255, 255, 0, 0.3);
+    border: 3px solid #FFD700;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    z-index: var(--z-floating);
+    pointer-events: auto;
+    animation: pulsate var(--animation-highlight-duration) infinite;
+}
+
+.math-app-grid-cell-highlighted:hover {
+    background-color: rgba(255, 255, 0, 0.3);
+    transform: none;
+    cursor: pointer;
+}
+
+.math-app-grid-separator {
+    position: absolute;
+    box-sizing: border-box;
+    padding: 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+}
+
+.math-app-grid-separator-line {
+    width: calc(100% - 10px);
+    height: 6px;
+    background: #FFFFFF;
+    border-radius: 2px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    border: 2px solid #FFFFFF;
+    border-top: 4px solid #FFFFFF;
+    margin-top: 5px;
+}
+
+/* ========================================
+ * BUTTON COMPONENTS
+ * Standardized button styles for navigation and interaction
+ * ======================================== */
+
+/* Base Button Styles */
+.math-app-button,
+.next-button,
+.previous-button,
+[data-grid-position="next-button"],
+[data-grid-position="previous-button"] {
+    position: absolute;
+    z-index: var(--z-button);
+    pointer-events: auto;
+    cursor: pointer;
+    display: block;
+    border: none;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: var(--transition-normal);
+    font-weight: bold;
+    border-radius: var(--border-radius-xl);
+    box-sizing: border-box;
+}
+
+/* Next Button - Primary action button */
+.math-app-button-next,
+.next-button,
+[data-grid-position="next-button"] {
+    background-color: var(--color-button-next);
+    border: 3px solid var(--color-gray-800);
+    color: var(--color-black);
+}
+
+.math-app-button-next:hover,
+.next-button:hover,
+[data-grid-position="next-button"]:hover {
+    background-color: var(--color-button-next-hover);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.math-app-button-next:disabled,
+.next-button:disabled {
+    background-color: var(--color-button-disabled);
+    border-color: var(--color-gray-600);
+    cursor: not-allowed;
+    opacity: 0.5;
+    color: var(--color-white);
+}
+
+/* Previous Button - Secondary action button */
+.math-app-button-previous,
+.previous-button,
+[data-grid-position="previous-button"] {
+    background-color: var(--color-button-previous);
+    border: 3px solid var(--color-gray-800);
+    color: var(--color-black);
+}
+
+.math-app-button-previous:hover,
+.previous-button:hover,
+[data-grid-position="previous-button"]:hover {
+    background-color: var(--color-button-previous-hover);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+/* Special Previous Button Styling for Page 1 */
+.math-app-button-previous-page1 {
+    background-color: var(--color-warning);
+    border-color: var(--color-warning-dark);
+}
+
+/* Button Pulse Animation Class */
+.math-app-pulse-animation {
+    animation: nextButtonPulse var(--animation-pulse-duration) infinite;
+}
+
+/* Start Button Pulse Animation */
+.start-button-pulse {
+    animation: startButtonPulse var(--animation-pulse-duration) infinite;
+}
+
+/* ========================================
+ * HEADER COMPONENTS
+ * Navigation, branding, and page information
+ * ======================================== */
+
+/* Page Indicator */
+.math-app-page-indicator,
+.page-indicator {
+    position: absolute;
+    z-index: var(--z-header);
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    top: clamp(8px, 1vw, 16px);
+    right: clamp(16px, 2vw, 32px);
+    background-color: var(--color-overlay-dark);
+    color: var(--color-white);
+    padding: clamp(8px, 1vw, 16px) clamp(16px, 2vw, 32px);
+    border-radius: clamp(16px, 2vw, 32px);
+    font-size: clamp(12px, 2vw, 16px);
+    font-weight: bold;
+    border: 2px solid var(--color-overlay-light);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ========================================
+ * DROPDOWN COMPONENTS  
+ * Form controls and selection interfaces
+ * ======================================== */
+
+/* Question Dropdown */
+.math-app-question-dropdown,
+.question-dropdown-container,
+[data-grid-position="question-dropdown"] {
+    position: absolute;
+    z-index: var(--z-dropdown);
+    pointer-events: auto;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.math-app-question-dropdown select,
+.question-dropdown-container select {
+    box-sizing: border-box;
+    padding: 8px;
+    border-radius: var(--border-radius-md);
+    border: 2px solid var(--color-gray-800);
+    background-color: var(--color-white);
+    color: var(--color-gray-800);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    transition: var(--transition-normal);
+}
+
+.math-app-question-dropdown select:hover,
+.question-dropdown-container select:hover {
+    background-color: var(--color-white);
+    border-color: var(--color-primary);
+    transform: scale(1.02);
+}
+
+.math-app-question-dropdown select:focus,
+.question-dropdown-container select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* ============================================================================
+ * ANIMATION LIBRARY
+ * ============================================================================ */
+
+/* ========================================
+ * BUTTON ANIMATIONS
+ * Pulse effects for user attention and feedback
+ * ======================================== */
+
+/**
+ * Next Button Pulse Animation
+ * Usage: Add 'math-app-pulse-animation' class to next button
+ * Purpose: Draws attention to primary action button
+ * Duration: 2 seconds, infinite loop
+ */
+@keyframes nextButtonPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 153, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
+    }
+}
+
+/**
+ * Start Button Pulse Animation
+ * Usage: Add 'start-button-pulse' class to start button
+ * Purpose: Draws attention to the start button with orange glow
+ * Duration: 2 seconds, infinite loop
+ */
+@keyframes startButtonPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(255, 149, 0, 0.3), 0 0 0 0 rgba(255, 149, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(255, 149, 0, 0.4), 0 0 0 15px rgba(255, 149, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(255, 149, 0, 0.3), 0 0 0 0 rgba(255, 149, 0, 0);
+    }
+}
+
+/* ========================================
+ * HIGHLIGHT ANIMATIONS
+ * Visual emphasis for interactive elements
+ * ======================================== */
+
+/**
+ * Pulsate Animation
+ * Usage: Applied automatically to '.math-app-grid-cell-highlighted'
+ * Purpose: Highlights interactive grid cells with breathing effect
+ * Duration: 1.5 seconds, infinite loop
+ * Colors: Green glow effect
+ */
+@keyframes pulsate {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: var(--shadow-glow) #00ff00;
+    }
+    50% { 
+        transform: scale(1.1);
+        opacity: 0.8;
+        box-shadow: var(--shadow-glow) #00ff00, 0 0 50px #00ff00;
+    }
+}
+
+.math-app-grid-cell-highlighted {
+    animation: pulsate var(--animation-highlight-duration) infinite;
+}
+
+/* ========================================
+ * PAGE TRANSITION ANIMATIONS
+ * Smooth transitions between content states
+ * ======================================== */
+
+/**
+ * Fade In Animation
+ * Usage: Add 'fadeIn' class to elements
+ * Purpose: Smooth element appearance
+ * Duration: 0.5 seconds
+ */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 0.5s var(--transition-normal);
+}
+
+/**
+ * Slide In Up Animation
+ * Usage: Add 'slideInUp' class to elements
+ * Purpose: Element slides in from bottom
+ * Duration: 0.6 seconds
+ */
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slideInUp {
+    animation: slideInUp 0.6s var(--transition-normal);
+}
+
+/**
+ * Bounce In Animation
+ * Usage: Add 'bounceIn' class to elements
+ * Purpose: Playful entrance effect
+ * Duration: 0.8 seconds
+ */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.bounceIn {
+    animation: bounceIn 0.8s var(--transition-normal);
+}
+
+/* ========================================
+ * UTILITY ANIMATION CLASSES
+ * Quick animation helpers
+ * ======================================== */
+
+/**
+ * Hover Scale Effect
+ * Usage: Add 'hover-scale' class to elements
+ * Purpose: Subtle scale on hover interaction
+ */
+.hover-scale {
+    transition: transform var(--transition-fast);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/**
+ * Smooth Transitions
+ * Usage: Add 'smooth-transition' class to elements
+ * Purpose: Adds smooth transition to all properties
+ */
+.smooth-transition {
+    transition: all var(--transition-normal);
+}
+
+/* ============================================================================
+ * GRID POSITIONING SYSTEM
+ * ============================================================================ */
+
+/* Grid-positioned elements base styles */
+.main-container .header-container[data-grid-position],
+.main-container .character-container[data-grid-position],
+.main-container .dialog-container[data-grid-position] {
+    position: absolute;
+    z-index: var(--z-content);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container positioning */
+.main-container .container1[data-grid-position],
+.main-container .container2[data-grid-position] {
+    position: absolute;
+    z-index: var(--z-content);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Table element positioning */
+.main-container .table-element[data-grid-position],
+.main-container [data-grid-position="visual-rep-table"] {
+    position: absolute !important;
+    z-index: var(--z-content);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* All grid-positioned elements reset */
+[data-grid-position]:not([data-grid-position="quizPanel"]) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Override pointer-events for interactive elements */
+[data-grid-position="next-button"],
+[data-grid-position="previous-button"],
+[data-grid-position="question-dropdown"] {
+    pointer-events: auto;
+}
+
+/* Dialog container styling */
+.dialog-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: var(--z-content);
+}
+
+/* ========================================
+ * CHARACTER & CONTENT COMPONENTS
+ * Visual elements and content display
+ * ======================================== */
+
+/* Character Container */
+.character-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-content);
+}
+
+.character-container .character-image {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    border: 3px solid transparent;
+    border-radius: var(--border-radius-md);
+    margin: 0;
+    padding: 0;
+}
+
+/* Dialog Content Styling */
+.dialog-container .dialog-content,
+.dialog-container .dialogue-content {
+    font-size: clamp(1rem, 2.5vw, 1.8rem);
+    color: var(--color-dialog-text);
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.4;
+    text-shadow: var(--shadow-sm);
+    margin: 0;
+    padding: 0;
+}
+
+/* Instruction Header */
+.instruction-header[data-grid-position] {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    pointer-events: auto;
+    user-select: text;
+    -webkit-user-select: text;
+    white-space: normal;
+    overflow: visible;
+    word-wrap: break-word;
+    position: absolute;
+    z-index: var(--z-notification);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Question dropdown styling - consolidated in Dropdown Components section above */
+
+/* ============================================================================
+ * CRITICAL OVERRIDES
+ * High-specificity rules to ensure component functionality
+ * ============================================================================ */
+
+/* ========================================
+ * BUTTON CLICKABILITY OVERRIDES
+ * Ensures buttons remain functional despite layout changes
+ * ======================================== */
+
+/* CRITICAL: Next Button Clickability Override */
+[data-grid-position="next-button"],
+.main-container [data-grid-position="next-button"],
+*[data-grid-position="next-button"],
+div[data-grid-position="next-button"],
+button[data-grid-position="next-button"] {
+    position: absolute;
+    display: block;
+    visibility: visible;
+    z-index: var(--z-button);
+    pointer-events: auto;
+    cursor: pointer;
+    isolation: isolate;
+    clip: auto;
+    clip-path: none;
+    overflow: visible;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    transform: none;
+    contain: none;
+}
+
+/* CRITICAL: Previous Button Clickability Override */
+[data-grid-position="previous-button"],
+.main-container [data-grid-position="previous-button"],
+*[data-grid-position="previous-button"],
+div[data-grid-position="previous-button"],
+button[data-grid-position="previous-button"] {
+    position: absolute;
+    display: block;
+    visibility: visible;
+    z-index: var(--z-button);
+    pointer-events: auto;
+    cursor: pointer;
+    isolation: isolate;
+    clip: auto;
+    clip-path: none;
+    overflow: visible;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    transform: none;
+    contain: none;
+}
+
+/* CRITICAL: Question Dropdown Clickability Override */
+.question-dropdown-container,
+[data-grid-position="question-dropdown"],
+.main-container .question-dropdown-container,
+.main-container [data-grid-position="question-dropdown"] {
+    position: absolute;
+    display: block;
+    visibility: visible;
+    z-index: var(--z-dropdown);
+    pointer-events: auto;
+    cursor: pointer;
+    isolation: isolate;
+    clip: auto;
+    clip-path: none;
+    overflow: visible;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    transform: none;
+    contain: none;
+}
+
+/* ============================================================================
+ * GRID OVERLAY SYSTEM
+ * Development and debugging tools
+ * ============================================================================ */
+
+/* ========================================
+ * Grid Overlay Container
+ * Development tool for visual grid positioning
+ * ======================================== */
+
+/* Grid overlay container - Development tool for positioning */
+#grid-overlay {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: var(--z-overlay);
+}
+
+/* Grid overlay control panel */
+#grid-overlay .grid-control-panel {
+    pointer-events: auto;
+    user-select: auto;
+    -webkit-user-select: auto;
+}
+
+/* Grid overlay highlights */
+.grid-highlight {
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+/* Ensure main container is visible for grid overlay calculations */
+.main-container {
+    border: 1px solid var(--color-overlay-light);
+}
+
+/* CRITICAL: Fix flexbox interference with absolute positioning */
+.main-container.math-app-container {
+    /* Override flex behavior that interferes with absolute positioning */
+    display: block !important;
+    /* Ensure children position relative to this container */
+    position: relative !important;
+}
+
+/* Lime glow and pulsating animation for denominator container when status = 0 */
+@keyframes limePulse {
+    0% {
+        border-color: #00ff00;
+        box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+        transform: scale(1);
+    }
+    50% {
+        border-color: #32ff32;
+        box-shadow: 0 0 10px #32ff32, 0 0 20px #32ff32, 0 0 30px #32ff32;
+        transform: scale(1.02);
+    }
+    100% {
+        border-color: #00ff00;
+        box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+        transform: scale(1);
+    }
+}
+
+.denominator-status-0 {
+    border-color: #00ff00 !important;
+    border-width: 3px !important;
+    border-style: solid !important;
+    animation: limePulse 2s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.numerator-status-0 {
+    border-color: #00ff00 !important;
+    border-width: 3px !important;
+    border-style: solid !important;
+    animation: limePulse 2s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+/* Next button enabled glow and pulsate animation */
+@keyframes nextButtonGlow {
+    0% {
+        box-shadow: 0 0 5px #4CAF50, 0 0 10px #4CAF50, 0 0 15px #4CAF50;
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 10px #4CAF50, 0 0 20px #4CAF50, 0 0 30px #4CAF50;
+        transform: scale(1.05);
+    }
+    100% {
+        box-shadow: 0 0 5px #4CAF50, 0 0 10px #4CAF50, 0 0 15px #4CAF50;
+        transform: scale(1);
+    }
+}
+
+.next-button-enabled {
+    animation: nextButtonGlow 2s ease-in-out infinite !important;
+    transition: all 0.3s ease;
+}
+
+/* Red pulsating animation for incorrect answers */
+@keyframes redPulsate {
+    0% {
+        background-color: red;
+        transform: scale(1);
+        box-shadow: 0 0 5px red;
+    }
+    50% {
+        background-color: #ff6666;
+        transform: scale(1.05);
+        box-shadow: 0 0 15px red;
+    }
+    100% {
+        background-color: red;
+        transform: scale(1);
+        box-shadow: 0 0 5px red;
+    }
+}
+
+.incorrect-answer-pulsate {
+    animation: redPulsate 1.5s ease-in-out infinite !important;
+    transition: all 0.3s ease;
+}
+
+/* Red pulsating animation for column overlays */
+@keyframes columnOverlayPulsate {
+    0% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.02);
+    }
+    100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+}
+
+.column-overlay-pulsate {
+    animation: columnOverlayPulsate 1.5s ease-in-out infinite !important;
+}
+
+/* Wiggle animation for denominator container when trying to exceed limit */
+@keyframes wiggle {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.wiggle-animation {
+    animation: wiggle 0.6s ease-in-out;
+}
+
+/* Partition Line Pulse Animation */
+.partition-line-pulse {
+    animation: partitionLinePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes partitionLinePulse {
+    0% {
+        opacity: 1;
+        border-color: #FF9500;
+    }
+    50% {
+        opacity: 0.6;
+        border-color: #00FF00;
+    }
+    100% {
+        opacity: 1;
+        border-color: #FF9500;
+    }
+}
+
+/* Pulsating animation for input tiles */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(33, 150, 243, 0.8), 0 0 40px rgba(33, 150, 243, 0.6);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(33, 150, 243, 1), 0 0 60px rgba(33, 150, 243, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(33, 150, 243, 0.8), 0 0 40px rgba(33, 150, 243, 0.6);
+    }
+}
+
+.pulsating {
+    animation: pulse 1.5s ease-in-out infinite;
+}

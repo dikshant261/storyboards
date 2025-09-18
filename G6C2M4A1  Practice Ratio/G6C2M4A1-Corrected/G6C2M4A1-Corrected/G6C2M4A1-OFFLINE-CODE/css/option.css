@@ -6,6 +6,7 @@
     pointer-events: none;
     opacity: 0.8;
 }
+
 .option-container {
     display: flex;
     flex-direction: column;
@@ -27,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .correct {
@@ -76,11 +77,12 @@
     height: 0.5vh;
     background-color: black;
 }
+
 .option-wrong-disabled {
-  background-color: salmon !important;
-  border: 0.2vw solid darksalmon !important;
-  color: #888 !important;
-  cursor: not-allowed !important;
-  pointer-events: none;
-  opacity: 0.8;
+    background-color: salmon !important;
+    border: 0.2vw solid darksalmon !important;
+    color: #888 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    opacity: 0.8;
 }

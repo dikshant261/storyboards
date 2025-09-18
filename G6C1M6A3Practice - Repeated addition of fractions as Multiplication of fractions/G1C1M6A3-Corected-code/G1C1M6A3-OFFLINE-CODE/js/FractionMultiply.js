@@ -1,9 +1,34 @@
-const FractionMultiply = ({ numerator, denominator, count, pluse = false, fontSize, add }) => {
+const FractionMultiply = ({
+  numerator,
+  denominator,
+  count,
+  pluse = false,
+  fontSize,
+  add,
+  sign,
+}) => {
+  if (sign === "÷") {
+    return React.createElement(
+      "div",
+      { className: "multiply" },
+      React.createElement(
+        "span",
+        { className: "top" },
+        `${numerator} ÷  ${count}`
+      ),
+      React.createElement("span", { className: "line" }),
+      React.createElement("span", { className: "bottom" }, denominator)
+    );
+  }
   if (pluse) {
     return React.createElement(
       "div",
       { className: "multiply" },
-      React.createElement("span", { className: "top" }, `${numerator} + ${count}`),
+      React.createElement(
+        "span",
+        { className: "top" },
+        `${numerator} + ${count}`
+      ),
       React.createElement("span", { className: "line" }),
       React.createElement("span", { className: "bottom" }, denominator)
     );
@@ -13,13 +38,17 @@ const FractionMultiply = ({ numerator, denominator, count, pluse = false, fontSi
     return React.createElement(
       "div",
       { className: "multiply", style: { fontSize: fontSize } },
-      React.createElement("span", { className: "top" }, `${numerator} + ${count}`),
+      React.createElement(
+        "span",
+        { className: "top" },
+        `${numerator} + ${count}`
+      ),
       React.createElement("span", { className: "line" }),
       React.createElement("span", { className: "bottom" }, denominator)
     );
   }
 
-  if (numerator===null && count ===null) {
+  if (numerator === null && count === null) {
     return React.createElement(
       "div",
       { className: "multiply", style: { fontSize: fontSize } },
@@ -31,9 +60,13 @@ const FractionMultiply = ({ numerator, denominator, count, pluse = false, fontSi
   return React.createElement(
     "div",
     { className: "multiply", style: { fontSize: fontSize } },
-    React.createElement("span", { className: "top" }, `${numerator} x ${count}`),
+    React.createElement(
+      "span",
+      { className: "top" },
+      `${numerator} × ${count}`
+    ),
     React.createElement("span", { className: "line" }),
     React.createElement("span", { className: "bottom" }, denominator)
   );
 };
-window.FractionMultiply=FractionMultiply;
+window.FractionMultiply = FractionMultiply;

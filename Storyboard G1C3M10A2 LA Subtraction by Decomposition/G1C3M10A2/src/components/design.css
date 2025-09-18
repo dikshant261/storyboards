@@ -1,0 +1,220 @@
+.design-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 6vw;
+    position: relative;
+}
+
+.design-container p {
+    font-size: 3vw;
+    color: white;
+    text-align: center;
+}
+
+.left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 45vh;
+    white-space: pre-line;
+}
+
+.big-circle {
+    width: 12vw;
+    height: 18vh;
+    border-radius: 50%;
+    background-color: #f6b26b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 7vw;
+    color: white;
+}
+
+.blue-circle {
+    width: 8vw;
+    height: 12vh;
+    border-radius: 50%;
+    background-color: #6fa8dc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vw;
+    color: white;
+}
+
+.pink-circle {
+    width: 8vw;
+    height: 12vh;
+    border-radius: 50%;
+    background-color: #c27ba0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vw;
+    color: white;
+}
+
+.green {
+    border: 0.3vw solid darkgreen;
+}
+
+.salmon {
+    border: 0.3vw solid salmon;
+}
+
+.line-one {
+    width: 34%;
+    height: 0.7vh;
+    background-color: var(--secondary-color);
+    position: absolute;
+    top: 32%;
+    left: 42%;
+    transform: rotate(-36deg);
+}
+
+.line-two {
+    width: 43%;
+    height: 0.7vh;
+    background-color: var(--secondary-color);
+    position: absolute;
+    bottom: 46%;
+    left: 39%;
+    transform: rotate(46deg);
+}
+
+.active {
+    animation: pulse-one 1.5s infinite;
+}
+
+@keyframes pulse-one {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw white,
+            0 0 1vw white,
+            0 0 1vw white;
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 1vw white,
+            0 0 2vw white,
+            0 0 4vw white;
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw white,
+            0 0 1vw white,
+            0 0 2vw white;
+    }
+}
+
+.design-container-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 4vw;
+    position: relative;
+    margin: 1vh 1vw;
+}
+
+.design-container-two p {
+    font-size: 3vw;
+    color: white;
+    text-align: center;
+}
+
+.design-container-two .left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+}
+
+.design-container-two .right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 22vh;
+    white-space: pre-line;
+}
+
+.design-container-two .big-circle {
+    width: 5vw;
+    height: 8vh;
+    border-radius: 50%;
+    background-color: #ffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    border: 0.4vw solid var(--secondary-color);
+    color: black;
+}
+
+.design-container-two .blue-circle {
+    width: 4vw;
+    height: 7vh;
+    border-radius: 50%;
+    background-color: #ffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+    border: 0.4vw solid var(--secondary-color);
+    color: black;
+}
+
+.design-container-two .pink-circle {
+    width: 4vw;
+    height: 7vh;
+    border-radius: 50%;
+    background-color: #ffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+    border: 0.4vw solid var(--secondary-color);
+    color: black;
+}
+
+.design-container-two.green {
+    border: 0.3vw solid darkgreen;
+}
+
+.design-container-two.salmon {
+    border: 0.3vw solid salmon;
+}
+
+.design-container-two .line-one {
+    width: 42%;
+    height: 0.7vh;
+    background-color: var(--secondary-color);
+    position: absolute;
+    top: 32%;
+    left: 33%;
+    transform: rotate(-36deg);
+}
+
+.design-container-two .line-two {
+    width: 48%;
+    height: 0.7vh;
+    background-color: var(--secondary-color);
+    position: absolute;
+    bottom: 37%;
+    left: 31%;
+    transform: rotate(46deg);
+}

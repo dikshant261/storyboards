@@ -10,4 +10,4 @@ const FractionOption = ({ numerator, denominator, fontSize }) => {
     React.createElement("p", { style: { fontSize: fontSize } }, denominator)
   );
 };
-window.FractionOption=FractionOption;
+window.FractionOption = FractionOption;

@@ -59,7 +59,7 @@ const SceneFive = ({ question, onNext, flag, onPrev }) => {
           "div",
           { className: "box-align" },
           React.createElement("p", null, question[2]),
-          React.createElement("p", null, "X"),
+          React.createElement("p", null, "×"),
           React.createElement(FractionNuber, { question }),
           React.createElement("p", null, "="),
           stepOne &&
@@ -88,11 +88,7 @@ const SceneFive = ({ question, onNext, flag, onPrev }) => {
           response: checkResponse,
           answer,
         }),
-        stepOne &&
-          React.createElement("img", {
-            src: tap,
-            style: { width: "4vw", objectFit: "contain" },
-          }),
+        
         errorShow &&
           React.createElement(ErrorMessageTwo, { answer, question })
       )

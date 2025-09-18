@@ -1,4 +1,3 @@
-
 function DogAndCatOption({
   options,
   correctOption,
@@ -13,7 +12,6 @@ function DogAndCatOption({
   showErrorTwo,
   showErrorThree,
 }) {
-  // Helper to get current step and result
   let currentStep = 0;
   let boxResult = "";
   let correct = "";
@@ -99,10 +97,13 @@ function DogAndCatOption({
         className:
           "feedback-box " +
           (currentStep > 0 && boxResult !== ""
-            ? (boxResult === correct ? "correct" : "wrong")
+            ? boxResult === correct
+              ? "correct"
+              : "wrong"
             : ""),
       },
-      (showErrorOne && stepOne &&
+      (showErrorOne &&
+        stepOne &&
         React.createElement(ErrorMessage, {
           stepOne,
           stepTwo,
@@ -111,7 +112,8 @@ function DogAndCatOption({
           correctOption,
           options,
         })) ||
-        (showErrorTwo && stepTwo &&
+        (showErrorTwo &&
+          stepTwo &&
           React.createElement(ErrorMessage, {
             stepOne,
             stepTwo,
@@ -120,7 +122,8 @@ function DogAndCatOption({
             correctOption,
             options,
           })) ||
-        (showErrorThree && stepThree &&
+        (showErrorThree &&
+          stepThree &&
           React.createElement(ErrorMessage, {
             stepOne,
             stepTwo,
@@ -136,13 +139,9 @@ function DogAndCatOption({
       "div",
       { className: "option-grid" },
       ...options.map((opt, idx) =>
-        React.createElement(
-          "button",
-          getButtonProps(idx),
-          renderOption(opt)
-        )
+        React.createElement("button", getButtonProps(idx), renderOption(opt))
       )
     )
   );
 }
-window.DogAndCatOption=DogAndCatOption;
+window.DogAndCatOption = DogAndCatOption;

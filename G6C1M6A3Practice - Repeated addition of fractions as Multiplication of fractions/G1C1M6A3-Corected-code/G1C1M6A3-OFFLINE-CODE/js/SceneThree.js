@@ -55,7 +55,7 @@ const SceneThree = ({ question, onNext, onPrev }) => {
           "div",
           { className: "box-align" },
           React.createElement(SimpleBox, null),
-          React.createElement("p", null, "X"),
+          React.createElement("p", null, "×"),
           stepOne
             ? React.createElement(BoxTwo, {
                 stepOne,
@@ -77,12 +77,6 @@ const SceneThree = ({ question, onNext, onPrev }) => {
           response: checkResponse,
           answer,
         }),
-        stepOne
-          ? React.createElement("img", {
-              src: tap,
-              style: { width: "4vw", objectFit: "contain" },
-            })
-          : null,
         errorShow
           ? React.createElement(ErrorMessage, { answer, question })
           : null

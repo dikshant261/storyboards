@@ -1,31 +1,45 @@
 const OptionTwo = ({ question, response }) => {
   const [disabledOptions, setDisabledOptions] = React.useState([]); // wrong clicked ones
   const [correctSelected, setCorrectSelected] = React.useState(false); // when correct is clicked
+  const [wrongOption, setWrongOption] = React.useState(null); // track last wrong clicked
 
   const correctAnswer = question[2]; // ✅ correct answer is always question[2]
 
   const handleClick = (option) => {
-    if (correctSelected || disabledOptions.includes(option)) return;
+    if (correctSelected || disabledOptions.includes(option) || wrongOption)
+      return;
 
     response(option);
 
     if (option === correctAnswer) {
       setCorrectSelected(true); // correct chosen → lock all
     } else {
-      setDisabledOptions((prev) => [...prev, option]); // wrong chosen → disable only that one
+      setWrongOption(option); // highlight wrong temporarily
+      setTimeout(() => {
+        setDisabledOptions((prev) => [...prev, option]); // move it to gray disabled
+        setWrongOption(null); // reset wrong highlight
+      }, 1000); // 1s highlight before turning gray
     }
   };
 
   const getStyle = (option) => {
-    if (correctSelected && option === correctAnswer) {
+    if (correctSelected) {
+      if (option === correctAnswer) {
+        return {
+          backgroundColor: "lightgreen",
+          color: "white",
+          pointerEvents: "none",
+          border: "0.3vw solid darkgreen",
+        };
+      }
       return {
-        backgroundColor: "lightgreen",
-        color: "white",
+        backgroundColor: "#e0e0e0", // gray
+        color: "#777",
         pointerEvents: "none",
-        border: "0.3vw solid darkgreen",
       };
     }
-    if (disabledOptions.includes(option)) {
+
+    if (wrongOption === option) {
       return {
         backgroundColor: "salmon",
         color: "white",
@@ -33,27 +47,60 @@ const OptionTwo = ({ question, response }) => {
         border: "0.3vw solid darksalmon",
       };
     }
-    if (correctSelected) {
-      return { pointerEvents: "none", opacity: 0.6 };
+
+    if (disabledOptions.includes(option)) {
+      return {
+        backgroundColor: "#e0e0e0", // gray after wrong
+        color: "#777",
+        pointerEvents: "none",
+        border: "0.3vw solid #777",
+      };
     }
+
     return {};
   };
 
   return React.createElement(
     "div",
     { className: "option-container" },
-    question.map((opt, index) =>
-      React.createElement(
-        "div",
-        {
-          key: index,
-          className: "option-button",
-          style: getStyle(opt),
-          onClick: () => handleClick(opt),
-        },
-        opt
-      )
+    question[0] === 3 && question[1] === 10
+      ? React.createElement(
+          "div",
+          {
+            className: "option-button",
+            style: getStyle(question[0] + 10),
+            onClick: () => handleClick(question[0] + 10),
+          },
+          question[0] + 10
+        )
+      : React.createElement(
+          "div",
+          {
+            className: "option-button",
+            style: getStyle(question[0]),
+            onClick: () => handleClick(question[0]),
+          },
+          question[0]
+        ),
+    React.createElement(
+      "div",
+      {
+        className: "option-button",
+        style: getStyle(question[1]),
+        onClick: () => handleClick(question[1]),
+      },
+      question[1]
+    ),
+    React.createElement(
+      "div",
+      {
+        className: "option-button",
+        style: getStyle(question[2]),
+        onClick: () => handleClick(question[2]),
+      },
+      question[2]
     )
   );
 };
-window.OptionTwo=OptionTwo;
+
+window.OptionTwo = OptionTwo;

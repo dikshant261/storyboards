@@ -1,0 +1,54 @@
+.apple-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.apple-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 0vw;
+}
+
+.apple {
+    width: 8vw;
+    object-fit: contain;
+    /* filter: drop-shadow(0 0 0.4vw white); */
+}
+
+.yellowball {
+    width: 11vw;
+    object-fit: contain;
+    /* filter: drop-shadow(0 0 0.4vw white); */
+}
+
+.circle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 3vw;
+}
+
+.rectangle {
+    width: 5vw;
+    object-fit: contain;
+    filter: drop-shadow(0 0 0.4vw white);
+
+}
+
+.circle {
+    width: 5vw;
+    object-fit: contain;
+    filter: drop-shadow(0 0 0.4vw white);
+}
+.circle-align{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    flex-direction: column;
+}

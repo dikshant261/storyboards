@@ -1,36 +1,53 @@
 const OptionThree = ({ question, response, answer }) => {
   const [disabledOptions, setDisabledOptions] = React.useState([]); // wrong clicked ones
   const [correctSelected, setCorrectSelected] = React.useState(false); // when correct is clicked
+  const [wrongOption, setWrongOption] = React.useState(null); // temporary wrong highlight
 
   // Create a unique key for each option
   const makeKey = (num, count, pluse) => `${num}-${count}-${pluse}`;
 
+  const isCorrectOption = (num, count, pluse) =>
+    num === question[2] && count === question[0] && pluse === "x";
+
   const handleClick = (num, count, pluse) => {
     const key = makeKey(num, count, pluse);
 
-    if (correctSelected || disabledOptions.includes(key)) return;
+    if (correctSelected || disabledOptions.includes(key) || wrongOption) return;
 
     response(num, count, pluse);
 
-    if (num === question[2] & count === question[0] && pluse === "x") {
+    if (isCorrectOption(num, count, pluse)) {
       setCorrectSelected(true); // correct chosen → lock all
     } else {
-      setDisabledOptions((prev) => [...prev, key]); // wrong chosen → disable only that one
+      setWrongOption(key); // highlight wrong temporarily
+      setTimeout(() => {
+        setDisabledOptions((prev) => [...prev, key]); // turn wrong into gray
+        setWrongOption(null);
+      }, 1000); // 1s salmon before gray
     }
   };
 
   const getStyle = (num, count, pluse) => {
     const key = makeKey(num, count, pluse);
 
-    if (correctSelected && num === question[2] & count === question[0] && pluse === "x") {
+    if (correctSelected) {
+      if (isCorrectOption(num, count, pluse)) {
+        return {
+          backgroundColor: "lightgreen",
+          color: "white",
+          pointerEvents: "none",
+          border: "0.3vw solid darkgreen",
+        };
+      }
       return {
-        backgroundColor: "lightgreen",
-        color: "white",
+        backgroundColor: "#e0e0e0",
+        color: "#777",
         pointerEvents: "none",
-        border: "0.3vw solid darkgreen",
+        border: "0.3vw solid #777",
       };
     }
-    if (disabledOptions.includes(key)) {
+
+    if (wrongOption === key) {
       return {
         backgroundColor: "salmon",
         color: "white",
@@ -38,9 +55,16 @@ const OptionThree = ({ question, response, answer }) => {
         border: "0.3vw solid darksalmon",
       };
     }
-    if (correctSelected) {
-      return { pointerEvents: "none", opacity: 0.6 };
+
+    if (disabledOptions.includes(key)) {
+      return {
+        backgroundColor: "#e0e0e0", // gray after wrong
+        color: "#777",
+        pointerEvents: "none",
+        border: "0.3vw solid #777",
+      };
     }
+
     return {};
   };
 
@@ -49,21 +73,36 @@ const OptionThree = ({ question, response, answer }) => {
     { className: "option-container" },
 
     // ✅ Option 1
-    React.createElement(
-      "div",
-      {
-        className: "option-button-multiply",
-        style: getStyle(question[2], question[2], "x"),
-        onClick: () => handleClick(question[2], question[2], "x"),
-      },
-      React.createElement(FractionMultiply, {
-        numerator: question[2],
-        denominator: question[1],
-        count: question[2],
-      })
-    ),
+    question[0] === 3 && question[1] === 10
+      ? React.createElement(
+          "div",
+          {
+            className: "option-button-multiply",
+            style: getStyle(question[2], question[2], "÷"),
+            onClick: () => handleClick(question[2], question[2], "÷"),
+          },
+          React.createElement(FractionMultiply, {
+            numerator: question[2],
+            denominator: question[1],
+            count: question[2],
+            sign: "÷",
+          })
+        )
+      : React.createElement(
+          "div",
+          {
+            className: "option-button-multiply",
+            style: getStyle(question[2], question[2], "x"),
+            onClick: () => handleClick(question[2], question[2], "x"),
+          },
+          React.createElement(FractionMultiply, {
+            numerator: question[2],
+            denominator: question[1],
+            count: question[2],
+          })
+        ),
 
-    // ✅ Option 2
+    // ✅ Option 2 (Correct one in your logic)
     React.createElement(
       "div",
       {
@@ -95,4 +134,4 @@ const OptionThree = ({ question, response, answer }) => {
     )
   );
 };
-window.OptionThree=OptionThree;
+window.OptionThree = OptionThree;

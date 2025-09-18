@@ -1,68 +1,74 @@
 .option-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
 }
 
 .option-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 6vw;
-    height: 14vh;
-    border: 0.3vw solid darkblue;
-    background-color: #3c78d8;
-    cursor: pointer;
-    font-size: 4vw;
-    color: white;
-    border-radius: 0.5vw;
-    box-shadow: 0 0.1vw 0.4vw white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6vw;
+  height: 14vh;
+  border: 0.3vw solid darkblue;
+  background-color: #3c78d8;
+  cursor: pointer;
+  font-size: 4vw;
+  color: white;
+  border-radius: 0.5vw;
+  box-shadow: 0 0.1vw 0.4vw white;
 }
+
 .option-button-multiply {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 8vw;
-    height: 14vh;
-    border: 0.3vw solid darkblue;
-    background-color: #3c78d8;
-    cursor: pointer;
-    font-size: 4vw;
-    color: white;
-    border-radius: 0.5vw;
-    box-shadow: 0 0.1vw 0.4vw white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8vw;
+  height: 14vh;
+  border: 0.3vw solid darkblue;
+  background-color: #3c78d8;
+  cursor: pointer;
+  font-size: 4vw;
+  color: white;
+  border-radius: 0.5vw;
+  box-shadow: 0 0.1vw 0.4vw white;
 }
 
 .option-fraction {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 3vw;
 }
 
 .option-fraction-line {
-    width: 100%;
-    height: 0.4vh;
-    background-color: white;
+  width: 100%;
+  height: 0.4vh;
+  background-color: white;
 }
+
 .option-correct {
-  background-color: #4caf50 !important; /* green */
+  background-color: #4caf50 !important;
+  /* green */
   color: white;
   border: 0.3vw solid darkgreen;
   pointer-events: none;
 }
+
 .option-wrong {
   background-color: salmon !important;
-  color: white;
-  border: 0.3vw solid darksalmon;
+  color: white !important;
+  border: 0.3vw solid darksalmon !important;
+  box-shadow: 0 0.2vw 0.8vw #ffb3a7;
   pointer-events: none;
 }
+
 .option-disabled {
   background-color: #e0e0e0 !important;
   color: #888;
-  border: 0.3vw solid darkgray;
+  border: 0.3vw solid darkgray !important;
   pointer-events: none;
 }

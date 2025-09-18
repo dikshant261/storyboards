@@ -1,0 +1,110 @@
+.keypad-container {
+    display: flex;
+    align-items: center;
+    gap: 3vw;
+    border-radius: 0.8vw;
+    /* position: relative; */
+    flex-direction: row;
+    justify-content: center;
+    /* padding-top: 3vh; */
+    padding-left: 1vw;
+}
+
+.keypad-container-inside {
+    
+        display: inline-flex;
+    justify-content: center;
+    align-items: end;
+    gap: 5vw;
+    position: fixed;
+    left: 30%;
+    bottom: 11%;
+}
+
+.keypad-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 2vw);
+    grid-auto-rows: 1vw;
+    gap: 4vw;
+    align-items: center;
+}
+
+.keypad-btn {
+    background: var(--secondary-color);
+    border: 0.2vw solid #eee;
+    border-radius: 0.4vw;
+    cursor: pointer;
+    font-size: 3vw;
+    font-weight: bold;
+    color: black;
+    transition: 0.2s;
+    width: 5vw;
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keypad-btn:hover {
+    background: #e2c097;
+}
+
+.keypad-check {
+    background-color: var(--secondary-color);
+    border: 0.2vw solid #eee;
+    border-radius: 1vw;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 14vw;
+    font-size: 3vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.keypad-hint {
+    background: var(--secondary-color);
+    border: 0.2vw solid #eee;
+    border-radius: 1vw;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 14vw;
+    font-size: 3vw;
+    height: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keypad-hint:hover {
+    background: #c18f5d;
+}
+
+.hint-message {
+    background-color: white;
+    font-size: 2vw;
+    color: black;
+    border-radius: 1vw;
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 12vw;
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    white-space: pre-line;
+}

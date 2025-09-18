@@ -7,7 +7,8 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
   const [red, setRed] = React.useState("");
   const [showAns, setShowAns] = React.useState(false);
   const [errorShow, setShowError] = React.useState(false);
-  const tap="assets/tap.gif"
+  const [showRedBorder, setShowRedBorder] = React.useState("");
+  const tap = "assets/tap.gif";
   const checkResponse = (num, deno) => {
     if (num === question[2] * question[0] && deno === question[1]) {
       playCorrect();
@@ -15,11 +16,13 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
       setShowAns(true);
       setStepOne(false);
       setShowError(true);
+      setShowRedBorder("");
     } else {
       playWrong();
       setAnswer({ num, deno });
       setRed("wrong");
       setShowError(true);
+      setShowRedBorder("red-border");
     }
   };
 
@@ -58,7 +61,7 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
           "div",
           { className: "box-align" },
           React.createElement("p", null, question[2]),
-          React.createElement("p", null, "X"),
+          React.createElement("p", null, "×"),
           React.createElement(FractionNuber, { question }),
           React.createElement("p", null, "="),
 
@@ -68,8 +71,8 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
             { className: "box-fraction", style: { fontSize: "6vw" } },
             React.createElement(
               "span",
-              { className: "top" },
-              `${question[2]} x ${question[0]}`
+              { className: `top ${showRedBorder==="" ? "" : "red-border"}` },
+              `${question[2]} × ${question[0]}`
             ),
             React.createElement("span", { className: "line" }),
             React.createElement("span", { className: "bottom" }, question[1])
@@ -105,12 +108,7 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
           response: checkResponse,
           answer,
         }),
-        stepOne
-          ? React.createElement("img", {
-              src: tap,
-              style: { width: "4vw", objectFit: "contain" },
-            })
-          : null,
+
         errorShow
           ? React.createElement(ErrorMessageThree, { answer, question })
           : null
@@ -154,4 +152,4 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
     )
   );
 };
-window.SceneSix=SceneSix;
+window.SceneSix = SceneSix;

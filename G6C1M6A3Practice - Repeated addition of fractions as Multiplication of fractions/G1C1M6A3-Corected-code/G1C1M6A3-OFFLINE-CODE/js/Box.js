@@ -3,7 +3,7 @@ const Box = function() {
     "div",
     { className: "box-container" },
     React.createElement("div", { className: "box" }),
-    React.createElement("p", null, "X"),
+    React.createElement("p", null, "×"),
     React.createElement("div", { className: "box" })
   );
 };

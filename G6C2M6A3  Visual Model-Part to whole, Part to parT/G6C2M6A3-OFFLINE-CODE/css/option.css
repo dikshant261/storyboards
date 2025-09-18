@@ -1,0 +1,88 @@
+.option-correct-disabled {
+    background-color: #d3d3d3 !important;
+    border: 0.2vw solid #555 !important;
+    color: #888 !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.option-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4vw;
+    min-height: 80vh;
+    width: 100%;
+}
+
+.feedback-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    height: 28vh;
+    border: 0.3vw dashed white;
+    border-radius: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.correct-box {
+    background-color: lightgreen;
+    border: 0.3vw dashed darkgreen;
+}
+
+.wrong-box {
+    background-color: salmon;
+    border: 0.3vw dashed darkgreen;
+}
+
+
+.option-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3vw;
+
+    justify-items: center;
+    align-items: center;
+}
+
+.option-grid button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 19vw;
+    height: 15vh;
+    background-color: var(--secondary-color);
+    border-radius: 1.5vw;
+    cursor: pointer;
+    font-size: 5vw;
+    color: black;
+    margin: 0 auto;
+    border: 0.4vw solid rgb(147, 107, 5);
+}
+
+
+.correct {
+    background-color: #4caf50 !important;
+    color: white !important;
+    border: 0.4vw solid darkgreen !important;
+}
+
+/* Wrong option → salmon */
+
+.wrong {
+    background-color: salmon !important;
+    color: white !important;
+    border: 0.4vw solid rgb(225, 83, 36) !important;
+}
+
+/* Disabled gray buttons */
+.option-grid button:disabled {
+    background-color: lightgray;
+    cursor: not-allowed;
+}

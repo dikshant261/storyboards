@@ -11,7 +11,9 @@ function ConvertFractionTwo({ question, answer }) {
         if (answer === null) {
           fractionClass += "";
         } else if (isSpecial) {
-          if (key === question[2] - 1) {
+          if (question[0] === 3 && question[1] === 10) {
+            fractionClass += " fraction-blue-dashed";
+          } else if (key === question[2] - 1) {
             fractionClass += " fraction-salmon-dashed";
           } else {
             fractionClass += " fraction-blue-dashed";
@@ -49,4 +51,4 @@ function ConvertFractionTwo({ question, answer }) {
       })
   );
 }
-window.ConvertFractionTwo=ConvertFractionTwo;
+window.ConvertFractionTwo = ConvertFractionTwo;

@@ -72,7 +72,7 @@ const SceneFour = ({ question, onNext, flag, numberString, onPrev }) => {
               red,
             }),
           showAns && React.createElement("p", null, question[2]),
-          React.createElement("p", null, "X"),
+          React.createElement("p", null, "×"),
           React.createElement(FractionNuber, { question })
         )
       ),
@@ -86,11 +86,7 @@ const SceneFour = ({ question, onNext, flag, numberString, onPrev }) => {
           response: checkResponse,
           answer,
         }),
-        stepOne &&
-          React.createElement("img", {
-            src: tap,
-            style: { width: "4vw", objectFit: "contain" },
-          }),
+        
         errorShow &&
           React.createElement(ErrorMessage, {
             answer,
