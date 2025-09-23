@@ -2,7 +2,7 @@
 
     background-color: #FF8F83;
     color: white;
-    font-size: 1.8vw;
+    font-size: 2vw;
     text-align: center;
     white-space: pre-line;
     margin: 0.3vw;
@@ -12,22 +12,49 @@
     top: 18%;
     right: 2%;
     width: 24vw;
+    height: 23vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: o.3vw solid darksalmon;
 }
 
-.success-message {
-        background-color: #58D98B;
-    color: black;
-    font-size: 1.5vw;
+.error-message-two {
+
+    background-color: #FF8F83;
+    color: white;
+    font-size: 2vw;
     text-align: center;
     white-space: pre-line;
     margin: 0.3vw;
-    border-radius: 1.5vw;
+    border-radius: 1vw;
     border: 0.3vw dashed;
     position: fixed;
     top: 18%;
     right: 2%;
     width: 24vw;
-    font-weight: 000;
+    height: 23vh;
+    text-align: center;
+    border: o.3vw solid darksalmon;
+}
+
+.success-message {
+           background-color: #58D98B;
+    color: black;
+    font-size: 2.1vw;
+    text-align: center;
+    white-space: pre-line;
+    margin: 0.3vw;
+    border-radius: 1.5vw;
+    border: 0.3vw dashed darkgreen;
+    position: fixed;
+    top: 18%;
+    right: 2%;
+    width: 24%;
+    height: 23%;
+    color: white;
+    padding: 1vh 1vw;
+    
 }
 
 .success-message .fraction-inline-align {

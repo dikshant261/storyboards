@@ -1,0 +1,21 @@
+.option-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.option{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap:1vw;
+    color:white;
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    width: 12vw;
+    height: 13vh;
+    font-size: 3vw;
+    border-radius:1vw;
+}

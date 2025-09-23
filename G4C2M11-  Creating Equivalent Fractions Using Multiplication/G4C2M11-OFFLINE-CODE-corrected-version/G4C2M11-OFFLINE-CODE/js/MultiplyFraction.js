@@ -14,7 +14,7 @@ const MultiplyFraction = ({ num, deno, beat, result, green, sign = "" }) => {
         React.createElement("span", null, sign === "÷" ? "÷" : "x"),
         React.createElement(
           "span",
-          { className: `box ${beat ? "active" : ""} ${green}` },
+          { className: `box  ${green}` },
           result
         )
       ),
@@ -30,7 +30,7 @@ const MultiplyFraction = ({ num, deno, beat, result, green, sign = "" }) => {
         React.createElement("span", null, sign === "÷" ? "÷" : "x"),
         React.createElement(
           "span",
-          { className: `box ${beat ? "active" : ""} ${green}` },
+          { className: `box  ${green}` },
           result
         )
       )

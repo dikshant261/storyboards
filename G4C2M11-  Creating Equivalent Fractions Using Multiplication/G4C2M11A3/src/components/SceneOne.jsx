@@ -38,12 +38,15 @@ const SceneOne = ({ question,onNext,onPrev }) => {
           .
         </p>
       </div>
+      <div className="scene-container-main-align">
       <div className="scene-container-main">
         <div className="question-align">
           <Fraction num={question[0]} deno={question[1]} />
           <p>=</p>
           <Fraction num={question[2]} deno={question[3]} />
         </div>
+      </div>
+      <div className="scene-container-option"></div>
       </div>
       <div className="scene-container-footer">
         <button className="nxt-btn" onClick={handlePrevOne}>◀</button>

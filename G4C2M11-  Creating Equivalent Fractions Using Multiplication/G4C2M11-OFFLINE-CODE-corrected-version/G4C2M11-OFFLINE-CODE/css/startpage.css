@@ -6,7 +6,7 @@
     height: 100vh;
     width: 100vw;
     gap: 0vw;
-    padding: 1vw;
+    padding: 2vw;
 }
 .start-page-container-part{
     display: flex;
@@ -16,7 +16,7 @@
     height: 100vh;
     width: 100vw;
     gap: 1vw;
-    padding: 1vw;
+    padding: 2vw;
 }
 .start-page-container-complete{
     display: flex;
@@ -50,6 +50,5 @@
     text-align: center;
     margin-top: 1vw;
     line-height: 8vw;
-    font-weight: 600;
     white-space: pre-line;
 }

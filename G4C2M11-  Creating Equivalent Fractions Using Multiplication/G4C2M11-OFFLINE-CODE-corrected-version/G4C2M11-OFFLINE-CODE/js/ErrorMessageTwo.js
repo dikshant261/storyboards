@@ -8,17 +8,17 @@ const ErrorMessgaeTwo = ({ question, result }) => {
           { style: { textAlign: "center" }, className: "success-message" },
           t("pages.common.greatWorkDivide"),
           " ",
-          React.createElement(
-            "span",
-            { className: "fraction-inline-align" },
-            React.createElement(
-              "span",
-              { className: "fraction-question-two" },
-              React.createElement("span", null, question[0]),
-              React.createElement("span", { className: "fraction-question-line" }),
-              React.createElement("span", null, question[1])
-            )
-          ),
+          // React.createElement(
+          //   "span",
+          //   { className: "fraction-inline-align" },
+          //   React.createElement(
+          //     "span",
+          //     { className: "fraction-question-two" },
+          //     React.createElement("span", null, question[0]),
+          //     React.createElement("span", { className: "fraction-question-line" }),
+          //     React.createElement("span", null, question[1])
+          //   )
+          // ),
           " ",
           t("pages.common.greatWorkDivideTwo", { count: result }),
           " ",
@@ -29,7 +29,9 @@ const ErrorMessgaeTwo = ({ question, result }) => {
               "span",
               { className: "fraction-question-two" },
               React.createElement("span", null, question[2]),
-              React.createElement("span", { className: "fraction-question-line" }),
+              React.createElement("span", {
+                className: "fraction-question-line",
+              }),
               React.createElement("span", null, question[3])
             )
           ),
@@ -40,25 +42,9 @@ const ErrorMessgaeTwo = ({ question, result }) => {
           { className: "error-message", style: { textAlign: "center" } },
           t("pages.common.divideError", {
             num: question[0],
-            result: result,
             deno: question[1],
-          }),
-          " ",
-          React.createElement(
-            "span",
-            { className: "fraction-inline-align" },
-            React.createElement(
-              "span",
-              { className: "fraction-question-two" },
-              React.createElement("span", null, question[2]),
-              React.createElement("span", { className: "fraction-question-line" }),
-              React.createElement("span", null, question[3])
-            )
-          ),
-          " ",
-          t("pages.common.divideErrorTwo"),
-          " ."
+          })
         )
   );
 };
-window.ErrorMessgaeTwo=ErrorMessgaeTwo;
+window.ErrorMessgaeTwo = ErrorMessgaeTwo;

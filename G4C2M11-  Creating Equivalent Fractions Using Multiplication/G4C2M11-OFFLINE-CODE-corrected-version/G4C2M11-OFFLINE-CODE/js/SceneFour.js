@@ -99,7 +99,7 @@ const SceneFour = ({ question, onNext, onPrev }) => {
           React.createElement(Fraction, {
             num: question[0],
             deno: question[1],
-            fontSize: "6vw",
+            fontSize: "7vw",
           }),
           React.createElement("p", null, "="),
           React.createElement(MultiplyFraction, {
@@ -114,7 +114,7 @@ const SceneFour = ({ question, onNext, onPrev }) => {
           React.createElement(Fraction, {
             num: question[2],
             deno: question[3],
-            fontSize: "6vw",
+            fontSize: "7vw",
           })
         )
       ),

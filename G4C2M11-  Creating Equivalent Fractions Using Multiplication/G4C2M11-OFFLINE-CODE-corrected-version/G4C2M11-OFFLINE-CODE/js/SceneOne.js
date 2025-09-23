@@ -1,5 +1,6 @@
-const SceneOne = ({ question, onNext, onPrev }) => {
-    const tap="assets/tap.gif";
+const SceneOne = function ({ question, onNext, onPrev }) {
+  const tap = "assets/tap.gif";
+
   const handleNext = () => {
     playClick();
     onNext();
@@ -14,7 +15,7 @@ const SceneOne = ({ question, onNext, onPrev }) => {
     "div",
     { className: "scene-container" },
 
-    // Heading
+    // Heading Section
     React.createElement(
       "div",
       { className: "scene-container-heading" },
@@ -30,7 +31,9 @@ const SceneOne = ({ question, onNext, onPrev }) => {
             "span",
             { className: "fraction-question" },
             React.createElement("span", null, question[0]),
-            React.createElement("span", { className: "fraction-question-line" }),
+            React.createElement("span", {
+              className: "fraction-question-line",
+            }),
             React.createElement("span", null, question[1])
           )
         ),
@@ -44,7 +47,9 @@ const SceneOne = ({ question, onNext, onPrev }) => {
             "span",
             { className: "fraction-question" },
             React.createElement("span", null, question[2]),
-            React.createElement("span", { className: "fraction-question-line" }),
+            React.createElement("span", {
+              className: "fraction-question-line",
+            }),
             React.createElement("span", null, question[3])
           )
         ),
@@ -52,34 +57,36 @@ const SceneOne = ({ question, onNext, onPrev }) => {
       )
     ),
 
-    // Main Fraction Display
+    // Main Content
     React.createElement(
       "div",
-      { className: "scene-container-main" },
+      { className: "scene-container-main-align" },
       React.createElement(
         "div",
-        { className: "question-align" },
-        React.createElement(Fraction, { num: question[0], deno: question[1] }),
-        React.createElement("p", null, "="),
-        React.createElement(Fraction, { num: question[2], deno: question[3] })
-      )
+        { className: "scene-container-main" },
+        React.createElement(
+          "div",
+          { className: "question-align" },
+          React.createElement(Fraction, {
+            num: question[0],
+            deno: question[1],
+          }),
+          React.createElement("p", null, "="),
+          React.createElement(Fraction, { num: question[2], deno: question[3] })
+        )
+      ),
     ),
 
     // Footer
     React.createElement(
       "div",
       { className: "scene-container-footer" },
-
-      // Prev Button
       React.createElement(
         "button",
         { className: "nxt-btn", onClick: handlePrevOne },
         t("buttons.previous")
       ),
-
       React.createElement("p", null, t("pages.common.tapNext")),
-
-      // Next Button with Tap Gif
       React.createElement(
         "div",
         null,
@@ -91,10 +98,10 @@ const SceneOne = ({ question, onNext, onPrev }) => {
         React.createElement("img", {
           src: tap,
           className: "tap-gif-one",
-          alt: "tap"
+          alt: "tap",
         })
       )
     )
   );
 };
-window.SceneOne=SceneOne;
+window.SceneOne = SceneOne;

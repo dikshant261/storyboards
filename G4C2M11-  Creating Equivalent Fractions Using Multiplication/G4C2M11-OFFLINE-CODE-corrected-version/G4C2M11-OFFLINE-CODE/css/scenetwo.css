@@ -4,6 +4,7 @@
     align-items: center;
     flex-direction: column;
     height: 100vh;
+    gap: 1vh;
 }
 
 .scene-two-container-heading {
@@ -12,6 +13,8 @@
     align-items: center;
     flex-direction: row;
     gap: 0.5vw;
+    width: 96vw;
+    height: 13vh;
 }
 
 .scene-two-container-heading p {
@@ -19,11 +22,13 @@
     font-size: 2.5vw;
     color: var(--secondary-color);
 }
+
 .scene-two-container-heading .fraction-inline-align {
     display: inline-flex;
     vertical-align: middle;
     align-items: center;
 }
+
 .fraction-question-two {
     display: inline-flex;
     flex-direction: column;
@@ -75,7 +80,7 @@
 }
 
 .scene-two-container-main-question-option {
-        display: flex;
+    display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
@@ -91,14 +96,17 @@
     align-items: center;
     justify-content: space-between;
     width: 96vw;
-} 
+    position: relative;
+}
+
 .scene-two-container-main-footer p {
     font-size: 3vw;
     color: var(--secondary-color);
     text-align: center;
     padding-top: 2vw;
-    
+
 }
+
 .scene-two-container-main-footer .nxt-btn {
     font-size: 2.5vw;
     width: 10vw;
@@ -111,12 +119,15 @@
     justify-content: center;
     border-radius: 0.8vw;
 }
-.scene-two-container-main-footer .disabled-btn{
+
+.scene-two-container-main-footer .disabled-btn {
     background-color: gray;
     border-color: gray;
 }
+
 .scene-two-container-main-footer .tap-gif-one {
-    margin-top: -5vw;
-    width: 5vw;
+    width: 4vw;
     object-fit: contain;
+    position: absolut;
+    bottom: 0%;
 }

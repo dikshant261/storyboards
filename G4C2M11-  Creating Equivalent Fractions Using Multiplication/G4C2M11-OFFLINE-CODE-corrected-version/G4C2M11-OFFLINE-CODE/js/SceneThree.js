@@ -1,5 +1,5 @@
-const SceneThree = ({ question, onNext, onPrev }) => {
-  const tap="assets/tap.gif";  
+const SceneThree = function ({ question, onNext, onPrev }) {
+  const tap = "assets/tap.gif";
   const handleNext = () => {
     playClick();
     onNext();
@@ -14,7 +14,7 @@ const SceneThree = ({ question, onNext, onPrev }) => {
     "div",
     { className: "scene-container" },
 
-    // Heading section
+    // Heading Section
     React.createElement(
       "div",
       { className: "scene-container-heading" },
@@ -30,7 +30,9 @@ const SceneThree = ({ question, onNext, onPrev }) => {
             "span",
             { className: "fraction-question" },
             React.createElement("span", null, question[0]),
-            React.createElement("span", { className: "fraction-question-line" }),
+            React.createElement("span", {
+              className: "fraction-question-line",
+            }),
             React.createElement("span", null, question[1])
           )
         ),
@@ -44,7 +46,9 @@ const SceneThree = ({ question, onNext, onPrev }) => {
             "span",
             { className: "fraction-question" },
             React.createElement("span", null, question[2]),
-            React.createElement("span", { className: "fraction-question-line" }),
+            React.createElement("span", {
+              className: "fraction-question-line",
+            }),
             React.createElement("span", null, question[3])
           )
         ),
@@ -52,20 +56,27 @@ const SceneThree = ({ question, onNext, onPrev }) => {
       )
     ),
 
-    // Main content
+    // Main Section
     React.createElement(
       "div",
-      { className: "scene-container-main" },
+      { className: "scene-container-main-align" },
       React.createElement(
         "div",
-        { className: "question-align" },
-        React.createElement(Fraction, { num: question[0], deno: question[1] }),
-        React.createElement("p", null, "="),
-        React.createElement(Fraction, { num: question[2], deno: question[3] })
-      )
+        { className: "scene-container-main" },
+        React.createElement(
+          "div",
+          { className: "question-align" },
+          React.createElement(Fraction, {
+            num: question[0],
+            deno: question[1],
+          }),
+          React.createElement("p", null, "="),
+          React.createElement(Fraction, { num: question[2], deno: question[3] })
+        )
+      ),
     ),
 
-    // Footer section
+    // Footer Section
     React.createElement(
       "div",
       { className: "scene-container-footer" },
@@ -92,4 +103,4 @@ const SceneThree = ({ question, onNext, onPrev }) => {
     )
   );
 };
-window.SceneThree=SceneThree;
+window.SceneThree = SceneThree;

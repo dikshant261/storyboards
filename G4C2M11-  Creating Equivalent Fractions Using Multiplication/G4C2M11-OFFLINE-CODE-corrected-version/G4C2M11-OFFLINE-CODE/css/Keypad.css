@@ -81,13 +81,16 @@
     gap: 1vw;
     transition: 0.3s;
     border: 0.3vw solid #998437;
+    position: relative;
+}
 
+.tap-gif-keypad {
+    width: 4vw;
+    object-fit: contain;
+    position: absolute;
+    bottom: 14%;
 }
-.tap-gif-keypad{
-   margin-top: -5vw;
-    width: 5vw;
-    object-fit: contain; 
-}
+
 .hint-message {
     background-color: white;
     font-size: 2vw;

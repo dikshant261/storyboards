@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subtraction Learning App</title>
+
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/Outlet.css">
+    <link rel="stylesheet" href="css/ActivityCompleted.css">
+    <link rel="stylesheet" href="css/box.css">
+    <link rel="stylesheet" href="css/errormessage.css">
+    <link rel="stylesheet" href="css/option.css">
+    <link rel="stylesheet" href="css/question.css">
+    <link rel="stylesheet" href="css/result.css">
+    <link rel="stylesheet" href="css/ReusableButton.css">
+    <link rel="stylesheet" href="css/scene.css">
+    <link rel="stylesheet" href="css/startpage.css">
+    <link rel="stylesheet" href="css/Slider.css">
+    
+
+
+
+
+    <!-- React and ReactDOM -->
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+
+    <!-- Babel removed - using React.createElement instead of JSX -->
+
+    <!-- Language Configuration -->
+    <script>
+        // Set the default language here
+        // Available languages: 'en' (English), 'id' (Indonesian)
+        window.APP_LANGUAGE = 'id'; // Change this to 'id' for Indonesian
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/Outlet.js"></script>
+    <script src="js/ActivityCompleted.js"></script>
+    <script src="js/Boxes.js"></script>
+    <script src="js/BoxFour.js"></script>
+    <script src="js/BoxThree.js"></script>
+    <script src="js/BoxTwo.js"></script>
+    <script src="js/ErrorMessage.js"></script>
+    <script src="js/Fraction.js"></script>
+    <script src="js/Option.js"></script>
+    <script src="js/PlayAudio.js"></script>
+    <script src="js/Question.js"></script>
+    <script src="js/Result.js"></script>
+    <script src="js/ReusableButton.js"></script>
+    <script src="js/SceneFive.js"></script>
+    <script src="js/SceneFour.js"></script>
+    <script src="js/SceneOne.js"></script>
+    <script src="js/SceneThree.js"></script>
+    <script src="js/SceneTwo.js"></script>
+    <script src="js/Slider.js"></script>
+    <script src="js/StartPage.js"></script> 
+    
+
+
+
+
+
+
+
+    <script>
+        ReactDOM.render(
+            React.createElement(Outlet, null),
+            document.getElementById("root")
+        );
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.dot {
+    width: 1.5vw;
+    height: 2vh;
+    background-color: white;
+    border-radius: 50%;
+}
