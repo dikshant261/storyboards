@@ -1,0 +1,23 @@
+.result-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6vw;
+    border: 0.2vw solid white;
+    background-color: #23496ebf;
+    border-radius: 1vw;
+    padding: 1vh 1vw;
+    width: 24vw;
+    height: 55vh;
+}
+
+.result-row {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 3vw;
+    font-size: 4vw;
+    color: white;
+}
