@@ -2,8 +2,16 @@ const End = ({ onClose }) => {
   return React.createElement(
     "div",
     { className: "start-page-container" },
-    React.createElement("div", { className: "top-heading" }, t("pages.common.equivalentFractions")),
-    React.createElement("div", { className: "sub-heading-one" }, t("pages.common.greatYouHaveLearned")),
+    React.createElement(
+      "div",
+      { className: "top-heading" },
+      t("pages.common.equivalentFractions")
+    ),
+    React.createElement(
+      "div",
+      { className: "sub-heading-one" },
+      t("pages.common.greatYouHaveLearned")
+    ),
     React.createElement(
       "div",
       { className: "top-margin" },
@@ -14,10 +22,10 @@ const End = ({ onClose }) => {
         fontSize: "3vw",
         onClick: () => {
           playClick();
-          window.location.reload();
+          window.location.href = window.location.href;
         },
       })
     )
   );
 };
-window.End=End;
+window.End = End;

@@ -1,4 +1,5 @@
 const tap = "assets/tap.gif";
+
 const ReusableButton = ({
   label,
   onClick,
@@ -7,32 +8,29 @@ const ReusableButton = ({
   fontSize = "2vw",
   showTap = true,
   tapClass = "tap-gif-width",
+  onKeyDown,
+  tabIndex,
 }) => {
   return /*#__PURE__*/ React.createElement(
     "div",
-    {
-      className: "button-container",
-    },
+    { className: "button-container" },
+
     /*#__PURE__*/ React.createElement(
       "button",
       {
         className: "start-button",
-        style: {
-          width,
-          height,
-          fontSize,
-          position: "relative",
-        },
+        style: { width, height, fontSize, position: "relative" },
         onClick: onClick,
+        onKeyDown: onKeyDown,
+        tabIndex: tabIndex,
       },
       label
     ),
+
     showTap &&
       /*#__PURE__*/ React.createElement(
         "div",
-        {
-          className: "tap-gif",
-        },
+        { className: "tap-gif" },
         /*#__PURE__*/ React.createElement("img", {
           src: tap,
           alt: "tap",
@@ -41,4 +39,5 @@ const ReusableButton = ({
       )
   );
 };
+
 window.ReusableButton = ReusableButton;

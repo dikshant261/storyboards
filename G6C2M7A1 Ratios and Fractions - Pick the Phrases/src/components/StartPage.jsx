@@ -1,18 +1,18 @@
 import React from "react";
 import "./startpage.css";
 import { useTranslation } from "react-i18next";
-import ReusableButton from "./TapButton";
 import { playClick } from "./PlayAudio";
+import ReusableButton from "./ReusableButton";
 const StartPage = ({ onClose }) => {
   const { t } = useTranslation();
   return (
     <div className="startpage-container">
-      <div className="startpage-heading">{t("startPageContent.title")}</div>
-      <div className="startpage-content">{t("startPageContent.weLearned")}</div>
+      <div className="startpage-heading">{t("title")}</div>
       <div className="startpage-content">
-        {t("startPageContent.nowLetLearn")}
+        {t("startPage.ratiosAndFraction")}
       </div>
-      <div className="startpage-content">{t("startPageContent.tapStart")}</div>
+      <div className="startpage-content">{t("startPage.fromTheIdentify")}</div>
+      <div className="startpage-content">{t("startPage.tip")}</div>
       <ReusableButton
         label={t("buttons.start")}
         width="15vw"

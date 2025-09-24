@@ -6,14 +6,15 @@
 
 .start-button {
   background-color: var(--secondary-color);
-  border-radius: 0.4vw;
+  border-radius: 0.9vw;
   border: none;
   cursor: pointer;
   transition: 0.3s;
-  animation: pulse 1.5s infinite;
   font-weight: bold;
 }
-
+.pulse-active{
+  animation: pulse 1.5s infinite;
+}
 .start-button:hover {
   transform: scale(1.05);
 }

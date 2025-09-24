@@ -17,6 +17,7 @@ const SceneThree = ({ question, onNext, onPrev }) => {
   };
   return (
     <div className="scene-container">
+      {/* this part is 2/5 */}
       <div className="scene-container-heading">
         <p style={{ textAlign: "center" }}>
           {t("let_find_divide")}{" "}
@@ -38,6 +39,7 @@ const SceneThree = ({ question, onNext, onPrev }) => {
           .
         </p>
       </div>
+      {/*  */}
       <div className="scene-container-main-align">
         <div className="scene-container-main">
           <div className="question-align">

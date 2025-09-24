@@ -1,32 +1,87 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import "./Outlet.css";
 import StartPage from "./components/StartPage";
+import ExampleApple from "./components/ExampleApple";
+import MarbleExample from "./components/MarbleExample";
+import RefreshDetector from "./components/RefreshDetector";
 import SceneOne from "./components/SceneOne";
 import SceneTwo from "./components/SceneTwo";
-import SceneThree from "./components/SceneThree";
-import SceneFour from "./components/SceneFour";
-import SceneFive from "./components/SceneFive";
 import ActivityCompleted from "./components/ActivityCompleted";
+const questions = [
+  {
+    question: "questions.questionStudent",
+    image: "student.png",
+    for: "ratio",
+    heading: "pictureHeading.student",
+    width: "36vw",
+    widthTwo: "20vw",
+    one: "one",
+  },
+  {
+    question: "questions.questionTeacher",
+    image: "teacher.png",
+    for: "ratio",
+    heading: "pictureHeading.teacher",
+    width: "36vw",
+    widthTwo: "20vw",
+    one: "two",
+  },
+  {
+    question: "questions.questionPizza",
+    image: "pizza.png",
+    for: "fraction",
+    heading: "pictureHeading.pizza",
+    width: "30vw",
+    widthTwo: "13vw",
+    one: "three",
+  },
+  {
+    question: "questions.questionComic",
+    image: "comic.png",
+    for: "fraction",
+    heading: "pictureHeading.comic",
+    width: "30vw",
+    widthTwo: "15vw",
+    one: "four",
+  },
+  {
+    question: "questions.questionApple",
+    image: "orangeapple.png",
+    for: "ratio",
+    heading: "pictureHeading.apple",
+    width: "31vw",
+    widthTwo: "20vw",
+    one: "five",
+  },
+  {
+    question: "questions.questionSleep",
+    image: "sleep.png",
+    for: "fraction",
+    heading: "pictureHeading.sleep",
+    width: "36vw",
+    widthTwo: "20vw",
+    one: "six",
+  },
+];
 const Outlet = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [start, setStart] = useState(true);
   const [sceneOne, setSceneOne] = useState(false);
   const [sceneTwo, setSceneTwo] = useState(false);
   const [sceneThree, setSceneThree] = useState(false);
   const [sceneFour, setSceneFour] = useState(false);
-  const [sceneFive, setSceneFive] = useState(false);
-  const [complete,setComplete]=useState(false);
+  const [end, setEnd] = useState(false);
   const handleStart = () => {
     setStart(false);
     setSceneOne(true);
   };
-  const handleNextOne = () => {
-    setSceneOne(false);
-    setSceneTwo(true);
-  };
-
   const handlePrevOne = () => {
     setSceneOne(false);
     setStart(true);
+  };
+  const handleNextOne = () => {
+    setSceneOne(false);
+    setSceneTwo(true);
   };
   const handlePrevTwo = () => {
     setSceneTwo(false);
@@ -36,42 +91,62 @@ const Outlet = () => {
     setSceneTwo(false);
     setSceneThree(true);
   };
-  const handlePrevThree = () => {
-    setSceneThree(false);
-    setSceneTwo(true);
-  };
   const handleNextThree = () => {
     setSceneThree(false);
     setSceneFour(true);
   };
   const handleNextFour = () => {
-    setSceneFour(false);
-    setSceneFive(true);
+    if (currentIndex + 1 === questions.length) {
+      setSceneFour(false);
+      setEnd(true);
+    } else {
+      setCurrentIndex((prev) => prev + 1);
+      setSceneFour(false);
+      setSceneThree(true);
+    }
   };
-  const handleNextFive=()=>{
-    setSceneFive(false);
-    setComplete(true);
-  }
-  const handlePrevFour=()=>{
+  const handlePrevThree = () => {
+    if (currentIndex === 0) {
+      setSceneThree(false);
+      setSceneTwo(true);
+    } else {
+      setCurrentIndex((prev) => prev - 1);
+      setSceneThree(false);
+      setSceneFour(true);
+    }
+  };
+  const handlePrevFour = () => {
     setSceneFour(false);
     setSceneThree(true);
-  }
-  const handlePrevFive=()=>{
-    setSceneFive(false);
-    setSceneFour(true);
-  }
-  console.log(sceneFour);
+  };
+  const currentQuestion = questions[currentIndex];
   return (
     <div className="outlet">
       {start && <StartPage onClose={handleStart} />}
-      {sceneOne && <SceneOne onNext={handleNextOne} onPrev={handlePrevOne} />}
-      {sceneTwo && <SceneTwo onPrev={handlePrevTwo} onNext={handleNextTwo} />}
-      {sceneThree && (
-        <SceneThree onPrev={handlePrevThree} onNext={handleNextThree} />
+      {sceneOne && (
+        <ExampleApple onNext={handleNextOne} onPrev={handlePrevOne} />
       )}
-      {sceneFour && <SceneFour onNext={handleNextFour} onPrev={handlePrevFour}/>}
-      {sceneFive && <SceneFive onNext={handleNextFive} onPrev={handlePrevFive}/>}
-      {complete && <ActivityCompleted/>}
+      {sceneTwo && (
+        <MarbleExample onPrev={handlePrevTwo} onNext={handleNextTwo} />
+      )}
+      {sceneThree && (
+        <SceneOne
+          questions={currentQuestion}
+          onNext={handleNextThree}
+          onPrev={handlePrevThree}
+        />
+      )}
+      {sceneFour && (
+        <SceneTwo
+          questions={questions}
+          onNext={handleNextFour}
+          questionIndex={currentIndex}
+          questionHeading={currentQuestion.question}
+          onPrev={handlePrevFour}
+        />
+      )}
+      {end && <ActivityCompleted />}
+      <RefreshDetector />
     </div>
   );
 };

@@ -1,0 +1,26 @@
+.apple-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.marble-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.apple-adjust {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.apple {
+    width: "6vw";
+    object-fit: contain;
+    height: 20vh;
+}

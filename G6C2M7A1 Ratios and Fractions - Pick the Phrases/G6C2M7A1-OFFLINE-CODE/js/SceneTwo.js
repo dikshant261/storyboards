@@ -1,0 +1,153 @@
+const SceneTwo = ({
+  onNext,
+  onPrev,
+  questions,
+  questionIndex,
+  questionHeading
+}) => {
+  const [next, setNext] = useState(false);
+  //   useEffect(() => {
+  //     const result = sessionStorage.getItem("marbleExample");
+  //     if (result) {
+  //       const parsed = JSON.parse(result);
+  //       setShowApple(parsed.showApple);
+  //       setNext(parsed.next);
+  //     }
+  //   }, []);
+  const handleNext = () => {
+    playClick();
+    onNext();
+  };
+  const handlePrev = () => {
+    playClick();
+    onPrev();
+  };
+  //   const handleClick = (ans, num) => {
+  //     if (ans === questions.for) {
+  //       playCorrect();
+  //       setShow(true);
+  //       setNavHeading(false);
+  //       setNext(true);
+  //       setDisabled([1, 2]);
+  //     } else {
+  //       playWrong();
+  //       setDisabled((prev) => (prev.includes(num) ? prev : [...prev, num]));
+  //     }
+  //     // sessionStorage.setItem(
+  //     //   "marbleExample",
+  //     //   JSON.stringify({
+  //     //     showApple: false,
+  //     //     next: true,
+  //     //   })
+  //     // );
+  //   };
+  function separateByType(arr, n) {
+    const ratio = [];
+    const fraction = [];
+    arr.slice(0, n + 1).forEach(item => {
+      if (item.for === "ratio") {
+        ratio.push(item);
+      } else if (item.for === "fraction") {
+        fraction.push(item);
+      }
+    });
+    return {
+      ratio,
+      fraction
+    };
+  }
+
+  // Example: separate first 4 objects
+  const {
+    ratio,
+    fraction
+  } = separateByType(questions, questionIndex);
+  return /*#__PURE__*/React.createElement("div", {
+    className: "scene-constainer"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "scene-heading"
+  }, /*#__PURE__*/React.createElement("p", null, t(questionHeading))), /*#__PURE__*/React.createElement("div", {
+    className: "scene-main"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "scene-main-first",
+    style: {
+      justifyContent: "flex-start",
+      gap: "1vh"
+    }
+  }, ratio.map((q, id) => /*#__PURE__*/React.createElement("div", {
+    key: id,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "row"
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      textAlign: "left",
+      fontSize: "2vw"
+    }
+  }, t(q.heading)), /*#__PURE__*/React.createElement(ImageRenderer, {
+    src: q.image,
+    width: q.widthTwo
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "fixed",
+      bottom: "12%"
+    }
+  }, /*#__PURE__*/React.createElement(ReusableButton, {
+    label: t("buttons.ratio"),
+    showTap: false,
+    width: "15vw",
+    height: "8vh",
+    fontSize: "3vw",
+    backgroundColor: "#cfe2f3",
+    disabled: true,
+    showActive: false
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "scene-main-second",
+    style: {
+      justifyContent: "flex-start",
+      gap: "1vh"
+    }
+  }, fraction.map((q, id) => /*#__PURE__*/React.createElement("div", {
+    key: id,
+    style: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "row"
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      textAlign: "left",
+      fontSize: "2vw"
+    }
+  }, t(q.heading)), /*#__PURE__*/React.createElement(ImageRenderer, {
+    src: q.image,
+    width: q.widthTwo
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "fixed",
+      bottom: "12%"
+    }
+  }, /*#__PURE__*/React.createElement(ReusableButton, {
+    label: t("buttons.fraction"),
+    width: "15vw",
+    height: "8vh",
+    fontSize: "3vw",
+    showTap: false,
+    showActive: false,
+    backgroundColor: "#cfe2f3",
+    disabled: true
+  })))), /*#__PURE__*/React.createElement("div", {
+    className: "scene-footer"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: handlePrev
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement("p", null, t("navigation.tapNext")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+    onClick: handleNext
+  }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
+    bottom: "0%"
+  }))));
+};
+window.SceneTwo=SceneTwo;
