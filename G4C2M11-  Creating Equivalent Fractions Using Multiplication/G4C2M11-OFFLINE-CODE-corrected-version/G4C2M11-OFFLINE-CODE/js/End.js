@@ -22,7 +22,7 @@ const End = ({ onClose }) => {
         fontSize: "3vw",
         onClick: () => {
           playClick();
-          window.location.href = window.location.href;
+          history.go(0)
         },
       })
     )

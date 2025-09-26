@@ -1,13 +1,16 @@
 const ActivityCompleted = () => {
   return /*#__PURE__*/React.createElement("div", {
-    className: "startpage-container"
+    className: "startpage-container",
+    style:{
+      gap:"3vw"
+    }
   }, /*#__PURE__*/React.createElement("div", {
     className: "startpage-heading"
   }, t("activityComplete")), /*#__PURE__*/React.createElement("div", {
     className: "startpage-content"
   }, t("ratioDifferent")), /*#__PURE__*/React.createElement("div", {
     className: "startpage-content"
-  }, t("startOver")), /*#__PURE__*/React.createElement(ReusableButton, {
+  }, t("startOver")), /*#__PURE__*/React.createElement("div",{style:{marginTop:"5vw"}},React.createElement(ReusableButton, {
     label: t("buttons.startOver"),
     width: "33vw",
     height: "13vh",
@@ -16,6 +19,6 @@ const ActivityCompleted = () => {
       playClick();
       window.location.reload();
     }
-  }));
+  })));
 };
 window.ActivityCompleted=ActivityCompleted;

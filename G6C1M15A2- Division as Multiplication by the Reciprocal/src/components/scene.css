@@ -1,0 +1,111 @@
+.scene-constainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+    height: 100vh;
+}
+
+.scene-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 12vh;
+    width: 96vw;
+    gap: 1vh;
+}
+
+.scene-heading p {
+    font-size: 3vw;
+    color: var(--secondary-color);
+    text-align: center;
+    white-space: pre-line;
+    font-weight: 500;
+}
+
+.scene-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.scene-main-first {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 48vw;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1.5vw;
+    height: 78vh;
+    position: relative;
+    padding-bottom: 3vh;
+    gap: 22vh;
+    padding: 1vh 1vw;
+}
+
+.scene-main-first p {
+    font-size: 3vw;
+    color: white;
+    white-space: pre-line;
+    text-align: center;
+}
+
+.scene-main-second {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 48vw;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1.5vw;
+    height: 78vh;
+    position: relative;
+    padding-bottom: 3vh;
+    padding: 1vh 1vw;
+}
+
+.scene-main-second p {
+    font-size: 3vw;
+    color: white;
+    white-space: pre-line;
+    text-align: center;
+}
+
+.scene-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 96vw;
+    height: 12vh;
+    flex-direction: row;
+    position: relative;
+}
+
+.scene-footer p {
+    font-size: 3vw;
+    color: white;
+    font-weight: 500;
+}
+
+.scene-footer button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    background-color: var(--secondary-color);
+    border: 0.3vw solid #f99819;
+    width: 9vw;
+    height: 7vh;
+    border: 0.9vw;
+    cursor: pointer;
+    border-radius: 0.9vw;
+}
+
+.scene-footer .disabled {
+    background-color: gray;
+    border-color: gray;
+}

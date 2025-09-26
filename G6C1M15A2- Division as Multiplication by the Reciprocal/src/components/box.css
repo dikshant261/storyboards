@@ -1,0 +1,33 @@
+.alignment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  gap: 2vw;
+}
+.alignment span {
+  font-size: 3.5vw;
+  font-weight: bold;
+}
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18vw;
+  height: 16vh;
+  border: 0.3vw solid skyblue;
+  background-color: white;
+  border-radius: 1vw;
+  font-size: 2.5vw;
+  color: black;
+}
+
+.box .wrong {
+  border-color: darksalmon;
+  background-color: rgb(247, 142, 130);
+}
+
+.box .correct {
+  border-color: darkgreen;
+  background-color: lightgreen;
+}

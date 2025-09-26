@@ -1,0 +1,20 @@
+.erorr-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  font-size: 3vw;
+  background-color: salmon;
+  color: white;
+}
+.success-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  font-size: 3vw;
+  background-color: lightgreen;
+  color: white;
+}

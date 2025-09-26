@@ -1,0 +1,91 @@
+.optionspanel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4vh;
+  width: 100%;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2vh 2vw;
+  width: 70%;
+  justify-items: center;
+}
+
+.option-btn {
+  background-color: #ffab40;
+  color: #1d1d1d;
+  border: none;
+  border-radius: 0.9vw;
+  width: 14vw;
+  height: 13vh;
+  font-size: 3vw;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0.4vw 0.6vw rgba(0, 0, 0, 0.25) inset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  padding: 0 0.6vw;
+  border: 0.2vw solid #c97204;
+}
+
+.option-btn:hover {
+  filter: brightness(1.05);
+}
+
+.hint-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.feedback-box {
+  width: 85%;
+  min-height: 27vh;
+  border: 0.25vw dashed rgba(255, 255, 255, 0.8);
+  border-radius: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.6vw;
+  padding: 2vh 2vw;
+}
+
+/* States */
+.option-btn.wrong {
+  background-color: salmon;
+  border-color: #e27a7a;
+  color: #1b1b1b;
+}
+
+.option-btn.correct {
+  background-color: #2ecc71;
+  border-color: #1f9d53;
+  color: #0b2a12;
+}
+
+
+/* Inline fraction styling for option labels */
+.frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.frac .num, .frac .den {
+  line-height: 1;
+}
+.frac .bar {
+  width: 100%;
+  border-top: 0.15em solid currentColor;
+  margin: 0.1em 0;
+}
+
+

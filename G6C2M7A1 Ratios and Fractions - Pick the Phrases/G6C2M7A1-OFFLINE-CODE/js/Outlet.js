@@ -20,7 +20,7 @@ const questions = [{
   image: "pizza.png",
   for: "fraction",
   heading: "pictureHeading.pizza",
-  width: "30vw",
+  width: "27vw",
   widthTwo: "13vw",
   one: "three"
 }, {
@@ -28,7 +28,7 @@ const questions = [{
   image: "comic.png",
   for: "fraction",
   heading: "pictureHeading.comic",
-  width: "30vw",
+  width: "40vw",
   widthTwo: "15vw",
   one: "four"
 }, {
@@ -36,7 +36,7 @@ const questions = [{
   image: "orangeapple.png",
   for: "ratio",
   heading: "pictureHeading.apple",
-  width: "31vw",
+  width: "48vw",
   widthTwo: "20vw",
   one: "five"
 }, {
