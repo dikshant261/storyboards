@@ -1,0 +1,57 @@
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26%;
+  height: 23%;
+  font-size: 2vw;
+  background-color: #ff6b6b;
+  color: white;
+  position: fixed;
+  bottom: 19%;
+  right: 1.5%;
+  border-radius: 1vw;
+  animation: shake 0.5s ease-in-out;
+  text-align: center;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+.success-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26%;
+  height: 23%;
+  font-size: 2vw;
+  background-color: lightgreen;
+  color: white;
+  position: fixed;
+  bottom: 19%;
+  right: 1.5%;
+  border-radius: 1vw;
+  animation: successPulse 0.5s ease-in-out;
+  text-align: center;
+}
+
+@keyframes successPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

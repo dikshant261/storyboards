@@ -1,0 +1,23 @@
+import React from "react";
+const CrossIcon = () => /*#__PURE__*/React.createElement("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "100%",
+  height: "100%",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "red",
+  strokeWidth: "2",
+  strokeLinecap: "round",
+  strokeLinejoin: "round"
+}, /*#__PURE__*/React.createElement("line", {
+  x1: "18",
+  y1: "6",
+  x2: "6",
+  y2: "18"
+}), /*#__PURE__*/React.createElement("line", {
+  x1: "6",
+  y1: "6",
+  x2: "18",
+  y2: "18"
+}));
+export default CrossIcon;

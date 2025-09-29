@@ -5,7 +5,7 @@
     flex-direction: row;
     gap: 0.5vw;
     height: 100vh;
-    padding: 0.5;
+    padding: 0.5vw;
 }
 
 .scene-container-left {
@@ -23,9 +23,10 @@
 .scene-container-left p {
     font-size: 2.3vw;
     line-height: 3vw;
-    text-align: center;
+    text-align: left;
     color: black;
     white-space: pre-line;
+    margin-bottom: 1vw;
 }
 
 .scene-container-right {
@@ -65,9 +66,40 @@
     text-align: center;
 }
 
-.scene-container-right-content {
+.align-total {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 6vw;
+    transform: translate(-13vw, 1vw);
+}
+
+.align-total .box {
+    width: 7vw;
+    height: 8vh;
+    border: 0.3vw solid #cb8608;
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4vw;
+    color: white;
+    border-radius: 1vw;
+}
+
+.align-total .correct {
+    background-color: lightgreen;
+    border-color: darkgreen;
+}
+
+.align-total .wrong {
+    background-color: salmon;
+    border-color: darksalmon;
+}
+
+.scene-container-right-content {
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     gap: 1vw;
@@ -75,10 +107,12 @@
     height: 70vh;
     background-color: rgb(0, 0, 0, 0.5);
     border-radius: 1.5vw;
+    padding: 3vh 4vw;
 
 }
-.scene-container-right-content p{
-    font-size: 3vw;
+
+.scene-container-right-content p {
+    font-size: 2.5vw;
     text-align: left;
     color: white;
     white-space: pre-line;

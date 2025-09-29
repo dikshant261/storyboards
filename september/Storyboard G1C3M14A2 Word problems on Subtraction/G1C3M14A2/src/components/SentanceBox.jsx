@@ -1,22 +1,20 @@
 import React from "react";
 import "./box.css";
-const SentanceBox = ({ beat, boxCss, option, num, style,result }) => {
+const SentanceBox = ({ numOne, numTwo, result, boxCss }) => {
   return (
     <div className="box-container">
-      <div className="box" style={style}>
-        7
+      <div className="sent-box" style={{ border: "none" }}>
+        {numOne}
       </div>
       <div className="minus-line"></div>
-      <div className="box" style={style}>
-        {num}
+      <div className="sent-box" style={{ border: "none" }}>
+        {numTwo}
       </div>
       <div className="equal-to">
         <div className="minus-line"></div>
         <div className="minus-line"></div>
       </div>
-      <div className={`box ${beat ? "active" : ""} ${boxCss}`} style={style}>
-        {option} {result}
-      </div>
+      <div className={`sent-box white-color ${boxCss}`}>{result}</div>
     </div>
   );
 };

@@ -1,0 +1,51 @@
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  /* 5 cars per row */
+  justify-content: center;
+  align-items: center;
+
+}
+
+.car {
+  width: 7vw;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.car:hover {
+  transform: scale(1.2);
+}
+
+.car-wrapper {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cros-align {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.cros-align:hover {
+  transform: scale(1.2);
+}
