@@ -1,0 +1,120 @@
+.scene-conatiner-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 100vh;
+    gap: 1vh;
+}
+
+
+.scene-conatiner-two .left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 30vw;
+    height: 99vh;
+    background-color: rgb(0, 0, 0, 0.5);
+    flex-direction: column;
+    gap: 5vw;
+    padding-top: 1vh;
+}
+
+.scene-conatiner-two .left .text-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28vw;
+    height: 50vh;
+    border: 0.3vw solid var(--secondary-color);
+    font-size: 3vw;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.724);
+    text-align: center;
+    flex-direction: column;
+    border-radius: 1vw;
+}
+
+.triangle {
+    font-size: 3vw;
+    color: var(--secondary-color);
+    position: fixed;
+    top: 49.5%;
+    left: 7%;
+    transform: rotate(90deg);
+}
+
+.scene-conatiner-two .left .text-box p {
+    margin-bottom: 2vw;
+}
+
+.scene-conatiner-two .right {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1vh;
+}
+
+.scene-conatiner-two .main-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 2vw;
+    width: 68vw;
+    height: 90vh;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1.5vw;
+    padding-left: 10vw;
+}
+
+.scene-conatiner-two .main-container .imgae-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.scene-conatiner-two .main-container .imgae-align .cake {
+    width: 23vw;
+    object-fit: contain;
+}
+
+.scene-conatiner-two .main-container .imgae-align .human {
+    width: 13vw;
+    object-fit: contain;
+}
+
+.scene-conatiner-two .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 68vw;
+    height: 9vh;
+}
+
+.scene-conatiner-two .footer p {
+    font-size: 3vw;
+    color: white;
+}
+
+.scene-conatiner-two .footer button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8vw;
+    height: 7vh;
+    background-color: var(--secondary-color);
+    border-radius: 1vw;
+    font-size: 3vw;
+    position: relative;
+    cursor: pointer;
+    border: 0.3vw solid rgb(193, 128, 6);
+}
+
+.scene-conatiner-two .footer .disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
