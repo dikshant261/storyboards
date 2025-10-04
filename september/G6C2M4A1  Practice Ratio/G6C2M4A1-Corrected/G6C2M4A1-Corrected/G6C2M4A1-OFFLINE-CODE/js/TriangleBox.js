@@ -1,46 +1,23 @@
 const TriangleBox = ({
   beat,
-  beatTwo,
+  beatOne,
   stepOne,
   stepTwo,
   boxResultOne,
   boxOneCss,
   boxResultTwo,
-  boxTwoCss,
+  boxTwoCss
 }) => {
-  
-
-  return React.createElement(
-    "div",
-    { className: "triangle-box-container" },
-
-    // First box
-    React.createElement(
-      "div",
-      { className: "triangle-inner" },
-      React.createElement("p", null, t("ratio_of_triangles")),
-      React.createElement(
-        "div",
-        {
-          className: `triangle-box ${beat ? "active" : ""} ${boxOneCss}`,
-        },
-        boxResultOne
-      )
-    ),
-
-    // Second box
-    React.createElement(
-      "div",
-      { className: "triangle-inner" },
-      React.createElement("p", null, t("ratio_of_pentagons")),
-      React.createElement(
-        "div",
-        {
-          className: `triangle-box ${beatTwo ? "active" : ""} ${boxTwoCss}`,
-        },
-        boxResultTwo
-      )
-    )
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    className: "triangle-box-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "triangle-inner"
+  }, /*#__PURE__*/React.createElement("p", null, t("ratio_of_triangles")), /*#__PURE__*/React.createElement("div", {
+    className: `triangle-box ${beat ? "active" : ""} ${boxOneCss}`
+  }, boxResultOne)), /*#__PURE__*/React.createElement("div", {
+    className: "triangle-inner"
+  }, /*#__PURE__*/React.createElement("p", null, t("ratio_of_pentagons")), /*#__PURE__*/React.createElement("div", {
+    className: `triangle-box ${beatOne ? "active" : ""} ${boxTwoCss}`
+  }, boxResultTwo)));
 };
 window.TriangleBox=TriangleBox;

@@ -25,29 +25,33 @@ const MainFour = ({
   onPrev,
 }) => {
   const { t } = useTranslation();
-  const [stepOne, setStepOne] = useState(true);
-  const [stepTwo, setStepTwo] = useState(false);
-  const [stepThree, setStepThree] = useState(false);
-  const [boxResultOne, setBoxResultOne] = useState("");
-  const [boxOneCss, setBoxOneCss] = useState("");
-  const [showErrorOne, setShowErrorOne] = useState(false);
-  const [boxResultTwo, setBoxResultTwo] = useState("");
-  const [boxTwoCss, setBoxTwoCss] = useState("");
-  const [showErrorTwo, setShowErrorTwo] = useState(false);
-  const [boxResultThree, setBoxResultThree] = useState("");
-  const [boxThreeCss, setBoxThreeCss] = useState("");
-  const [showErrorThree, setShowErrorThree] = useState(false);
-  const [tapProceed, setTapProceed] = useState(false);
-  const [disabledNext, setDisabledNext] = useState(true);
-  const [nextOne, setNextOne] = useState(false);
-  const [nextTwo, setNextTwo] = useState(false);
-  const [tapRatio, setTapRatio] = useState(true);
+  const [stepOne, setStepOne] = React.useState(true);
+  const [stepTwo, setStepTwo] = React.useState(false);
+  const [stepThree, setStepThree] = React.useState(false);
+  const [boxResultOne, setBoxResultOne] = React.useState("");
+  const [boxOneCss, setBoxOneCss] = React.useState("");
+  const [showErrorOne, setShowErrorOne] = React.useState(false);
+  const [boxResultTwo, setBoxResultTwo] = React.useState("");
+  const [boxTwoCss, setBoxTwoCss] = React.useState("");
+  const [showErrorTwo, setShowErrorTwo] = React.useState(false);
+  const [boxResultThree, setBoxResultThree] = React.useState("");
+  const [boxThreeCss, setBoxThreeCss] = React.useState("");
+  const [showErrorThree, setShowErrorThree] = React.useState(false);
+  const [tapProceed, setTapProceed] = React.useState(false);
+  const [disabledNext, setDisabledNext] = React.useState(true);
+  const [nextOne, setNextOne] = React.useState(false);
+  const [nextTwo, setNextTwo] = React.useState(false);
+  const [tapRatio, setTapRatio] = React.useState(true);
+  const [beat, setBeat] = React.useState(true);
+  const [beatOne, setBeatOne] = React.useState(false);
+  const [btnTwo, setBtnTwo] = React.useState(false);
   const handleBoxResultOne = (option) => {
     if (!stepOne) return;
     setBoxResultOne(option);
     if (option === correctOption[0]) {
       playCorrect();
       setBoxOneCss("correct");
+      setBeat(false);
       setNextOne(true);
       setTapRatio(false);
       setDisabledNext(false);
@@ -58,26 +62,31 @@ const MainFour = ({
       setShowErrorOne(true);
     }
   };
+
   const handleNextOne = () => {
     playClick();
     setNextOne(false);
     setShowErrorOne(false);
     setStepOne(false);
+    setBeatOne(true);
     setDisabledNext(true);
     setTapRatio(true);
     setStepTwo(true);
+    setBtnTwo(true);
   };
+
   const handleBoxResultTwo = (option) => {
     if (!stepTwo) return;
-    console.log("option", option);
     setBoxResultTwo(option);
     if (option === correctOption[1]) {
       playCorrect();
       setBoxTwoCss("correct");
       setTapProceed(true);
+      setBeatOne(false);
       setTapRatio(false);
       setDisabledNext(false);
       setShowErrorTwo(true);
+      setBtnTwo(false);
     } else {
       playWrong();
       setBoxTwoCss("incorrect");
@@ -90,16 +99,37 @@ const MainFour = ({
     setStepTwo(false);
     onNext();
   };
+
   const handlePrevOne = () => {
     playClick();
     onPrev();
   };
+
   const handlePrevTwo = () => {
     playClick();
     setStepTwo(false);
+    setBtnTwo(false);
+    setBeat(true);
+    setBeatOne(false);
     setStepOne(true);
     setBoxResultOne("");
     setBoxOneCss("");
+    setBoxResultTwo("");
+    setBoxTwoCss("");
+    setNextOne(false);
+    setShowErrorOne(false);
+  };
+  const handlePrevFour = () => {
+    playClick();
+    setTapProceed(false);
+    setBtnTwo(true);
+    setBoxTwoCss("");
+    setShowErrorTwo(false);
+    setBoxResultTwo("");
+    setTapRatio(true);
+    setStepTwo(true);
+    setDisabledNext(true);
+    setBeatOne(true);
   };
   return (
     <div className="main">
@@ -111,6 +141,8 @@ const MainFour = ({
           </div>
           <div className="answer-box">
             <ResultBoxTwo
+              beat={beat}
+              beatOne={beatOne}
               stepOne={stepOne}
               stepTwo={stepTwo}
               boxOneHeading={boxOneHeading}
@@ -122,6 +154,7 @@ const MainFour = ({
               boxTwoCss={boxTwoCss}
               boxResultThree={boxResultThree}
               boxThreeCss={boxThreeCss}
+              style={{ gap: "7vw" }}
             />
           </div>
         </div>
@@ -143,6 +176,9 @@ const MainFour = ({
             boxResultTwo={boxResultTwo}
             showErrorOne={showErrorOne}
             showErrorTwo={showErrorTwo}
+            style={{
+             fontSize:"3vw" 
+            }}
           />
         </div>
       </div>
@@ -155,13 +191,14 @@ const MainFour = ({
         nextOne={nextOne}
         nextTwo={nextTwo}
         stepOne={stepOne}
-        stepTwo={stepTwo}
+        stepTwo={btnTwo}
         stepThree={stepThree}
         tapProceed={tapProceed}
         handleNextOne={handleNextOne}
         handleProceed={handleProceed}
         handlePrevOne={handlePrevOne}
         handlePrevTwo={handlePrevTwo}
+        handlePrevFour={handlePrevFour}
       />
     </div>
   );

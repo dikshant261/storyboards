@@ -67,20 +67,47 @@ const SceneEleven = ({ onNext }) => {
       <div className="right">
         <div className="right-align">
           <div className="main-container">
-            <img
-              src={images.cakeone}
-              style={{ width: "37vw", objectFit: "contain" }}
-            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <img
+                src={images.cakeOnehalf}
+                style={{
+                  width: "36.5vw",
+                  objectFit: "contain",
+                  filter: showBox
+                    ? "drop-shadow(0 0 0 orange) drop-shadow(0 0 1vw orange)"
+                    : "",
+                  opacity: showBox ? "0.8" : "",
+                }}
+              />
+              <img
+                src={images.cakeOnehalftwo}
+                style={{
+                  width: "37vw",
+                  objectFit: "contain",
+                  filter: showBox
+                    ? "drop-shadow(0 0 0 orange) drop-shadow(0 0 1vw orange)"
+                    : "",
+                  opacity: showBox ? "0.8" : "",
+                }}
+              />
+            </div>
             <div
               className={`${line ? "cut-line-two" : "line-three"}`}
               onClick={handleLine}
             ></div>
-            {showBox && (
-              <div>
-                <div className="half-cake-two"></div>
-                <div className="half-cake-right-two"></div>
-              </div>
-            )}
+            {/* {showBox && (
+              // <div>
+              //   <div className="half-cake-two"></div>
+              //   <div className="half-cake-right-two"></div>
+              // </div>
+            )} */}
           </div>
 
           <div className="cutter-box">
@@ -91,6 +118,7 @@ const SceneEleven = ({ onNext }) => {
                 onClick={() => handleCheck("yes")}
                 style={{
                   backgroundColor: btnCss === "yes" ? "salmon" : "",
+                  opacity: disabled ? "0.6" : "1",
                 }}
               >
                 {t("buttons.yes")}
@@ -101,6 +129,7 @@ const SceneEleven = ({ onNext }) => {
                 onClick={() => handleCheck("no")}
                 style={{
                   backgroundColor: btnCss === "no" ? "lightgreen" : "",
+                  opacity: disabled ? "0.6" : "1",
                 }}
               >
                 {t("buttons.no")}

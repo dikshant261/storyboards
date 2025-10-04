@@ -1,4 +1,4 @@
-function ResultBoxTwo({
+const ResultBoxTwo = ({
   beat,
   beatOne,
   stepOne,
@@ -9,51 +9,40 @@ function ResultBoxTwo({
   boxOneCss,
   boxResultTwo,
   boxTwoCss,
-}) {
+  style
+}) => {
   // Helper to render fraction if value is in a/b form
-  const renderFraction = (value) => {
+  const renderFraction = value => {
     if (typeof value === "string" && value.includes("/")) {
       const [num, denom] = value.split("/");
       if (!isNaN(num) && !isNaN(denom)) {
-        return React.createElement(
-          "span",
-          { className: "fraction-align" },
-          React.createElement("span", null, num),
-          React.createElement("span", { className: "fraction-line-box" }),
-          React.createElement("span", null, denom)
-        );
+        return /*#__PURE__*/React.createElement("span", {
+          className: "fraction-align"
+        }, /*#__PURE__*/React.createElement("span", null, num), /*#__PURE__*/React.createElement("span", {
+          className: "fraction-line-box"
+        }), /*#__PURE__*/React.createElement("span", null, denom));
       }
     }
     return value;
   };
-
-  return React.createElement(
-    "div",
-    { className: "result-box" },
-
-    // Box 1
-    React.createElement(
-      "div",
-      { className: `result-box-container ${beat ? "active" : ""}` },
-      React.createElement(
-        "div",
-        { className: `box ${boxOneCss}` },
-        renderFraction(boxResultOne)
-      ),
-      React.createElement("div", { className: "box-title" }, t(boxOneHeading))
-    ),
-
-    // Box 2
-    React.createElement(
-      "div",
-      { className: `result-box-container ${beatOne ? "active" : ""}` },
-      React.createElement(
-        "div",
-        { className: `box ${boxTwoCss}` },
-        renderFraction(boxResultTwo)
-      ),
-      React.createElement("div", { className: "box-title" }, t(boxTwoHeading))
-    )
-  );
-}
+  return /*#__PURE__*/React.createElement("div", {
+    className: "result-box",
+    style: {
+      ...style,
+      gap: "7vw"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `result-box-container ${beat ? "active" : ""}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `box ${boxOneCss}`
+  }, renderFraction(boxResultOne)), /*#__PURE__*/React.createElement("div", {
+    className: "box-title"
+  }, t(boxOneHeading))), /*#__PURE__*/React.createElement("div", {
+    className: `result-box-container ${beatOne ? "active" : ""}`
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `box ${boxTwoCss}`
+  }, renderFraction(boxResultTwo)), /*#__PURE__*/React.createElement("div", {
+    className: "box-title"
+  }, t(boxTwoHeading))));
+};
 window.ResultBoxTwo=ResultBoxTwo;

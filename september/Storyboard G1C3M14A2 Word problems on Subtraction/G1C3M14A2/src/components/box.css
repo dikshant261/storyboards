@@ -17,10 +17,7 @@
     width: 7vw;
     height: 10vh;
 }
-.white-color{
-    background-color: var(--secondary-color);
-    border-color:#cb8608 ;
-}
+/*  */
 .minus-line {
     background-color: white;
     width: 2vw;

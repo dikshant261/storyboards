@@ -52,7 +52,10 @@ const SceneSix = ({
       objectFit: "contain"
     }
   }), /*#__PURE__*/React.createElement("div", {
-    className: `cut-line`
+    className: `cut-line`,
+    style: {
+      border: "0.3vw solid black"
+    }
   }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "half-cake"
   }), /*#__PURE__*/React.createElement("div", {

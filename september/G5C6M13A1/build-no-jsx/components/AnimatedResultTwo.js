@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from "react";
-import "./animatedresult.css";
-import Fraction from "./Fraction";
-import { useTranslation } from "react-i18next";
 const AnimatedResultTwo = ({
   next,
   setNext,
@@ -15,9 +11,6 @@ const AnimatedResultTwo = ({
   const [stepThree, setStepThree] = useState(false);
   const result = sessionStorage.getItem("fractionsData");
   const parsed = result ? JSON.parse(result) : [];
-  const {
-    t
-  } = useTranslation();
   // Show each row one by one
   useEffect(() => {
     if (parsed.length === 0) return;
@@ -44,59 +37,115 @@ const AnimatedResultTwo = ({
     return () => clearInterval(interval);
   }, [parsed, next]);
   return /*#__PURE__*/React.createElement("div", {
-    className: "conatiner"
+    className: "conatiner",
+    d: true
   }, /*#__PURE__*/React.createElement("div", {
-    className: "result-container"
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gridAutoFlow: "dense",
+      gap: "1vh",
+      justifyContent: "center"
+    }
   }, parsed.slice(0, visibleRows).map((item, index) => /*#__PURE__*/React.createElement("div", {
-    className: "result",
-    key: index
+    key: index,
+    style: {
+      display: "grid",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      gap: "2vw",
+      gridAutoFlow: "column",
+      width: "39vw"
+    }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       width: "6vw",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      opacity: fadeOpacity ? "0.7" : "1"
+      opacity: fadeOpacity ? "0.4" : "1"
     }
   }, /*#__PURE__*/React.createElement(Fraction, {
     numerator: item.step.originalNum,
     denominator: item.step.originalDen,
     fontSize: "4vw",
-    lineHeight: "0.5vh",
+    lineHeight: "1vh",
     lineWidth: "100%"
-  })), /*#__PURE__*/React.createElement("p", null, "="), /*#__PURE__*/React.createElement("div", {
-    className: "divide-fraction"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  })), /*#__PURE__*/React.createElement("p", {
     style: {
-      opacity: fadeOpacity ? "0.7" : "1"
+      opacity: fadeOpacity ? "0.4" : "1"
     }
-  }, " ", item.step.originalNum, " \xF7"), " ", /*#__PURE__*/React.createElement("span", {
+  }, "="), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "end",
+      justifyContent: "center",
+      fontSize: "4vw",
+      color: "white",
+      lineHeight: "1.2",
+      width: "18vw",
+      fontWeight: "700"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      gap: "2vh"
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: fadeOpacity ? "0.4" : "1"
+    }
+  }, " ", item.step.originalNum), /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: fadeOpacity ? "0.4" : "1"
+    }
+  }, " \xF7 "), /*#__PURE__*/React.createElement("span", {
     className: `${stepOne ? "divisor" : ""}`
   }, item.step.divisor)), /*#__PURE__*/React.createElement("div", {
     className: "line",
     style: {
-      opacity: fadeOpacity ? "0.7" : "1"
+      opacity: fadeOpacity ? "0.4" : "1",
+      width: "18vw"
     }
-  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
-      opacity: fadeOpacity ? "0.7" : "1"
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+      gap: "2vh"
     }
-  }, item.step.originalDen, " \xF7", " "), " ", /*#__PURE__*/React.createElement("span", {
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: fadeOpacity ? "0.4" : "1"
+    }
+  }, item.step.originalDen), " ", /*#__PURE__*/React.createElement("span", {
+    style: {
+      opacity: fadeOpacity ? "0.4" : "1"
+    }
+  }, " \xF7 "), /*#__PURE__*/React.createElement("span", {
     className: `${stepOne ? "divisor" : ""}`
-  }, item.step.divisor))), /*#__PURE__*/React.createElement("p", null, "="), /*#__PURE__*/React.createElement("div", {
+  }, item.step.divisor))), /*#__PURE__*/React.createElement("p", {
     style: {
-      opacity: fadeOpacity ? "0.7" : "1"
+      opacity: fadeOpacity ? "0.4" : "1"
+    }
+  }, "="), /*#__PURE__*/React.createElement("div", {
+    style: {
+      opacity: fadeOpacity ? "0.4" : "1"
     }
   }, /*#__PURE__*/React.createElement(Fraction, {
     numerator: item.fraction.num,
     denominator: item.fraction.den,
     fontSize: "4vw",
-    lineHeight: "0.5vh",
+    lineHeight: "1vh",
     lineWidth: "100%"
   }))))), /*#__PURE__*/React.createElement("div", {
     className: "bracket",
     style: {
-      opacity: fadeOpacity ? "0.7" : stepTwo ? "1" : "0"
+      opacity: fadeOpacity ? "0.4" : stepTwo ? "1" : "0"
     }
   }, "}"), paraOne && /*#__PURE__*/React.createElement("div", {
     style: {
@@ -104,7 +153,7 @@ const AnimatedResultTwo = ({
     }
   }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("span", {
     style: {
-      opacity: fadeOpacity ? "0.7" : "1"
+      opacity: fadeOpacity ? "0.4" : "1"
     }
   }, t("divideBy")), ",", /*#__PURE__*/React.createElement("span", {
     className: "divisor"
@@ -122,7 +171,7 @@ const AnimatedResultTwo = ({
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      opacity: fadeOpacity ? "0.7" : "1"
+      opacity: fadeOpacity ? "0.4" : "1"
     }
   }, /*#__PURE__*/React.createElement("span", null, "12"), /*#__PURE__*/React.createElement("span", {
     style: {
@@ -138,4 +187,4 @@ const AnimatedResultTwo = ({
     className: "divisor"
   }, "3"), " ", t("commonFactor")));
 };
-export default AnimatedResultTwo;
+window.AnimatedResultTwo=AnimatedResultTwo;

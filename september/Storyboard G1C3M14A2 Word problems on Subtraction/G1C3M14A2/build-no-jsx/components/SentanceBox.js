@@ -4,7 +4,8 @@ const SentanceBox = ({
   numOne,
   numTwo,
   result,
-  boxCss
+  boxCss,
+  beat
 }) => {
   return /*#__PURE__*/React.createElement("div", {
     className: "box-container"
@@ -27,7 +28,7 @@ const SentanceBox = ({
   }), /*#__PURE__*/React.createElement("div", {
     className: "minus-line"
   })), /*#__PURE__*/React.createElement("div", {
-    className: `sent-box white-color ${boxCss}`
+    className: `sent-box ${beat ? "active" : ""} ${boxCss}`
   }, result));
 };
 export default SentanceBox;

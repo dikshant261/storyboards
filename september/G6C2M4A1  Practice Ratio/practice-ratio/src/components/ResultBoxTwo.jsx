@@ -2,6 +2,8 @@ import React from "react";
 import "./ResultBox.css";
 import { useTranslation } from "react-i18next";
 const ResultBoxTwo = ({
+  beat,
+  beatOne,
   stepOne,
   stepTwo,
   boxResultOne,
@@ -10,6 +12,7 @@ const ResultBoxTwo = ({
   boxOneCss,
   boxResultTwo,
   boxTwoCss,
+  style,
 }) => {
   const { t } = useTranslation();
   // Helper to render fraction if value is in a/b form
@@ -29,12 +32,12 @@ const ResultBoxTwo = ({
     return value;
   };
   return (
-    <div className="result-box">
-      <div className={`result-box-container ${stepOne ? "active" : ""}`}>
+    <div className="result-box" style={{ ...style, gap: "7vw" }}>
+      <div className={`result-box-container ${beat ? "active" : ""}`}>
         <div className={`box ${boxOneCss}`}>{renderFraction(boxResultOne)}</div>
         <div className="box-title">{t(boxOneHeading)}</div>
       </div>
-      <div className={`result-box-container ${stepTwo ? "active" : ""}`}>
+      <div className={`result-box-container ${beatOne ? "active" : ""}`}>
         <div className={`box ${boxTwoCss}`}>{renderFraction(boxResultTwo)}</div>
         <div className="box-title">{t(boxTwoHeading)}</div>
       </div>

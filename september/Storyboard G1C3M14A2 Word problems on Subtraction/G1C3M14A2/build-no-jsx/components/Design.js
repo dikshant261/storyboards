@@ -28,7 +28,7 @@ const Design = ({
     }
   }, t("questionThree.ripe"))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
     className: "pink-circle"
-  }, "\"?\""), /*#__PURE__*/React.createElement("p", {
+  }, "?"), /*#__PURE__*/React.createElement("p", {
     style: {
       fontSize: "1.5vw"
     }

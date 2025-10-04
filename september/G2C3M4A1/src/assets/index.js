@@ -1,6 +1,6 @@
 // src/assets/index.js
 
-import man from "man.png";
+import man from "./man.png";
 import girl from "./girl.png";
 import boy from "./boy.png";
 import cakeone from "./cakeone.png";
@@ -10,6 +10,8 @@ import rightman from "./rightman.png";
 import cutter from "./cutter.png";
 import manhand from "./manhand.png";
 import thinkboy from "./thinkboy.png"
+import cakeOnehalf from "./cakeOnehalf.png";
+import cakeOnehalftwo from "./cakeOnehalftwo.png";
 // Export as an object
 const images = {
   man,
@@ -21,7 +23,9 @@ const images = {
   rightman,
   cutter,
   manhand,
-  thinkboy
+  thinkboy,
+  cakeOnehalf,
+  cakeOnehalftwo
 };
 
 export default images;

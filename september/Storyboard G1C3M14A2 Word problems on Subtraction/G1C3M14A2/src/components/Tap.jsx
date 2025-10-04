@@ -8,12 +8,14 @@ const Tap = ({
   bottom,
   style = {},
   className = "",
+  onClick
 }) => {
   return (
     <img
       src={tap}
       alt="tap"
       className={className}
+      onClick={onClick}
       style={{
         position: "absolute",
         width: width || "4vw",
@@ -21,6 +23,7 @@ const Tap = ({
         left: left,
         right: right,
         bottom: bottom,
+        cursor:"pointer",
         ...style, // allow extra custom styling
       }}
     />

@@ -7,6 +7,7 @@ import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
 import MarbleRender from "./MarbleRender";
+import ProgressBar from "./ProgressBar";
 const SceneFive = ({
   onPrev,
   onNext
@@ -17,6 +18,7 @@ const SceneFive = ({
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat, setBeat] = useState(true);
   const {
     t
   } = useTranslation();
@@ -29,6 +31,7 @@ const SceneFive = ({
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -53,13 +56,15 @@ const SceneFive = ({
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem("marblesubtractionOne", JSON.stringify({
         showError: true,
         boxCss: "correct",
         disabled: true,
         current: false,
         next: true,
-        result: result
+        result: result,
+        beat: false
       }));
     } else {
       playWrong();
@@ -92,7 +97,7 @@ const SceneFive = ({
   }, /*#__PURE__*/React.createElement("p", null, t("questionTwo.question")), /*#__PURE__*/React.createElement("div", {
     className: "align-total",
     style: {
-      transform: "translate(0vw, -1vw)",
+      transform: "translate(0vw, 0vw)",
       gap: "2vh"
     }
   }, /*#__PURE__*/React.createElement("p", null, t("questionTwo.malik")), /*#__PURE__*/React.createElement(MarbleRender, {
@@ -100,18 +105,20 @@ const SceneFive = ({
   })), /*#__PURE__*/React.createElement("div", {
     className: "align-total",
     style: {
-      transform: "translate(-5vw, -2vw)",
-      gap: "2vh"
+      transform: "translate(-5vw, -1vw)",
+      gap: "2vh",
+      marginBottom: "2vh"
     }
   }, /*#__PURE__*/React.createElement("p", null, t("questionTwo.andi")), /*#__PURE__*/React.createElement(MarbleRender, {
     limit: 7
   })), /*#__PURE__*/React.createElement("div", {
     className: "align-total",
     style: {
-      transform: "translate(-9vw, -2vw)"
+      transform: "translate(-8.8vw, -2vw)",
+      gap: "6vw"
     }
   }, /*#__PURE__*/React.createElement("p", null, t("questionTwo.larger")), /*#__PURE__*/React.createElement("div", {
-    className: `box ${boxCss}`,
+    className: `box ${beat ? "active" : ""} ${boxCss}`,
     style: {
       transform: "translateX(0.9vw)"
     }
@@ -141,12 +148,15 @@ const SceneFive = ({
     className: "scene-container-right-footer-button"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: handlePrev
-  }, t("buttons.previous")), current && /*#__PURE__*/React.createElement("button", {
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement(ProgressBar, {
+    current: 5
+  }), current && /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleNext
   }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
-    bottom: 0
+    bottom: 0,
+    onClick: handleNext
   })))));
 };
 export default SceneFive;

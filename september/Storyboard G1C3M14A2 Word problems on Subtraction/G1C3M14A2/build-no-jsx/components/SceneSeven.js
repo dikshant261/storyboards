@@ -7,6 +7,7 @@ import Keypad from "./Keypad";
 import Tap from "./Tap";
 import MarbleRender from "./MarbleRender";
 import SentanceBox from "./SentanceBox";
+import ProgressBar from "./ProgressBar";
 const SceneSeven = ({
   onPrev,
   onNext
@@ -17,6 +18,7 @@ const SceneSeven = ({
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat, setBeat] = useState(true);
   const {
     t
   } = useTranslation();
@@ -29,6 +31,7 @@ const SceneSeven = ({
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -53,13 +56,15 @@ const SceneSeven = ({
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem("marbleSentancesubtractionOne", JSON.stringify({
         showError: true,
         boxCss: "correct",
         disabled: true,
         current: false,
         next: true,
-        result: result
+        result: result,
+        beat: false
       }));
     } else {
       playWrong();
@@ -138,7 +143,8 @@ const SceneSeven = ({
     numOne: 9,
     numTwo: 7,
     boxCss: boxCss,
-    result: result
+    result: result,
+    beat: beat
   })), next && /*#__PURE__*/React.createElement("p", {
     style: {
       transform: "translate(-9vw, -3.5vw)",
@@ -166,12 +172,15 @@ const SceneSeven = ({
     className: "scene-container-right-footer-button"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: handlePrev
-  }, t("buttons.previous")), current && /*#__PURE__*/React.createElement("button", {
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement(ProgressBar, {
+    current: 7
+  }), current && /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleNext
   }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
-    bottom: 0
+    bottom: 0,
+    onClick: handleNext
   })))));
 };
 export default SceneSeven;

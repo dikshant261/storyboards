@@ -9,7 +9,6 @@ import RepersentinRatio from "./components/RepersentinRatio";
 import MainFour from "./components/MainFour";
 import MainFive from "./components/MainFive";
 import MainSix from "./components/MainSix";
-import End from "./components/End";
 import ActivityComplete from "./components/ActivityComplete";
 const Outlet = () => {
   const { t } = useTranslation();
@@ -121,16 +120,16 @@ const Outlet = () => {
         <Main
           onNext={handleNext}
           onPrev={handlePrevOne}
-          options={["3:2", "3 to 2", "2 to 3", "3/2", "2/3", "2:3"]}
-          correctOption={["3:2", "3 to 2", "3/2"]}
+          options={["3 : 2", "3 to 2", "2 to 3", "3/2", "2/3", "2 : 3"]}
+          correctOption={["3 : 2", "3 to 2", "3/2"]}
         />
       )}
       {second && (
         <MainTwo
           onNext={handleNextTwo}
           onPrev={handlePrevTwo}
-          options={["6:2", "6 to 2", "2 to 6", "6/2", "2/6", "2:6"]}
-          correctOption={["6:2", "6 to 2", "6/2"]}
+          options={["6 : 2", "6 to 2", "2 to 6", "6/2", "2/6", "2 : 6"]}
+          correctOption={["6 : 2", "6 to 2", "6/2"]}
         />
       )}
       {third && (
@@ -138,19 +137,21 @@ const Outlet = () => {
           onNext={() => handleNextThree()}
           onPrev={handlePrevThree}
           questionHeading={t("emptyChairsHeading")}
-          question={t("questionTwo")}
-          options={["6:2", "6 to 2", "2 to 6", "6/2", "2/6", "2:6"]}
-          correctOption={["6:2", "6 to 2", "6/2"]}
+          question={t("questionExtra")}
+          extraHeading={t("extraHeading")}
+          options={["2 : 6", "2 to 6", "6 to 2", "2/6", "6/2", "6 : 2"]}
+          correctOption={["2 : 6", "2 to 6", "2/6"]}
         />
       )}
       {fourth && (
         <MainThree
           onNext={() => handleNextFour()}
           onPrev={handlePrevFour}
-          questionHeading={t("questionThreeHeading")}
+          questionHeading={t("emptyChairsHeading")}
           question={t("questionThree")}
-          options={["9:7", "9 to 7", "7 to 9", "9/7", "7/9", "7:9"]}
-          correctOption={["9:7", "9 to 7", "9/7"]}
+          extraHeading={t("questionThreeHeading")}
+          options={["9 : 7", "9 to 7", "7 to 9", "9/7", "7/9", "7 : 9"]}
+          correctOption={["9 : 7", "9 to 7", "9/7"]}
           flag={1}
         />
       )}
@@ -158,10 +159,11 @@ const Outlet = () => {
         <MainThree
           onNext={() => handleNextFive()}
           onPrev={handlePrevFive}
-          questionHeading={t("questionFourHeading")}
+          questionHeading={t("emptyChairsHeading")}
+          extraHeading={t("questionFourHeading")}
           question={t("questionFour")}
-          options={["7:9", "7 to 9", "9 to 7", "7/9", "9/7", "9:7"]}
-          correctOption={["7:9", "7 to 9", "7/9"]}
+          options={["7 : 9", "7 to 9", "9 to 7", "7/9", "9/7", "9 : 7"]}
+          correctOption={["7 : 9", "7 to 9", "7/9"]}
           flag={2}
         />
       )}
@@ -173,8 +175,8 @@ const Outlet = () => {
           boxOneHeading={t("ratioApple")}
           boxTwoHeading={t("rationOrange")}
           questionHeading={t("repreSenting_ratios")}
-          options={["5:4", "5:10", "4:5", "4:10"]}
-          correctOption={["5:4", "4:5"]}
+          options={["5 : 4", "5 : 10", "4 : 5", "4 : 10"]}
+          correctOption={["4 : 5", "5 : 4"]}
         />
       )}
       {seven && (
@@ -182,8 +184,8 @@ const Outlet = () => {
           onNext={handleNextEight}
           onPrev={handlePrevSeven}
           questionHeading={t("repreSenting_ratios")}
-          options={["7:3", "3:10", "3:7", "7:10"]}
-          correctOption={["3:7", "7:3"]}
+          options={["7 : 3", "3 : 10", "3 : 7", "7 : 10"]}
+          correctOption={["3 : 7", "7 : 3"]}
           flag={1}
         />
       )}
@@ -195,7 +197,7 @@ const Outlet = () => {
           boxOneHeading={t("ratioBoys")}
           boxTwoHeading={t("ratioGirl")}
           questionHeading={t("repreSenting_ratios")}
-          options={["9/14", "9/23", "14/9", "14/23"]}
+          options={["14/9", "9/23", "9/14", "14/23"]}
           correctOption={["9/14", "14/9"]}
           flag={2}
         />
@@ -221,12 +223,12 @@ const Outlet = () => {
           boxOneHeading={t("ratioStudent")}
           boxTwoHeading={t("ratioPlaground")}
           questionHeading={t("repreSenting_ratios")}
-          options={["32:25", "32:57", "25:32", "25:57"]}
-          correctOption={["25:32", "32:25"]}
+          options={["32 : 25", "32 : 57", "25 : 32", "25 : 57"]}
+          correctOption={["25 : 32", "32 : 25"]}
           flag={4}
         />
       )}
-      {end && <ActivityComplete/>}
+      {end && <ActivityComplete />}
     </div>
   );
 };

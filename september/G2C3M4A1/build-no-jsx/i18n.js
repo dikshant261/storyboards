@@ -96,6 +96,16 @@ i18n.use(initReactI18next).init({
           smallerPart: "Smaller part",
           biggerPart: "Bigger Part",
           tapContinue: "Tap » to continue."
+        },
+        halfLesson: {
+          title: "What is half?",
+          weLearnt: "We learnt!",
+          half: "Half",
+          equalParts: "= One of two equal parts of a whole.",
+          notEqual: "If the parts are not equal,",
+          notHalves: "they are not halves.",
+          twoHalves: "Two halves together",
+          makeWhole: "make a whole."
         }
       }
     }

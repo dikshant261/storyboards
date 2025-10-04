@@ -3,6 +3,8 @@ import "./option.css";
 import { useTranslation } from "react-i18next";
 const Option = ({ response, setShowError, allDisabled }) => {
   const { t } = useTranslation();
+  const result = sessionStorage.getItem("fractionsData");
+  const parsed = result ? JSON.parse(result) : [];
   const handleResponse = (id) => {
     setShowError(false);
     response(id);
@@ -19,7 +21,7 @@ const Option = ({ response, setShowError, allDisabled }) => {
         <span>÷</span> <span>5</span>
       </button>
       <button
-        style={{ fontSize: "2.2vw" }}
+        style={{ fontSize: "2.2vw", }}
         onClick={() => handleResponse(4)}
         disabled={allDisabled}
       >

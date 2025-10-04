@@ -109,9 +109,9 @@ const TableMessage = ({
               <p className="success-message">
                 {t("great")}{" "}
                 <span className="option-fraction-error">
-                  <span>6</span>
+                  <span>7</span>
                   <span className="fraction-line-error"></span>
-                  <span>2</span>
+                  <span>9</span>
                 </span>
                 {t("success", { word: "fraction" })}
               </p>

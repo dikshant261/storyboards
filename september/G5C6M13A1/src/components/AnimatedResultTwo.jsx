@@ -45,64 +45,111 @@ const AnimatedResultTwo = ({
   }, [parsed, next]);
 
   return (
-    <div className="conatiner">
-      <div className="result-container">
+    <div className="conatiner" d>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gridAutoFlow: "dense",
+          gap: "1vh",
+          justifyContent: "center",
+        }}
+      >
         {parsed.slice(0, visibleRows).map((item, index) => (
-          <div className="result" key={index}>
+          <div
+            key={index}
+            style={{
+              display: "grid",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              gap: "2vw",
+              gridAutoFlow: "column",
+              width: "39vw",
+            }}
+          >
             <div
               style={{
                 width: "6vw",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                opacity: fadeOpacity ? "0.7" : "1",
+                opacity: fadeOpacity ? "0.4" : "1",
               }}
             >
               <Fraction
                 numerator={item.step.originalNum}
                 denominator={item.step.originalDen}
                 fontSize={"4vw"}
-                lineHeight={"0.5vh"}
+                lineHeight={"1vh"}
                 lineWidth={"100%"}
               />
             </div>
 
-            <p>=</p>
+            <p style={{opacity: fadeOpacity ? "0.4" : "1",}}>=</p>
 
             {/* Division step */}
-            <div className="divide-fraction">
-              <div>
-                <span style={{ opacity: fadeOpacity ? "0.7" : "1" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "end",
+                justifyContent: "center",
+                fontSize: "4vw",
+                color: "white",
+                lineHeight: "1.2",
+                width: "18vw",
+                fontWeight:"700"
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  gap: "2vh",
+                }}
+              >
+                <span style={{ opacity: fadeOpacity ? "0.4" : "1" }}>
                   {" "}
-                  {item.step.originalNum} ÷
-                </span>{" "}
+                  {item.step.originalNum}
+                </span>
+                <span style={{opacity: fadeOpacity ? "0.4" : "1",}}> ÷ </span>
                 <span className={`${stepOne ? "divisor" : ""}`}>
                   {item.step.divisor}
                 </span>
               </div>
               <div
                 className="line"
-                style={{ opacity: fadeOpacity ? "0.7" : "1" }}
+                style={{ opacity: fadeOpacity ? "0.4" : "1",width:"18vw" }}
               ></div>
-              <div>
-                <span style={{ opacity: fadeOpacity ? "0.7" : "1" }}>
-                  {item.step.originalDen} ÷{" "}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                  gap: "2vh",
+                }}
+              >
+                <span style={{ opacity: fadeOpacity ? "0.4" : "1" }}>
+                  {item.step.originalDen}
                 </span>{" "}
+                <span style={{opacity: fadeOpacity ? "0.4" : "1",}}> ÷ </span>
                 <span className={`${stepOne ? "divisor" : ""}`}>
                   {item.step.divisor}
                 </span>
               </div>
             </div>
 
-            <p>=</p>
+            <p style={{opacity: fadeOpacity ? "0.4" : "1",}}>=</p>
 
             {/* Final simplified fraction */}
-            <div style={{ opacity: fadeOpacity ? "0.7" : "1" }}>
+            <div style={{ opacity: fadeOpacity ? "0.4" : "1" }}>
               <Fraction
                 numerator={item.fraction.num}
                 denominator={item.fraction.den}
                 fontSize={"4vw"}
-                lineHeight={"0.5vh"}
+                lineHeight={"1vh"}
                 lineWidth={"100%"}
               />
             </div>
@@ -111,7 +158,7 @@ const AnimatedResultTwo = ({
       </div>
       <div
         className="bracket"
-        style={{ opacity: fadeOpacity ? "0.7" : stepTwo ? "1" : "0" }}
+        style={{ opacity: fadeOpacity ? "0.4" : stepTwo ? "1" : "0" }}
       >
         {"}"}
       </div>
@@ -119,7 +166,7 @@ const AnimatedResultTwo = ({
         <div style={{ opacity: stepThree ? "1" : "0" }}>
           <p>
             <span>
-              <span style={{ opacity: fadeOpacity ? "0.7" : "1" }}>
+              <span style={{ opacity: fadeOpacity ? "0.4" : "1" }}>
                 {t("divideBy")}
               </span>
               ,<span className="divisor">2</span>,
@@ -136,7 +183,7 @@ const AnimatedResultTwo = ({
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                opacity: fadeOpacity ? "0.7" : "1",
+                opacity: fadeOpacity ? "0.4" : "1",
               }}
             >
               <span>12</span>

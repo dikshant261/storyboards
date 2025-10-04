@@ -7,6 +7,7 @@ import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
 import MarbleRender from "./MarbleRender";
+import ProgressBar from "./ProgressBar";
 const SceneFive = ({ onPrev, onNext }) => {
   const [result, setResult] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -14,6 +15,7 @@ const SceneFive = ({ onPrev, onNext }) => {
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat,setBeat]=useState(true);
   const { t } = useTranslation();
   useEffect(() => {
     const stored = JSON.parse(sessionStorage.getItem("marblesubtractionOne"));
@@ -24,6 +26,7 @@ const SceneFive = ({ onPrev, onNext }) => {
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat)
     }
   }, []);
   const handlePrev = () => {
@@ -48,6 +51,7 @@ const SceneFive = ({ onPrev, onNext }) => {
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem(
         "marblesubtractionOne",
         JSON.stringify({
@@ -57,6 +61,7 @@ const SceneFive = ({ onPrev, onNext }) => {
           current: false,
           next: true,
           result: result,
+          beat:false
         })
       );
     } else {
@@ -81,26 +86,24 @@ const SceneFive = ({ onPrev, onNext }) => {
               <p>{t("questionTwo.question")}</p>
               <div
                 className="align-total"
-                style={{ transform: "translate(0vw, -1vw)", gap: "2vh" }}
+                style={{ transform: "translate(0vw, 0vw)", gap: "2vh" }}
               >
                 <p>{t("questionTwo.malik")}</p>
                 <MarbleRender limit={9} />
               </div>
               <div
                 className="align-total"
-                style={{ transform: "translate(-5vw, -2vw)", gap: "2vh" }}
+                style={{ transform: "translate(-5vw, -1vw)", gap: "2vh",marginBottom:"2vh" }}
               >
                 <p>{t("questionTwo.andi")}</p>
                 <MarbleRender limit={7} />
               </div>
               <div
                 className="align-total"
-                style={{ transform: "translate(-9vw, -2vw)" }}
               >
                 <p>{t("questionTwo.larger")}</p>
                 <div
-                  className={`box ${boxCss}`}
-                  style={{ transform: "translateX(0.9vw)" }}
+                  className={`box ${beat?"active":""} ${boxCss}`}
                 >
                   {result}
                 </div>
@@ -108,7 +111,6 @@ const SceneFive = ({ onPrev, onNext }) => {
               <div
                 className="align-total"
                 style={{
-                  transform: "translate(-8.8vw,-2vw)",
                   border: "none",
                   opacity: "0.7",
                 }}
@@ -137,11 +139,12 @@ const SceneFive = ({ onPrev, onNext }) => {
         </div>
         <div className="scene-container-right-footer-button">
           <button onClick={handlePrev}>{t("buttons.previous")}</button>
+          <ProgressBar current={5}/>
           {current && <button className="disabled">{t("buttons.next")}</button>}
           {next && (
             <div>
               <button onClick={handleNext}>{t("buttons.next")}</button>
-              <Tap bottom={0} />
+              <Tap bottom={0} onClick={handleNext}/>
             </div>
           )}
         </div>

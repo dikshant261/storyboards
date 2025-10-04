@@ -1,7 +1,8 @@
 import React from "react";
 import "./option.css";
 import ErrorMessage from "./ErrorMessage";
-import { playClick } from "./PlayAudio";
+import { useTranslation } from "react-i18next";
+
 const DogAndCatOption = ({
   options,
   correctOption,
@@ -16,12 +17,13 @@ const DogAndCatOption = ({
   showErrorTwo,
   showErrorThree,
 }) => {
+  const { t } = useTranslation();
+  const isStepActive = stepOne || stepTwo || stepThree;
+
   const handleOptionClick = (option) => {
     boxResultSet(option);
   };
-  // Only enable buttons if stepOne, stepTwo, or stepThree is active
-  const isDisabled = !(stepOne || stepTwo || stepThree);
-  // Helper to render fraction if value is in a/b form
+
   const renderOption = (value) => {
     if (typeof value === "string" && value.match(/^\d+\/\d+$/)) {
       const [num, denom] = value.split("/");
@@ -35,6 +37,94 @@ const DogAndCatOption = ({
     }
     return value;
   };
+
+  // correct answers from earlier steps stay locked
+  const isLockedFromPreviousStep = (opt) => {
+    if (boxResultOne === correctOption[0] && !stepOne && opt === correctOption[0])
+      return true;
+    if (boxResultTwo === correctOption[1] && !stepTwo && opt === correctOption[1])
+      return true;
+    if (boxResultThree === correctOption[2] && !stepThree && opt === correctOption[2])
+      return true;
+    return false;
+  };
+
+  const getButtonProps = (opt) => {
+    let className = "option-button";
+    let disabled = !isStepActive;
+
+    // lock from previous step
+    if (isLockedFromPreviousStep(opt)) {
+      className += " option-locked";
+      disabled = true;
+      return { className, disabled };
+    }
+
+    // STEP ONE
+    if (stepOne) {
+      if (boxResultOne) {
+        // correct choice => freeze all
+        if (boxResultOne === correctOption[0]) {
+          disabled = true;
+          if (opt === correctOption[0]) className += " option-correct";
+        } else {
+          // wrong choice => only disable that wrong button
+          if (opt === boxResultOne) {
+            disabled = true;
+            className += " option-wrong";
+          } else {
+            disabled = false; // other buttons still active
+          }
+        }
+      } else {
+        disabled = false;
+      }
+      return { className, disabled };
+    }
+
+    // STEP TWO
+    if (stepTwo) {
+      if (boxResultTwo) {
+        if (boxResultTwo === correctOption[1]) {
+          disabled = true;
+          if (opt === correctOption[1]) className += " option-correct";
+        } else {
+          if (opt === boxResultTwo) {
+            disabled = true;
+            className += " option-wrong";
+          } else {
+            disabled = false;
+          }
+        }
+      } else {
+        disabled = false;
+      }
+      return { className, disabled };
+    }
+
+    // STEP THREE
+    if (stepThree) {
+      if (boxResultThree) {
+        if (boxResultThree === correctOption[2]) {
+          disabled = true;
+          if (opt === correctOption[2]) className += " option-correct";
+        } else {
+          if (opt === boxResultThree) {
+            disabled = true;
+            className += " option-wrong";
+          } else {
+            disabled = false;
+          }
+        }
+      } else {
+        disabled = false;
+      }
+      return { className, disabled };
+    }
+
+    return { className, disabled };
+  };
+
   return (
     <div className="option-container">
       <div
@@ -43,13 +133,17 @@ const DogAndCatOption = ({
           (stepTwo && boxResultTwo === correctOption[1]) ||
           (stepThree && boxResultThree === correctOption[2])
             ? "correct"
-            : (stepOne && boxResultOne !== "") ||
-              (stepTwo && boxResultTwo !== "") ||
-              (stepThree && boxResultThree !== "")
+            : (stepOne && boxResultOne) ||
+              (stepTwo && boxResultTwo) ||
+              (stepThree && boxResultThree)
             ? "wrong"
             : ""
         }`}
       >
+        {!showErrorOne && !showErrorTwo && !showErrorThree && (
+          <p className="para">{t("selectCorrect")}</p>
+        )}
+
         {showErrorOne && stepOne && (
           <ErrorMessage
             stepOne={stepOne}
@@ -81,57 +175,21 @@ const DogAndCatOption = ({
           />
         )}
       </div>
+
       <div className="option-grid">
-        <button
-          className={`option-button${
-            boxResultOne === correctOption[0] ? " option-correct-disabled" : ""
-          }`}
-          onClick={() => handleOptionClick(correctOption[0])}
-          disabled={isDisabled || boxResultOne === correctOption[0]}
-        >
-          {renderOption(options[0])}
-        </button>
-        <button
-          className={`option-button${
-            boxResultTwo === correctOption[1] ? " option-correct-disabled" : ""
-          }`}
-          onClick={() => handleOptionClick(correctOption[1])}
-          disabled={isDisabled || boxResultTwo === correctOption[1]}
-        >
-          {renderOption(options[1])}
-        </button>
-        <button
-          className="option-button"
-          onClick={() => handleOptionClick(options[2])}
-          disabled={isDisabled}
-        >
-          {renderOption(options[2])}
-        </button>
-        <button
-          className={`option-button${
-            boxResultThree === correctOption[2]
-              ? " option-correct-disabled"
-              : ""
-          }`}
-          onClick={() => handleOptionClick(correctOption[2])}
-          disabled={isDisabled || boxResultThree === correctOption[2]}
-        >
-          {renderOption(options[3])}
-        </button>
-        <button
-          className="option-button"
-          onClick={() => handleOptionClick(options[4])}
-          disabled={isDisabled}
-        >
-          {renderOption(options[4])}
-        </button>
-        <button
-          className="option-button"
-          onClick={() => handleOptionClick(options[5])}
-          disabled={isDisabled}
-        >
-          {renderOption(options[5])}
-        </button>
+        {options.map((opt, idx) => {
+          const props = getButtonProps(opt);
+          return (
+            <button
+              key={idx}
+              className={props.className}
+              disabled={props.disabled}
+              onClick={() => handleOptionClick(opt)}
+            >
+              {renderOption(opt)}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

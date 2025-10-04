@@ -56,25 +56,26 @@
 }
 
 .option-box {
-        display: flex;
+    display: flex;
     flex-direction: column;
     gap: 1vw;
     align-items: center;
     justify-content: center;
     width: 25vw;
-    height: 67.5vh;
+    height: 67vh;
     background-color: rgb(0, 0, 0, 0.5);
     border-radius: 1.5vw;
 }
 
 .footer-heading {
-    display: flex;
+       display: flex;
     width: 95vw;
     height: 14vh;
     align-items: center;
-    justify-content: center;
     font-size: 3vw;
     color: white;
+    text-align: center;
+    justify-content: center;
 }
 
 .footer-buttons {

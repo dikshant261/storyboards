@@ -10,12 +10,12 @@ const SceneFive = ({ onNext }) => {
     playClick();
     onNext();
   };
-  
+
   return (
     <div className="scene-conatiner-three">
       <div className="left">
         <div className="text-box">
-           <p >{t("sceneFive.equalParts")}</p>
+          <p>{t("sceneFive.equalParts")}</p>
           <div className="triangle">▶</div>
         </div>
 
@@ -32,8 +32,12 @@ const SceneFive = ({ onNext }) => {
               src={images.caketwo}
               style={{ width: "29vw", objectFit: "contain" }}
             />
-            <div className={`cut-line`} ></div>
-
+            <div
+              className={`cut-line`}
+              style={{
+                border: "0.3vw solid black",
+              }}
+            ></div>
             <div>
               <div className="half-cake"></div>
               <div className="half-cake-right"></div>
@@ -49,7 +53,7 @@ const SceneFive = ({ onNext }) => {
         </div>
         <div className="footer">
           <button className="disabled">{t("buttons.previous")}</button>
-          <p style={{fontSize:"2.5vw"}}>{t("sceneFive.tapToKnow")}</p>
+          <p style={{ fontSize: "2.5vw" }}>{t("sceneFive.tapToKnow")}</p>
 
           <div>
             <button onClick={handleNext}>{t("buttons.next")}</button>

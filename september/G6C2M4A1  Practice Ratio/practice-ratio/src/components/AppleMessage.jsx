@@ -19,7 +19,7 @@ const AppleMessage = ({
               <p className="success-message">
                 {t("successTwo", { count: correctOption[0] })}
               </p>
-            ) : boxResultOne === options[3] ? (
+            ) : boxResultOne === options[1] ? (
               <p className="error-message">{t("triangleErrorTwo")}</p>
             ) : (
               <p className="error-message">{t("triangleErrorOne")}</p>
@@ -57,7 +57,7 @@ const AppleMessage = ({
                 </span>
                 {t("successThree")}
               </p>
-            ) : boxResultOne === options[3] ? (
+            ) : boxResultOne === options[1] ? (
               <p className="error-message">{t("boyFirstErrorTwo")}</p>
             ) : (
               <p className="error-message">{t("boyFirstErrorOne")}</p>

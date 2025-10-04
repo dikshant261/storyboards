@@ -22,7 +22,7 @@ const Design = ({ mangoes, ripe }) => {
           <p style={{ fontSize: "1.5vw" }}>{t("questionThree.ripe")}</p>
         </div>
         <div>
-          <div className="pink-circle">"?"</div>
+          <div className="pink-circle">?</div>
           <p style={{ fontSize: "1.5vw" }}>{t("questionThree.unripe")}</p>
         </div>
       </div>

@@ -7,6 +7,7 @@ import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
 import MarbleRender from "./MarbleRender";
+import ProgressBar from "./ProgressBar";
 const SceneSix = ({
   onPrev,
   onNext
@@ -17,6 +18,7 @@ const SceneSix = ({
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat, setBeat] = useState(true);
   const {
     t
   } = useTranslation();
@@ -29,6 +31,7 @@ const SceneSix = ({
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -53,13 +56,15 @@ const SceneSix = ({
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem("marbleSmallersubtractionOne", JSON.stringify({
         showError: true,
         boxCss: "correct",
         disabled: true,
         current: false,
         next: true,
-        result: result
+        result: result,
+        beat: false
       }));
     } else {
       playWrong();
@@ -124,7 +129,7 @@ const SceneSix = ({
       transform: "translate(-8.8vw,-2vw)"
     }
   }, /*#__PURE__*/React.createElement("p", null, t("questionTwo.smaller")), /*#__PURE__*/React.createElement("div", {
-    className: `box ${boxCss}`
+    className: `box ${beat ? "active" : ""} ${boxCss}`
   }, result)))), /*#__PURE__*/React.createElement("div", {
     className: "scene-container-right-option"
   }, /*#__PURE__*/React.createElement(Keypad, {
@@ -142,12 +147,15 @@ const SceneSix = ({
     className: "scene-container-right-footer-button"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: handlePrev
-  }, t("buttons.previous")), current && /*#__PURE__*/React.createElement("button", {
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement(ProgressBar, {
+    current: 6
+  }), current && /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleNext
   }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
-    bottom: 0
+    bottom: 0,
+    onClick: handleNext
   })))));
 };
 export default SceneSix;

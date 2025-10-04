@@ -8,7 +8,7 @@ import AnimatedResult from "./AnimatedResult";
 import ErrorMessage from "./ErrorMessage";
 import Tap from "./Tap";
 
-const Scene = ({onNext}) => {
+const Scene = ({ onNext }) => {
   const [divisionSteps, setDivisionSteps] = useState([]);
   const [showFraction, setShowFraction] = useState(true);
   const [errorShow, setShowError] = useState(false);
@@ -32,7 +32,23 @@ const Scene = ({onNext}) => {
   console.log("parsed", parsed);
   const handleResult = (id) => {
     setDivisorOption(id);
-    if (id === 2 || id === 3) {
+    if (
+      id === 2 &&
+      (currentFraction.num % 2 !== 0 || currentFraction.den % 2 !== 0)
+    ) {
+      playWrong();
+      setFlag(6);
+      setShowError(true);
+      console.log("hi");
+    } else if (
+      id === 3 &&
+      (currentFraction.num % 3 !== 0 || currentFraction.den % 3 !== 0)
+    ) {
+      playWrong();
+      setFlag(6);
+      setShowError(true);
+      console.log("hi");
+    } else if (id === 2 || id === 3) {
       // Check if the divisor can actually divide both numerator and denominator
       if (currentFraction.num % id === 0 && currentFraction.den % id === 0) {
         playCorrect();

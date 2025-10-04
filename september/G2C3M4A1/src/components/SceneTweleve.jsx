@@ -27,10 +27,30 @@ const SceneTwelve = ({ onNext }) => {
       <div className="right">
         <div className="right-align">
           <div className="main-container">
-            <img
-              src={images.cakeone}
-              style={{ width: "37vw", objectFit: "contain" }}
-            />
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <img
+                src={images.cakeOnehalf}
+                style={{
+                  width: "36.5vw",
+                  objectFit: "contain",
+                }}
+              />
+              <img
+                src={images.cakeOnehalftwo}
+                style={{
+                  width: "37vw",
+                  objectFit: "contain",
+                }}
+              />
+            </div>
+
             <div className="cut-line-two"></div>
             <div
               style={{

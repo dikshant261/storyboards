@@ -35,13 +35,26 @@ const SceneTwelve = ({
     className: "right-align"
   }, /*#__PURE__*/React.createElement("div", {
     className: "main-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column"
+    }
   }, /*#__PURE__*/React.createElement("img", {
-    src: images.cakeone,
+    src: images.cakeOnehalf,
+    style: {
+      width: "36.5vw",
+      objectFit: "contain"
+    }
+  }), /*#__PURE__*/React.createElement("img", {
+    src: images.cakeOnehalftwo,
     style: {
       width: "37vw",
       objectFit: "contain"
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     className: "cut-line-two"
   }), /*#__PURE__*/React.createElement("div", {
     style: {

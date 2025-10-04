@@ -3,6 +3,7 @@ import "./Scene.css";
 import { useTranslation } from "react-i18next";
 import ReusableButton from "./TapButton";
 import { playClick } from "./PlayAudio";
+import ProgressBar from "./ProgressBar";
 const SceneOne = ({ onSatrt }) => {
   const { t } = useTranslation();
   return (
@@ -39,6 +40,7 @@ const SceneOne = ({ onSatrt }) => {
         </div>
         <div className="scene-container-right-footer-button">
           <button className="disabled">{t("buttons.previous")}</button>
+          <ProgressBar current={1}/>
           <button className="disabled">{t("buttons.next")}</button>
         </div>
       </div>

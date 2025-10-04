@@ -6,6 +6,7 @@ import { playClick, playCorrect, playWrong } from "./PlayAudio";
 import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
+import ProgressBar from "./ProgressBar";
 const SceneTwo = ({
   onPrev,
   onNext
@@ -16,6 +17,7 @@ const SceneTwo = ({
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat, setBeat] = useState(true);
   const {
     t
   } = useTranslation();
@@ -28,6 +30,7 @@ const SceneTwo = ({
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -52,13 +55,15 @@ const SceneTwo = ({
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem("pencilsubtractionOne", JSON.stringify({
         showError: true,
         boxCss: "correct",
         disabled: true,
         current: false,
         next: true,
-        result: result
+        result: result,
+        beat: false
       }));
     } else {
       playWrong();
@@ -92,12 +97,12 @@ const SceneTwo = ({
     totalCars: 7,
     crossCars: 4
   }), /*#__PURE__*/React.createElement("div", {
-    className: "align-total"
-  }, /*#__PURE__*/React.createElement("p", null, t("total")), /*#__PURE__*/React.createElement("div", {
-    className: `box ${boxCss}`,
+    className: "align-total",
     style: {
-      transform: "translateX(8vw)"
+      gap: "14vw"
     }
+  }, /*#__PURE__*/React.createElement("p", null, t("total")), /*#__PURE__*/React.createElement("div", {
+    className: `box ${beat ? "active" : ""} ${boxCss}`
   }, result)), /*#__PURE__*/React.createElement("div", {
     className: "align-total",
     style: {
@@ -123,13 +128,16 @@ const SceneTwo = ({
   }, current && /*#__PURE__*/React.createElement("p", null, t("navigation.tapNumber")), next && /*#__PURE__*/React.createElement("p", null, t("navigation.tapContinue"))), /*#__PURE__*/React.createElement("div", {
     className: "scene-container-right-footer-button"
   }, /*#__PURE__*/React.createElement("button", {
-    onClick: handlePrev
-  }, t("buttons.previous")), current && /*#__PURE__*/React.createElement("button", {
+    className: "disabled"
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement(ProgressBar, {
+    current: 2
+  }), current && /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleNext
   }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
-    bottom: 0
+    bottom: 0,
+    onClick: handleNext
   })))));
 };
 export default SceneTwo;

@@ -1,4 +1,4 @@
-function MainFour({
+const MainFour = ({
   onNext,
   options,
   correctOption,
@@ -7,8 +7,8 @@ function MainFour({
   boxTwoHeading,
   questionHeading,
   flag,
-  onPrev,
-}) {
+  onPrev
+}) => {
   const [stepOne, setStepOne] = React.useState(true);
   const [stepTwo, setStepTwo] = React.useState(false);
   const [stepThree, setStepThree] = React.useState(false);
@@ -26,10 +26,10 @@ function MainFour({
   const [nextOne, setNextOne] = React.useState(false);
   const [nextTwo, setNextTwo] = React.useState(false);
   const [tapRatio, setTapRatio] = React.useState(true);
-  const [beat,setBeat]=React.useState(true);
-  const [beatOne,setBeatOne]=React.useState(false);
-  const [beatTwo,setBeatTwo]=React.useState(false);
-  const handleBoxResultOne = (option) => {
+  const [beat, setBeat] = React.useState(true);
+  const [beatOne, setBeatOne] = React.useState(false);
+  const [btnTwo, setBtnTwo] = React.useState(false);
+  const handleBoxResultOne = option => {
     if (!stepOne) return;
     setBoxResultOne(option);
     if (option === correctOption[0]) {
@@ -46,7 +46,6 @@ function MainFour({
       setShowErrorOne(true);
     }
   };
-
   const handleNextOne = () => {
     playClick();
     setNextOne(false);
@@ -56,41 +55,39 @@ function MainFour({
     setDisabledNext(true);
     setTapRatio(true);
     setStepTwo(true);
+    setBtnTwo(true);
   };
-
-  const handleBoxResultTwo = (option) => {
+  const handleBoxResultTwo = option => {
     if (!stepTwo) return;
     setBoxResultTwo(option);
     if (option === correctOption[1]) {
       playCorrect();
       setBoxTwoCss("correct");
       setTapProceed(true);
-      setBeatOne(false)
+      setBeatOne(false);
       setTapRatio(false);
       setDisabledNext(false);
       setShowErrorTwo(true);
-      setStepTwo(false);
+      setBtnTwo(false);
     } else {
       playWrong();
       setBoxTwoCss("incorrect");
       setShowErrorTwo(true);
     }
   };
-
   const handleProceed = () => {
     playClick();
     setStepTwo(false);
     onNext();
   };
-
   const handlePrevOne = () => {
     playClick();
     onPrev();
   };
-
   const handlePrevTwo = () => {
     playClick();
     setStepTwo(false);
+    setBtnTwo(false);
     setBeat(true);
     setBeatOne(false);
     setStepOne(true);
@@ -101,100 +98,84 @@ function MainFour({
     setNextOne(false);
     setShowErrorOne(false);
   };
-  const handlePrevFour=()=>{
-     playClick();
-     setTapProceed(false);
-     setBoxTwoCss("");
-     setShowErrorTwo(false);
-     setBoxResultTwo("");
-     setTapRatio(true);
-     setStepTwo(true);
-     setDisabledNext(true);
-     setBeatOne(true);
-  }
-
-  return React.createElement(
-    "div",
-    { className: "main" },
-    React.createElement(
-      "div",
-      { className: "main-heading" },
-      t(questionHeading)
-    ),
-    React.createElement(
-      "div",
-      { className: "main-content" },
-      React.createElement(
-        "div",
-        { className: "image-container" },
-        React.createElement(
-          "div",
-          { className: "image-box" },
-          React.createElement(AppleImage)
-        ),
-        React.createElement(
-          "div",
-          { className: "answer-box" },
-          React.createElement(ResultBoxTwo, {
-            beat,
-            beatOne,
-            stepOne: stepOne,
-            stepTwo: stepTwo,
-            boxOneHeading: boxOneHeading,
-            boxTwoHeading: boxTwoHeading,
-            stepThree: stepThree,
-            boxResultOne: boxResultOne,
-            boxOneCss: boxOneCss,
-            boxResultTwo: boxResultTwo,
-            boxTwoCss: boxTwoCss,
-            boxResultThree: boxResultThree,
-            boxThreeCss: boxThreeCss,
-          })
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: "option-box" },
-        React.createElement(AppleOption, {
-          options: options,
-          correctOption: correctOption,
-          flag: flag,
-          boxResultSet: stepOne
-            ? handleBoxResultOne
-            : stepTwo
-            ? handleBoxResultTwo
-            : function () {},
-          stepOne: stepOne,
-          stepTwo: stepTwo,
-          boxResultOne: boxResultOne,
-          boxResultTwo: boxResultTwo,
-          showErrorOne: showErrorOne,
-          showErrorTwo: showErrorTwo,
-        })
-      )
-    ),
-    tapRatio &&
-      React.createElement("div", { className: "footer-heading" }, t("tapRatio")),
-    nextOne &&
-      React.createElement("div", { className: "footer-heading" }, t("tapNext")),
-    nextTwo &&
-      React.createElement("div", { className: "footer-heading" }, t("tapNext")),
-    tapProceed &&
-      React.createElement("div", { className: "footer-heading" }, t("proceed")),
-    React.createElement(FooterButtons, {
-      disabledNext: disabledNext,
-      nextOne: nextOne,
-      nextTwo: nextTwo,
-      stepOne: stepOne,
-      stepTwo: stepTwo,
-      stepThree: stepThree,
-      tapProceed: tapProceed,
-      handleNextOne: handleNextOne,
-      handleProceed: handleProceed,
-      handlePrevOne: handlePrevOne,
-      handlePrevTwo: handlePrevTwo,
-      handlePrevFour:handlePrevFour
-    })
-  );
-}
+  const handlePrevFour = () => {
+    playClick();
+    setTapProceed(false);
+    setBtnTwo(true);
+    setBoxTwoCss("");
+    setShowErrorTwo(false);
+    setBoxResultTwo("");
+    setTapRatio(true);
+    setStepTwo(true);
+    setDisabledNext(true);
+    setBeatOne(true);
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "main"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "main-heading"
+  }, t(questionHeading)), /*#__PURE__*/React.createElement("div", {
+    className: "main-content"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "image-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "image-box"
+  }, /*#__PURE__*/React.createElement(AppleImage, null)), /*#__PURE__*/React.createElement("div", {
+    className: "answer-box"
+  }, /*#__PURE__*/React.createElement(ResultBoxTwo, {
+    beat: beat,
+    beatOne: beatOne,
+    stepOne: stepOne,
+    stepTwo: stepTwo,
+    boxOneHeading: boxOneHeading,
+    boxTwoHeading: boxTwoHeading,
+    stepThree: stepThree,
+    boxResultOne: boxResultOne,
+    boxOneCss: boxOneCss,
+    boxResultTwo: boxResultTwo,
+    boxTwoCss: boxTwoCss,
+    boxResultThree: boxResultThree,
+    boxThreeCss: boxThreeCss,
+    style: {
+      gap: "7vw"
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "option-box"
+  }, /*#__PURE__*/React.createElement(AppleOption, {
+    options: options,
+    correctOption: correctOption,
+    flag: flag,
+    boxResultSet: stepOne ? handleBoxResultOne : stepTwo ? handleBoxResultTwo : () => {},
+    stepOne: stepOne,
+    stepTwo: stepTwo,
+    boxResultOne: boxResultOne,
+    boxResultTwo: boxResultTwo,
+    showErrorOne: showErrorOne,
+    showErrorTwo: showErrorTwo,
+    style: {
+      fontSize: "3vw"
+    }
+  }))), tapRatio && /*#__PURE__*/React.createElement("div", {
+    className: "footer-heading"
+  }, t("tapRatio")), nextOne && /*#__PURE__*/React.createElement("div", {
+    className: "footer-heading"
+  }, t("tapNext")), nextTwo && /*#__PURE__*/React.createElement("div", {
+    className: "footer-heading"
+  }, t("tapNext")), tapProceed && /*#__PURE__*/React.createElement("div", {
+    className: "footer-heading"
+  }, t("proceed")), /*#__PURE__*/React.createElement(FooterButtons, {
+    disabledNext: disabledNext,
+    nextOne: nextOne,
+    nextTwo: nextTwo,
+    stepOne: stepOne,
+    stepTwo: btnTwo,
+    stepThree: stepThree,
+    tapProceed: tapProceed,
+    handleNextOne: handleNextOne,
+    handleProceed: handleProceed,
+    handlePrevOne: handlePrevOne,
+    handlePrevTwo: handlePrevTwo,
+    handlePrevFour: handlePrevFour
+  }));
+};
 window.MainFour=MainFour;

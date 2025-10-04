@@ -8,6 +8,7 @@ import CarOne from "./Car";
 import Tap from "./Tap";
 import MarbleRender from "./MarbleRender";
 import Design from "./Design";
+import ProgressBar from "./ProgressBar";
 const SceneNine = ({
   onPrev,
   onNext
@@ -18,6 +19,7 @@ const SceneNine = ({
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat, setBeat] = useState(true);
   const {
     t
   } = useTranslation();
@@ -30,6 +32,7 @@ const SceneNine = ({
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -54,13 +57,15 @@ const SceneNine = ({
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem("mangoRipesubtractionOne", JSON.stringify({
         showError: true,
         boxCss: "correct",
         disabled: true,
         current: false,
         next: true,
-        result: result
+        result: result,
+        beat: false
       }));
     } else {
       playWrong();
@@ -92,12 +97,15 @@ const SceneNine = ({
     className: "scene-container-right-content"
   }, /*#__PURE__*/React.createElement("p", null, t("questionThree.question")), /*#__PURE__*/React.createElement("div", {
     style: {
-      transform: "translateX(13vw)"
+      transform: "translate(13vw,-3vw)"
     }
-  }, /*#__PURE__*/React.createElement(Design, null)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(Design, {
+    mangoes: 6,
+    ripe: 2
+  })), /*#__PURE__*/React.createElement("div", {
     className: "align-total",
     style: {
-      transform: "translate(-13vw, -4vw)"
+      transform: "translate(-13vw, -8vw)"
     }
   }, /*#__PURE__*/React.createElement("p", null, t("total")), /*#__PURE__*/React.createElement("div", {
     className: `box`,
@@ -110,10 +118,10 @@ const SceneNine = ({
   }, 6)), /*#__PURE__*/React.createElement("div", {
     className: "align-total",
     style: {
-      transform: "translate(-9vw,-4vw)"
+      transform: "translate(-9vw,-8vw)"
     }
   }, /*#__PURE__*/React.createElement("p", null, t("questionThree.partA")), /*#__PURE__*/React.createElement("div", {
-    className: `box ${boxCss}`
+    className: `box ${beat ? "active" : ""} ${boxCss}`
   }, result)))), /*#__PURE__*/React.createElement("div", {
     className: "scene-container-right-option"
   }, /*#__PURE__*/React.createElement(Keypad, {
@@ -131,12 +139,15 @@ const SceneNine = ({
     className: "scene-container-right-footer-button"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: handlePrev
-  }, t("buttons.previous")), current && /*#__PURE__*/React.createElement("button", {
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement(ProgressBar, {
+    current: 9
+  }), current && /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleNext
   }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
-    bottom: 0
+    bottom: 0,
+    onClick: handleNext
   })))));
 };
 export default SceneNine;

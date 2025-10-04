@@ -9,6 +9,8 @@ const Option = ({
   const {
     t
   } = useTranslation();
+  const result = sessionStorage.getItem("fractionsData");
+  const parsed = result ? JSON.parse(result) : [];
   const handleResponse = id => {
     setShowError(false);
     response(id);

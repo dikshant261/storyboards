@@ -17,6 +17,8 @@ const ErrorMessage = ({
     className: "success-message"
   }, t("error.thatCorrect")) : flag === 5 ? /*#__PURE__*/React.createElement("p", {
     className: "error-message"
-  }, t("error.notYet")) : "");
+  }, t("error.notYet")) : flag === 6 ? /*#__PURE__*/React.createElement("p", {
+    className: "error-message"
+  }, t("error.notDivide")) : "");
 };
 export default ErrorMessage;

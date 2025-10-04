@@ -9,6 +9,7 @@ import Tap from "./Tap";
 import MarbleRender from "./MarbleRender";
 import Design from "./Design";
 import SentanceBox from "./SentanceBox";
+import ProgressBar from "./ProgressBar";
 const SceneTen = ({ onPrev, onNext }) => {
   const [result, setResult] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -16,6 +17,7 @@ const SceneTen = ({ onPrev, onNext }) => {
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat,setBeat]=useState(true);
   const { t } = useTranslation();
   useEffect(() => {
     const stored = JSON.parse(
@@ -28,6 +30,7 @@ const SceneTen = ({ onPrev, onNext }) => {
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -52,6 +55,7 @@ const SceneTen = ({ onPrev, onNext }) => {
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem(
         "mangoSentancesubtractionOne",
         JSON.stringify({
@@ -61,6 +65,7 @@ const SceneTen = ({ onPrev, onNext }) => {
           current: false,
           next: true,
           result: result,
+          beat:false
         })
       );
     } else {
@@ -83,12 +88,12 @@ const SceneTen = ({ onPrev, onNext }) => {
             </div>
             <div className="scene-container-right-content">
               <p>{t("questionThree.question")}</p>
-              <div style={{ transform: "translateX(13vw)" }}>
-                <Design />
+              <div style={{ transform: "translate(13vw,-3vw)" }}>
+                <Design mangoes={6} ripe={2}/>
               </div>
               <div
                 className="align-total"
-                style={{ transform: "translate(-13vw, -4vw)" }}
+                style={{ transform: "translate(-13vw, -8vw)" }}
               >
                 <p>{t("total")}</p>
                 <div
@@ -106,7 +111,7 @@ const SceneTen = ({ onPrev, onNext }) => {
               <div
                 className="align-total"
                 style={{
-                  transform: "translate(-9vw,-4vw)",
+                  transform: "translate(-9vw,-8vw)",
                 }}
               >
                 <p>{t("questionThree.partA")}</p>
@@ -121,18 +126,19 @@ const SceneTen = ({ onPrev, onNext }) => {
                   {2}
                 </div>
               </div>
-              <div style={{ transform: "translate(1vw,-4vw)" }}>
+              <div style={{ transform: "translate(1vw,-8vw)" }}>
                 <SentanceBox
                   numOne={6}
                   numTwo={2}
                   boxCss={boxCss}
                   result={result}
+                  beat={beat}
                 />
               </div>
               {next && (
                 <p
                   style={{
-                    transform: "translate(-11vw, -5vw)",
+                    transform: "translate(-11vw, -9vw)",
                     fontSize: "2vw",
                   }}
                 >
@@ -164,11 +170,12 @@ const SceneTen = ({ onPrev, onNext }) => {
         </div>
         <div className="scene-container-right-footer-button">
           <button onClick={handlePrev}>{t("buttons.previous")}</button>
+          <ProgressBar current={10}/>
           {current && <button className="disabled">{t("buttons.next")}</button>}
           {next && (
             <div>
               <button onClick={handleNext}>{t("buttons.next")}</button>
-              <Tap bottom={0} />
+              <Tap bottom={0} onClick={handleNext}/>
             </div>
           )}
         </div>

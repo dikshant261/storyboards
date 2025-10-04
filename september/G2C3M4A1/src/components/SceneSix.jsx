@@ -29,14 +29,19 @@ const SceneSix = ({ onNext }) => {
         <div className="right-align">
           <div className="main-container">
             <p style={{ position: "fixed", top: "8%", left: "33%" }}>
-              <span style={{color:"#0000d6"}}>{t("sceneSix.half")}:</span>{" "}
+              <span style={{ color: "#0000d6" }}>{t("sceneSix.half")}:</span>{" "}
               <span>{t("sceneSix.oneTwo")}</span>
             </p>
             <img
               src={images.caketwo}
               style={{ width: "29vw", objectFit: "contain" }}
             />
-            <div className={`cut-line`}></div>
+            <div
+              className={`cut-line`}
+              style={{
+                border: "0.3vw solid black",
+              }}
+            ></div>
 
             <div>
               <div className="half-cake"></div>

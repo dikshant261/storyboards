@@ -80,11 +80,35 @@
 
 .scene-conatiner-three .main-container .line {
     height: 25vh;
-    border-right: 0.3vw dashed white;
+    border-right: 0.6vw dashed white;
     position: fixed;
     top: 32%;
     left: 55.5vw;
     cursor: pointer;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw var(--secondary-color),
+            0 0 1vw var(--secondary-color),
+            0 0 1vw var(--secondary-color);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 2vw var(--secondary-color),
+            0 0 4vw var(--secondary-color),
+            0 0 6vw var(--secondary-color);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw var(--secondary-color),
+            0 0 1vw var(--secondary-color),
+            0 0 2vw var(--secondary-color);
+    }
 }
 
 .scene-conatiner-three .main-container p {
@@ -94,46 +118,95 @@
 }
 
 .scene-conatiner-three .main-container .line-three {
-    height: 55vh;
-    border-right: 0.3vw dashed white;
+        height: 64vh;
+    border-right: 0.6vw dashed white;
     position: fixed;
-    top: 9%;
+    top: 2%;
     left: 59.5vw;
     cursor: pointer;
     transform: rotate(90deg);
+    animation: pulse-two 1.5s infinite;
+}
+
+@keyframes pulse-two {
+    0% {
+        transform: scale(1) rotate(90deg);
+        box-shadow: 0 0 0.5vw var(--secondary-color),
+            0 0 1vw var(--secondary-color),
+            0 0 1vw var(--secondary-color);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 0 2vw var(--secondary-color),
+            0 0 4vw var(--secondary-color),
+            0 0 6vw var(--secondary-color);
+    }
+
+    100% {
+        transform: scale(1) rotate(90deg);
+        box-shadow: 0 0 0.5vw var(--secondary-color),
+            0 0 1vw var(--secondary-color),
+            0 0 2vw var(--secondary-color);
+    }
 }
 
 .scene-conatiner-three .main-container .cut-line {
     height: 25vh;
-    border: 0.4vw solid black;
+    border: 0.4vw dashed white;
     position: fixed;
     top: 32%;
     left: 55.5vw;
 }
 
 .scene-conatiner-three .main-container .cut-line-two {
-    height: 55vh;
-    border-right: 0.4vw solid black;
+    height: 65.5vh;
+    border-right: 0.6vw solid black;
     position: fixed;
-    top: 9%;
-    left: 59.5vw;
+    top: 1%;
+    left: 59.3vw;
     cursor: pointer;
     transform: rotate(90deg);
+    opacity: 0.8;
 }
 
 .scene-conatiner-three .main-container .cut-line-diagonal {
     height: 46vh;
-    border-right: 0.3vw dashed white;
+    border-right: 0.6vw dashed white;
     position: fixed;
     top: 22%;
     left: 59.5vw;
     cursor: pointer;
     transform: rotate(61deg);
+    animation: pulse-diagonal 1.5s infinite;
+}
+
+@keyframes pulse-diagonal {
+    0% {
+        transform: scale(1) rotate(61deg);
+        box-shadow: 0 0 0.5vw var(--secondary-color),
+            0 0 1vw var(--secondary-color),
+            0 0 1vw var(--secondary-color);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(61deg);
+        box-shadow: 0 0 2vw var(--secondary-color),
+            0 0 4vw var(--secondary-color),
+            0 0 6vw var(--secondary-color);
+    }
+
+    100% {
+        transform: scale(1) rotate(61deg);
+        box-shadow: 0 0 0.5vw var(--secondary-color),
+            0 0 1vw var(--secondary-color),
+            0 0 2vw var(--secondary-color);
+    }
 }
 
 .scene-conatiner-three .main-container .cut-line-black {
     height: 46vh;
-    border-right: 0.4vw solid rgb(0, 0, 0);
+    border-right: 0.4vw dashed white;
     position: fixed;
     top: 22%;
     left: 59.5vw;
@@ -220,10 +293,89 @@
     border-radius: 1.5vw;
     height: 90vh;
     flex-direction: column;
+    position: relative;
+}
+
+.cutter-pulse {
+    animation: cutter-pulse 1.5s infinite;
+}
+
+@keyframes cutter-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw var(--secondary-color),
+            0 0 1vw var(--secondary-color),
+            0 0 1vw var(--secondary-color);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 2vw var(--secondary-color),
+            0 0 4vw var(--secondary-color),
+            0 0 6vw var(--secondary-color);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw var(--secondary-color),
+            0 0 1vw var(--secondary-color),
+            0 0 2vw var(--secondary-color);
+    }
+}
+
+.cutting-animate {
+    animation: moveToCake 3s ease-in-out forwards;
+}
+
+@keyframes moveToCake {
+    0% {
+        transform: translate(0, 0);
+        /* Start at original position */
+    }
+
+    30% {
+        transform: translate(-33vw, 15vh);
+        /* Move toward cake */
+    }
+
+    60% {
+        transform: translate(-33vw, -15vh);
+        /* Move bottom → top (cut) */
+    }
+
+    100% {
+        transform: translate(0, 0);
+        /* Return back */
+    }
+}
+
+.cutting-animate-diagonally {
+    animation: moveToCake-diagonally 3s ease-in-out forwards;
+}
+
+@keyframes moveToCake-diagonally {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    /* Move diagonally toward the cake */
+    30% {
+        transform: translate(-39vw, 15vh);
+    }
+
+    /* Start the diagonal cut upward and slightly right */
+    60% {
+        transform: translate(-20vw, -3vh);
+    }
+
+    /* Return back to original position */
+    100% {
+        transform: translate(0, 0);
+    }
 }
 
 .scene-conatiner-three .cutter-box .success {
-    display: flex;
+        display: flex;
     justify-content: center;
     align-items: center;
     width: 13vw;
@@ -232,9 +384,9 @@
     border-radius: 1vw;
     color: white;
     font-size: 2.5vw;
-     height: 37vh;
+    height: 35vh;
     position: fixed;
-    top: 51%;
+    top: 53%;
     right: 1%;
     text-align: center;
 }
@@ -249,9 +401,9 @@
     border-radius: 1vw;
     color: white;
     font-size: 2.5vw;
-    height: 37vh;
+    height: 35vh;
     position: fixed;
-    top: 51%;
+    top: 53%;
     right: 1%;
     text-align: center;
 
@@ -262,14 +414,15 @@
     justify-content: center;
     align-items: center;
     gap: 1vh;
+    flex-direction: column;
 }
 
 .scene-conatiner-three .cutter-box .yes-button {
-    display: flex;
+        display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2vw;
-    width: 6.5vw;
+    font-size: 3vw;
+    width: 10.5vw;
     height: 6vh;
     color: black;
     background-color: rgba(255, 255, 255, 0.756);

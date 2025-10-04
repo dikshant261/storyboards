@@ -6,6 +6,7 @@ import { playClick, playCorrect, playWrong } from "./PlayAudio";
 import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
+import ProgressBar from "./ProgressBar";
 const SceneTwo = ({  onPrev, onNext }) => {
   const [result, setResult] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -13,6 +14,7 @@ const SceneTwo = ({  onPrev, onNext }) => {
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat,setBeat]=useState(true);
   const { t } = useTranslation();
   useEffect(() => {
     const stored = JSON.parse(sessionStorage.getItem("pencilsubtractionOne"));
@@ -23,6 +25,7 @@ const SceneTwo = ({  onPrev, onNext }) => {
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -47,6 +50,7 @@ const SceneTwo = ({  onPrev, onNext }) => {
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false)
       sessionStorage.setItem(
         "pencilsubtractionOne",
         JSON.stringify({
@@ -56,6 +60,7 @@ const SceneTwo = ({  onPrev, onNext }) => {
           current: false,
           next: true,
           result: result,
+          beat:false
         })
       );
     } else {
@@ -82,8 +87,7 @@ const SceneTwo = ({  onPrev, onNext }) => {
               <div className="align-total">
                 <p>{t("total")}</p>
                 <div
-                  className={`box ${boxCss}`}
-                  style={{ transform: "translateX(8vw)" }}
+                  className={`box ${beat?"active":""} ${boxCss}`}
                 >
                   {result}
                 </div>
@@ -91,7 +95,7 @@ const SceneTwo = ({  onPrev, onNext }) => {
               <div
                 className="align-total"
                 style={{
-                  transform: "translate(-8.8vw,1vw)",
+                  // transform: "translate(-8.8vw,1vw)",
                   border: "none",
                   opacity: "0.7",
                 }}
@@ -119,12 +123,13 @@ const SceneTwo = ({  onPrev, onNext }) => {
           {next && <p>{t("navigation.tapContinue")}</p>}
         </div>
         <div className="scene-container-right-footer-button">
-          <button onClick={handlePrev}>{t("buttons.previous")}</button>
+          <button className="disabled">{t("buttons.previous")}</button>
+          <ProgressBar current={2}/> 
           {current && <button className="disabled">{t("buttons.next")}</button>}
           {next && (
             <div>
               <button onClick={handleNext}>{t("buttons.next")}</button>
-              <Tap bottom={0} />
+              <Tap bottom={0} onClick={handleNext}/>
             </div>
           )}
         </div>

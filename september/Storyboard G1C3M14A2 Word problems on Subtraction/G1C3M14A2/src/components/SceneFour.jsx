@@ -7,6 +7,7 @@ import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
 import SentanceBox from "./SentanceBox";
+import ProgressBar from "./ProgressBar";
 const SceneFour = ({ onNext, onPrev }) => {
   const [result, setResult] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -14,6 +15,7 @@ const SceneFour = ({ onNext, onPrev }) => {
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat,setBeat]=useState(true);
   const { t } = useTranslation();
   useEffect(() => {
     const stored = JSON.parse(
@@ -26,6 +28,7 @@ const SceneFour = ({ onNext, onPrev }) => {
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat)
     }
   }, []);
   const handlePrev = () => {
@@ -50,6 +53,7 @@ const SceneFour = ({ onNext, onPrev }) => {
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false)
       sessionStorage.setItem(
         "pencilSenetanceSubtractionOne",
         JSON.stringify({
@@ -59,6 +63,7 @@ const SceneFour = ({ onNext, onPrev }) => {
           current: false,
           next: true,
           result: result,
+          beat:false
         })
       );
     } else {
@@ -82,12 +87,13 @@ const SceneFour = ({ onNext, onPrev }) => {
             <div className="scene-container-right-content">
               <p>{t("questionOne.question")}</p>
               <CarOne totalCars={7} crossCars={4} />
-              <div className="align-total">
+              <div
+                className="align-total"
+              >
                 <p>{t("total")}</p>
                 <div
                   className={`box`}
                   style={{
-                    transform: "translateX(8vw)",
                     backgroundColor: "white",
                     border: "none",
                     color: "black",
@@ -98,9 +104,6 @@ const SceneFour = ({ onNext, onPrev }) => {
               </div>
               <div
                 className="align-total"
-                style={{
-                  transform: "translate(-8.8vw,1vw)",
-                }}
               >
                 <p>{t("takenAway")}</p>
                 <div
@@ -120,6 +123,7 @@ const SceneFour = ({ onNext, onPrev }) => {
                   numTwo={4}
                   boxCss={boxCss}
                   result={result}
+                  beat={beat}
                 />
               </div>
               {next && (
@@ -151,11 +155,12 @@ const SceneFour = ({ onNext, onPrev }) => {
         </div>
         <div className="scene-container-right-footer-button">
           <button onClick={handlePrev}>{t("buttons.previous")}</button>
+          <ProgressBar current={4} />
           {current && <button className="disabled">{t("buttons.next")}</button>}
           {next && (
             <div>
               <button onClick={handleNext}>{t("buttons.next")}</button>
-              <Tap bottom={0} />
+              <Tap bottom={0} onClick={handleNext}/>
             </div>
           )}
         </div>

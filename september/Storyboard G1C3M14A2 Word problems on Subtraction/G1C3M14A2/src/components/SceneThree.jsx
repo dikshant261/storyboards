@@ -6,6 +6,7 @@ import { playClick, playCorrect, playWrong } from "./PlayAudio";
 import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
+import ProgressBar from "./ProgressBar";
 const SceneThree = ({ onNext, onPrev }) => {
   const [result, setResult] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -13,6 +14,7 @@ const SceneThree = ({ onNext, onPrev }) => {
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat,setBeat]=useState(true);
   const { t } = useTranslation();
   useEffect(() => {
     const stored = JSON.parse(
@@ -25,6 +27,7 @@ const SceneThree = ({ onNext, onPrev }) => {
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -49,6 +52,7 @@ const SceneThree = ({ onNext, onPrev }) => {
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem(
         "pencilTakenAwaysubtractionOne",
         JSON.stringify({
@@ -58,6 +62,7 @@ const SceneThree = ({ onNext, onPrev }) => {
           current: false,
           next: true,
           result: result,
+          beat:false
         })
       );
     } else {
@@ -86,7 +91,6 @@ const SceneThree = ({ onNext, onPrev }) => {
                 <div
                   className={`box`}
                   style={{
-                    transform: "translateX(8vw)",
                     backgroundColor: "white",
                     border: "none",
                     color: "black",
@@ -97,12 +101,9 @@ const SceneThree = ({ onNext, onPrev }) => {
               </div>
               <div
                 className="align-total"
-                style={{
-                  transform: "translate(-8.8vw,1vw)",
-                }}
               >
                 <p>{t("takenAway")}</p>
-                <div className={`box ${boxCss}`}>{result}</div>
+                <div className={`box ${beat?"active":""} ${boxCss}`}>{result}</div>
               </div>
             </div>
           </div>
@@ -125,11 +126,12 @@ const SceneThree = ({ onNext, onPrev }) => {
         </div>
         <div className="scene-container-right-footer-button">
           <button onClick={handlePrev}>{t("buttons.previous")}</button>
+          <ProgressBar current={3}/>
           {current && <button className="disabled">{t("buttons.next")}</button>}
           {next && (
             <div>
               <button onClick={handleNext}>{t("buttons.next")}</button>
-              <Tap bottom={0} />
+              <Tap bottom={0} onClick={handleNext}/>
             </div>
           )}
         </div>

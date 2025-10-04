@@ -2,6 +2,9 @@ import React from "react";
 import "./ResultBox.css";
 import { useTranslation } from "react-i18next";
 const ResultBox = ({
+  beat,
+  beatOne,
+  beatTwo,
   stepOne,
   stepTwo,
   stepThree,
@@ -31,15 +34,15 @@ const ResultBox = ({
   };
   return (
     <div className="result-box">
-      <div className={`result-box-container ${stepOne ? "active" : ""}`}>
+      <div className={`result-box-container ${beat ? "active" : ""}`}>
         <div className={`box ${boxOneCss}`}>{renderFraction(boxResultOne)}</div>
         <div className="box-title">{t("symbol")}</div>
       </div>
-      <div className={`result-box-container ${stepTwo ? "active" : ""}`}>
+      <div className={`result-box-container ${beatOne ? "active" : ""}`}>
         <div className={`box ${boxTwoCss}`}>{renderFraction(boxResultTwo)}</div>
         <div className="box-title">{t("word")}</div>
       </div>
-      <div className={`result-box-container ${stepThree ? "active" : ""}`}>
+      <div className={`result-box-container ${beatTwo ? "active" : ""}`}>
         <div className={`box ${boxThreeCss}`}>
           {renderFraction(boxResultThree)}
         </div>

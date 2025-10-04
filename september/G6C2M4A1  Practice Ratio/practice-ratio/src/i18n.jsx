@@ -7,6 +7,15 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        buttons: {
+                next: "NEXT",
+                previous: "«",
+                start: "START",
+                check: "CHECK",
+                nextQuestion: "Next Question",
+                startOver: "Start Over",
+                proceed: "»"
+            },
         writingRatio: "Representing and Writing Ratios",
         get_ready_to_explore:
           "Get ready to explore ratios in action.\nYou will practice representing ratios in different forms.",
@@ -16,10 +25,13 @@ i18n.use(initReactI18next).init({
         nextContinue: "Tap ‘Next’ to continue.",
         start: "START",
         next: "NEXT",
+        selectCorrect:"Select the \nCorrect ratio",
         representingRatios:
-          "Represent the ratio of cats to dogs in this picture.",
+          "Represent the",
+        rationCatDog:"ratio of cats to dogs",
+        inThisPicture:"in this picture.",  
         tapRatio:
-          "Tap the correct ratio in the correct form to fill the highlighted box…",
+          "Tap the correct ratio in the correct form to fill the highlighted box.",
         great: "Great!",
         repreSenting_ratios: "Represent the ratio as required.",
         dogErrorone: "Oops! We need the {{word}}.\n Try again!",
@@ -29,7 +41,7 @@ i18n.use(initReactI18next).init({
         successTwo: "Great! {{count}} is the correct ratio required.",
         successThree: "is the correct ratio required.",
         proceed: "Tap ▶ to proceed.",
-        tapNext: "Tap ▶ to next...",
+        tapNext: "Tap ▶ to next.",
         word: "Word",
         fraction: "Fraction",
         symbol: "Symbol",
@@ -37,15 +49,18 @@ i18n.use(initReactI18next).init({
           "At a table for 8,\n 6 seats are filled\n and 2 seats are empty.",
         questionTwo:
           "At a table for 8, \n2 seats are empty and 6 seats are filled.",
+        questionExtra:"At a table for 8,\n 2 seats are empty and 6 seats are filled.",
         questionThree: "A bag contains 9 yellow marbles and 7 blue marbles.",
         questionFive: "A classroom has 9 boys and 14 girls.",
         questionSix: "A basket contains 16 apples and 19 bananas.",
         questionSeven:
           "32 students in the classroom and 25 students in the playground.",
-        questionThreeHeading: "Represent the ratio of yellow to blue marbles.",
+        questionThreeHeading: "ratio of yellow to blue marbles.",
         questionFour: "A bag contains 9 yellow marbles and 7 blue marbles.",
-        questionFourHeading: "Represent the ratio of blue to yellow marbles.",
-        emptyChairsHeading: "Represent the ratio of filled to empty seats.",
+        questionFourHeading: "ratio of blue to yellow marbles.",
+        emptyChairsHeading: "Represent the",
+        extraHeading:"ratio of empty to filled seats.",
+        fieldToEmpty:"ratio of filled to empty seats.",
         tableErrorSymbol:
           "Not quite! We need filled seats first, then empty seats. Try again!",
         tableErrorFraction:

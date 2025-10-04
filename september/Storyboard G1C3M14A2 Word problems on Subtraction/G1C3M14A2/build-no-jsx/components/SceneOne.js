@@ -3,6 +3,7 @@ import "./Scene.css";
 import { useTranslation } from "react-i18next";
 import ReusableButton from "./TapButton";
 import { playClick } from "./PlayAudio";
+import ProgressBar from "./ProgressBar";
 const SceneOne = ({
   onSatrt
 }) => {
@@ -40,7 +41,9 @@ const SceneOne = ({
     className: "scene-container-right-footer-button"
   }, /*#__PURE__*/React.createElement("button", {
     className: "disabled"
-  }, t("buttons.previous")), /*#__PURE__*/React.createElement("button", {
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement(ProgressBar, {
+    current: 1
+  }), /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")))));
 };

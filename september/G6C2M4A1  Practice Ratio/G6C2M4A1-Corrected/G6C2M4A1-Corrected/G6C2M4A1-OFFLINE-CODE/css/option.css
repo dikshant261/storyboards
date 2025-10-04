@@ -6,7 +6,6 @@
     pointer-events: none;
     opacity: 0.8;
 }
-
 .option-container {
     display: flex;
     flex-direction: column;
@@ -23,21 +22,26 @@
     align-items: center;
     width: 22vw;
     height: 24vh;
-    border: 0.3vw dashed white;
+    
     border-radius: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
 }
-
+.feedback-box .para{
+        color: white;
+    text-align: center;
+    white-space: pre-line;
+    font-size: 3vw;
+}
 .correct {
-    background-color: lightgreen;
+    background-color: #597e5d;
     border: 0.3vw dashed darkgreen;
 }
 
 .wrong {
-    background-color: salmon;
+    background-color:#ea9999;
     border: 0.3vw dashed darksalmon;
 }
 
@@ -65,6 +69,25 @@
     border: 0.2vw solid rgb(147, 107, 5);
 }
 
+.option-correct {
+  background-color: lightgreen ;
+  border-color: green;
+  color: #fff;
+}
+.option-wrong {
+  background-color: salmon;
+  border-color: darkred;
+  color: #000;
+}
+.option-locked {
+  background-color: gray;
+  border-color: gray;
+  color: #fff;
+  opacity: 0.9;
+}
+/* keep disabled pointer style as needed */
+.option-button:disabled { cursor: not-allowed; }
+
 .option-fraction {
     display: flex;
     flex-direction: column;
@@ -75,14 +98,5 @@
 .fraction-line {
     width: 2vw;
     height: 0.5vh;
-    background-color: black;
-}
-
-.option-wrong-disabled {
-    background-color: salmon !important;
-    border: 0.2vw solid darksalmon !important;
-    color: #888 !important;
-    cursor: not-allowed !important;
-    pointer-events: none;
-    opacity: 0.8;
+    background-color:currentColor;
 }

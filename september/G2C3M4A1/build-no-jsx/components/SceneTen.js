@@ -45,10 +45,16 @@ const SceneTen = ({
     className: "cutter-box"
   }, /*#__PURE__*/React.createElement("img", {
     src: images.cakethree,
-    className: "cake-image-cut"
+    className: "cake-image-cut",
+    style: {
+      opacity: 0.5
+    }
   }), /*#__PURE__*/React.createElement("img", {
     src: images.cakethree,
-    className: "cake-image-cut-two"
+    className: "cake-image-cut-two",
+    style: {
+      opacity: 0.5
+    }
   }))), /*#__PURE__*/React.createElement("div", {
     className: "footer"
   }, /*#__PURE__*/React.createElement("button", {

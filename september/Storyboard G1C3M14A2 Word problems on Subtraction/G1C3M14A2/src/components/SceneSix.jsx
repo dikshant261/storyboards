@@ -7,6 +7,7 @@ import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
 import MarbleRender from "./MarbleRender";
+import ProgressBar from "./ProgressBar";
 const SceneSix = ({ onPrev, onNext }) => {
   const [result, setResult] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -14,6 +15,7 @@ const SceneSix = ({ onPrev, onNext }) => {
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat,setBeat]=useState(true);
   const { t } = useTranslation();
   useEffect(() => {
     const stored = JSON.parse(
@@ -26,6 +28,7 @@ const SceneSix = ({ onPrev, onNext }) => {
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -50,6 +53,7 @@ const SceneSix = ({ onPrev, onNext }) => {
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem(
         "marbleSmallersubtractionOne",
         JSON.stringify({
@@ -59,6 +63,7 @@ const SceneSix = ({ onPrev, onNext }) => {
           current: false,
           next: true,
           result: result,
+          beat:false
         })
       );
     } else {
@@ -119,7 +124,7 @@ const SceneSix = ({ onPrev, onNext }) => {
                 }}
               >
                 <p>{t("questionTwo.smaller")}</p>
-                <div className={`box ${boxCss}`}>{result}</div>
+                <div className={`box ${beat?"active":""} ${boxCss}`}>{result}</div>
               </div>
             </div>
           </div>
@@ -142,11 +147,12 @@ const SceneSix = ({ onPrev, onNext }) => {
         </div>
         <div className="scene-container-right-footer-button">
           <button onClick={handlePrev}>{t("buttons.previous")}</button>
+          <ProgressBar current={6}/>
           {current && <button className="disabled">{t("buttons.next")}</button>}
           {next && (
             <div>
               <button onClick={handleNext}>{t("buttons.next")}</button>
-              <Tap bottom={0} />
+              <Tap bottom={0} onClick={handleNext}/>
             </div>
           )}
         </div>

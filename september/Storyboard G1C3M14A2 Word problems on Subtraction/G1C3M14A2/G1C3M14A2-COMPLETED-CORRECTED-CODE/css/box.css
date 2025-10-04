@@ -1,0 +1,70 @@
+.box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.sent-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 0.4vw solid skyblue;
+    font-size: 5vw;
+    color: black;
+    width: 7vw;
+    height: 10vh;
+}
+/*  */
+.minus-line {
+    background-color: white;
+    width: 2vw;
+    height: 0.9vh;
+}
+
+.equal-to {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.correct {
+    border: 0.3vw solid darkgreen;
+    background: lightgreen;
+}
+
+.wrong {
+    border: 0.3vw solid darksalmon;
+    background-color: salmon;
+}
+
+.active {
+    animation: pulse-one 1.5s infinite;
+}
+
+@keyframes pulse-one {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw white,
+            0 0 1vw white,
+            0 0 1vw white;
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 1vw white,
+            0 0 2vw white,
+            0 0 4vw white;
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw white,
+            0 0 1vw white,
+            0 0 2vw white;
+    }
+}

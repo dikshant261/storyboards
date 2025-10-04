@@ -7,6 +7,7 @@ import Keypad from "./Keypad";
 import Tap from "./Tap";
 import MarbleRender from "./MarbleRender";
 import SentanceBox from "./SentanceBox";
+import ProgressBar from "./ProgressBar";
 const SceneSeven = ({ onPrev, onNext }) => {
   const [result, setResult] = useState(null);
   const [showError, setShowError] = useState(false);
@@ -14,6 +15,7 @@ const SceneSeven = ({ onPrev, onNext }) => {
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat,setBeat]=useState(true);
   const { t } = useTranslation();
   useEffect(() => {
     const stored = JSON.parse(
@@ -26,6 +28,7 @@ const SceneSeven = ({ onPrev, onNext }) => {
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -50,6 +53,7 @@ const SceneSeven = ({ onPrev, onNext }) => {
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem(
         "marbleSentancesubtractionOne",
         JSON.stringify({
@@ -59,6 +63,7 @@ const SceneSeven = ({ onPrev, onNext }) => {
           current: false,
           next: true,
           result: result,
+          beat:false
         })
       );
     } else {
@@ -136,6 +141,7 @@ const SceneSeven = ({ onPrev, onNext }) => {
                   numTwo={7}
                   boxCss={boxCss}
                   result={result}
+                  beat={beat}
                 />
               </div>
               {next && (
@@ -173,11 +179,12 @@ const SceneSeven = ({ onPrev, onNext }) => {
         </div>
         <div className="scene-container-right-footer-button">
           <button onClick={handlePrev}>{t("buttons.previous")}</button>
+          <ProgressBar current={7}/>
           {current && <button className="disabled">{t("buttons.next")}</button>}
           {next && (
             <div>
               <button onClick={handleNext}>{t("buttons.next")}</button>
-              <Tap bottom={0} />
+              <Tap bottom={0} onClick={handleNext}/>
             </div>
           )}
         </div>

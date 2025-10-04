@@ -15,6 +15,8 @@ const ErrorMessage = ({ flag }) => {
         <p className="success-message">{t("error.thatCorrect")}</p>
       ) : flag === 5 ? (
         <p className="error-message">{t("error.notYet")}</p>
+      ) : flag === 6 ? (
+        <p className="error-message">{t("error.notDivide")}</p>
       ) : (
         ""
       )}

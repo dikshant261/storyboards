@@ -11,29 +11,32 @@ const HalfLesson = () => {
     className: "lesson-container"
   }, /*#__PURE__*/React.createElement("h2", {
     className: "lesson-title"
-  }, "What is half?"), /*#__PURE__*/React.createElement("div", {
+  }, t("halfLesson.title")), /*#__PURE__*/React.createElement("div", {
     className: "lesson-box"
   }, /*#__PURE__*/React.createElement("p", {
-    className: "lesson-subtitle"
-  }, "We learnt!"), /*#__PURE__*/React.createElement("div", {
+    className: "lesson-subtitle",
+    style: {
+      fontSize: "3vw"
+    }
+  }, t("halfLesson.weLearnt")), /*#__PURE__*/React.createElement("div", {
     className: "lesson-item"
   }, /*#__PURE__*/React.createElement("span", {
     className: "check"
   }, "\u2714"), /*#__PURE__*/React.createElement("span", {
     className: "highlight"
-  }, "Half"), " = One of two equal parts of a whole."), /*#__PURE__*/React.createElement("div", {
+  }, t("halfLesson.half")), " ", t("halfLesson.equalParts")), /*#__PURE__*/React.createElement("div", {
     className: "lesson-item"
   }, /*#__PURE__*/React.createElement("span", {
     className: "check"
   }, "\u2714"), /*#__PURE__*/React.createElement("span", {
     className: "highlight"
-  }, "If the parts are not equal,"), " they are not halves"), /*#__PURE__*/React.createElement("div", {
+  }, t("halfLesson.notEqual")), " ", t("halfLesson.notHalves")), /*#__PURE__*/React.createElement("div", {
     className: "lesson-item"
   }, /*#__PURE__*/React.createElement("span", {
     className: "check"
   }, "\u2714"), /*#__PURE__*/React.createElement("span", {
     className: "highlight"
-  }, "Two halves together"), " make a whole."), /*#__PURE__*/React.createElement("div", {
+  }, t("halfLesson.twoHalves")), " ", t("halfLesson.makeWhole")), /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: "center",
       marginTop: "3vw"

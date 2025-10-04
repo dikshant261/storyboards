@@ -76,20 +76,33 @@ const SceneEleven = ({
     className: "right-align"
   }, /*#__PURE__*/React.createElement("div", {
     className: "main-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexDirection: "column"
+    }
   }, /*#__PURE__*/React.createElement("img", {
-    src: images.cakeone,
+    src: images.cakeOnehalf,
+    style: {
+      width: "36.5vw",
+      objectFit: "contain",
+      filter: showBox ? "drop-shadow(0 0 0 orange) drop-shadow(0 0 1vw orange)" : "",
+      opacity: showBox ? "0.8" : ""
+    }
+  }), /*#__PURE__*/React.createElement("img", {
+    src: images.cakeOnehalftwo,
     style: {
       width: "37vw",
-      objectFit: "contain"
+      objectFit: "contain",
+      filter: showBox ? "drop-shadow(0 0 0 orange) drop-shadow(0 0 1vw orange)" : "",
+      opacity: showBox ? "0.8" : ""
     }
-  }), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     className: `${line ? "cut-line-two" : "line-three"}`,
     onClick: handleLine
-  }), showBox && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-    className: "half-cake-two"
-  }), /*#__PURE__*/React.createElement("div", {
-    className: "half-cake-right-two"
-  }))), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     className: "cutter-box"
   }, /*#__PURE__*/React.createElement("div", {
     className: "yes-align"
@@ -98,14 +111,16 @@ const SceneEleven = ({
     disabled: disabled,
     onClick: () => handleCheck("yes"),
     style: {
-      backgroundColor: btnCss === "yes" ? "salmon" : ""
+      backgroundColor: btnCss === "yes" ? "salmon" : "",
+      opacity: disabled ? "0.6" : "1"
     }
   }, t("buttons.yes")), /*#__PURE__*/React.createElement("button", {
     className: "yes-button",
     disabled: disabled,
     onClick: () => handleCheck("no"),
     style: {
-      backgroundColor: btnCss === "no" ? "lightgreen" : ""
+      backgroundColor: btnCss === "no" ? "lightgreen" : "",
+      opacity: disabled ? "0.6" : "1"
     }
   }, t("buttons.no"))), errorShow && /*#__PURE__*/React.createElement("div", null, btnCss === "no" ? /*#__PURE__*/React.createElement("div", {
     className: "success"

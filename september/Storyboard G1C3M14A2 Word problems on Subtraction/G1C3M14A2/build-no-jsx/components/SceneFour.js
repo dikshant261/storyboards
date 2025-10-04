@@ -7,6 +7,7 @@ import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
 import SentanceBox from "./SentanceBox";
+import ProgressBar from "./ProgressBar";
 const SceneFour = ({
   onNext,
   onPrev
@@ -17,6 +18,7 @@ const SceneFour = ({
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat, setBeat] = useState(true);
   const {
     t
   } = useTranslation();
@@ -29,6 +31,7 @@ const SceneFour = ({
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -53,13 +56,15 @@ const SceneFour = ({
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem("pencilSenetanceSubtractionOne", JSON.stringify({
         showError: true,
         boxCss: "correct",
         disabled: true,
         current: false,
         next: true,
-        result: result
+        result: result,
+        beat: false
       }));
     } else {
       playWrong();
@@ -91,7 +96,10 @@ const SceneFour = ({
     totalCars: 7,
     crossCars: 4
   }), /*#__PURE__*/React.createElement("div", {
-    className: "align-total"
+    className: "align-total",
+    style: {
+      transform: "translate(-13vw,1vw)"
+    }
   }, /*#__PURE__*/React.createElement("p", null, t("total")), /*#__PURE__*/React.createElement("div", {
     className: `box`,
     style: {
@@ -120,7 +128,8 @@ const SceneFour = ({
     numOne: 7,
     numTwo: 4,
     boxCss: boxCss,
-    result: result
+    result: result,
+    beat: beat
   })), next && /*#__PURE__*/React.createElement("p", {
     style: {
       transform: "translate(-9vw, 1vw)"
@@ -147,12 +156,15 @@ const SceneFour = ({
     className: "scene-container-right-footer-button"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: handlePrev
-  }, t("buttons.previous")), current && /*#__PURE__*/React.createElement("button", {
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement(ProgressBar, {
+    current: 4
+  }), current && /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleNext
   }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
-    bottom: 0
+    bottom: 0,
+    onClick: handleNext
   })))));
 };
 export default SceneFour;

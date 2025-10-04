@@ -1,133 +1,138 @@
-
-function AppleOption({
+const AppleOption = ({
   options,
   correctOption,
   boxResultSet,
   stepOne,
   stepTwo,
-  stepThree,
   boxResultOne,
   boxResultTwo,
-  boxResultThree,
   showErrorOne,
   showErrorTwo,
-  flag
-}) {
-  // Determine current step and result
-  let currentStep = 0;
-  let boxResult = "";
-  let correct = "";
-  if (stepOne) {
-    currentStep = 1;
-    boxResult = boxResultOne;
-    correct = correctOption[0];
-  } else if (stepTwo) {
-    currentStep = 2;
-    boxResult = boxResultTwo;
-    correct = correctOption[1];
-  }
-
-  const handleOptionClick = (option) => {
+  flag,
+  style
+}) => {
+  const isStepActive = stepOne || stepTwo;
+  const handleOptionClick = option => {
     boxResultSet(option);
   };
 
-  // Button state logic: disables and colors wrong/correct as required
-  const getButtonProps = (index) => {
-    if (currentStep > 0) {
-      const isCorrect = options[index] === correct;
-      const isAnswered = boxResult !== "";
-      const isThisClicked = boxResult === options[index];
-      // If correct answer chosen, disable all
-      if (isAnswered && boxResult === correct) {
-        return {
-          className: "option-button option-correct-disabled",
-          disabled: true,
-          onClick: undefined,
-        };
-      }
-      // If wrong answer chosen, disable only that button and color salmon
-      if (isAnswered && isThisClicked && !isCorrect) {
-        return {
-          className: "option-button option-wrong-disabled",
-          disabled: true,
-          onClick: undefined,
-        };
-      }
-      // If wrong answer chosen, other buttons remain enabled
-      return {
-        className: "option-button",
-        disabled: false,
-        onClick: () => handleOptionClick(options[index]),
-      };
-    }
-    // No step active: all normal
-    return {
-      className: "option-button",
-      disabled: false,
-      onClick: () => handleOptionClick(options[index]),
-    };
-  };
-
-  const renderOption = (value) => {
+  // render fraction if "a/b"
+  const renderOption = value => {
     if (typeof value === "string" && value.match(/^\d+\/\d+$/)) {
       const [num, denom] = value.split("/");
-      return React.createElement(
-        "span",
-        { className: "option-fraction" },
-        num,
-        React.createElement("span", { className: "fraction-line" }),
-        denom
-      );
+      return /*#__PURE__*/React.createElement("span", {
+        className: "option-fraction"
+      }, num, /*#__PURE__*/React.createElement("span", {
+        className: "fraction-line"
+      }), denom);
     }
     return value;
   };
 
-  return React.createElement(
-    "div",
-    { className: "option-container" },
+  // lock correct answers from previous steps
+  const isLockedFromPreviousStep = opt => {
+    if (boxResultOne === correctOption[0] && !stepOne && opt === correctOption[0]) return true;
+    if (boxResultTwo === correctOption[1] && !stepTwo && opt === correctOption[1]) return true;
+    return false;
+  };
+  const getButtonProps = opt => {
+    let className = "option-button";
+    let disabled = !isStepActive;
 
-    // feedback-box
-    React.createElement(
-      "div",
-      {
-        className:
-          "feedback-box " +
-          (currentStep > 0 && boxResult !== ""
-            ? (boxResult === correct ? "correct" : "wrong")
-            : ""),
-      },
-      (showErrorOne && stepOne &&
-        React.createElement(AppleMessage, {
-          stepOne,
-          stepTwo,
-          boxResultOne,
-          correctOption,
-          options,
-          flag,
-        })) ||
-        (showErrorTwo && stepTwo &&
-          React.createElement(AppleMessage, {
-            stepOne,
-            stepTwo,
-            boxResultOne: boxResultTwo,
-            correctOption,
-            options,
-            flag,
-          }))
-    ),
+    // lock if correct from earlier step
+    if (isLockedFromPreviousStep(opt)) {
+      className += " option-locked";
+      disabled = true;
+      return {
+        className,
+        disabled
+      };
+    }
 
-    // option-grid
-    React.createElement(
-      "div",
-      { className: "option-grid" },
-      ...options.map((opt, idx) =>
-        React.createElement(
-          "button",
-          getButtonProps(idx),
-          renderOption(opt)
-        )
-      )
-    )
-  );
-}
+    // STEP ONE
+    if (stepOne) {
+      if (boxResultOne) {
+        if (boxResultOne === correctOption[0]) {
+          disabled = true;
+          if (opt === correctOption[0]) className += " option-correct";
+        } else {
+          if (opt === boxResultOne) {
+            disabled = true;
+            className += " option-wrong";
+          } else {
+            disabled = false;
+          }
+        }
+      } else {
+        disabled = false;
+      }
+      return {
+        className,
+        disabled
+      };
+    }
+
+    // STEP TWO
+    if (stepTwo) {
+      if (boxResultTwo) {
+        if (boxResultTwo === correctOption[1]) {
+          disabled = true;
+          if (opt === correctOption[1]) className += " option-correct";
+        } else {
+          if (opt === boxResultTwo) {
+            disabled = true;
+            className += " option-wrong";
+          } else {
+            disabled = false;
+          }
+        }
+      } else {
+        disabled = false;
+      }
+      return {
+        className,
+        disabled
+      };
+    }
+    return {
+      className,
+      disabled
+    };
+  };
+  return /*#__PURE__*/React.createElement("div", {
+    className: "option-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: `feedback-box ${stepOne && boxResultOne === correctOption[0] || stepTwo && boxResultTwo === correctOption[1] ? "correct" : stepOne && boxResultOne || stepTwo && boxResultTwo ? "wrong" : ""}`,
+    style: {
+      marginBottom: "4vw"
+    }
+  }, !showErrorOne && !showErrorTwo && /*#__PURE__*/React.createElement("p", {
+    className: "para"
+  }, t("selectCorrect")), showErrorOne && stepOne && /*#__PURE__*/React.createElement(AppleMessage, {
+    stepOne: stepOne,
+    stepTwo: stepTwo,
+    boxResultOne: boxResultOne,
+    correctOption: correctOption,
+    options: options,
+    flag: flag
+  }), showErrorTwo && stepTwo && /*#__PURE__*/React.createElement(AppleMessage, {
+    stepOne: stepOne,
+    stepTwo: stepTwo,
+    boxResultOne: boxResultTwo,
+    correctOption: correctOption,
+    options: options,
+    flag: flag
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "option-grid"
+  }, options.map((opt, idx) => {
+    const props = getButtonProps(opt);
+    return /*#__PURE__*/React.createElement("button", {
+      key: idx,
+      className: props.className,
+      disabled: props.disabled,
+      style: style,
+      onClick: () => handleOptionClick(opt)
+    }, renderOption(opt));
+  })));
+};
 window.AppleOption=AppleOption;

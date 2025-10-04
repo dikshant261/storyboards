@@ -6,6 +6,7 @@ import { playClick, playCorrect, playWrong } from "./PlayAudio";
 import Keypad from "./Keypad";
 import CarOne from "./Car";
 import Tap from "./Tap";
+import ProgressBar from "./ProgressBar";
 const SceneThree = ({
   onNext,
   onPrev
@@ -16,6 +17,7 @@ const SceneThree = ({
   const [disabled, setDisabled] = useState(false);
   const [current, SetCurrrent] = useState(true);
   const [next, setNext] = useState(false);
+  const [beat, setBeat] = useState(true);
   const {
     t
   } = useTranslation();
@@ -28,6 +30,7 @@ const SceneThree = ({
       setDisabled(stored.disabled);
       SetCurrrent(stored.current);
       setNext(stored.next);
+      setBeat(stored.beat);
     }
   }, []);
   const handlePrev = () => {
@@ -52,13 +55,15 @@ const SceneThree = ({
       setDisabled(true);
       SetCurrrent(false);
       setNext(true);
+      setBeat(false);
       sessionStorage.setItem("pencilTakenAwaysubtractionOne", JSON.stringify({
         showError: true,
         boxCss: "correct",
         disabled: true,
         current: false,
         next: true,
-        result: result
+        result: result,
+        beat: false
       }));
     } else {
       playWrong();
@@ -92,7 +97,10 @@ const SceneThree = ({
     totalCars: 7,
     crossCars: 4
   }), /*#__PURE__*/React.createElement("div", {
-    className: "align-total"
+    className: "align-total",
+    style: {
+      transform: "translate(-13vw,1vw)"
+    }
   }, /*#__PURE__*/React.createElement("p", null, t("total")), /*#__PURE__*/React.createElement("div", {
     className: `box`,
     style: {
@@ -107,7 +115,7 @@ const SceneThree = ({
       transform: "translate(-8.8vw,1vw)"
     }
   }, /*#__PURE__*/React.createElement("p", null, t("takenAway")), /*#__PURE__*/React.createElement("div", {
-    className: `box ${boxCss}`
+    className: `box ${beat ? "active" : ""} ${boxCss}`
   }, result)))), /*#__PURE__*/React.createElement("div", {
     className: "scene-container-right-option"
   }, /*#__PURE__*/React.createElement(Keypad, {
@@ -125,12 +133,15 @@ const SceneThree = ({
     className: "scene-container-right-footer-button"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: handlePrev
-  }, t("buttons.previous")), current && /*#__PURE__*/React.createElement("button", {
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement(ProgressBar, {
+    current: 3
+  }), current && /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleNext
   }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
-    bottom: 0
+    bottom: 0,
+    onClick: handleNext
   })))));
 };
 export default SceneThree;

@@ -15,6 +15,11 @@ const SceneEight = ({
   const [next, setNext] = useState(false);
   const [nextTwo, setNextTwo] = useState(false);
   const [afterCut, setAfterCut] = useState(false);
+  const [pulse, setPulse] = useState(false);
+  const [cutting, setCutting] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const [disabledOne, setDisabledOne] = useState(false);
+  const [black, setBlack] = useState(false);
   const handleNext = () => {
     playClick();
     onNext();
@@ -22,12 +27,27 @@ const SceneEight = ({
   const handleLine = () => {
     playClick();
     setCut(true);
+    setPulse(true);
+    setDisabled(false);
   };
   const handleCutter = () => {
     playCorrect();
-    setBeforeCut(false);
-    setAfterCut(true);
-    setNext(true);
+    setCutting(true);
+    setPulse(false);
+
+    // ⏱ After 60% of 3s animation → around 1.8s
+    setTimeout(() => {
+      setBlack(true);
+    }, 1800); // <-- trigger at 60%
+
+    // ⏱ After full animation (3s), reset cutter animation
+    setTimeout(() => {
+      setBeforeCut(false);
+      setAfterCut(true);
+      setNext(true);
+      setCutting(false);
+      setDisabledOne(true);
+    }, 3000);
   };
   console.log("next", next, afterCut);
   const handleNextTwo = () => {
@@ -71,7 +91,12 @@ const SceneEight = ({
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: `${cut ? "cut-line-black" : "cut-line-diagonal"}`,
-    onClick: handleLine
+    onClick: handleLine,
+    style: {
+      border: black ? "0.3vw solid black" : "",
+      pointerEvents: disabled ? "auto" : "none",
+      cursor: disabled ? "pointer" : "not-allowed"
+    }
   })), /*#__PURE__*/React.createElement("div", {
     className: "cutter-box"
   }, /*#__PURE__*/React.createElement("img", {
@@ -79,14 +104,30 @@ const SceneEight = ({
     style: {
       width: "10vw",
       objectFit: "contain",
-      cursor: "pointer"
+      pointerEvents: disabledOne ? "none" : "auto",
+      cursor: disabledOne ? "not-allowed" : "pointer",
+      opacity: disabledOne ? "0.5" : "1"
     },
-    onClick: handleCutter
+    onClick: handleCutter,
+    className: `${pulse ? "cutter-pulse" : ""} ${cutting ? "cutting-animate-diagonally" : ""}`
   }))), /*#__PURE__*/React.createElement("div", {
     className: "footer"
   }, /*#__PURE__*/React.createElement("button", {
     className: "disabled"
-  }, t("buttons.previous")), beforeCut && /*#__PURE__*/React.createElement("p", null, t("sceneEight.tapCutting")), afterCut && /*#__PURE__*/React.createElement("p", null, t("sceneEight.tapKnow")), beforeCut && /*#__PURE__*/React.createElement("button", {
+  }, t("buttons.previous")), beforeCut && /*#__PURE__*/React.createElement("p", {
+    style: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "1vw"
+    }
+  }, t("sceneEight.tapCutting"), /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement("img", {
+    src: images.cutter,
+    style: {
+      width: "4vw",
+      objectFit: "contain"
+    }
+  }))), afterCut && /*#__PURE__*/React.createElement("p", null, t("sceneEight.tapKnow")), beforeCut && /*#__PURE__*/React.createElement("button", {
     className: "disabled"
   }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
     onClick: handleNextTwo

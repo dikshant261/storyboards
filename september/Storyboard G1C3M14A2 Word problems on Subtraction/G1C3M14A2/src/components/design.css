@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    gap: 1vw;
+    gap: 3vw;
     position: relative;
 }
 
@@ -25,24 +25,24 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    height: 19vh;
+    height: 24vh;
     white-space: pre-line;
 }
 
 .big-circle {
-        width: 6vw;
+    width: 6vw;
     height: 10vh;
     border-radius: 50%;
     background-color: #f6b26b;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 7vw;
+    font-size: 4vw;
     color: white;
 }
 
 .blue-circle {
-        width: 4vw;
+    width: 4vw;
     height: 7vh;
     border-radius: 50%;
     background-color: #6fa8dc;
@@ -54,7 +54,7 @@
 }
 
 .pink-circle {
-        width: 4vw;
+    width: 4vw;
     height: 7vh;
     border-radius: 50%;
     background-color: #c27ba0;
@@ -74,22 +74,22 @@
 }
 
 .line-one {
-       width: 31%;
+        width: 32%;
     height: 0.7vh;
     background-color: var(--secondary-color);
     position: absolute;
     top: 22%;
-    left: 39%;
+    left: 41%;
     transform: rotate(-36deg);
 }
 
 .line-two {
-       width: 35%;
+        width: 41%;
     height: 0.7vh;
     background-color: var(--secondary-color);
     position: absolute;
-    bottom: 47%;
-    left: 35%;
+    bottom: 49%;
+    left: 37%;
     transform: rotate(46deg);
 }
 

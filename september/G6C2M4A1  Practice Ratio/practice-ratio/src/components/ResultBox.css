@@ -47,12 +47,12 @@
 }
 
 .correct {
-    background-color: lightgreen;
+    background-color: #597e5d;
     border: green 0.3vw solid;
 }
 
 .incorrect {
-    background-color: #ff7f7f;
+    background-color:#ea9999;
     border: red 0.3vw solid;
 }
 

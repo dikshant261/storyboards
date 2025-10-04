@@ -34,18 +34,26 @@ const SceneTen = ({ onNext }) => {
           </div>
 
           <div className="cutter-box">
-            <img src={images.cakethree} className="cake-image-cut" />
-            <img src={images.cakethree} className="cake-image-cut-two" />
+            <img
+              src={images.cakethree}
+              className="cake-image-cut"
+              style={{ opacity: 0.5 }}
+            />
+            <img
+              src={images.cakethree}
+              className="cake-image-cut-two"
+              style={{ opacity: 0.5 }}
+            />
           </div>
         </div>
-      <div className="footer">
-        <button className="disabled">{t("buttons.previous")}</button>
-        <p>{t("sceneTen.tapContinue")}</p>
-        <div>
-          <button onClick={handleNext}>{t("buttons.next")}</button>
-          <Tap bottom={0} />
+        <div className="footer">
+          <button className="disabled">{t("buttons.previous")}</button>
+          <p>{t("sceneTen.tapContinue")}</p>
+          <div>
+            <button onClick={handleNext}>{t("buttons.next")}</button>
+            <Tap bottom={0} />
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
