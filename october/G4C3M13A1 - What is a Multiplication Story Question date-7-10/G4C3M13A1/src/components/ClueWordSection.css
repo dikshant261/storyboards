@@ -1,0 +1,113 @@
+.clue-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 5vw;
+
+    color: white;
+}
+
+/* Left info box */
+.clue-container .info-box {
+    background-color: white;
+    color: #3b2a1a;
+    border-radius: 1vw;
+    width: 22vw;
+    padding: 3vh 2vw;
+    box-shadow: 0 0 1vw rgba(255, 255, 255, 0.2);
+}
+
+.clue-container .align-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.clue-container .info-title {
+    font-size: 1.6vw;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2vh;
+}
+
+.clue-container .info-text {
+    font-size: 1.8vw;
+    line-height: 1.5;
+    white-space: pre-line;
+    text-align: center;
+    margin-top: 1vh;
+}
+
+/* Middle buttons */
+.clue-container .clue-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    margin-top: 2vh;
+}
+
+.clue-container .btn {
+    border: none;
+    padding: 2vh 3vw;
+    border-radius: 2vw;
+    font-size: 2.2vw;
+    cursor: pointer;
+    font-weight: bold;
+    width: 17vw;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.clue-container .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 1vw rgba(255, 255, 255, 0.4);
+}
+
+.clue-container .orange {
+    background-color: #ffa94d;
+}
+
+.clue-container .yellow {
+    background-color: #e4ff5d;
+}
+
+/* Right Example Box */
+.clue-container .example-box {
+    border: 0.3vw solid #ffb940;
+    padding: 3vh 3vw;
+    border-radius: 1vw;
+    width: 35vw;
+    background-color: #000;
+    color: white;
+    height: 71vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5vh;
+}
+
+.clue-container .example-text {
+    font-size: 2.2vw;
+    line-height: 1.6;
+}
+
+.clue-container .example-meaning {
+        font-size: 2.2vw;
+    margin-top: 1vh;
+    white-space: pre-line;
+}
+
+.clue-container .alternate-title {
+    color: #ffb940;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 3vh;
+    font-size: 2.2vw;
+}
+
+.clue-container .alternate-text {
+    margin-top: 1.5vh;
+    font-size: 2.2vw;
+    line-height: 1.6;
+}

@@ -307,12 +307,12 @@ const Main = ({ completeActivity }) => {
   return (
     <div className="main-container">
       {mainHeadingOneShow && (
-        <h3 className="h3-heading fadeIn">
+        <h3 className="h3-heading ">
           Let’s convert the given fraction into a mixed number using division.
         </h3>
       )}
       {mainHeadingTwoShow && (
-        <h3 className="h3-heading fadeIn">
+        <h3 className="h3-heading ">
           Divide {currentQuestion.dividend} by {currentQuestion.divisor}. Notice
           how the fraction is represented as a mixed number.
         </h3>
@@ -321,7 +321,7 @@ const Main = ({ completeActivity }) => {
         <div className="main-content-items">
           <div className="left-fraction">
             <h3 className="improper-heading">Improper Fraction</h3>
-            <div className="fadeIn" style={{
+            <div className="" style={{
               position:"relative"
             }}>
               <Fraction
@@ -347,7 +347,7 @@ const Main = ({ completeActivity }) => {
             }}
           />
           {showDivision && (
-            <div className="left-fraction fadeIn">
+            <div className="left-fraction ">
               <h3
                 className="improper-heading"
                 style={{
@@ -356,7 +356,7 @@ const Main = ({ completeActivity }) => {
               >
                 Division
               </h3>
-              <div className="fadeIn" style={{ position: "relative" }}>
+              <div className="" style={{ position: "relative" }}>
                 {/* Target for flying line to aim to */}
                 <div id="division-line-target" style={{ position: "absolute", top: "2.8vw", left: "-6vw", width: "1px", height: "1px", pointerEvents: "none", opacity: 0 }}></div>
                 {/* <Division
@@ -379,7 +379,7 @@ const Main = ({ completeActivity }) => {
         </div>
         <div className="main-content-items" style={{ position: "relative" }}>
           {showMixedNumber && (
-            <div className="left-fraction fadeIn">
+            <div className="left-fraction ">
               <h3 className="improper-heading">Mixed Number</h3>
               <div>
                 <MixedFraction
@@ -411,7 +411,7 @@ const Main = ({ completeActivity }) => {
           <div style={{
             position:"relative"
           }}>
-          <button className="footer-button fadeIn" onClick={handleDivideClick}
+          <button className="footer-button " onClick={handleDivideClick}
           
           >
             <svg
@@ -436,28 +436,28 @@ const Main = ({ completeActivity }) => {
           </div>
         )}
         {showNextOne && (
-          <button className="next-button fadeIn" onClick={handleNextOne}>
+          <button className="next-button " onClick={handleNextOne}>
             Next
           </button>
         )}
         {showNextTwo && (
-          <button className="next-button fadeIn" onClick={handleNextTwo}>
+          <button className="next-button " onClick={handleNextTwo}>
             Next
           </button>
         )}
         {showNextThree && (
-          <button className="next-button fadeIn" onClick={handleNextThree}>
+          <button className="next-button " onClick={handleNextThree}>
             Next
           </button>
         )}
         {showNextFour && (
-          <button className="next-button fadeIn" onClick={handleNextFour}>
+          <button className="next-button " onClick={handleNextFour}>
             Next
           </button>
         )}
         {showNextOne && (
           <h3
-            className="improper-heading-2 fadeIn"
+            className="improper-heading-2 "
             style={{
               display: "flex",
               justifyContent: "center",
@@ -478,7 +478,7 @@ const Main = ({ completeActivity }) => {
         )}
         {quotientOptionShow && (
           <div>
-            <div className="options fadeIn">
+            <div className="options ">
               {currentQuestion.quotient.map((option, index) => {
                 let isDisabled =
                   disabledQuotientOptions.includes(option) ||
@@ -519,7 +519,7 @@ const Main = ({ completeActivity }) => {
         )}
         {showRemainderOption && (
           <div>
-            <div className="options fadeIn">
+            <div className="options ">
               {currentQuestion.remainder.map((option, index) => {
                 let isDisabled =
                   disabledRemainderOptions.includes(option) ||
@@ -559,7 +559,7 @@ const Main = ({ completeActivity }) => {
           </div>
         )}
         {errorMessageShow && (
-          <div className="fadeIn">
+          <div className="">
             <ErrorMessage
               quotient={selectedQuotientOption}
               questionData={currentQuestion}
@@ -567,7 +567,7 @@ const Main = ({ completeActivity }) => {
           </div>
         )}
         {remainderErrorMessage && (
-          <div className="fadeIn">
+          <div className="">
             <RemainderError
               remainder={selectedRemainderOption}
               questionData={currentQuestion}
@@ -575,7 +575,7 @@ const Main = ({ completeActivity }) => {
           </div>
         )}
         {successHeadingShow && (
-          <div className="improper-heading-2 fadeIn">
+          <div className="improper-heading-2 ">
             <h3
               className="success-heading-align"
               style={{
@@ -608,26 +608,26 @@ const Main = ({ completeActivity }) => {
       </div>
       <div className="footer-2">
         {showTapHeading && (
-          <h3 className="improper-heading-2 fadeIn">
+          <h3 className="improper-heading-2 ">
             Tap the button to divide
           </h3>
         )}
         {showNextOne && (
-          <h3 className="improper-heading-2 fadeIn">Tap Next to proceed.</h3>
+          <h3 className="improper-heading-2 ">Tap Next to proceed.</h3>
         )}
         {tapQuotient && (
-          <h3 className="improper-heading-2 fadeIn">
+          <h3 className="improper-heading-2 ">
             Tap the correct quotient.
           </h3>
         )}
-        {tapNextTwo && <h3 className="improper-heading-2 fadeIn">Tap Next</h3>}
+        {tapNextTwo && <h3 className="improper-heading-2 ">Tap Next</h3>}
         {tapRemainder && (
-          <h3 className="improper-heading-2 fadeIn">
+          <h3 className="improper-heading-2 ">
             Tap the correct remainder.
           </h3>
         )}
         {tapNextThree && (
-          <h3 className="improper-heading-2 fadeIn">Tap Next</h3>
+          <h3 className="improper-heading-2 ">Tap Next</h3>
         )}
       </div>
       {/* <div className="footer-2"></div> */}
