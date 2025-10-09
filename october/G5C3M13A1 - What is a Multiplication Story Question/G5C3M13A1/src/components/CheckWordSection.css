@@ -1,0 +1,65 @@
+.check-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6vw;
+    color: #000;
+    padding: 5vh 5vw;
+}
+
+/* Left description text */
+.check-container .left-description {
+    width: 25vw;
+    font-size: 2.3vw;
+    color: #007b48;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.check-container .para-t {
+    margin-bottom: 2vh;
+}
+
+.check-container .bold {
+    font-weight: bold;
+}
+
+.check-container .left-description i {
+    color: #004c99;
+}
+
+/* Middle keywords */
+.check-container .middle-words {
+    display: flex;
+    flex-direction: column;
+    gap: 9vh;
+    font-size: 2.3vw;
+    text-align: center;
+    width: 15vw;
+    color: white;
+}
+
+.check-container .word {
+    font-weight: bold;
+}
+
+/* Right icon section */
+.check-container .right-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2vh;
+}
+
+.check-container .icon {
+    width: 18vw;
+    height: auto;
+}
+
+.check-container .icon-title {
+    font-size: 1.8vw;
+    color: #5a2a00;
+    font-weight: bold;
+    text-align: center;
+}
