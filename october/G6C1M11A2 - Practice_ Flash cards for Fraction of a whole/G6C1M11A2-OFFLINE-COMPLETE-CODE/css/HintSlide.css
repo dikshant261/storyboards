@@ -1,0 +1,86 @@
+.fraction-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0, 0, 0, 0.9);
+    color: white;
+    padding: 4vh 5vw;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.fraction-title {
+    text-align: center;
+    color: orange;
+    font-size: 4vw;
+    margin-bottom: 6vh;
+}
+
+.fraction-description {
+    text-align: center;
+    font-size: 2.5vw;
+    width: 80vw;
+    margin: 0 auto 5vh auto;
+    line-height: 1.4;
+}
+
+.fraction-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    gap: 4vw;
+}
+
+.fraction-left,
+.fraction-right {
+    width: 35vw;
+    padding: 4vh 2vw;
+    border-radius: 1vw;
+    text-align: center;
+    height: 26vh;
+}
+
+.fraction-left {
+    background-color: rgb(255 171 64 / 50%);
+}
+
+.fraction-right {
+    background-color: #1e3a8a;
+}
+
+.fraction-heading {
+    font-weight: bold;
+    font-size: 1.8vw;
+    margin-bottom: 2vh;
+}
+
+.fraction-equation {
+    font-size: 2.2vw;
+    line-height: 1.8;
+}
+
+.fraction-formula {
+    font-size: 2vw;
+    font-style: italic;
+    margin-bottom: 2vh;
+}
+
+.fraction-solution {
+    font-size: 2.2vw;
+    font-weight: bold;
+}
+
+.fraction {
+    font-weight: bold;
+    color: #fff;
+}
+
+.fraction-label {
+    font-size: 2vw;
+}

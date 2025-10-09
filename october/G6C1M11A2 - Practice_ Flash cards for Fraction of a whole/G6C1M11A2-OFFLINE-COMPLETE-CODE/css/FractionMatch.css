@@ -1,0 +1,83 @@
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4vh;
+}
+
+.card-row {
+    display: flex;
+    gap: 3vw;
+    position: relative;
+}
+
+.card {
+    width: 15vw;
+    height: 21vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.5vw;
+    background-color: #0891b2;
+    color: white;
+    font-size: 3.6vw;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.card.upper:hover,
+.card.lower:hover {
+    transform: scale(1.05);
+}
+
+.card.selected {
+    background-color: #facc15;
+    color: #000;
+}
+
+.card.wrong {
+    background-color: #c75a4e;
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-1vw);
+    }
+
+    50% {
+        transform: translateX(1vw);
+    }
+
+    75% {
+        transform: translateX(-1vw);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveLeft {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0vw);
+    }
+}
+
+.card.matched {
+    background-color: #849939;
+    color: white;
+    transition: transform 0.8s ease;
+}
