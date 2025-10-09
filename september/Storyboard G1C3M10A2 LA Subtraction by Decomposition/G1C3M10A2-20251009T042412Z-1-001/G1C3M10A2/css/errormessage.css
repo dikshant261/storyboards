@@ -1,0 +1,31 @@
+.error-messaage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+    white-space: pre-line;
+    background-color: salmon;
+    border: 0.3vw solid rgb(229, 113, 74);
+    width: 99%;
+    height: 99%;
+    color: black;
+    text-align: center;
+    border-radius: 2vw;
+    font-weight: 700;
+}
+
+.success-messaage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+    white-space: pre-line;
+    background-color: lightgreen;
+    border: 0.3vw solid darkgreen;
+    width: 99%;
+    height: 99%;
+    color: black;
+    text-align: center;
+    border-radius: 2vw;
+    font-weight: 700;
+}

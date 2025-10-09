@@ -2,10 +2,26 @@ import React from "react";
 import "./Outlet.css";
 import StartPage from "./components/StartPage";
 import RefreshDetector from "./components/RefreshDetector";
+import SceneOne from "./components/SceneOne";
+import SceneTwo from "./components/SceneTwo";
+import SceneThree from "./components/SceneThree";
+import SceneFour from "./components/SceneFour";
+import SceneFive from "./components/SceneFive";
+import SceneSix from "./components/SceneSix";
+import End from "./components/End";
 
 const Outlet = () => {
   const [currentScene, setCurrentScene] = React.useState(0);
-  const sceneComponents = [StartPage];
+  const sceneComponents = [
+    StartPage,
+    SceneOne,
+    SceneTwo,
+    SceneThree,
+    SceneFour,
+    SceneFive,
+    SceneSix,
+    End
+  ];
   console.log("Current Scene:", currentScene);
   const goNext = () =>
     setCurrentScene((prev) =>

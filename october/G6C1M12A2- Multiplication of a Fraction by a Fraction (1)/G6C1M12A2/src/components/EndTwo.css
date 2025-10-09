@@ -1,0 +1,64 @@
+.fraction-container-three {
+    color: white;
+    text-align: center;
+    
+}
+
+.fraction-container-three .title-text {
+    font-size: 3vw;
+    margin-bottom: 2vh;
+    font-weight: 600;
+}
+
+.fraction-container-three .description-text {
+    font-size: 3vw;
+    margin-bottom: 6vh;
+    line-height: 1.4;
+}
+
+.fraction-container-three .formula-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+    margin-bottom: 5vh;
+}
+
+.fraction-container-three .fraction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 3vw;
+    font-weight: 500;
+}
+
+.fraction-container-three .line {
+    width: 100%;
+    height: 0.5vh;
+    background-color: currentColor;
+    margin: 0.5vh 0;
+}
+
+.fraction-container-three .orange-col {
+    color: #f5a623;
+}
+
+.fraction-container-three .green-col {
+    color: #8bc34a;
+}
+
+.fraction-container-three .result {
+    color: #f5a623;
+}
+
+.fraction-container-three .multiply-symbol,
+.equals-symbol {
+    font-size: 3vw;
+    font-weight: bold;
+}
+
+.fraction-container-three .footer-text {
+    font-size: 3vw;
+    margin-top: 3vh;
+    margin-bottom: 3vw;
+}

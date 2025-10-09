@@ -1,0 +1,79 @@
+.fraction-container-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.fraction-container-two .fraction-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 1vw;
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size:2vw;
+    width: 34vw;
+}
+
+.fraction-container-two .fraction-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 2vh;
+}
+
+.fraction-container-two .multiply-symbol,
+.equal-symbol {
+    font-size: 2vw;
+    font-weight: bold;
+    margin: 0 1vw;
+    color: white;
+}
+
+.fraction-container-two .fraction-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2vw;
+}
+
+.fraction-container-two .fraction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fraction-container-two .num {
+    font-size: 2vw;
+    font-weight: bold;
+}
+
+.fraction-container-two .den {
+    font-size: 2vw;
+}
+
+.fraction-container-two .line {
+    width: 100%;
+    height: 0.2vh;
+    background-color: white;
+    margin: 0.3vh 0;
+}
+
+.fraction-container-two .small-line {
+    width: 8vw;
+    background-color: white;
+    height: 0.3vh;
+}
+
+.fraction-container-two .green-color {
+    color: #7cff7c;
+}
+
+.fraction-container-two .orange-color {
+    color: #ffb347;
+}

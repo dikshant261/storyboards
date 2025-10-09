@@ -20,18 +20,51 @@ i18n.use(initReactI18next).init({
           yes: "Yes",
           no: "No",
         },
+        activity: "Activity Completed!",
         navigation: {
-          tapNext: "Tap Next after reading",
-          tapEachWord:
-            "Tap on each word to see how it is used. Tap » after reading",
-          tapAndDrag: "Tap and drag the phrases into the right category area ",
+          tapNumpad:
+            "Use numpad to enter numerator and denominator, then tap Check.",
+          tapNext: "Tap » to continue",
+          tryNext: "Tap » to try a new challenge.",
         },
-        startPage:{
-          title:"Multiplication of a Fraction by a Fraction",
-          weHave:"We learned how to multiply two fractions using\n an area model.",
-          nowIts:"Now, it’s your turn to try on your own.",
-          tapStart:"Tap “Start” to begin."
-        }
+        startPage: {
+          title: "Multiplication of a Fraction by a Fraction",
+          weHave:
+            "We learned how to multiply two fractions using\n an area model.",
+          nowIts: "Now, it’s your turn to try on your own.",
+          tapStart: "Tap “Start” to begin.",
+        },
+        sceneOne: {
+          heading: "Multiply the given fractions.",
+          success:
+            "Well done! Product of fractions is the same as\nproduct of numerators over product of denominators.",
+          error: "Try Again",
+          errorTwo:
+            "Oops! Multiply the numerators together and\n multiply the denominators together. Try again!",
+          successTwo:
+            "Correct! {{count}} out of {{counttwo}} parts are overlapped.\nProduct of fractions is the same as\nproduct of numerators over product of denominators.",
+        },
+
+        numerator1: "Numerator 1",
+        denominator1: "Denominator 1",
+        numerator2: "Numerator 2",
+        denominator2: "Denominator 2",
+
+        sceneTwo: {
+          whatResult: "What is the result of",
+          of: "of",
+          message:
+            "To multiply two fractions, multiply the numerators together and the\n denominators together.",
+        },
+
+        fraction: {
+          title: "We used an area model to show multiplication of fractions.",
+          description:
+            "This can be done by multiplying the numerators together and multiplying the denominators together.",
+          numerator: "Numerator",
+          denominator: "Denominator",
+          restart: "Tap “Start Over” to restart the activity.",
+        },
       },
     },
   },

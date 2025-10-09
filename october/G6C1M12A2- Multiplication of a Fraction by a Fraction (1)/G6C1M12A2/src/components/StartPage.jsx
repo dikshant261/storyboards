@@ -3,7 +3,7 @@ import "./startpage.css";
 import ReusableButton from "./ReusableButton";
 import { playClick } from "./PlayAudio";
 import { useTranslation } from "react-i18next";
-const StartPage = ({ gonext }) => {
+const StartPage = ({ goNext }) => {
     const { t } = useTranslation();
   return (
     <div className="intro-container">
@@ -13,9 +13,12 @@ const StartPage = ({ gonext }) => {
       <div className="text-section">{t("startPage.tapStart")}</div>
       <ReusableButton
         label={t("buttons.start")}
+        width="14vw"
+        height="9vh"
+        fontSize="3vw"
         onClick={() => {
           playClick();
-          gonext();
+          goNext();
         }}
       />
     </div>

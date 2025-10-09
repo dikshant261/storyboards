@@ -13,7 +13,7 @@ const ProgressBar = ({
       key: step,
       className: "dot",
       style: {
-        height: isActive ? "2vh" : "1.5vh",
+        height: isActive ? "3vh" : "2vh",
         width: isActive ? "2vw" : "1.5vw",
         backgroundColor: isActive ? "var(--secondary-color)" : "gray",
         borderRadius: "50%",

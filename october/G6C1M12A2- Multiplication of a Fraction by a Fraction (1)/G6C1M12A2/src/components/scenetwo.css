@@ -1,0 +1,101 @@
+.scene-conatiner-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.scene-conatiner-two .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    color: var(--secondary-color);
+    font-weight: bold;
+    padding: 1vh 2vw;
+    gap: 2vh;
+}
+
+
+
+.scene-conatiner-two  .question-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 1vh;
+    width: 97vw;
+    height: 75vh;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1vw;
+    padding: 2vh 2vw;
+}
+
+.scene-conatiner-two .main-content .question-container .question-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+}
+
+.scene-conatiner-two  .question-container p {
+    font-size: 3vw;
+    color: white;
+    font-weight: bold;
+    white-space: pre-line;
+    text-align: center;
+}
+
+.scene-conatiner-two .main-content .question-container .box-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box-line {
+    width: 100%;
+    background-color: white;
+    height: 0.5vh;
+}
+
+
+
+.scene-conatiner-two .footer-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    color: white;
+    font-weight: bold;
+    padding: 0.5vh 0;
+}
+
+.scene-conatiner-two .footer-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98vw;
+
+}
+
+.scene-conatiner-two .footer-button button {
+    width: 8vw;
+    height: 6vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background-color: var(--secondary-color);
+    border-radius: 1vw;
+    cursor: pointer;
+    font-size: 3vw;
+    border: 0.3vw solid rgb(222, 145, 3);
+}
+
+.scene-conatiner-two .footer-button .disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
