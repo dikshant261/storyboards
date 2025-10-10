@@ -1,12 +1,3 @@
-import React, { useEffect, useState } from "react";
-import "./scene.css";
-import { useTranslation } from "react-i18next";
-import Fraction from "./Fraction";
-import Option from "./Option";
-import { playClick, playCorrect, playWrong } from "./PlayAudio";
-import AnimatedResult from "./AnimatedResult";
-import ErrorMessage from "./ErrorMessage";
-import Tap from "./Tap";
 const Scene = ({
   onNext
 }) => {
@@ -37,7 +28,7 @@ const Scene = ({
       console.log("hi");
     } else if (id === 3 && (currentFraction.num % 3 !== 0 || currentFraction.den % 3 !== 0)) {
       playWrong();
-      setFlag(6);
+      setFlag(7);
       setShowError(true);
       console.log("hi");
     } else if (id === 2 || id === 3) {
@@ -118,10 +109,6 @@ const Scene = ({
       setFlag(0); // Error flag
     }
   };
-  console.log("heading", showHeading);
-  const {
-    t
-  } = useTranslation();
   const handleNextOne = () => {
     playClick();
     setShowResult(false);
@@ -158,12 +145,12 @@ const Scene = ({
   })), showHeading && /*#__PURE__*/React.createElement("div", {
     className: "heading-align"
   }, /*#__PURE__*/React.createElement(Fraction, {
-    numerator: 12,
-    denominator: 24,
-    fontSize: "3vw"
-  }), /*#__PURE__*/React.createElement("p", null, t("simplestFormHeading")), /*#__PURE__*/React.createElement(Fraction, {
     numerator: 1,
     denominator: 2,
+    fontSize: "3vw"
+  }), /*#__PURE__*/React.createElement("p", null, t("simplestFormHeading")), /*#__PURE__*/React.createElement(Fraction, {
+    numerator: 12,
+    denominator: 24,
     fontSize: "3vw"
   }))), showSoFar && /*#__PURE__*/React.createElement("div", {
     className: "scene-main-first"
@@ -173,8 +160,8 @@ const Scene = ({
       gap: "2vh"
     }
   }, /*#__PURE__*/React.createElement(Fraction, {
-    numerator: 12,
-    denominator: 24,
+    numerator: 1,
+    denominator: 2,
     fontSize: "5vw",
     lineWidth: "100%",
     lineHeight: "0.5vh"
@@ -183,8 +170,8 @@ const Scene = ({
       fontSize: "5vw"
     }
   }, " ", t("simplestFormHeading"), " "), /*#__PURE__*/React.createElement(Fraction, {
-    numerator: 1,
-    denominator: 2,
+    numerator: 12,
+    denominator: 24,
     fontSize: "5vw",
     lineWidth: "100%",
     lineHeight: "0.5vh"
@@ -195,7 +182,8 @@ const Scene = ({
     setShowError: () => setShowError(false),
     allDisabled: allDisabled
   }), errorShow && /*#__PURE__*/React.createElement(ErrorMessage, {
-    flag: flag
+    flag: flag,
+    currentFraction: currentFraction
   }))), /*#__PURE__*/React.createElement("div", {
     className: "scene-footer"
   }, /*#__PURE__*/React.createElement("button", {
@@ -212,4 +200,4 @@ const Scene = ({
     bottom: "0%"
   }))));
 };
-export default Scene;
+window.Scene=Scene;

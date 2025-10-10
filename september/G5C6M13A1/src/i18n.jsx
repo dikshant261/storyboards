@@ -34,12 +34,13 @@ i18n.use(initReactI18next).init({
         },
         error: {
           notDivisibleByFive:
-            "Oops! 24 and 8 are not divisible by 5. Remember, both numbers must be divisible by the same number.",
+            "Oops! {{num}} and {{den}} are not divisible by 5. Remember, both numbers must be divisible by the same number.",
           notYet:
             "Not yet! You can still divide numerator and denominator further.",
           goodJob: "Good job! You picked the right number to divide.",
           thatCorrect: "That’s correct! It can't be divided further.",
-          notDivide: "It can't be divided further.",
+          notDivideTwo: "{{num}} and {{den}}  are not divide by 2 further.",
+          notDivideThree: "{{num}} and {{den}}  are not divide by 3 further.",
         },
         simplestFormHeading: "is the simplest form of",
         andToget: "and to get the simplest form\n of the fraction",

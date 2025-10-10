@@ -37,8 +37,7 @@ const AnimatedResultTwo = ({
     return () => clearInterval(interval);
   }, [parsed, next]);
   return /*#__PURE__*/React.createElement("div", {
-    className: "conatiner",
-    d: true
+    className: "conatiner"
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
@@ -56,13 +55,13 @@ const AnimatedResultTwo = ({
       alignItems: "center",
       gap: "2vw",
       gridAutoFlow: "column",
-      width: "39vw"
+      width: "100%"
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       width: "6vw",
       display: "flex",
-      justifyContent: "center",
+      justifyContent: "flex-end",
       alignItems: "center",
       opacity: fadeOpacity ? "0.4" : "1"
     }
@@ -77,21 +76,12 @@ const AnimatedResultTwo = ({
       opacity: fadeOpacity ? "0.4" : "1"
     }
   }, "="), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "end",
-      justifyContent: "center",
-      fontSize: "4vw",
-      color: "white",
-      lineHeight: "1.2",
-      width: "18vw",
-      fontWeight: "700"
-    }
+    className: "division-align",
+    style: {}
   }, /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "flex-end",
       alignItems: "center",
       gap: "2vh"
     }
@@ -106,15 +96,14 @@ const AnimatedResultTwo = ({
   }, " \xF7 "), /*#__PURE__*/React.createElement("span", {
     className: `${stepOne ? "divisor" : ""}`
   }, item.step.divisor)), /*#__PURE__*/React.createElement("div", {
-    className: "line",
+    className: "line-two",
     style: {
-      opacity: fadeOpacity ? "0.4" : "1",
-      width: "18vw"
+      opacity: fadeOpacity ? "0.4" : "1"
     }
   }), /*#__PURE__*/React.createElement("div", {
     style: {
       display: "flex",
-      justifyContent: "flex-start",
+      justifyContent: "flex-end",
       alignItems: "center",
       gap: "2vh"
     }

@@ -45,7 +45,7 @@ const AnimatedResultTwo = ({
   }, [parsed, next]);
 
   return (
-    <div className="conatiner" d>
+    <div className="conatiner">
       <div
         style={{
           display: "flex",
@@ -65,14 +65,14 @@ const AnimatedResultTwo = ({
               alignItems: "center",
               gap: "2vw",
               gridAutoFlow: "column",
-              width: "39vw",
+              width: "100%",
             }}
           >
             <div
               style={{
                 width: "6vw",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-end",
                 alignItems: "center",
                 opacity: fadeOpacity ? "0.4" : "1",
               }}
@@ -86,26 +86,19 @@ const AnimatedResultTwo = ({
               />
             </div>
 
-            <p style={{opacity: fadeOpacity ? "0.4" : "1",}}>=</p>
+            <p style={{ opacity: fadeOpacity ? "0.4" : "1" }}>=</p>
 
             {/* Division step */}
             <div
+              className="division-align"
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "end",
-                justifyContent: "center",
-                fontSize: "4vw",
-                color: "white",
-                lineHeight: "1.2",
-                width: "18vw",
-                fontWeight:"700"
+                
               }}
             >
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-start",
+                  justifyContent: "flex-end",
                   alignItems: "center",
                   gap: "2vh",
                 }}
@@ -114,19 +107,19 @@ const AnimatedResultTwo = ({
                   {" "}
                   {item.step.originalNum}
                 </span>
-                <span style={{opacity: fadeOpacity ? "0.4" : "1",}}> ÷ </span>
+                <span style={{ opacity: fadeOpacity ? "0.4" : "1" }}> ÷ </span>
                 <span className={`${stepOne ? "divisor" : ""}`}>
                   {item.step.divisor}
                 </span>
               </div>
               <div
-                className="line"
-                style={{ opacity: fadeOpacity ? "0.4" : "1",width:"18vw" }}
+                className="line-two"
+                style={{ opacity: fadeOpacity ? "0.4" : "1" }}
               ></div>
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "flex-start",
+                  justifyContent: "flex-end",
                   alignItems: "center",
                   gap: "2vh",
                 }}
@@ -134,14 +127,14 @@ const AnimatedResultTwo = ({
                 <span style={{ opacity: fadeOpacity ? "0.4" : "1" }}>
                   {item.step.originalDen}
                 </span>{" "}
-                <span style={{opacity: fadeOpacity ? "0.4" : "1",}}> ÷ </span>
+                <span style={{ opacity: fadeOpacity ? "0.4" : "1" }}> ÷ </span>
                 <span className={`${stepOne ? "divisor" : ""}`}>
                   {item.step.divisor}
                 </span>
               </div>
             </div>
 
-            <p style={{opacity: fadeOpacity ? "0.4" : "1",}}>=</p>
+            <p style={{ opacity: fadeOpacity ? "0.4" : "1" }}>=</p>
 
             {/* Final simplified fraction */}
             <div style={{ opacity: fadeOpacity ? "0.4" : "1" }}>

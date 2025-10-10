@@ -29,12 +29,13 @@ const appData = {
       },
       error: {
         notDivisibleByFive:
-          "Oops! 24 and 8 are not divisible by 5. Remember, both numbers must be divisible by the same number.",
+          "Oops! {{num}} and {{den}} are not divisible by 5. Remember, both numbers must be divisible by the same number.",
         notYet:
           "Not yet! You can still divide numerator and denominator further.",
         goodJob: "Good job! You picked the right number to divide.",
         thatCorrect: "That’s correct! It can't be divided further.",
-        notDivide: "It can't be divided further.",
+        notDivideTwo: "{{num}} and {{den}}  are not divide by 2 further.",
+        notDivideThree: "{{num}} and {{den}}  are not divide by 3 further.",
       },
       simplestFormHeading: "is the simplest form of",
       andToget: "and to get the simplest form\n of the fraction",
@@ -60,8 +61,8 @@ const appData = {
       },
 
       startPage: {
-        simplestForm: "Bentuk Sederhana dari Pecahan",
-        keep: "Teruslah membagi\n pembilang dan penyebut\n dengan angka yang sama\n sampai tidak bisa dibagi lagi.",
+        simplestForm: "Bentuk Tersederhana dari Pecahan",
+        keep: "Terus bagi pembilang dan penyebut\n dengan angka yang sama\n sampai tidak bisa dibagi lagi.",
         tapStart: "Ketuk “MULAI” untuk memulai.",
       },
 
@@ -69,7 +70,7 @@ const appData = {
         tapOption: "Ketuk opsi untuk membagi.",
         tapContinue: "Ketuk » untuk melanjutkan",
         tapToSeeFar:
-          "Ketuk » untuk melihat apa yang sudah kita lakukan sejauh ini.",
+          "Ketuk » untuk melihat apa yang telah kita lakukan sejauh ini.",
         tapNextPart: "Ketuk » untuk melihat bagian berikutnya.",
         tapStartOver: "Ketuk » untuk memulai ulang.",
       },
@@ -79,18 +80,18 @@ const appData = {
           "Ups! 24 dan 8 tidak dapat dibagi dengan 5. Ingat, kedua angka harus dapat dibagi dengan angka yang sama.",
         notYet:
           "Belum! Kamu masih bisa membagi pembilang dan penyebut lebih lanjut.",
-        goodJob: "Kerja bagus! Kamu memilih angka yang benar untuk membagi.",
-        thatCorrect: "Benar! Itu tidak bisa dibagi lagi.",
-        notDivide: "Itu tidak bisa dibagi lagi.",
+        goodJob: "Kerja bagus! Kamu memilih angka yang tepat untuk membagi.",
+        thatCorrect: "Benar! Pecahan ini tidak bisa dibagi lagi.",
+        notDivide: "Tidak bisa dibagi lagi.",
       },
 
-      simplestFormHeading: "adalah bentuk sederhana dari",
-      andToget: "dan untuk mendapatkan \nbentuk sederhana\n dari pecahan",
+      simplestFormHeading: "adalah bentuk tersederhana dari",
+      andToget: "dan untuk mendapatkan bentuk tersederhana\n dari pecahan",
       divideBy: "Dibagi dengan",
       commonFactor: "adalah \nfaktor persekutuan dari \n12 dan 24.",
       and: "dan",
       greatJob:
-        "Kerja bagus! Sebuah pecahan berada dalam bentuk paling sederhana\n ketika pembilang dan penyebut tidak bisa\n dibagi dengan angka yang sama lagi. Kita menggunakan \nfaktor prima persekutuan untuk menyederhanakan pecahan.",
+        "Kerja bagus! Pecahan berada dalam bentuk tersederhana\n ketika pembilang dan penyebutnya tidak dapat\n dibagi dengan angka yang sama lagi. Kita menggunakan\n faktor prima persekutuan untuk menyederhanakan pecahan.",
     },
   },
 };

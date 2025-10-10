@@ -45,7 +45,7 @@ const Scene = ({ onNext }) => {
       (currentFraction.num % 3 !== 0 || currentFraction.den % 3 !== 0)
     ) {
       playWrong();
-      setFlag(6);
+      setFlag(7);
       setShowError(true);
       console.log("hi");
     } else if (id === 2 || id === 3) {
@@ -171,9 +171,9 @@ const Scene = ({ onNext }) => {
             ))}
             {showHeading && (
               <div className="heading-align">
-                <Fraction numerator={12} denominator={24} fontSize="3vw" />
-                <p>{t("simplestFormHeading")}</p>
                 <Fraction numerator={1} denominator={2} fontSize="3vw" />
+                <p>{t("simplestFormHeading")}</p>
+                <Fraction numerator={12} denominator={24} fontSize="3vw" />
               </div>
             )}
           </div>
@@ -182,16 +182,16 @@ const Scene = ({ onNext }) => {
           <div className="scene-main-first">
             <div className="heading-align" style={{ gap: "2vh" }}>
               <Fraction
-                numerator={12}
-                denominator={24}
+                numerator={1}
+                denominator={2}
                 fontSize="5vw"
                 lineWidth="100%"
                 lineHeight="0.5vh"
               />
               <p style={{ fontSize: "5vw" }}> {t("simplestFormHeading")} </p>
               <Fraction
-                numerator={1}
-                denominator={2}
+                numerator={12}
+                denominator={24}
                 fontSize="5vw"
                 lineWidth="100%"
                 lineHeight="0.5vh"
@@ -205,7 +205,9 @@ const Scene = ({ onNext }) => {
             setShowError={() => setShowError(false)}
             allDisabled={allDisabled}
           />
-          {errorShow && <ErrorMessage flag={flag} />}
+          {errorShow && (
+            <ErrorMessage flag={flag} currentFraction={currentFraction} />
+          )}
         </div>
       </div>
 
