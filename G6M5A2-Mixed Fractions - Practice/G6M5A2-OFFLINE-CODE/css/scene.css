@@ -1,0 +1,130 @@
+.scene-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.scene-container .heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-color);
+    font-size: 3vw;
+    width: 98vw;
+    height: 10vh;
+}
+
+.scene-container .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1vw;
+    width: 98vw;
+}
+
+.scene-container .main .left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1.3vw;
+    width: 32.6vw;
+    height: 60vh;
+    padding-top: 3vh;
+    gap: 3vh;
+}
+
+.scene-container .main .left p {
+    font-size: 3vw;
+    color: white;
+}
+
+.scene-container .main .mid {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1vh;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1.3vw;
+    width: 32.6vw;
+    padding-top: 3vh;
+    height: 60vh;
+}
+
+.scene-container .main .mid p {
+    font-size: 3vw;
+    color: white;
+}
+
+.scene-container .main .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0, 0.5);
+    border-radius: 1.3vw;
+    width: 32.6vw;
+    height: 60vh;
+}
+
+.scene-container .main .right p {
+    font-size: 3vw;
+    color: white;
+}
+
+.scene-container .option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    background-color: rgb(0, 0, 0, 0.5);
+    width: 98vw;
+    height: 20vh;
+    border-radius: 1.3vw;
+}
+
+.scene-container .option p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    font-size: 3vw;
+    color: white;
+}
+
+.scene-container .footer-two {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98vw;
+    /* height: 10vh; */
+}
+
+.scene-container .footer-two p {
+    font-size: 3vw;
+    color: white;
+}
+
+.scene-container .footer-two button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8vw;
+    height: 7vh;
+    background-color: var(--secondary-color);
+    border-radius: 1vw;
+    font-size: 3vw;
+    position: relative;
+    cursor: pointer;
+    border: 0.3vw solid rgb(193, 128, 6);
+}
+
+.scene-container .footer-two .disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

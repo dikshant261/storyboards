@@ -1,0 +1,34 @@
+.question-fraction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.question-fraction .numerator,
+.denominator {
+  display: block;
+  font-weight: bold;
+}
+
+.question-fraction .line {
+  display: block;
+  margin: 0.5vh auto;
+}
+
+.fly-in {
+  animation: fly-in 1.5s ease-in-out forwards;
+}
+
+@keyframes fly-in {
+  0% {
+    transform: translateX(2vw);
+  }
+
+  100% {
+    transform: translate(32vw, -8.1vw);
+  }
+
+
+}

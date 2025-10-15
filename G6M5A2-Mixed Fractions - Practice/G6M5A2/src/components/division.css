@@ -1,0 +1,156 @@
+.division-container {
+    display: grid;
+    grid-template-columns: repeat(2, 7fr);
+    gap: 3.5vh;
+    width: 12vw;
+    margin-bottom: 2vh;
+    justify-content: center;
+    text-align: end;
+    position: fixed;
+    left: 40%;
+    row-gap: 0vh;
+}
+
+.division-container .box {
+    width: 6vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 1vw;
+    display: flex;
+    font-size: 5vw;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.division-container .box-two {
+    width: 6vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 1vw;
+    display: flex;
+    font-size: 5vw;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.column-adjust {
+    grid-column: 2;
+}
+
+.column-adjust-two {
+    grid-column: 1;
+}
+
+.division-container .num {
+    font-size: 5vw;
+    color: white;
+}
+
+.division-container .fly-two {
+    animation: fly-two 1.5s ease-in-out forwards;
+}
+
+@keyframes fly-two {
+    0% {
+        transform: translate(0vw);
+    }
+
+    90% {
+        transform: translate(42.5vw, 4.3vw);
+        font-size: 8vw;
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+
+}
+
+.division-container .glow {
+    animation: glow 1.5s ease-in-out forwards;
+}
+
+@keyframes glow {
+    0% {
+        transform: scale(0);
+    }
+
+    80% {
+        transform: scale(1.1);
+        background-color: white;
+    }
+
+    100% {
+        transform: scale(0);
+    }
+
+}
+
+.quotient-fly {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(0);
+    font-weight: bold;
+    color: green;
+}
+
+.quotient-fly-two {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    transform: translateY(0);
+    font-weight: bold;
+    color: green;
+}
+
+.division-container .fly-three {
+    animation: fly-three 1.5s ease-in-out forwards;
+}
+
+@keyframes fly-three {
+    0% {
+        transform: translate(0vw);
+        font-size: 5vw;
+    }
+
+    90% {
+        transform: translate(29.5vw, 6.3vw);
+        font-size: 8vw;
+        color: green;
+    }
+
+    100% {
+        transform: translate(29.5vw, 6.3vw);
+        opacity: 0;
+        font-size: 8vw;
+    }
+
+}
+
+.division-container .fly-four {
+    animation: fly-four 1.5s ease-in-out forwards;
+}
+
+@keyframes fly-four {
+    0% {
+        transform: translate(-0vw);
+        font-size: 5vw;
+    }
+
+    90% {
+        transform: translate(45.5vw, -10.3vw);
+        font-size: 8vw;
+        color: green;
+    }
+
+    100% {
+        transform: translate(45.5vw, -10.3vw);
+        opacity: 0;
+        font-size: 8vw;
+    }
+
+}

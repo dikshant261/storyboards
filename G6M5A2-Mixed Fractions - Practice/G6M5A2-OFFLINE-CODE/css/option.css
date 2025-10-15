@@ -1,0 +1,46 @@
+.option-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3vw;
+}
+
+.option-container .button-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2vw;
+}
+
+.option-container button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4vw;
+    width: 7vw;
+    height: 9vh;
+    background-color: var(--secondary-color);
+    border-radius: 1vw;
+    cursor: pointer;
+    color: black;
+    transition: 0.5s ease;
+    border: 0.4vw solid rgb(230, 170, 59);
+}
+
+.option-container button:hover {
+    transform: scale(1.1);
+    background-color: orange;
+}
+
+.feedback {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    width: 62vw;
+    height: 19vh;
+    white-space: pre-line;
+    text-align: center;
+    color: white;
+    border-radius: 1.3vw;
+}
