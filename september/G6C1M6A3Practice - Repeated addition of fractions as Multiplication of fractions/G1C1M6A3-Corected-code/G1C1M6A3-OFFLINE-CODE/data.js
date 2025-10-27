@@ -44,21 +44,22 @@ const AppData = {
             // Scene content
             scenes: {
                 letWriteMultiplication: "Let's write a multiplication sentence for the given addition sentence.",
-                tapProceed: "Tap next to proceed.",
+                tapProceed: "Tap » to proceed.",
                 addedRepeatedly: "Which one is added repeatedly?",
                 tapAnswer: "Choose the correct answer.",
-                tapContinue: "Tap Next to continue.",
+                tapContinue: "Tap » to continue.",
                 howManyTimes: "How many times is ",
                 added: "added?",
                 multiplicationSentence: "Write the multiplication sentence for the addition sentence.",
-                whatIsResult: "What is the result?"
+                whatIsResult: "What is the result?",
+                tapNextChallenge:'Tap » to try a new challenge.'
             },
            
             // Error messages
             errors: {
                 denominatorError: "Oops! You picked the denominator \ninstead of the \nfraction.",
                 countError: "Oops! {count} is the 'count' of fractions. Which is the fraction being added \n{count} times?",
-                goodGoing: "Good going!\n\nWe're adding",
+                goodGoing: "Good going!\nWe're adding ",
                 repeatedly: "repeatedly",
                 twoFifthError: "Oops! Double-check the number of {word}.",
                 yesWeAdded: "Yes! We added",
@@ -331,7 +332,8 @@ window.t = (key, params = {}) => {
         'Whole': 'mathTerms.whole',
         'Multiplication_sentences_can_be_written_as': 'activityComplete.multiplicationSentencesCanBeWrittenAs',
         'For_any_addition_sentence': 'activityComplete.forAnyAdditionSentence',
-        'Activity Completed!': 'activityComplete.title'
+        'Activity Completed!': 'activityComplete.title',
+        'tapNextChallenge':'scenes.tapNextChallenge'
     };
     
     const mappedKey = keyMappings[key] || key;

@@ -10,23 +10,25 @@ const OptionsPanel = ({
   validate,
   question,
   setHintSlide,
-  freezeButton
+  freezeButton,
+  setBoxCss
 }) => {
   const [feedback, setFeedback] = useState(false);
   const CORRECT_ID = "D"; // a × 1/b
   const [disabledAll, setDisabledAll] = useState(false);
   const [wrongIds, setWrongIds] = useState(new Set());
-  const [wrongId,setWrongId]=useState("")
+  const [wrongId, setWrongId] = useState("");
   const [correctId, setCorrectId] = useState(null);
   const [errorShow, setErrorShow] = useState(false);
-  const {t}=useTranslation();
-  useEffect(()=>{
-    if(freezeButton){
+  const { t } = useTranslation();
+  useEffect(() => {
+    if (freezeButton) {
       setDisabledAll(true);
       setCorrectId("D");
       setErrorShow(true);
+      setBoxCss("correct")
     }
-  },[freezeButton])
+  }, [freezeButton]);
   const handleSelect = (value, index) => {
     playClick();
     const labelNode = typeof value === "string" ? value : value?.label;
@@ -38,6 +40,7 @@ const OptionsPanel = ({
         setErrorShow(true);
         setCorrectId(value && value.id ? value.id : null);
         setDisabledAll(true);
+        setBoxCss("correct");
         if (typeof onSelect === "function") {
           onSelect({
             selectedId: value?.id,
@@ -52,6 +55,7 @@ const OptionsPanel = ({
         playWrong();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("wrong");
         if (value && value.id)
           setWrongIds((prev) => new Set(prev).add(value.id));
         setWrongId(value.id);
@@ -74,6 +78,7 @@ const OptionsPanel = ({
         playCorrect();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("correct")
         setCorrectId(CORRECT_ID);
         setDisabledAll(true);
         if (typeof onSelect === "function") {
@@ -90,6 +95,7 @@ const OptionsPanel = ({
         playWrong();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("wrong")
         if (value && value.id)
           setWrongIds((prev) => new Set(prev).add(value.id));
         setWrongId(value.id);
@@ -221,8 +227,9 @@ const OptionsPanel = ({
           height="9vh"
           fontSize="3vw"
           showTap={false}
-          showActive={false}
+          showActive={!disabledAll}
           onClick={handleHint}
+          disabled={disabledAll}
         />
       </div>
 
@@ -230,24 +237,17 @@ const OptionsPanel = ({
         className="feedback-box"
         style={{
           backgroundColor:
+            correctId === "D" ? "#2ecc71" : wrongIds.size > 0 ? "#e27a7a" : "",
+          border:
             correctId === "D"
-              ? "lightgreen"
+              ? "0.3vw dashed darkgreen"
               : wrongIds.size > 0
-              ? "salmon"
+              ? "0.3vw dashed darksalmon"
               : "",
-          borderColor:
-            correctId === "D"
-              ? "darkgreen"
-              : wrongIds.size > 0
-              ? "darksalmon"
-              : "",
+          color:'black'    
         }}
       >
-        {errorShow ? (
-          <ErrorMessage wrongId={wrongId} correctId={correctId} />
-        ) : (
-          <span>Feedback</span>
-        )}
+        {errorShow && <ErrorMessage wrongId={wrongId} correctId={correctId} />}
       </div>
     </div>
   );

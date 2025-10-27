@@ -8,14 +8,14 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         buttons: {
-                next: "NEXT",
-                previous: "«",
-                start: "START",
-                check: "CHECK",
-                nextQuestion: "Next Question",
-                startOver: "Start Over",
-                proceed: "»"
-            },
+          next: "NEXT",
+          previous: "«",
+          start: "START",
+          check: "CHECK",
+          nextQuestion: "Next Question",
+          startOver: "Start Over",
+          proceed: "»",
+        },
         writingRatio: "Representing and Writing Ratios",
         get_ready_to_explore:
           "Get ready to explore ratios in action.\nYou will practice representing ratios in different forms.",
@@ -25,11 +25,10 @@ i18n.use(initReactI18next).init({
         nextContinue: "Tap ‘Next’ to continue.",
         start: "START",
         next: "NEXT",
-        selectCorrect:"Select the \nCorrect ratio",
-        representingRatios:
-          "Represent the",
-        rationCatDog:"ratio of cats to dogs",
-        inThisPicture:"in this picture.",  
+        selectCorrect: "Select the \nCorrect ratio",
+        representingRatios: "Represent the",
+        rationCatDog: "ratio of cats to dogs",
+        inThisPicture: "in this picture.",
         tapRatio:
           "Tap the correct ratio in the correct form to fill the highlighted box.",
         great: "Great!",
@@ -40,8 +39,8 @@ i18n.use(initReactI18next).init({
         success: "is the the correct {{word}} form required!",
         successTwo: "Great! {{count}} is the correct ratio required.",
         successThree: "is the correct ratio required.",
-        proceed: "Tap ▶ to proceed.",
-        tapNext: "Tap ▶ to next.",
+        proceed: "Tap » to proceed.",
+        tapNext: "Tap » to continue.",
         word: "Word",
         fraction: "Fraction",
         symbol: "Symbol",
@@ -49,7 +48,8 @@ i18n.use(initReactI18next).init({
           "At a table for 8,\n 6 seats are filled\n and 2 seats are empty.",
         questionTwo:
           "At a table for 8, \n2 seats are empty and 6 seats are filled.",
-        questionExtra:"At a table for 8,\n 2 seats are empty and 6 seats are filled.",
+        questionExtra:
+          "At a table for 8,\n 2 seats are empty and 6 seats are filled.",
         questionThree: "A bag contains 9 yellow marbles and 7 blue marbles.",
         questionFive: "A classroom has 9 boys and 14 girls.",
         questionSix: "A basket contains 16 apples and 19 bananas.",
@@ -59,8 +59,8 @@ i18n.use(initReactI18next).init({
         questionFour: "A bag contains 9 yellow marbles and 7 blue marbles.",
         questionFourHeading: "ratio of blue to yellow marbles.",
         emptyChairsHeading: "Represent the",
-        extraHeading:"ratio of empty to filled seats.",
-        fieldToEmpty:"ratio of filled to empty seats.",
+        extraHeading: "ratio of empty to filled seats.",
+        fieldToEmpty: "ratio of filled to empty seats.",
         tableErrorSymbol:
           "Not quite! We need filled seats first, then empty seats. Try again!",
         tableErrorFraction:
@@ -84,8 +84,8 @@ i18n.use(initReactI18next).init({
         ratioOrange: "Ratio of\nbananas to apples",
         ratioStudent: "Ratio of students in\nplayground to classroom",
         ratioPlaground: "Ratio of students in\nclassroom to playground",
-        ratio_of_pentagons: "Ratio of triangles to pentagons",
-        ratio_of_triangles: "Ratio of pentagons to triangles",
+        ratio_of_pentagons: "Ratio of triangles to\n pentagons",
+        ratio_of_triangles: "Ratio of pentagons to\n triangles",
         appleErrorOne:
           "Oops! That’s not correct. There are 5 oranges, not 10. Try again!",
         appleErrorTwo:

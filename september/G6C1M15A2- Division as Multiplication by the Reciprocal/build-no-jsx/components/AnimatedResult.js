@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./AnimatedResult.css";
 import { useTranslation } from "react-i18next";
 const AnimatedResult = ({
@@ -9,14 +9,18 @@ const AnimatedResult = ({
   const {
     t
   } = useTranslation();
+  const [stepZero, setStepZero] = useState(false);
   const [stepOne, setStepOne] = React.useState(false);
+  const [stepOneHalf, setStepOneHalf] = React.useState(false);
   const [stepTwo, setStepTwo] = React.useState(false);
   const [stepThree, setStepThree] = React.useState(false);
   const [stepFour, setStepFour] = React.useState(false);
   if (freezeAnimation) {
     useEffect(() => {
       if (freezeAnimation) {
+        setStepZero(true);
         setStepOne(true);
+        setStepOneHalf(true);
         setStepTwo(true);
         setStepThree(true);
         setStepFour(true);
@@ -24,17 +28,23 @@ const AnimatedResult = ({
     }, [freezeAnimation]);
   } else {
     React.useEffect(() => {
-      setStepOne(true);
+      setStepZero(true);
       setTimeout(() => {
-        setStepTwo(true);
+        setStepOne(true);
       }, 1500);
       setTimeout(() => {
+        setStepOneHalf(true);
+      }, 3500);
+      setTimeout(() => {
+        setStepTwo(true);
+      }, 5000);
+      setTimeout(() => {
         setStepThree(true);
-      }, 2500);
+      }, 6500);
       setTimeout(() => {
         setStepFour(true);
         setNext(true);
-      }, 3000);
+      }, 7500);
     }, []);
   }
   return /*#__PURE__*/React.createElement("div", {
@@ -47,10 +57,10 @@ const AnimatedResult = ({
       height: "22vh",
       position: "fixed",
       top: "36%",
-      left: "18%",
-      opacity: stepTwo ? "" : "0"
+      left: "18.5%",
+      opacity: stepOneHalf ? "" : "0"
     },
-    className: `${stepTwo ? "animate-result" : ""}`
+    className: `${stepOneHalf ? "animate-result" : ""}`
   }, /*#__PURE__*/React.createElement("path", {
     style: {
       fill: "white"
@@ -64,7 +74,7 @@ const AnimatedResult = ({
       height: "18vh",
       position: "fixed",
       top: "32%",
-      left: "26%",
+      left: "27%",
       opacity: stepThree ? "" : "0"
     },
     className: `${stepThree ? "animate-result" : ""}`
@@ -77,23 +87,26 @@ const AnimatedResult = ({
     style: {
       position: "fixed",
       top: "36%",
-      left: "33%",
+      left: "35%",
       color: "rgb(67, 213, 122)",
       fontSize: "2vw",
       opacity: stepFour ? "" : "0"
     },
-    className: `${stepFour ? "animate-result" : ""}`
+    className: `${stepThree ? "animate-result" : ""}`
   }, t("reciprocal", {
     count: question[1]
   }))), /*#__PURE__*/React.createElement("div", {
     className: "equal-align"
   }, /*#__PURE__*/React.createElement("span", {
-    className: `${stepOne ? "animate-result" : ""}`,
+    className: `${stepZero ? "animate-result" : ""}`,
     style: {
       fontSize: "4vw"
     }
   }, "="), /*#__PURE__*/React.createElement("span", {
-    className: `${stepOne ? "animate-result" : ""}`
+    className: `${stepOne ? "animate-result" : ""}`,
+    style: {
+      opacity: stepOne ? "" : "0"
+    }
   }, question[0])), /*#__PURE__*/React.createElement("span", {
     className: `${stepTwo ? "animate-result" : ""}`,
     style: {
@@ -101,9 +114,9 @@ const AnimatedResult = ({
       color: "#11affc"
     }
   }, "\xD7"), /*#__PURE__*/React.createElement("span", {
-    className: `${stepThree ? "animate-result" : ""} result`,
+    className: `${stepFour ? "animate-result" : ""} result`,
     style: {
-      opacity: stepThree ? "" : "0",
+      opacity: stepFour ? "" : "0",
       color: "#43d57a"
     }
   }, /*#__PURE__*/React.createElement("span", {

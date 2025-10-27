@@ -53,15 +53,15 @@
 .circle {
     border: 1vh solid orange;
     border-radius: 3.3vw;
-    height: 58vh;
+    height: 62vh;
     width: 40vw;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    /* right-align content */
+    justify-content: center;
     background: white;
     overflow: hidden;
-    padding-right: 2vw;
+    padding-bottom: 3vw;
+    padding-left: 2vw;
 }
 
 .circle img {

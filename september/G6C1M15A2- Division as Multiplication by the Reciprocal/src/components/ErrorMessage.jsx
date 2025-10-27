@@ -7,13 +7,21 @@ const ErrorMessage = ({ wrongId, correctId }) => {
   return (
     <div>
       {correctId === "D" ? (
-        <p className="success-message">{t("error.success")}</p>
+        <p className="success-message" style={{ color: "black" }}>
+          {t("error.success")}
+        </p>
       ) : wrongId === "A" ? (
-        <p className="error-message">{t("error.errorOne")}</p>
+        <p className="error-message" style={{ color: "black" }}>
+          {t("error.errorOne")}
+        </p>
       ) : wrongId === "C" ? (
-        <p className="error-message">{t("error.errorThree")}</p>
+        <p className="error-message" style={{ color: "black" }}>
+          {t("error.errorThree")}
+        </p>
       ) : (
-        <p className="error-message">{t("error.errorTwo")}</p>
+        <p className="error-message" style={{ color: "black" }}>
+          {t("error.errorTwo")}
+        </p>
       )}
     </div>
   );

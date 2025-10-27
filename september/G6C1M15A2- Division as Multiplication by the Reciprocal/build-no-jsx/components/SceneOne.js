@@ -45,9 +45,7 @@ const SceneOne = ({
     if (isCorrect) {
       setHeading(false);
       setShowNextOne(true);
-    } else {
-      setBoxCss("wrong");
-    }
+    } else {}
   }, [isCorrect]);
   const handleNextOne = () => {
     playClick();
@@ -106,7 +104,8 @@ const SceneOne = ({
       setIsCorrect(isCorrect);
     },
     setHintSlide: setHintSlide,
-    freezeButton: freezeButton
+    freezeButton: freezeButton,
+    setBoxCss: setBoxCss
   }))), /*#__PURE__*/React.createElement("div", {
     className: "scene-footer"
   }, /*#__PURE__*/React.createElement("button", {

@@ -1,0 +1,137 @@
+.scene-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.scene-container .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90vw;
+    border-bottom: 0.4vw solid #ffd550;
+    height: 20vh;
+}
+
+.scene-container .top-heading {
+    font-size: 4vw;
+    color: white;
+    text-align: center;
+}
+
+.scene-container .top .align-hand-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0vw;
+}
+
+.scene-container .top .align-hand-image .shout-loud {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1vh;
+    background-color: #ffd550;
+    font-size: 2.5vw;
+    color: rgb(18, 18, 18);
+    border-radius: 1vw;
+}
+
+.scene-container .boy-hand {
+    width: 14vw;
+}
+
+.scene-container .main {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90vw;
+    gap: 2vw;
+}
+
+.scene-container .girl-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    gap: 5vh;
+    width: 30vw;
+    height: 80vh;
+}
+
+.scene-container .girl-container .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24vw;
+    height: 21vh;
+    border-radius: 1.3vw;
+    background-color: white;
+    font-size: 2.5vw;
+    white-space: pre-line;
+    text-align: center;
+    font-weight: 600;
+    padding: 1vh;
+    position: relative;
+}
+
+.scene-container .box .align-triangle {
+    position: absolute;
+    font-size: 5vw;
+    color: white;
+    bottom: -35%;
+    left: 21%;
+}
+
+.scene-container .girl-container .girl-image {
+    width: 28vw;
+}
+
+.scene-container .one {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6vw;
+    position: relative;
+    height: 80vh;
+    width: 70vw;
+}
+
+.scene-container .one .image-one {
+    width: 15vw;
+    cursor: pointer;
+}
+
+.scene-container .one .image-two {
+    width: 13vw;
+    cursor: pointer;
+}
+
+.scene-container .one .image-three {
+    width: 13vw;
+    cursor: pointer;
+}
+
+.scene-container .one .speaker-align {
+    position: absolute;
+    top: 0%;
+    left: 38%;
+}
+
+.scene-container .one .align-next {
+    position: absolute;
+    bottom: 3%;
+    right: 1%;
+}
+
+.speaker {
+    width: 15vw;
+    filter: drop-shadow(2px 4px 6px white);
+    cursor: pointer;
+}
+
+.opacity{
+    opacity: 0.6;
+}

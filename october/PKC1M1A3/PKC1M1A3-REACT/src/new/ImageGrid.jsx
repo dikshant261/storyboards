@@ -1,12 +1,35 @@
 import React, { useEffect, useState } from "react";
 import "./ImageGrid.css";
-import { playClick } from "./PlayAudio";
-
+import {
+  playClick,
+  playEight,
+  playFive,
+  playFour,
+  playNine,
+  playOne,
+  playSeven,
+  playSix,
+  playTen,
+  playThree,
+  playTwo,
+} from "./PlayAudio";
+const playSound = [
+  playOne,
+  playTwo,
+  playThree,
+  playFour,
+  playFive,
+  playSix,
+  playSeven,
+  playEight,
+  playNine,
+  playTen,
+];
 const ImageGrid = ({ renderCount = 6, imageName = "image1.png", disabled }) => {
   const images = Array.from({ length: renderCount }, (_, i) => i + 1);
   const [counts, setCounts] = useState(Array(renderCount).fill(0));
   const [clickOrder, setClickOrder] = useState(0);
-
+  console.log("count:", clickOrder);
   // Reset both when renderCount changes
   useEffect(() => {
     setCounts(Array(renderCount).fill(0));
@@ -19,7 +42,7 @@ const ImageGrid = ({ renderCount = 6, imageName = "image1.png", disabled }) => {
       : "image-grid-container";
 
   const handleImageClick = (index) => {
-    playClick();
+    if (playSound[clickOrder]) playSound[clickOrder]();
     setCounts((prev) => {
       if (prev[index] !== 0) return prev; // already clicked, do nothing
 
@@ -55,6 +78,7 @@ const ImageGrid = ({ renderCount = 6, imageName = "image1.png", disabled }) => {
             style={{
               cursor: counts[index] ? "not-allowed" : "pointer",
               opacity: counts[index] ? "0.5" : "1",
+              pointerEvents: counts[index] ? "none" : "auto",
             }}
           />
           {counts[index] > 0 && (

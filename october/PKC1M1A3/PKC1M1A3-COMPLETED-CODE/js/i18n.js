@@ -39,6 +39,19 @@ const appData = {
         correct: "Well Done!",
         incorrect: "Oops! That's Incorrect. Try Again.",
       },
+
+      audio: {
+        One: "assets/sound/en/one_en.mp3",
+        Two: "assets/sound/en/two_en.mp3",
+        Three: "assets/sound/en/three_en.mp3",
+        Four: "assets/sound/en/four_en.mp3",
+        Five: "assets/sound/en/five_en.mp3",
+        Six: "assets/sound/en/six_en.mp3",
+        Seven: "assets/sound/en/seven_en.mp3",
+        Eight: "ssets/sound/en/eight_en.mp3",
+        Nine: "assets/sound/en/nine_en.mp3",
+        Ten: "assets/sound/en/ten_en.mp3",
+      },
     },
   },
   id: {
@@ -78,6 +91,18 @@ const appData = {
       feedback: {
         correct: "Bagus sekali!",
         incorrect: "Ups! Jawabanmu salah. Coba lagi.",
+      },
+      audio: {
+        One: "assets/sound/id/one_id.mp3",
+        Two: "assets/sound/id/two_id.mp3",
+        Three: "assets/sound/id/three_id.mp3",
+        Four: "assets/sound/id/four_id.mp3",
+        Five: "assets/sound/id/five_id.mp3",
+        Six: "assets/sound/id/six_id.mp3",
+        Seven: "assets/sound/id/seven_id.mp3",
+        Eight: "ssets/sound/id/eight_id.mp3",
+        Nine: "assets/sound/id/nine_id.mp3",
+        Ten: "assets/sound/id/ten_id.mp3",
       },
     },
   },

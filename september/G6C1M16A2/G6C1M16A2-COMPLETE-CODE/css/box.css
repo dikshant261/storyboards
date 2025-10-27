@@ -5,10 +5,12 @@
   color: white;
   gap: 2vw;
 }
+
 .alignment span {
   font-size: 3.5vw;
   font-weight: bold;
 }
+
 .box {
   display: flex;
   align-items: center;
@@ -24,12 +26,12 @@
   margin-bottom: 9vw;
 }
 
-.box .wrong {
+.alignment .wrong {
   border-color: darksalmon;
   background-color: rgb(247, 142, 130);
 }
 
-.box .correct {
+.alignment .correct {
   border-color: darkgreen;
-  background-color: lightgreen;
+  background-color: rgb(31, 157, 83);
 }

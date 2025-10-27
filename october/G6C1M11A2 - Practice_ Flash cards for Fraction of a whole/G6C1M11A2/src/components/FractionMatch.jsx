@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./FractionMatch.css";
-import { playClick, playCorrect, playWrong } from "./PlayAudio";
+
+const playClick = () => console.log("Click played");
+const playCorrect = () => console.log("Correct played");
+const playWrong = () => console.log("Wrong played");
+
 function Fraction({ value }) {
-  // value: "1/5"
   const [numerator, denominator] = value.split("/");
   return (
     <span
@@ -21,6 +24,7 @@ function Fraction({ value }) {
     </span>
   );
 }
+
 const FractionMatch = ({ setShowError, setShowSuccess, setFinal }) => {
   const upperArrayInit = [
     { id: 1, upper: "1/5 of 20", answer: 4 },
@@ -41,13 +45,13 @@ const FractionMatch = ({ setShowError, setShowSuccess, setFinal }) => {
   const [upperArray] = useState(upperArrayInit);
   const [lowerArray] = useState(lowerArrayInit);
   const [selectedUpper, setSelectedUpper] = useState(null);
-  const [matchedPairs, setMatchedPairs] = useState([]); // [{upperId, lowerId}]
+  const [matchedPairs, setMatchedPairs] = useState([]);
   const [wrongPair, setWrongPair] = useState(null);
+
   useEffect(() => {
-    if (matchedPairs.length === upperArray.length) {
-      setFinal(true);
-    }
+    if (matchedPairs.length === upperArray.length) setFinal(true);
   }, [matchedPairs, upperArray.length, setFinal]);
+
   const handleUpperClick = (item) => {
     if (matchedPairs.find((pair) => pair.upperId === item.id)) return;
     setSelectedUpper(item);
@@ -59,8 +63,7 @@ const FractionMatch = ({ setShowError, setShowSuccess, setFinal }) => {
 
   const handleLowerClick = (lowerItem) => {
     if (!selectedUpper) return;
-
-    if (matchedPairs.find((pair) => pair.upperId === selectedUpper.id)) return;
+    if (matchedPairs.find((pair) => pair.lowerId === lowerItem.id)) return;
 
     if (selectedUpper.answer === lowerItem.lower) {
       setMatchedPairs((prev) => [
@@ -79,22 +82,20 @@ const FractionMatch = ({ setShowError, setShowSuccess, setFinal }) => {
     }
   };
 
+  const getMatchedLower = (upperId) => {
+    const pair = matchedPairs.find((p) => p.upperId === upperId);
+    if (!pair) return null;
+    return lowerArray.find((l) => l.id === pair.lowerId);
+  };
+
   return (
     <div className="game-container">
-      {/* Upper Row */}
-      <div className="card-row">
-        {[
-          // Matched cards in order of matching
-          ...matchedPairs.map((pair) =>
-            upperArray.find((u) => u.id === pair.upperId)
-          ),
-          // Unmatched cards in their original order
-          ...upperArray.filter(
-            (item) => !matchedPairs.some((pair) => pair.upperId === item.id)
-          ),
-        ].map((item) => {
+      {/* UPPER ROW */}
+      <div className="card-row upper-row">
+        {upperArray.map((item) => {
           const isMatched = matchedPairs.some((p) => p.upperId === item.id);
           const isWrong = wrongPair && wrongPair.upperId === item.id;
+
           return (
             <div
               key={item.id}
@@ -102,40 +103,12 @@ const FractionMatch = ({ setShowError, setShowSuccess, setFinal }) => {
                 selectedUpper?.id === item.id ? " selected" : ""
               }${isMatched ? " matched" : ""}${isWrong ? " wrong" : ""}`}
               onClick={() => handleUpperClick(item)}
-              style={
-                isMatched
-                  ? {
-                      transform: "translateX(0)",
-                      animation: "moveLeft 0.8s ease forwards",
-                      pointerEvents: "none",
-                    }
-                  : {}
-              }
+              style={{
+                pointerEvents: isMatched ? "none" : "auto",
+                order: isMatched ? -1 : item.id, // move matched card to left
+              }}
             >
-              {isMatched && (
-                <span
-                  className="check-icon"
-                  style={{
-                    position: "absolute",
-                    top: "0px",
-                    left: "0px",
-                    color: "white",
-                    fontSize: "1.5em",
-                    fontWeight: "bold",
-                    zIndex: "2",
-                    background: "rgb(0, 0, 0, 0.5)",
-                    width: "15vw",
-                    height: "21vh",
-                    borderRadius: "1vw",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  ✓
-                </span>
-              )}
-
+              {isMatched && <span className="check-icon">✓</span>}
               {item.upper.match(/^(\d+)\/(\d+) of (.+)$/) ? (
                 <>
                   <Fraction value={item.upper.match(/^(\d+)\/(\d+)/)[0]} /> of{" "}
@@ -148,63 +121,26 @@ const FractionMatch = ({ setShowError, setShowSuccess, setFinal }) => {
           );
         })}
       </div>
-      {/* Lower Row */}
-      <div className="card-row">
-        {[
-          // Matched cards in order of matching
-          ...matchedPairs.map((pair) =>
-            lowerArray.find((l) => l.id === pair.lowerId)
-          ),
-          // Unmatched cards in their original order
-          ...lowerArray.filter(
-            (item) => !matchedPairs.some((pair) => pair.lowerId === item.id)
-          ),
-        ].map((item) => {
-          const isMatched = matchedPairs.some(
-            (pair) => pair.lowerId === item.id
-          );
+
+      <div className="card-row lower-row">
+        {lowerArray.map((item) => {
+          const isMatched = matchedPairs.some((p) => p.lowerId === item.id);
           const isWrong = wrongPair && wrongPair.lowerId === item.id;
+
           return (
             <div
               key={item.id}
               className={`card lower${isMatched ? " matched" : ""}${
                 isWrong ? " wrong" : ""
               }`}
-              onClick={() => (isMatched ? undefined : handleLowerClick(item))}
-              style={
-                isMatched
-                  ? {
-                      transform: "translateX(0)",
-                      animation: "moveLeft 0.8s ease forwards",
-                      pointerEvents: "none",
-                    }
-                  : {}
-              }
+              onClick={() => handleLowerClick(item)}
+              style={{
+                pointerEvents: isMatched ? "none" : "auto",
+                order: isMatched ? -1 : item.id, // move matched lower card to left
+              }}
             >
-              {isMatched && (
-                <span
-                  className="check-icon"
-                  style={{
-                    position: "absolute",
-                    top: "0px",
-                    left: "0px",
-                    color: "white",
-                    fontSize: "1.5em",
-                    fontWeight: "bold",
-                    zIndex: "2",
-                    background: "rgb(0, 0, 0, 0.5)",
-                    width: "15vw",
-                    height: "21vh",
-                    borderRadius: "1vw",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  ✓
-                </span>
-              )}
               {item.lower}
+              {isMatched && <span className="check-icon">✓</span>}
             </div>
           );
         })}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Division as multiplication by its reciprocal</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"
+        crossorigin="anonymous"></script>
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="css/Outlet.css">
+    <link rel="stylesheet" href="css/ReusableButton.css">
+    <link rel="stylesheet" href="css/scene.css">
+    <!-- React and ReactDOM -->
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <!-- Babel removed - using React.createElement instead of JSX -->
+
+    <!-- Language Configuration -->
+    <script>
+        // Set the default language here
+        // Available languages: 'en' (English), 'id' (Indonesian)
+        window.APP_LANGUAGE = 'id'; // Change this to 'id' for Indonesian
+    </script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="js/i18n.js"></script>
+    <script src="js/Outlet.js"></script>
+    <script src="js/PlayAudio.js"></script>
+    <script src="js/RefreshDetector.js"></script>
+    <script src="js/Tap.js"></script>
+    <script src="js/ReusableButton.js"></script>
+    <script src="js/Scene.js"></script>
+    <script>
+        ReactDOM.render(
+            React.createElement(Outlet, null),
+            document.getElementById("root")
+        );
+    </script>
+
+</body>
+
+</html>

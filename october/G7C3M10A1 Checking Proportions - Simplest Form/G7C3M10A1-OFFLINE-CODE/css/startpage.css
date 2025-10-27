@@ -1,0 +1,121 @@
+.startpage-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2vh;
+    height: 100vh;
+}
+
+.fraction-container {
+    color: #fff;
+    height: 100vh;
+    width: 100vw;
+    text-align: center;
+    padding-top: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.startpage-heading {
+    text-align: center;
+    font-size: 5vw;
+    color: var(--secondary-color);
+}
+
+.startpage-content {
+    text-align: center;
+    font-size: 3vw;
+    color: white;
+    white-space: pre-line;
+    line-height: 5vw;
+}
+
+.title {
+    font-size: 4vw;
+    font-weight: bold;
+    color: orange;
+    margin-bottom: 5vh;
+}
+
+.align-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    width: 89vw;
+    gap: 2vw;
+    height: 70vh;
+}
+
+.circle {
+    border: 1vh solid orange;
+    border-radius: 3.3vw;
+    height: 62vh;
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    overflow: hidden;
+    padding-bottom: 3vw;
+    padding-left: 2vw;
+}
+
+.circle img {
+    width: 85%;
+    /* smaller width */
+    object-fit: contain;
+    /* ensures proper sizing */
+    align-self: center;
+    /* keeps it vertically centered */
+}
+
+
+.fraction {
+    font-size: 12vw;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.numerator,
+.denominator {
+    display: block;
+}
+
+.line {
+    display: block;
+    height: 1vh;
+    background-color: white;
+    width: 100%;
+    margin: 0.5vh auto;
+}
+
+.content {
+    margin-top: 5vh;
+    font-size: 2.5vw;
+    white-space: pre-line;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6vh;
+}
+
+.line-height {
+    line-height: 3.5vw;
+}
+
+.start-btn {
+    margin-top: 3vh;
+    padding: 1.5vh 4vh;
+    font-size: 2.5vh;
+    border: none;
+    border-radius: 1vh;
+    background: linear-gradient(to bottom, #c48a36, #3e2a00);
+    color: white;
+    cursor: pointer;
+}

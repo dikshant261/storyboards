@@ -15,7 +15,7 @@ function ErrorMessage({ answer, question, flag, numberString }) {
               { className: "option-fraction-error" },
               React.createElement("span", null, question[0]),
               React.createElement("span", { className: "fraction-line-error" }),
-              React.createElement("span", null, question[1])
+              React.createElement("span", null, question[1]),
             ),
             t("three_times", { count: question[2] })
           )
@@ -57,4 +57,4 @@ function ErrorMessage({ answer, question, flag, numberString }) {
         )
   );
 }
-window.ErrorMessage=ErrorMessage;
+window.ErrorMessage = ErrorMessage;

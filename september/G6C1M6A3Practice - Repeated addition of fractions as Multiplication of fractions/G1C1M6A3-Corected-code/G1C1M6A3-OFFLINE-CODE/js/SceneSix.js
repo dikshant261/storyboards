@@ -60,7 +60,7 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
         React.createElement(
           "div",
           { className: "box-align" },
-          React.createElement("p", null, question[2]),
+          React.createElement("p", { style: { fontWeight: 600 } }, question[2]),
           React.createElement("p", null, "×"),
           React.createElement(FractionNuber, { question }),
           React.createElement("p", null, "="),
@@ -71,7 +71,7 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
             { className: "box-fraction", style: { fontSize: "6vw" } },
             React.createElement(
               "span",
-              { className: `top ${showRedBorder==="" ? "" : "red-border"}` },
+              { className: `top ${showRedBorder === "" ? "" : "red-border"}` },
               `${question[2]} × ${question[0]}`
             ),
             React.createElement("span", { className: "line" }),
@@ -103,11 +103,15 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
       React.createElement(
         "div",
         { className: "scenethree-container-main-option" },
-        React.createElement(OptionFour, {
-          question,
-          response: checkResponse,
-          answer,
-        }),
+        React.createElement(
+          "div",
+          { style: { position: "absolute", bottom: "2%" } },
+          React.createElement(OptionFour, {
+            question,
+            response: checkResponse,
+            answer,
+          })
+        ),
 
         errorShow
           ? React.createElement(ErrorMessageThree, { answer, question })
@@ -125,7 +129,7 @@ const SceneSix = ({ question, onNext, flag, onPrev }) => {
         "«"
       ),
       stepOne ? React.createElement("p", null, t("tapAnswer")) : null,
-      showAns ? React.createElement("p", null, t("tapContinue")) : null,
+      showAns ? React.createElement("p", null, t("tapNextChallenge")) : null,
       React.createElement(
         "div",
         null,

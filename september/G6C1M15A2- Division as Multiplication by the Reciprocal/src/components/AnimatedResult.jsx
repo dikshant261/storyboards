@@ -1,16 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./AnimatedResult.css";
 import { useTranslation } from "react-i18next";
 const AnimatedResult = ({ question, setNext, freezeAnimation }) => {
   const { t } = useTranslation();
+  const [stepZero, setStepZero] = useState(false);
   const [stepOne, setStepOne] = React.useState(false);
+  const [stepOneHalf, setStepOneHalf] = React.useState(false);
   const [stepTwo, setStepTwo] = React.useState(false);
   const [stepThree, setStepThree] = React.useState(false);
   const [stepFour, setStepFour] = React.useState(false);
   if (freezeAnimation) {
     useEffect(() => {
       if (freezeAnimation) {
+        setStepZero(true);
         setStepOne(true);
+        setStepOneHalf(true);
         setStepTwo(true);
         setStepThree(true);
         setStepFour(true);
@@ -18,17 +22,23 @@ const AnimatedResult = ({ question, setNext, freezeAnimation }) => {
     }, [freezeAnimation]);
   } else {
     React.useEffect(() => {
-      setStepOne(true);
+      setStepZero(true);
       setTimeout(() => {
-        setStepTwo(true);
+        setStepOne(true);
       }, 1500);
       setTimeout(() => {
+        setStepOneHalf(true);
+      }, 3500);
+      setTimeout(() => {
+        setStepTwo(true);
+      }, 5000);
+      setTimeout(() => {
         setStepThree(true);
-      }, 2500);
+      }, 6500);
       setTimeout(() => {
         setStepFour(true);
         setNext(true);
-      }, 3000);
+      }, 7500);
     }, []);
   }
   return (
@@ -42,10 +52,10 @@ const AnimatedResult = ({ question, setNext, freezeAnimation }) => {
             height: "22vh",
             position: "fixed",
             top: "36%",
-            left: "18%",
-            opacity: stepTwo ? "" : "0",
+            left: "18.5%",
+            opacity: stepOneHalf ? "" : "0",
           }}
-          className={`${stepTwo ? "animate-result" : ""}`}
+          className={`${stepOneHalf ? "animate-result" : ""}`}
         >
           <path
             style={{ fill: "white" }}
@@ -60,7 +70,7 @@ const AnimatedResult = ({ question, setNext, freezeAnimation }) => {
             height: "18vh",
             position: "fixed",
             top: "32%",
-            left: "26%",
+            left: "27%",
             opacity: stepThree ? "" : "0",
           }}
           className={`${stepThree ? "animate-result" : ""}`}
@@ -74,24 +84,27 @@ const AnimatedResult = ({ question, setNext, freezeAnimation }) => {
           style={{
             position: "fixed",
             top: "36%",
-            left: "33%",
+            left: "35%",
             color: "rgb(67, 213, 122)",
             fontSize: "2vw",
             opacity: stepFour ? "" : "0",
           }}
-          className={`${stepFour ? "animate-result" : ""}`}
+          className={`${stepThree ? "animate-result" : ""}`}
         >
           {t("reciprocal", { count: question[1] })}
         </p>
       </div>
       <div className="equal-align">
         <span
-          className={`${stepOne ? "animate-result" : ""}`}
+          className={`${stepZero ? "animate-result" : ""}`}
           style={{ fontSize: "4vw" }}
         >
           =
         </span>
-        <span className={`${stepOne ? "animate-result" : ""}`}>
+        <span
+          className={`${stepOne ? "animate-result" : ""}`}
+          style={{ opacity: stepOne ? "" : "0" }}
+        >
           {question[0]}
         </span>
       </div>
@@ -102,8 +115,8 @@ const AnimatedResult = ({ question, setNext, freezeAnimation }) => {
         ×
       </span>
       <span
-        className={`${stepThree ? "animate-result" : ""} result`}
-        style={{ opacity: stepThree ? "" : "0", color: "#43d57a" }}
+        className={`${stepFour ? "animate-result" : ""} result`}
+        style={{ opacity: stepFour ? "" : "0", color: "#43d57a" }}
       >
         <span className="num">1</span>
         <span className="bar"></span>

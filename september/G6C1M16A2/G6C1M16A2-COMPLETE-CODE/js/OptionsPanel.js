@@ -3,7 +3,8 @@ const OptionsPanel = ({
   validate,
   question,
   setHintSlide,
-  freezeButton
+  freezeButton,
+  setBoxCss
 }) => {
   const [feedback, setFeedback] = useState(false);
   const CORRECT_ID = "D"; // a × 1/b
@@ -17,6 +18,7 @@ const OptionsPanel = ({
       setDisabledAll(true);
       setCorrectId("D");
       setErrorShow(true);
+      setBoxCss("correct");
     }
   }, [freezeButton]);
   const handleSelect = (value, index) => {
@@ -28,6 +30,7 @@ const OptionsPanel = ({
         playCorrect();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("correct");
         setCorrectId(value && value.id ? value.id : null);
         setDisabledAll(true);
         if (typeof onSelect === "function") {
@@ -44,6 +47,7 @@ const OptionsPanel = ({
         playWrong();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("wrong");
         if (value && value.id) setWrongIds(prev => new Set(prev).add(value.id));
         setWrongId(value.id);
         if (typeof onSelect === "function") {
@@ -65,6 +69,7 @@ const OptionsPanel = ({
         setFeedback(true);
         setErrorShow(true);
         setCorrectId(CORRECT_ID);
+        setBoxCss("correct");
         setDisabledAll(true);
         if (typeof onSelect === "function") {
           onSelect({
@@ -80,6 +85,7 @@ const OptionsPanel = ({
         playWrong();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("wrong");
         if (value && value.id) setWrongIds(prev => new Set(prev).add(value.id));
         setWrongId(value.id);
         if (typeof onSelect === "function") {
@@ -124,6 +130,7 @@ const OptionsPanel = ({
       className: "den"
     }, d));
   };
+  console.log("feedback", feedback);
   const buildNumericOptions = () => {
     const a = question && question.length > 0 ? question[0] : "a";
     const b = question && question.length > 1 ? question[1] : "b";
@@ -187,17 +194,18 @@ const OptionsPanel = ({
     height: "9vh",
     fontSize: "3vw",
     showTap: false,
-    showActive: false,
+    showActive: !disabledAll,
+    disabled: disabledAll,
     onClick: handleHint
   })), /*#__PURE__*/React.createElement("div", {
     className: "feedback-box",
     style: {
-      backgroundColor: correctId === "D" ? "lightgreen" : wrongIds.size > 0 ? "salmon" : "",
-      borderColor: correctId === "D" ? "darkgreen" : wrongIds.size > 0 ? "darksalmon" : ""
+      backgroundColor: correctId === "D" ? "#1f9d53" : wrongIds.size > 0 ? "salmon" : "",
+      borderColor: correctId === "D" ? "0.3vw dashed darkgreen" : wrongIds.size > 0 ? "0.3vw dashed darksalmon" : ""
     }
-  }, errorShow ? /*#__PURE__*/React.createElement(ErrorMessage, {
+  }, errorShow && /*#__PURE__*/React.createElement(ErrorMessage, {
     wrongId: wrongId,
     correctId: correctId
-  }) : /*#__PURE__*/React.createElement("span", null, t("feedback"))));
+  })));
 };
 window.OptionsPanel=OptionsPanel;

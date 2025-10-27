@@ -4,7 +4,8 @@ import "./startpage.css";
 import ReusableButton from "./ReusableButton";
 import { playClick } from "./PlayAudio";
 import frame from "../assets/frame.png";
-const StartPage = ({ onClose }) => {
+import FrameImag from "./SquirrelQuestion/FrameImage";
+const StartPage = ({ goNext }) => {
   const { t } = useTranslation();
 
   return (
@@ -12,7 +13,7 @@ const StartPage = ({ onClose }) => {
       <h2 className="title">{t("startPage.findingFrames")}</h2>
       <div className="align-row">
         <div className="circle">
-          <img src={frame} />
+          <FrameImag width="63%"/>
         </div>
 
         <div className="content">
@@ -32,7 +33,7 @@ const StartPage = ({ onClose }) => {
             fontSize="3vw"
             onClick={() => {
               playClick();
-              onClose();
+              goNext();
             }}
           />
         </div>

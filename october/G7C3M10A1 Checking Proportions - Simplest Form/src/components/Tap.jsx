@@ -21,6 +21,7 @@ const Tap = ({
         left: left,
         right: right,
         bottom: bottom,
+        cursor:"pointer",
         ...style, // allow extra custom styling
       }}
     />

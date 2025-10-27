@@ -47,7 +47,6 @@
 .feedback-box {
   width: 85%;
   height: 27vh;
-  border: 0.25vw dashed rgba(255, 255, 255, 0.8);
   border-radius: 1vw;
   display: flex;
   align-items: center;

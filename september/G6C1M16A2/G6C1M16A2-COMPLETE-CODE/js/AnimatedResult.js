@@ -5,6 +5,7 @@ const AnimatedResult = ({
   animationSet,
   freezeAnimation,
 }) => {
+  const curvedArrow = "assets/curvedArrow.svg";
   const [stepOne, setStepOne] = React.useState(false);
   const [stepTwo, setStepTwo] = React.useState(false);
   const [showArrow, setShowArrow] = React.useState(false);
@@ -12,6 +13,7 @@ const AnimatedResult = ({
   const [stepFour, setStepFour] = React.useState(false);
   const [stepFive, setStepFive] = React.useState(false);
   const [stepSix, setStepSix] = React.useState(false);
+  const [stepSixHalf, setStepSixHalf] = React.useState(false);
   const [stepSeven, setStepSeven] = React.useState(false);
   const [stepEight, setStepEight] = React.useState(false);
   if (freezeAnimation) {
@@ -23,6 +25,7 @@ const AnimatedResult = ({
         setStepFive(true);
         setStepFour(true);
         setStepSix(true);
+        setStepSixHalf(true);
         setStepSeven(true);
         setStepEight(true);
         setShowArrow(false);
@@ -43,20 +46,23 @@ const AnimatedResult = ({
       }, 4000);
       setTimeout(() => {
         setShowArrow(false);
-      }, 4500);
+      }, 5000);
       setTimeout(() => {
         setStepFive(true);
-      }, 5500);
+      }, 6000);
       setTimeout(() => {
         setStepSix(true);
-      }, 6500);
+      }, 7500);
+      setTimeout(() => {
+        setStepSixHalf(true);
+      }, 8500);
       setTimeout(() => {
         setStepSeven(true);
-      }, 7500);
+      }, 9500);
       setTimeout(() => {
         setStepEight(true);
         setNext(true);
-      }, 8500);
+      }, 10500);
     }, []);
   }
   return /*#__PURE__*/ React.createElement(
@@ -124,57 +130,39 @@ const AnimatedResult = ({
                 left: "33%",
                 color: "rgb(67, 213, 122)",
                 fontSize: "2vw",
-                opacity: stepFour ? "" : "0",
+                opacity: stepThree ? "" : "0",
               },
-              className: `${stepFour && showArrow ? "animate-result" : ""}`,
+              className: `${stepThree && showArrow ? "animate-result" : ""}`,
             },
             t("reciprocal", {
               count: question[2],
             })
           )
         ),
-      /*#__PURE__*/ React.createElement(
-        "svg",
-        {
-          xmlns: "http://www.w3.org/2000/svg",
-          viewBox: "0.9 -0.85 4.2 0.95",
-          style: {
-            width: "11vw",
-            height: "18vh",
-            position: "fixed",
-            top: "29%",
-            left: "20.7%",
-            opacity: stepFive ? "" : "0",
-          },
+      /*#__PURE__*/ React.createElement("img", {
+        src: curvedArrow,
+        style: {
+          width: "10vw",
+          height: "18vh",
+          position: "fixed",
+          top: "29%",
+          left: "21.7%",
+          transform: "rotate(-25deg)",
+          opacity: stepFive ? "" : "0",
         },
-        /*#__PURE__*/ React.createElement("path", {
-          d: "M 1 0 C 2 -1 4 -1 5 0",
-          stroke: "#fff",
-          "strokeWidth": "0.1",
-          fill: "none",
-        })
-      ),
-      /*#__PURE__*/ React.createElement(
-        "svg",
-        {
-          xmlns: "http://www.w3.org/2000/svg",
-          viewBox: "0.9 -0.1 4.2 1.089",
-          style: {
-            width: "11vw",
-            height: "18vh",
-            position: "fixed",
-            top: "53%",
-            left: "20.7%",
-            opacity: stepSeven ? "" : "0",
-          },
+      }),
+      /*#__PURE__*/ React.createElement("img", {
+        src: curvedArrow,
+        style: {
+          width: "10vw",
+          height: "18vh",
+          position: "fixed",
+          top: "53%",
+          left: "21.7%",
+          transform: "scaleY(-1) rotate(-32deg)",
+          opacity: stepSeven ? "" : "0",
         },
-        /*#__PURE__*/ React.createElement("path", {
-          d: "M 1 0 C 3 2 5 0 5 0",
-          stroke: "#fff",
-          "strokeWidth": "0.1",
-          fill: "none",
-        })
-      )
+      })
     ),
     /*#__PURE__*/ React.createElement(
       "div",
@@ -234,9 +222,9 @@ const AnimatedResult = ({
       /*#__PURE__*/ React.createElement(
         "span",
         {
-          className: `${stepThree ? "animate-result" : ""} result`,
+          className: `${stepFour ? "animate-result" : ""} result`,
           style: {
-            opacity: stepThree ? "" : "0",
+            opacity: stepFour ? "" : "0",
             color: "#43d57a",
           },
         },
@@ -286,9 +274,9 @@ const AnimatedResult = ({
         /*#__PURE__*/ React.createElement(
           "span",
           {
-            className: `${stepSix ? "animate-result" : ""}num`,
+            className: `${stepSixHalf ? "animate-result" : ""}num`,
             style: {
-              opacity: stepSix ? "" : "0",
+              opacity: stepSixHalf ? "" : "0",
             },
           },
           question[0]

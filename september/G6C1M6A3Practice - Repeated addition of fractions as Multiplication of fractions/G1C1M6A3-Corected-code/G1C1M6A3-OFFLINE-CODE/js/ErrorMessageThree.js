@@ -15,13 +15,15 @@ function ErrorMessageThree({ answer, question }) {
             React.createElement("span", null, question[1])
           ),
           t("added_times_gives", { count: question[2] }),
+          " ",
           React.createElement(
             "span",
             { className: "option-fraction-error" },
             React.createElement("span", null, question[2] * question[0]),
             React.createElement("span", { className: "fraction-line-error" }),
             React.createElement("span", null, question[1])
-          )
+          ),
+          "."
         )
       : React.createElement(
           "p",
@@ -34,4 +36,4 @@ function ErrorMessageThree({ answer, question }) {
         )
   );
 }
-window.ErrorMessageThree=ErrorMessageThree;
+window.ErrorMessageThree = ErrorMessageThree;

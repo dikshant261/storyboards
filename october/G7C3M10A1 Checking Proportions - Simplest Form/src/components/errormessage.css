@@ -1,0 +1,29 @@
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22vw;
+    height: 24vh;
+    background-color: rgba(250, 128, 114, 0.621);
+    color: white;
+    font-size: 2vw;
+    border-radius: 1vw;
+    padding: 1vh;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22vw;
+    height: 24vh;
+    background-color: rgba(0, 128, 0, 0.735);
+    color: white;
+    font-size: 2vw;
+    border-radius: 1vw;
+    padding: 1vh;
+    text-align: center;
+    white-space: pre-line;
+}

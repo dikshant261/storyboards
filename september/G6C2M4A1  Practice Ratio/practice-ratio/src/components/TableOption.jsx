@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./option.css";
 import TableMessage from "./TableMessage";
 import { useTranslation } from "react-i18next";
@@ -21,11 +21,17 @@ const TableOption = ({
   const { t } = useTranslation();
   const isStepActive = stepOne || stepTwo || stepThree;
 
+  // ✅ Shuffle options once per render (keeps order consistent until options change)
+  const shuffledOptions = useMemo(() => {
+    const shuffled = [...options].sort(() => Math.random() - 0.5);
+    return shuffled;
+  }, [options]);
+
   const handleOptionClick = (option) => {
     boxResultSet(option);
   };
 
-  // render fraction if "a/b"
+  // ✅ Render fraction if "a/b"
   const renderOption = (value) => {
     if (typeof value === "string" && value.match(/^\d+\/\d+$/)) {
       const [num, denom] = value.split("/");
@@ -40,7 +46,7 @@ const TableOption = ({
     return value;
   };
 
-  // lock correct answers from previous steps
+  // ✅ Lock correct answers from previous steps
   const isLockedFromPreviousStep = (opt) => {
     if (boxResultOne === correctOption[0] && !stepOne && opt === correctOption[0])
       return true;
@@ -55,14 +61,14 @@ const TableOption = ({
     let className = "option-button";
     let disabled = !isStepActive;
 
-    // lock if correct from earlier step
+    // Lock from previous steps
     if (isLockedFromPreviousStep(opt)) {
       className += " option-locked";
       disabled = true;
       return { className, disabled };
     }
 
-    // STEP ONE
+    // ✅ STEP ONE
     if (stepOne) {
       if (boxResultOne) {
         if (boxResultOne === correctOption[0]) {
@@ -72,17 +78,13 @@ const TableOption = ({
           if (opt === boxResultOne) {
             disabled = true;
             className += " option-wrong";
-          } else {
-            disabled = false;
-          }
+          } else disabled = false;
         }
-      } else {
-        disabled = false;
-      }
+      } else disabled = false;
       return { className, disabled };
     }
 
-    // STEP TWO
+    // ✅ STEP TWO
     if (stepTwo) {
       if (boxResultTwo) {
         if (boxResultTwo === correctOption[1]) {
@@ -92,17 +94,13 @@ const TableOption = ({
           if (opt === boxResultTwo) {
             disabled = true;
             className += " option-wrong";
-          } else {
-            disabled = false;
-          }
+          } else disabled = false;
         }
-      } else {
-        disabled = false;
-      }
+      } else disabled = false;
       return { className, disabled };
     }
 
-    // STEP THREE
+    // ✅ STEP THREE
     if (stepThree) {
       if (boxResultThree) {
         if (boxResultThree === correctOption[2]) {
@@ -112,13 +110,9 @@ const TableOption = ({
           if (opt === boxResultThree) {
             disabled = true;
             className += " option-wrong";
-          } else {
-            disabled = false;
-          }
+          } else disabled = false;
         }
-      } else {
-        disabled = false;
-      }
+      } else disabled = false;
       return { className, disabled };
     }
 
@@ -179,8 +173,9 @@ const TableOption = ({
         )}
       </div>
 
+      {/* ✅ Use shuffledOptions here */}
       <div className="option-grid">
-        {options.map((opt, idx) => {
+        {shuffledOptions.map((opt, idx) => {
           const props = getButtonProps(opt);
           return (
             <button

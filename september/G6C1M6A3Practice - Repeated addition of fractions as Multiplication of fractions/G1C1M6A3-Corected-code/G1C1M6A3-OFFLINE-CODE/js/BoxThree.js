@@ -1,6 +1,6 @@
 const BoxThree = function(props) {
   const { stepOne, answer, question, red } = props;
-
+  console.log("answer",answer);
   return React.createElement(
     "div",
     { className: "box-container" },

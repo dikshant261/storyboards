@@ -51,7 +51,7 @@ i18n.use(initReactI18next).init({
           hint: "Hint",
           heading:"To divide a Fraction by a Whole Number",
           listOne:"Change division(÷) to multiplication(×).",
-          listeTwo:"Take the reciprocal of the whole number.",
+          listTwo:"Take the reciprocal of the whole number.",
           listThree:"Multiply the fractions.",
           reciprocal:"Reciprocal"
         },

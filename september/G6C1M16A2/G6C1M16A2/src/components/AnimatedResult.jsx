@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./AnimatedResult.css";
 import { useTranslation } from "react-i18next";
+import curvedArrow from "../assets/curvedArrow.svg";
 const AnimatedResult = ({
   question,
   setNext,
@@ -16,8 +17,10 @@ const AnimatedResult = ({
   const [stepFour, setStepFour] = React.useState(false);
   const [stepFive, setStepFive] = React.useState(false);
   const [stepSix, setStepSix] = React.useState(false);
+  const [stepSixHalf, setStepSixHalf] = React.useState(false);
   const [stepSeven, setStepSeven] = React.useState(false);
   const [stepEight, setStepEight] = React.useState(false);
+
   if (freezeAnimation) {
     useEffect(() => {
       if (freezeAnimation) {
@@ -27,6 +30,7 @@ const AnimatedResult = ({
         setStepFive(true);
         setStepFour(true);
         setStepSix(true);
+        setStepSixHalf(true);
         setStepSeven(true);
         setStepEight(true);
         setShowArrow(false);
@@ -47,20 +51,23 @@ const AnimatedResult = ({
       }, 4000);
       setTimeout(() => {
         setShowArrow(false);
-      }, 4500);
+      }, 5000);
       setTimeout(() => {
         setStepFive(true);
-      }, 5500);
+      }, 6000);
       setTimeout(() => {
         setStepSix(true);
-      }, 6500);
+      }, 7500);
+      setTimeout(() => {
+        setStepSixHalf(true);
+      }, 8500);
       setTimeout(() => {
         setStepSeven(true);
-      }, 7500);
+      }, 9500);
       setTimeout(() => {
         setStepEight(true);
         setNext(true);
-      }, 8500);
+      }, 10500);
     }, []);
   }
   return (
@@ -111,52 +118,38 @@ const AnimatedResult = ({
                 left: "33%",
                 color: "rgb(67, 213, 122)",
                 fontSize: "2vw",
-                opacity: stepFour ? "" : "0",
+                opacity: stepThree ? "" : "0",
               }}
-              className={`${stepFour && showArrow ? "animate-result" : ""}`}
+              className={`${stepThree && showArrow ? "animate-result" : ""}`}
             >
               {t("reciprocal", { count: question[2] })}
             </p>
           </div>
         )}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0.9 -0.85 4.2 0.95"
+        <img
+          src={curvedArrow}
           style={{
-            width: "11vw",
+            width: "10vw",
             height: "18vh",
             position: "fixed",
             top: "29%",
-            left: "20.7%",
+            left: "21.7%",
+            transform: "rotate(-25deg)",
             opacity: stepFive ? "" : "0",
           }}
-        >
-          <path
-            d="M 1 0 C 2 -1 4 -1 5 0"
-            stroke="#fff"
-            stroke-width="0.1"
-            fill="none"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0.9 -0.1 4.2 1.089"
+        />
+        <img
+          src={curvedArrow}
           style={{
-            width: "11vw",
+            width: "10vw",
             height: "18vh",
             position: "fixed",
             top: "53%",
-            left: "20.7%",
+            left: "21.7%",
+            transform: "scaleY(-1) rotate(-32deg)",
             opacity: stepSeven ? "" : "0",
           }}
-        >
-          <path
-            d="M 1 0 C 3 2 5 0 5 0"
-            stroke="#fff"
-            stroke-width="0.1"
-            fill="none"
-          />
-        </svg>
+        />
       </div>
       <div className="result-align">
         <div className="equal-align">
@@ -179,8 +172,8 @@ const AnimatedResult = ({
           ×
         </span>
         <span
-          className={`${stepThree ? "animate-result" : ""} result`}
-          style={{ opacity: stepThree ? "" : "0", color: "#43d57a" }}
+          className={`${stepFour ? "animate-result" : ""} result`}
+          style={{ opacity: stepFour ? "" : "0", color: "#43d57a" }}
         >
           <span className="num">1</span>
           <span className="bar"></span>
@@ -198,8 +191,8 @@ const AnimatedResult = ({
 
         <span className={`result`}>
           <span
-            className={`${stepSix ? "animate-result" : ""}num`}
-            style={{ opacity: stepSix ? "" : "0" }}
+            className={`${stepSixHalf ? "animate-result" : ""}num`}
+            style={{ opacity: stepSixHalf ? "" : "0" }}
           >
             {question[0]}
           </span>

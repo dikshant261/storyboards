@@ -6,6 +6,7 @@ const FractionMultiply = ({
   fontSize,
   add,
   sign,
+  color,
 }) => {
   if (sign === "÷") {
     return React.createElement(
@@ -13,7 +14,7 @@ const FractionMultiply = ({
       { className: "multiply" },
       React.createElement(
         "span",
-        { className: "top" },
+        { className: "top", style: { color } },
         `${numerator} ÷  ${count}`
       ),
       React.createElement("span", { className: "line" }),
@@ -26,7 +27,7 @@ const FractionMultiply = ({
       { className: "multiply" },
       React.createElement(
         "span",
-        { className: "top" },
+        { className: "top", style: { color } },
         `${numerator} + ${count}`
       ),
       React.createElement("span", { className: "line" }),
@@ -40,18 +41,30 @@ const FractionMultiply = ({
       { className: "multiply", style: { fontSize: fontSize } },
       React.createElement(
         "span",
-        { className: "top" },
+        { className: "top", style: { color } },
         `${numerator} + ${count}`
       ),
       React.createElement("span", { className: "line" }),
       React.createElement("span", { className: "bottom" }, denominator)
     );
   }
-
-  if (numerator === null && count === null) {
+  if (add === "÷") {
     return React.createElement(
       "div",
       { className: "multiply", style: { fontSize: fontSize } },
+      React.createElement(
+        "span",
+        { className: "top", style: { color } },
+        `${numerator} ÷ ${count}`
+      ),
+      React.createElement("span", { className: "line" }),
+      React.createElement("span", { className: "bottom" }, denominator)
+    );
+  }
+  if (numerator === null && count === null) {
+    return React.createElement(
+      "div",
+      { className: "multiply", style: { fontSize: fontSize, color: color } },
       React.createElement("span", { className: "top" }, ""),
       React.createElement("span", { className: "line" }),
       React.createElement("span", { className: "bottom" }, "")
@@ -59,10 +72,10 @@ const FractionMultiply = ({
   }
   return React.createElement(
     "div",
-    { className: "multiply", style: { fontSize: fontSize } },
+    { className: "multiply", style: { fontSize: fontSize, color: color } },
     React.createElement(
       "span",
-      { className: "top" },
+      { className: "top", style: { color: color } },
       `${numerator} × ${count}`
     ),
     React.createElement("span", { className: "line" }),

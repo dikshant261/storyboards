@@ -2,8 +2,6 @@
 const ReusableButton = ({
   label,
   onClick,
-  width = "8vw",
-  height = "6vh",
   fontSize = "2vw",
   showTap = true,
   tapClass = "tap-gif-width",
@@ -17,8 +15,7 @@ const ReusableButton = ({
   }, /*#__PURE__*/React.createElement("button", {
     className: `start-button ${showActive ? "pulse-active" : ""}`,
     style: {
-      width,
-      height,
+      padding:'2vh',
       fontSize,
       backgroundColor,
       position: "relative"

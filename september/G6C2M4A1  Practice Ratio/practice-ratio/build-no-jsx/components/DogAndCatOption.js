@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./option.css";
 import ErrorMessage from "./ErrorMessage";
 import { useTranslation } from "react-i18next";
@@ -20,6 +20,12 @@ const DogAndCatOption = ({
     t
   } = useTranslation();
   const isStepActive = stepOne || stepTwo || stepThree;
+
+  // ✅ Shuffle only once per render cycle using useMemo
+  const shuffledOptions = useMemo(() => {
+    const shuffled = [...options].sort(() => Math.random() - 0.5);
+    return shuffled;
+  }, [options]);
   const handleOptionClick = option => {
     boxResultSet(option);
   };
@@ -34,8 +40,6 @@ const DogAndCatOption = ({
     }
     return value;
   };
-
-  // correct answers from earlier steps stay locked
   const isLockedFromPreviousStep = opt => {
     if (boxResultOne === correctOption[0] && !stepOne && opt === correctOption[0]) return true;
     if (boxResultTwo === correctOption[1] && !stepTwo && opt === correctOption[1]) return true;
@@ -45,8 +49,6 @@ const DogAndCatOption = ({
   const getButtonProps = opt => {
     let className = "option-button";
     let disabled = !isStepActive;
-
-    // lock from previous step
     if (isLockedFromPreviousStep(opt)) {
       className += " option-locked";
       disabled = true;
@@ -59,22 +61,16 @@ const DogAndCatOption = ({
     // STEP ONE
     if (stepOne) {
       if (boxResultOne) {
-        // correct choice => freeze all
         if (boxResultOne === correctOption[0]) {
           disabled = true;
           if (opt === correctOption[0]) className += " option-correct";
         } else {
-          // wrong choice => only disable that wrong button
           if (opt === boxResultOne) {
             disabled = true;
             className += " option-wrong";
-          } else {
-            disabled = false; // other buttons still active
-          }
+          } else disabled = false;
         }
-      } else {
-        disabled = false;
-      }
+      } else disabled = false;
       return {
         className,
         disabled
@@ -91,13 +87,9 @@ const DogAndCatOption = ({
           if (opt === boxResultTwo) {
             disabled = true;
             className += " option-wrong";
-          } else {
-            disabled = false;
-          }
+          } else disabled = false;
         }
-      } else {
-        disabled = false;
-      }
+      } else disabled = false;
       return {
         className,
         disabled
@@ -114,13 +106,9 @@ const DogAndCatOption = ({
           if (opt === boxResultThree) {
             disabled = true;
             className += " option-wrong";
-          } else {
-            disabled = false;
-          }
+          } else disabled = false;
         }
-      } else {
-        disabled = false;
-      }
+      } else disabled = false;
       return {
         className,
         disabled
@@ -160,7 +148,7 @@ const DogAndCatOption = ({
     options: options
   })), /*#__PURE__*/React.createElement("div", {
     className: "option-grid"
-  }, options.map((opt, idx) => {
+  }, shuffledOptions.map((opt, idx) => {
     const props = getButtonProps(opt);
     return /*#__PURE__*/React.createElement("button", {
       key: idx,

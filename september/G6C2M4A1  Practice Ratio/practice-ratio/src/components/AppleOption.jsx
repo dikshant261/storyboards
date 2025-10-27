@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import "./option.css";
 import { useTranslation } from "react-i18next";
 import AppleMessage from "./AppleMessage";
@@ -19,11 +19,17 @@ const AppleOption = ({
   const { t } = useTranslation();
   const isStepActive = stepOne || stepTwo;
 
+  // ✅ Shuffle options once per render cycle (stable order)
+  const shuffledOptions = useMemo(() => {
+    const shuffled = [...options].sort(() => Math.random() - 0.5);
+    return shuffled;
+  }, [options]);
+
   const handleOptionClick = (option) => {
     boxResultSet(option);
   };
 
-  // render fraction if "a/b"
+  // ✅ Render fraction (e.g., "3/4")
   const renderOption = (value) => {
     if (typeof value === "string" && value.match(/^\d+\/\d+$/)) {
       const [num, denom] = value.split("/");
@@ -38,7 +44,7 @@ const AppleOption = ({
     return value;
   };
 
-  // lock correct answers from previous steps
+  // ✅ Lock correct answers from previous steps
   const isLockedFromPreviousStep = (opt) => {
     if (boxResultOne === correctOption[0] && !stepOne && opt === correctOption[0])
       return true;
@@ -51,14 +57,14 @@ const AppleOption = ({
     let className = "option-button";
     let disabled = !isStepActive;
 
-    // lock if correct from earlier step
+    // Lock if already correct from earlier step
     if (isLockedFromPreviousStep(opt)) {
       className += " option-locked";
       disabled = true;
       return { className, disabled };
     }
 
-    // STEP ONE
+    // ✅ STEP ONE
     if (stepOne) {
       if (boxResultOne) {
         if (boxResultOne === correctOption[0]) {
@@ -68,17 +74,13 @@ const AppleOption = ({
           if (opt === boxResultOne) {
             disabled = true;
             className += " option-wrong";
-          } else {
-            disabled = false;
-          }
+          } else disabled = false;
         }
-      } else {
-        disabled = false;
-      }
+      } else disabled = false;
       return { className, disabled };
     }
 
-    // STEP TWO
+    // ✅ STEP TWO
     if (stepTwo) {
       if (boxResultTwo) {
         if (boxResultTwo === correctOption[1]) {
@@ -88,13 +90,9 @@ const AppleOption = ({
           if (opt === boxResultTwo) {
             disabled = true;
             className += " option-wrong";
-          } else {
-            disabled = false;
-          }
+          } else disabled = false;
         }
-      } else {
-        disabled = false;
-      }
+      } else disabled = false;
       return { className, disabled };
     }
 
@@ -103,7 +101,7 @@ const AppleOption = ({
 
   return (
     <div className="option-container">
-      {/* Feedback */}
+      {/* ✅ Feedback Section */}
       <div
         className={`feedback-box ${
           (stepOne && boxResultOne === correctOption[0]) ||
@@ -142,9 +140,9 @@ const AppleOption = ({
         )}
       </div>
 
-      {/* Options */}
+      {/* ✅ Option Buttons (Shuffled) */}
       <div className="option-grid">
-        {options.map((opt, idx) => {
+        {shuffledOptions.map((opt, idx) => {
           const props = getButtonProps(opt);
           return (
             <button

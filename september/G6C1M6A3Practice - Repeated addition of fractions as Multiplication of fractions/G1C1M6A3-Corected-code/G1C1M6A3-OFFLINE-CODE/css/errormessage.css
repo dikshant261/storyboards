@@ -8,14 +8,14 @@
     margin: 0.3vw;
     border-radius: 1vw;
     border: 0.3vw dashed;
-    position: fixed;
-    top: 14%;
-    right: 2%;
+    /* position: fixed;
+    top: 17%;
+    right: 2%; */
     width: 26vw;
 }
 
 .success-message {
-    background-color: lightgreen;
+    background-color: #4caf50;
     color: white;
     font-size: 3vw;
     text-align: center;
@@ -23,28 +23,27 @@
     margin: 0.3vw;
     border-radius: 1vw;
     border: 0.3vw dashed;
-    position: fixed;
-    top: 14%;
-    right: 2%;
+    /* position: fixed;
+    top: 17%;
+    right: 2%; */
     width: 26vw;
 }
 
 .option-fraction-error {
-    display: flex;
-    flex-direction: column;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    vertical-align: middle;
+    flex-direction: column;
 }
 
-.success-message-align {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
+.option-fraction-error span {
+    display: inline-block;
 }
 
 .fraction-line-error {
-    width: 2vw;
+    width: 4vw;
     height: 0.5vh;
-    background-color: white;
+    background-color: currentColor;
+    margin: 0 3px;
+    align-self: center;
 }

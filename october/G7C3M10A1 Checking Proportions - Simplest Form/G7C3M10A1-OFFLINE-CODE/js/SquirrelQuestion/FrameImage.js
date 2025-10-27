@@ -1,0 +1,23 @@
+
+const FrameImag = ({
+  width = "70%"
+}) => {
+  const frame="assets/frame.png";
+  return /*#__PURE__*/React.createElement("div", {
+    className: "frame-container"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: frame,
+    style: {
+      width: width
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "length-line"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "width-line"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "length"
+  }, t("length")), /*#__PURE__*/React.createElement("div", {
+    className: "width"
+  }, t("width")));
+};
+window.FrameImag=FrameImag;

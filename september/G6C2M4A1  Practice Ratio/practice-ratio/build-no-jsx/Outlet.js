@@ -168,6 +168,8 @@ const Outlet = () => {
   }), seven && /*#__PURE__*/React.createElement(MainFive, {
     onNext: handleNextEight,
     onPrev: handlePrevSeven,
+    boxOneHeading: t("ratio_of_triangles"),
+    boxTwoHeading: t("ratio_of_pentagons"),
     questionHeading: t("repreSenting_ratios"),
     options: ["7 : 3", "3 : 10", "3 : 7", "7 : 10"],
     correctOption: ["3 : 7", "7 : 3"],

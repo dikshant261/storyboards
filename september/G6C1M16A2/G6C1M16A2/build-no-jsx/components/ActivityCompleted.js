@@ -12,12 +12,18 @@ const StartPage = () => {
   }, /*#__PURE__*/React.createElement("div", {
     className: "startpage-heading"
   }, t("activityComplete")), /*#__PURE__*/React.createElement("div", {
-    className: "startpage-content"
+    className: "startpage-content",
+    style: {
+      paddingTop: '4vh'
+    }
   }, t("wePractice")), /*#__PURE__*/React.createElement("div", {
-    className: "startpage-content"
+    className: "startpage-content",
+    style: {
+      paddingTop: '5vh'
+    }
   }, t("tapStartOver")), /*#__PURE__*/React.createElement("div", {
     style: {
-      marginTop: "8vw"
+      marginTop: "6vw"
     }
   }, /*#__PURE__*/React.createElement(ReusableButton, {
     label: t("buttons.startOver"),

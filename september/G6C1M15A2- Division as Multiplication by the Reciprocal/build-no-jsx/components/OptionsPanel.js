@@ -9,7 +9,8 @@ const OptionsPanel = ({
   validate,
   question,
   setHintSlide,
-  freezeButton
+  freezeButton,
+  setBoxCss
 }) => {
   const [feedback, setFeedback] = useState(false);
   const CORRECT_ID = "D"; // a × 1/b
@@ -26,6 +27,7 @@ const OptionsPanel = ({
       setDisabledAll(true);
       setCorrectId("D");
       setErrorShow(true);
+      setBoxCss("correct");
     }
   }, [freezeButton]);
   const handleSelect = (value, index) => {
@@ -39,6 +41,7 @@ const OptionsPanel = ({
         setErrorShow(true);
         setCorrectId(value && value.id ? value.id : null);
         setDisabledAll(true);
+        setBoxCss("correct");
         if (typeof onSelect === "function") {
           onSelect({
             selectedId: value?.id,
@@ -53,6 +56,7 @@ const OptionsPanel = ({
         playWrong();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("wrong");
         if (value && value.id) setWrongIds(prev => new Set(prev).add(value.id));
         setWrongId(value.id);
         if (typeof onSelect === "function") {
@@ -73,6 +77,7 @@ const OptionsPanel = ({
         playCorrect();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("correct");
         setCorrectId(CORRECT_ID);
         setDisabledAll(true);
         if (typeof onSelect === "function") {
@@ -89,6 +94,7 @@ const OptionsPanel = ({
         playWrong();
         setFeedback(true);
         setErrorShow(true);
+        setBoxCss("wrong");
         if (value && value.id) setWrongIds(prev => new Set(prev).add(value.id));
         setWrongId(value.id);
         if (typeof onSelect === "function") {
@@ -202,17 +208,19 @@ const OptionsPanel = ({
     height: "9vh",
     fontSize: "3vw",
     showTap: false,
-    showActive: false,
-    onClick: handleHint
+    showActive: !disabledAll,
+    onClick: handleHint,
+    disabled: disabledAll
   })), /*#__PURE__*/React.createElement("div", {
     className: "feedback-box",
     style: {
-      backgroundColor: correctId === "D" ? "lightgreen" : wrongIds.size > 0 ? "salmon" : "",
-      borderColor: correctId === "D" ? "darkgreen" : wrongIds.size > 0 ? "darksalmon" : ""
+      backgroundColor: correctId === "D" ? "#2ecc71" : wrongIds.size > 0 ? "#e27a7a" : "",
+      border: correctId === "D" ? "0.3vw dashed darkgreen" : wrongIds.size > 0 ? "0.3vw dashed darksalmon" : "",
+      color: 'black'
     }
-  }, errorShow ? /*#__PURE__*/React.createElement(ErrorMessage, {
+  }, errorShow && /*#__PURE__*/React.createElement(ErrorMessage, {
     wrongId: wrongId,
     correctId: correctId
-  }) : /*#__PURE__*/React.createElement("span", null, "Feedback")));
+  })));
 };
 export default OptionsPanel;

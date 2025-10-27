@@ -33,15 +33,15 @@ const OptionThree = ({ question, response, answer }) => {
     if (correctSelected) {
       if (isCorrectOption(num, count, pluse)) {
         return {
-          backgroundColor: "lightgreen",
+          backgroundColor: "#4caf50",
           color: "white",
           pointerEvents: "none",
           border: "0.3vw solid darkgreen",
         };
       }
       return {
-        backgroundColor: "#e0e0e0",
-        color: "#777",
+        backgroundColor: "rgb(184 184 184)",
+        color: "white",
         pointerEvents: "none",
         border: "0.3vw solid #777",
       };
@@ -58,8 +58,8 @@ const OptionThree = ({ question, response, answer }) => {
 
     if (disabledOptions.includes(key)) {
       return {
-        backgroundColor: "#e0e0e0", // gray after wrong
-        color: "#777",
+        backgroundColor: "rgb(184 184 184)", // gray after wrong
+        color: "white",
         pointerEvents: "none",
         border: "0.3vw solid #777",
       };

@@ -32,13 +32,18 @@
 
 /* Hint Box */
 .hint-box {
-  width: 52vw;
+  width: 63vw;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 1vw;
   padding: 3vh 3vw;
   font-size: 2.5vw;
   line-height: 6vh;
   border: 0.2vh solid #ccc;
+  display: flex;
+  justify-content: center;
+  /* align-items: flex-start; */
+  flex-direction: column;
+  gap: 2vh;
 }
 
 /* Highlighted text */

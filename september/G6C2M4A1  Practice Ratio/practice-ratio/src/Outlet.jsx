@@ -19,7 +19,7 @@ const Outlet = () => {
   const [fourth, setFourth] = React.useState(false);
   const [five, setFive] = React.useState(false);
   const [nextPart, setNextPart] = React.useState(false);
-  const [seven, setSeven] = React.useState(false);
+  const [seven, setSeven] = React.useState(true);
   const [six, setSix] = useState(false);
   const [eight, setEight] = useState(false);
   const [nine, setNine] = useState(false);
@@ -183,6 +183,8 @@ const Outlet = () => {
         <MainFive
           onNext={handleNextEight}
           onPrev={handlePrevSeven}
+          boxOneHeading={t("ratio_of_triangles")}
+          boxTwoHeading={t("ratio_of_pentagons")}
           questionHeading={t("repreSenting_ratios")}
           options={["7 : 3", "3 : 10", "3 : 7", "7 : 10"]}
           correctOption={["3 : 7", "7 : 3"]}

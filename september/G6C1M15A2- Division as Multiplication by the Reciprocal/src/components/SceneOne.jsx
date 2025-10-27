@@ -39,7 +39,7 @@ const SceneOne = ({ onPrev, onNext, question, setHintSlide }) => {
       setHeading(false);
       setShowNextOne(true);
     } else {
-      setBoxCss("wrong");
+      
     }
   }, [isCorrect]);
   const handleNextOne = () => {
@@ -101,6 +101,7 @@ const SceneOne = ({ onPrev, onNext, question, setHintSlide }) => {
             }}
             setHintSlide={setHintSlide}
             freezeButton={freezeButton}
+            setBoxCss={setBoxCss}
           />
         </div>
       </div>

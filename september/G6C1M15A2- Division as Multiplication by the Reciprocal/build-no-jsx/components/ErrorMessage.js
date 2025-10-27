@@ -10,13 +10,25 @@ const ErrorMessage = ({
     t
   } = useTranslation();
   return /*#__PURE__*/React.createElement("div", null, correctId === "D" ? /*#__PURE__*/React.createElement("p", {
-    className: "success-message"
+    className: "success-message",
+    style: {
+      color: "black"
+    }
   }, t("error.success")) : wrongId === "A" ? /*#__PURE__*/React.createElement("p", {
-    className: "error-message"
+    className: "error-message",
+    style: {
+      color: "black"
+    }
   }, t("error.errorOne")) : wrongId === "C" ? /*#__PURE__*/React.createElement("p", {
-    className: "error-message"
+    className: "error-message",
+    style: {
+      color: "black"
+    }
   }, t("error.errorThree")) : /*#__PURE__*/React.createElement("p", {
-    className: "error-message"
+    className: "error-message",
+    style: {
+      color: "black"
+    }
   }, t("error.errorTwo")));
 };
 export default ErrorMessage;

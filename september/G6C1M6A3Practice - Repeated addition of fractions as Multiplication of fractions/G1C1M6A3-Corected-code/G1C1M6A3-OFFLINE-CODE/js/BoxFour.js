@@ -12,7 +12,8 @@ const BoxFour = function(props) {
       React.createElement(FractionOption, {
         numerator: answer.num,
         denominator: answer.deno,
-        fontSize: "5vw"
+        fontSize: "5vw",
+        add:answer.pluse
       })
     )
   );

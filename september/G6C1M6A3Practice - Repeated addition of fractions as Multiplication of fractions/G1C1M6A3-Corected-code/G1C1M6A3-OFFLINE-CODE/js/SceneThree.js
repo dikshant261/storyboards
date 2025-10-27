@@ -4,7 +4,7 @@ const SceneThree = ({ question, onNext, onPrev }) => {
   const [red, setRed] = React.useState("");
   const [showAns, setShowAns] = React.useState(false);
   const [errorShow, setShowError] = React.useState(false);
-  const tap="assets/tap.gif"
+  const tap = "assets/tap.gif";
   const checkResponse = (num) => {
     if (num === `${question[0]}/${question[1]}`) {
       playCorrect();
@@ -72,14 +72,18 @@ const SceneThree = ({ question, onNext, onPrev }) => {
       React.createElement(
         "div",
         { className: "scenethree-container-main-option" },
-        React.createElement(Option, {
-          question,
-          response: checkResponse,
-          answer,
-        }),
         errorShow
           ? React.createElement(ErrorMessage, { answer, question })
-          : null
+          : null,
+        React.createElement(
+          "div",
+          { style: { position: "absolute", bottom: "2%" } },
+          React.createElement(Option, {
+            question,
+            response: checkResponse,
+            answer,
+          })
+        )
       )
     ),
 
@@ -109,11 +113,15 @@ const SceneThree = ({ question, onNext, onPrev }) => {
                 { className: "nxt-btn", onClick: handleNext },
                 "»"
               ),
-              React.createElement("img", { src: tap, alt: "tap", className: "tap" })
+              React.createElement("img", {
+                src: tap,
+                alt: "tap",
+                className: "tap",
+              })
             )
           : null
       )
     )
   );
 };
-window.SceneThree=SceneThree;
+window.SceneThree = SceneThree;

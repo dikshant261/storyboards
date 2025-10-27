@@ -18,12 +18,12 @@ const TriangleBox = ({
     className: "triangle-box-container"
   }, /*#__PURE__*/React.createElement("div", {
     className: "triangle-inner"
-  }, /*#__PURE__*/React.createElement("p", null, t("ratio_of_triangles")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: `triangle-box ${beat ? "active" : ""} ${boxOneCss}`
-  }, boxResultOne)), /*#__PURE__*/React.createElement("div", {
+  }, boxResultOne), /*#__PURE__*/React.createElement("p", null, t("ratio_of_triangles"))), /*#__PURE__*/React.createElement("div", {
     className: "triangle-inner"
-  }, /*#__PURE__*/React.createElement("p", null, t("ratio_of_pentagons")), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("div", {
     className: `triangle-box ${beatOne ? "active" : ""} ${boxTwoCss}`
-  }, boxResultTwo)));
+  }, boxResultTwo, /*#__PURE__*/React.createElement("p", null, t("ratio_of_pentagons")))));
 };
 export default TriangleBox;

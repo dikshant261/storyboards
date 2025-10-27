@@ -8,7 +8,7 @@ const SceneFive = ({ question, onNext, flag, onPrev }) => {
   const [red, setRed] = React.useState("");
   const [showAns, setShowAns] = React.useState(false);
   const [errorShow, setShowError] = React.useState(false);
-  const tap="assets/tap.gif"
+  const tap = "assets/tap.gif";
   const checkResponse = (num, count, pluse) => {
     if (num === question[2] && count === question[0] && pluse === "x") {
       playCorrect();
@@ -58,7 +58,7 @@ const SceneFive = ({ question, onNext, flag, onPrev }) => {
         React.createElement(
           "div",
           { className: "box-align" },
-          React.createElement("p", null, question[2]),
+          React.createElement("p", { style: { fontWeight: 600 } }, question[2]),
           React.createElement("p", null, "×"),
           React.createElement(FractionNuber, { question }),
           React.createElement("p", null, "="),
@@ -83,14 +83,17 @@ const SceneFive = ({ question, onNext, flag, onPrev }) => {
       React.createElement(
         "div",
         { className: "scenethree-container-main-option" },
-        React.createElement(OptionThree, {
-          question,
-          response: checkResponse,
-          answer,
-        }),
-        
-        errorShow &&
-          React.createElement(ErrorMessageTwo, { answer, question })
+        React.createElement(
+          "div",
+          { style: { position: "absolute", bottom: "2%" } },
+          React.createElement(OptionThree, {
+            question,
+            response: checkResponse,
+            answer,
+          })
+        ),
+
+        errorShow && React.createElement(ErrorMessageTwo, { answer, question })
       )
     ),
 
@@ -108,8 +111,7 @@ const SceneFive = ({ question, onNext, flag, onPrev }) => {
       React.createElement(
         "div",
         null,
-        stepOne &&
-          React.createElement("button", { className: "nxt-btn" }, "»"),
+        stepOne && React.createElement("button", { className: "nxt-btn" }, "»"),
         showAns &&
           React.createElement(
             "div",
@@ -119,10 +121,14 @@ const SceneFive = ({ question, onNext, flag, onPrev }) => {
               { className: "nxt-btn", onClick: handleNext },
               "»"
             ),
-            React.createElement("img", { src: tap, alt: "tap", className: "tap" })
+            React.createElement("img", {
+              src: tap,
+              alt: "tap",
+              className: "tap",
+            })
           )
       )
     )
   );
 };
-window.SceneFive=SceneFive;
+window.SceneFive = SceneFive;

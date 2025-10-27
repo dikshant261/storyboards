@@ -4,7 +4,7 @@ const SceneFour = ({ question, onNext, flag, numberString, onPrev }) => {
   const [red, setRed] = React.useState("");
   const [showAns, setShowAns] = React.useState(false);
   const [errorShow, setShowError] = React.useState(false);
-  const tap="assets/tap.gif"
+  const tap = "assets/tap.gif";
   const checkResponse = (num) => {
     if (num === question[2]) {
       playCorrect();
@@ -81,12 +81,16 @@ const SceneFour = ({ question, onNext, flag, numberString, onPrev }) => {
       React.createElement(
         "div",
         { className: "scenethree-container-main-option" },
-        React.createElement(OptionTwo, {
-          question,
-          response: checkResponse,
-          answer,
-        }),
-        
+        React.createElement(
+          "div",
+          { style: { position: "absolute", bottom: "2%" } },
+          React.createElement(OptionTwo, {
+            question,
+            response: checkResponse,
+            answer,
+          })
+        ),
+
         errorShow &&
           React.createElement(ErrorMessage, {
             answer,
@@ -111,12 +115,7 @@ const SceneFour = ({ question, onNext, flag, numberString, onPrev }) => {
       React.createElement(
         "div",
         null,
-        stepOne &&
-          React.createElement(
-            "button",
-            { className: "nxt-btn" },
-            "»"
-          ),
+        stepOne && React.createElement("button", { className: "nxt-btn" }, "»"),
         showAns &&
           React.createElement(
             "div",
@@ -126,10 +125,14 @@ const SceneFour = ({ question, onNext, flag, numberString, onPrev }) => {
               { className: "nxt-btn", onClick: handleNext },
               "»"
             ),
-            React.createElement("img", { src: tap, alt: "tap", className: "tap" })
+            React.createElement("img", {
+              src: tap,
+              alt: "tap",
+              className: "tap",
+            })
           )
       )
     )
   );
 };
-window.SceneFour=SceneFour;
+window.SceneFour = SceneFour;

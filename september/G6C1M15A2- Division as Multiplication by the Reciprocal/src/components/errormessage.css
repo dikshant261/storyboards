@@ -5,9 +5,11 @@
   width: 100%;
   height: auto;
   font-size: 3vw;
-  background-color: salmon;
+  background-color: #e27a7a;
   color: white;
+  box-shadow: '0 0.4vw 0.6vw rgba(0, 0, 0, 0.25) inset'
 }
+
 .success-message {
   display: flex;
   justify-content: center;
@@ -15,6 +17,8 @@
   width: 100%;
   height: auto;
   font-size: 3vw;
-  background-color: lightgreen;
-  color: white;
+  background-color: #2ecc71;
+  color: black;
+  box-shadow: '0 0.4vw 0.6vw rgba(0, 0, 0, 0.25) inset'
+
 }

@@ -10,6 +10,7 @@
     display: flex;
     gap: 3vw;
     position: relative;
+    transition: all 0.8s ease-in-out;
 }
 
 .card {
@@ -18,13 +19,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     border-radius: 1.5vw;
     background-color: #0891b2;
     color: white;
     font-size: 3.6vw;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease-in-out;
+}
+
+.card.matched {
+    background-color: #849939;
+    /* Remove translateX, use flex order instead */
+    transition: all 2.8s ease-in-out, background 2.5s ease;
 }
 
 .card.upper:hover,
@@ -40,6 +48,17 @@
 .card.wrong {
     background-color: #c75a4e;
     animation: shake 0.3s ease;
+}
+
+.check-icon {
+    background: rgb(0, 0, 0, 0.7);
+    position: absolute;
+    z-index: 1;
+    width: 15vw;
+    height: 21vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @keyframes shake {
@@ -64,20 +83,14 @@
     }
 }
 
-@keyframes moveLeft {
-    from {
-        opacity: 1;
-        transform: translateX(0);
-    }
 
-    to {
-        opacity: 1;
-        transform: translateX(0vw);
-    }
-}
 
-.card.matched {
-    background-color: #849939;
-    color: white;
-    transition: transform 0.8s ease;
-}
+/* To ensure the checkmark is positioned correctly */
+/* .card .check-icon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0; */
+/* The Flexbox centering is also applied to this element (via inline style in JSX) */
+/* } */

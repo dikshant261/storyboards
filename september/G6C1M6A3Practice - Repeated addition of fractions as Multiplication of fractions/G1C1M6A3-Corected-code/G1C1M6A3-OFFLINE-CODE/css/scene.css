@@ -14,6 +14,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 1vw;
+    height: 14vh;
 }
 
 .scene-container-question {
@@ -47,7 +48,7 @@
     justify-content: center;
     align-items: center;
     width: 9vw;
-    height: 7vh;
+    height: 8vh;
     background-color: var(--secondary-color);
     border: 0.3vw solid rgb(85, 64, 12);
     border-radius: 0.8vw;
@@ -55,7 +56,8 @@
     font-size: 3vw;
 }
 .tap{
-    width: 3vw;
+    width: 4vw;
     object-fit: contain;
-    margin-top: -2vw;
+    position: absolute;
+    bottom: 2%;
 }

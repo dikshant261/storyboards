@@ -21,7 +21,9 @@ const MainFive = ({
   question,
   questionHeading,
   flag,
-  onPrev
+  onPrev,
+  boxOneHeading,
+  boxTwoHeading
 }) => {
   const {
     t
@@ -139,13 +141,15 @@ const MainFive = ({
     className: "image-box"
   }, /*#__PURE__*/React.createElement(TriangleImage, null)), /*#__PURE__*/React.createElement("div", {
     className: "answer-box"
-  }, /*#__PURE__*/React.createElement(TriangleBox, {
+  }, /*#__PURE__*/React.createElement(ResultBoxTwo, {
     beat: beat,
     beatOne: beatOne,
     stepOne: stepOne,
     stepTwo: stepTwo,
     boxResultOne: boxResultOne,
     boxOneCss: boxOneCss,
+    boxOneHeading: boxOneHeading,
+    boxTwoHeading: boxTwoHeading,
     boxResultTwo: boxResultTwo,
     boxTwoCss: boxTwoCss,
     boxResultThree: boxResultThree,

@@ -1,0 +1,27 @@
+const zerofinger = "assets/zerofinger.png";
+const Onefinger = "assets/Onefinger.png";
+const Twofinger = "assets/Twofinger.png";
+const Threefinger = "assets/Threefinger.png";
+const fourfinger = "assets/fourfinger.png";
+const Fivefinger = "assets/Fivefinger.png";
+
+const one = "assets/one.png";
+const two = "assets/two.png";
+const three = "assets/three.png";
+const four = "assets/four.png";
+const five = "assets/five.png";
+const speaker = "assets/speaker.png";
+const raisehandchild = "assets/raisehandchild.png";
+window.zerofinger = zerofinger;
+window.Onefinger = Onefinger;
+window.Twofinger = Twofinger;
+window.Threefinger = Threefinger;
+window.fourfinger = fourfinger;
+window.FiveFinger = Fivefinger;
+window.one = one;
+window.two = two;
+window.three = three;
+window.four = four;
+window.five = five;
+window.speaker=speaker;
+window.raisehandchild = raisehandchild;

@@ -22,12 +22,13 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  width: 90%;
 }
 
 .hint-text {
-  width: 55%;
-  font-size: 3vw;
-  line-height: 4vw;
+    width: 63%;
+    font-size: 2.9vw;
+    line-height: 4vw;
 }
 
 .hint-text ul {
@@ -77,19 +78,19 @@
   margin: 0.5vh 0;
   position: fixed;
   top: 22%;
-  right: 23.4%;
+  right: 19.4%;
 }
 .arrow-two{
   font-size: 6vw;
   margin: 0.5vh 0;
   position: fixed;
   top: 24%;
-  right: 20.7%;
+  right: 16.7%;
 }
 .reciprocal-label {
   position: absolute;
-  right: 3%;
+  right: 9%;
   top: 24%;
-  font-size: 1.4vw;
+  font-size: 1.5vw;
   color: #ffffff;
 }

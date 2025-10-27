@@ -8,9 +8,9 @@ const StartPage = () => {
   return (
     <div className="startpage-container">
       <div className="startpage-heading">{t("activityComplete")}</div>
-      <div className="startpage-content">{t("wePractice")}</div>
-      <div className="startpage-content">{t("tapStartOver")}</div>
-      <div style={{ marginTop: "8vw" }}>
+      <div className="startpage-content" style={{paddingTop:'4vh'}}>{t("wePractice")}</div>
+      <div className="startpage-content" style={{paddingTop:'5vh'}}>{t("tapStartOver")}</div>
+      <div style={{ marginTop: "6vw" }}>
         <ReusableButton
           label={t("buttons.startOver")}
           width="25vw"

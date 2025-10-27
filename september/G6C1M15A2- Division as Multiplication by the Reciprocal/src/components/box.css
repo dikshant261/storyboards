@@ -5,10 +5,12 @@
   color: white;
   gap: 2vw;
 }
+
 .alignment span {
   font-size: 3.5vw;
   font-weight: bold;
 }
+
 .box {
   display: flex;
   align-items: center;
@@ -22,12 +24,12 @@
   color: black;
 }
 
-.box .wrong {
-  border-color: darksalmon;
-  background-color: rgb(247, 142, 130);
+.alignment .wrong {
+  border-color: #e27a7a !important;
+  background-color: #e27a7a !important;
 }
 
-.box .correct {
-  border-color: darkgreen;
-  background-color: lightgreen;
+.alignment .correct {
+  border-color: #1f9d53;
+  background-color: #2ecc71;
 }

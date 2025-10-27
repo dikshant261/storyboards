@@ -23,6 +23,8 @@ const MainFive = ({
   questionHeading,
   flag,
   onPrev,
+  boxOneHeading,
+  boxTwoHeading
 }) => {
   const { t } = useTranslation();
   const [stepOne, setStepOne] = React.useState(true);
@@ -140,13 +142,15 @@ const MainFive = ({
             <TriangleImage />
           </div>
           <div className="answer-box">
-            <TriangleBox
+            <ResultBoxTwo
               beat={beat}
               beatOne={beatOne}
               stepOne={stepOne}
               stepTwo={stepTwo}
               boxResultOne={boxResultOne}
               boxOneCss={boxOneCss}
+              boxOneHeading={boxOneHeading}
+        boxTwoHeading={boxTwoHeading}
               boxResultTwo={boxResultTwo}
               boxTwoCss={boxTwoCss}
               boxResultThree={boxResultThree}

@@ -37,8 +37,7 @@ i18n.use(initReactI18next).init({
           errorOne: "Careful! You need to change division problem to multiplication by its reciprocal.",
           errorTwo: "Oops! You took the reciprocal of the dividend instead of the divisor.",
           errorThree: "Careful! Write division as multiplication by reciprocal of the divisor.",
-          success: "Well done! You wrote division problem as multiplication by its reciprocal.",
-          feedback:"Feedback",
+          success: "Well done! You wrote division problem as multiplication by its reciprocal."
         },
         hint: {
           hint: "Hint",
