@@ -1,0 +1,90 @@
+.frame-two-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 7vw;
+    width: 34vw;
+    height: 30vh;
+}
+
+.frame-two-container .ml-align {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.frame-two-container .length-line {
+    width: 74%;
+    height: 0.5vh;
+    background-color: white;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 49%;
+    left: -22%;
+}
+
+.frame-two-container .width-line {
+    width: 63%;
+    height: 0.5vh;
+    background-color: white;
+    transform: rotate(0deg);
+    position: absolute;
+    top: 88%;
+    left: 18%;
+}
+
+.frame-two-container .length {
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    top: 46%;
+    left: -2%;
+}
+
+.frame-two-container .width {
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    bottom: -2%;
+    left: 43%;
+}
+
+.frame-two-container .length .para {
+    font-size: 2vw;
+    color: white;
+}
+
+.frame-two-container .width .para {
+    font-size: 2vw;
+    color: white;
+}
+
+.frame-two-container .beat {
+    animation: pulse-three 1.5s infinite;
+}
+
+@keyframes pulse-three {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw white,
+            0 0 1vw white,
+            0 0 1vw white;
+    }
+
+    50% {
+        transform: scale(1.01);
+        box-shadow: 0 0 2vw white,
+            0 0 4vw white,
+            0 0 6vw white;
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw white,
+            0 0 1vw white,
+            0 0 2vw white;
+    }
+}

@@ -1,9 +1,4 @@
-const Main = ({
-  onNext,
-  options,
-  correctOption,
-  onPrev
-}) => {
+const Main = ({ onNext, options, correctOption, onPrev }) => {
   const [stepOne, setStepOne] = React.useState(true);
   const [stepTwo, setStepTwo] = React.useState(false);
   const [stepThree, setStepThree] = React.useState(false);
@@ -27,7 +22,7 @@ const Main = ({
   const [beatTwo, setBeatTwo] = React.useState(false);
   const [buttondis, setButtonDis] = React.useState(false);
   console.log("btnTwo", btnTwo);
-  const handleBoxResultOne = option => {
+  const handleBoxResultOne = (option) => {
     if (!stepOne) return;
     setBoxResultOne(option);
     if (option === correctOption[0]) {
@@ -54,7 +49,7 @@ const Main = ({
     setTapRatio(true);
     setStepTwo(true);
   };
-  const handleBoxResultTwo = option => {
+  const handleBoxResultTwo = (option) => {
     if (!stepTwo) return;
     setBoxResultTwo(option);
     if (option === correctOption[1]) {
@@ -83,7 +78,7 @@ const Main = ({
     setDisabledNext(true);
     setTapRatio(true);
   };
-  const handleBoxResultThree = option => {
+  const handleBoxResultThree = (option) => {
     if (!stepThree) return;
     setBoxResultThree(option);
     if (option === correctOption[2]) {
@@ -148,75 +143,148 @@ const Main = ({
     setTapProceed(false);
     setBtnTwo(true);
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "main"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "main-heading"
-  }, /*#__PURE__*/React.createElement("p", null, t("representingRatios"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: "white"
-    }
-  }, " ", t("rationCatDog")), /*#__PURE__*/React.createElement("span", null, " ", t("inThisPicture")))), /*#__PURE__*/React.createElement("div", {
-    className: "main-content"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "image-container"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "image-box"
-  }, /*#__PURE__*/React.createElement(Catimage, null)), /*#__PURE__*/React.createElement("div", {
-    className: "answer-box"
-  }, /*#__PURE__*/React.createElement(ResultBox, {
-    beat: beat,
-    beatOne: beatOne,
-    beatTwo: beatTwo,
-    stepOne: stepOne,
-    stepTwo: stepTwo,
-    stepThree: stepThree,
-    boxResultOne: boxResultOne,
-    boxOneCss: boxOneCss,
-    boxResultTwo: boxResultTwo,
-    boxTwoCss: boxTwoCss,
-    boxResultThree: boxResultThree,
-    boxThreeCss: boxThreeCss
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "option-box"
-  }, /*#__PURE__*/React.createElement(DogAndCatOption, {
-    options: options,
-    correctOption: correctOption,
-    boxResultSet: stepOne ? handleBoxResultOne : stepTwo ? handleBoxResultTwo : stepThree ? handleBoxResultThree : () => {},
-    stepOne: stepOne,
-    stepTwo: stepTwo,
-    stepThree: stepThree,
-    boxResultOne: boxResultOne,
-    boxResultTwo: boxResultTwo,
-    boxResultThree: boxResultThree,
-    showErrorOne: showErrorOne,
-    showErrorTwo: showErrorTwo,
-    showErrorThree: showErrorThree,
-    tapProceed: tapProceed
-  }))), tapRatio && /*#__PURE__*/React.createElement("div", {
-    className: "footer-heading"
-  }, t("tapRatio")), nextOne && /*#__PURE__*/React.createElement("div", {
-    className: "footer-heading"
-  }, t("tapNext")), nextTwo && /*#__PURE__*/React.createElement("div", {
-    className: "footer-heading"
-  }, t("tapNext")), tapProceed && /*#__PURE__*/React.createElement("div", {
-    className: "footer-heading"
-  }, t("proceed")), /*#__PURE__*/React.createElement(FooterButtons, {
-    disabledNext: disabledNext,
-    nextOne: nextOne,
-    nextTwo: nextTwo,
-    stepOne: stepOne,
-    stepTwo: stepTwo,
-    stepThree: stepThree,
-    tapProceed: tapProceed,
-    btnTwo: btnTwo,
-    handleNextOne: handleNextOne,
-    handleNextTwo: handleNextTwo,
-    handleProceed: handleProceed,
-    handlePrevOne: handlePrevOne,
-    handlePrevTwo: handlePrevTwo,
-    handlePrevThree: handlePrevThree,
-    handlePrevFour: handlePrevFour
-  }));
+  return /*#__PURE__*/ React.createElement(
+    "div",
+    {
+      className: "main",
+    },
+    /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        className: "main-heading",
+      },
+      /*#__PURE__*/ React.createElement(
+        "p",
+        null,
+        t("representingRatios"),
+        /*#__PURE__*/ React.createElement(
+          "span",
+          {
+            style: {
+              color: "white",
+            },
+          },
+          " ",
+          t("rationCatDog")
+        ),
+        /*#__PURE__*/ React.createElement("span", null, " ", t("inThisPicture"))
+      )
+    ),
+    /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        className: "main-content",
+      },
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          className: "image-container",
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            className: "image-box",
+          },
+          /*#__PURE__*/ React.createElement(Catimage, null)
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            className: "answer-box",
+          },
+          /*#__PURE__*/ React.createElement(ResultBox, {
+            beat: beat,
+            beatOne: beatOne,
+            beatTwo: beatTwo,
+            stepOne: stepOne,
+            stepTwo: stepTwo,
+            stepThree: stepThree,
+            boxResultOne: boxResultOne,
+            boxOneCss: boxOneCss,
+            boxResultTwo: boxResultTwo,
+            boxTwoCss: boxTwoCss,
+            boxResultThree: boxResultThree,
+            boxThreeCss: boxThreeCss,
+          })
+        )
+      ),
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          className: "option-box",
+        },
+        /*#__PURE__*/ React.createElement(DogAndCatOption, {
+          options: options,
+          correctOption: correctOption,
+          boxResultSet: stepOne
+            ? handleBoxResultOne
+            : stepTwo
+            ? handleBoxResultTwo
+            : stepThree
+            ? handleBoxResultThree
+            : () => {},
+          stepOne: stepOne,
+          stepTwo: stepTwo,
+          stepThree: stepThree,
+          boxResultOne: boxResultOne,
+          boxResultTwo: boxResultTwo,
+          boxResultThree: boxResultThree,
+          showErrorOne: showErrorOne,
+          showErrorTwo: showErrorTwo,
+          showErrorThree: showErrorThree,
+          tapProceed: tapProceed,
+        })
+      )
+    ),
+    tapRatio &&
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          className: "footer-heading",
+        },
+        t("tapRatio")
+      ),
+    nextOne &&
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          className: "footer-heading",
+        },
+        t("tapNext")
+      ),
+    nextTwo &&
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          className: "footer-heading",
+        },
+        t("tapNext")
+      ),
+    tapProceed &&
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          className: "footer-heading",
+        },
+        t("proceed")
+      ),
+    /*#__PURE__*/ React.createElement(FooterButtons, {
+      disabledNext: disabledNext,
+      nextOne: nextOne,
+      nextTwo: nextTwo,
+      stepOne: stepOne,
+      stepTwo: stepTwo,
+      stepThree: stepThree,
+      tapProceed: tapProceed,
+      btnTwo: btnTwo,
+      handleNextOne: handleNextOne,
+      handleNextTwo: handleNextTwo,
+      handleProceed: handleProceed,
+      handlePrevOne: handlePrevOne,
+      handlePrevTwo: handlePrevTwo,
+      handlePrevThree: handlePrevThree,
+      handlePrevFour: handlePrevFour,
+    })
+  );
 };
-window.Main=Main;
+window.Main = Main;

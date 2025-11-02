@@ -1,0 +1,51 @@
+const SceneFour = ({
+  goNext,
+  goPrev
+}) => {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "scene-container"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "heading"
+  }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("span", null, t("sceneOne.aCertain")), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: "white"
+    }
+  }, t("sceneOne.twoMetals")), /*#__PURE__*/React.createElement("span", null, t("sceneOne.ifANew")), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: "white"
+    }
+  }, t("sceneOne.sameAlloy")), /*#__PURE__*/React.createElement("span", {
+    style: {
+      color: "#b6d7a8"
+    }
+  }, t("sceneOne.howManyGrams")))), /*#__PURE__*/React.createElement("div", {
+    className: "main"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "left"
+  }, /*#__PURE__*/React.createElement("p", null, t("sceneFour.letAssume")), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: "white"
+    }
+  }, t("sceneFour.xGrams"))), /*#__PURE__*/React.createElement("div", {
+    className: "right"
+  }, /*#__PURE__*/React.createElement(MetalRatio, null))), /*#__PURE__*/React.createElement("div", {
+    className: "footer"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      playClick();
+      goPrev();
+    }
+  }, t("buttons.previous")), /*#__PURE__*/React.createElement("p", null, t("instructions.tapToContinue")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      playClick();
+      goNext();
+    }
+  }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
+    bottom: "0%",
+    onClick: () => {
+      playClick();
+      goNext();
+    }
+  }))));
+};
+window.SceneFour=SceneFour;

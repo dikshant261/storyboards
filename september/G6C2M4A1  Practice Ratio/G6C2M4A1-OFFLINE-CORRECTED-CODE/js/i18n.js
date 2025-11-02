@@ -78,8 +78,8 @@ const appData = {
       ratioOrange: "Ratio of\nbananas to apples",
       ratioStudent: "Ratio of students in\nplayground to classroom",
       ratioPlaground: "Ratio of students in\nclassroom to playground",
-      ratio_of_pentagons: "Ratio of triangles to pentagons",
-      ratio_of_triangles: "Ratio of pentagons to triangles",
+      ratio_of_pentagons: "Ratio of triangles to\n pentagons",
+      ratio_of_triangles: "Ratio of pentagons to\n triangles",
       appleErrorOne:
         "Oops! That’s not correct. There are 5 oranges, not 10. Try again!",
       appleErrorTwo:
@@ -126,6 +126,16 @@ const appData = {
         "You have learned how to identify and represent ratios \nin symbol, fraction, and word forms.",
       startOver: "To go over the activity again, tap on ‘Start Over’.",
       buttonStartOver: "Start Over",
+
+      symbol: "symbol",
+      symbolCode: "symbol :",
+      word: "word",
+      wordTo: "word to",
+      fraction: "fraction",
+      fractionForm: "fraction form",
+      //toOption
+
+      toOption: "{{num1}} to {{num2}}",
     },
   },
   id: {
@@ -256,31 +266,46 @@ const appData = {
         "Anda telah belajar bagaimana mengidentifikasi dan mewakili perbandingan \ndalam bentuk simbol, pecahan, dan kata.",
       startOver: "Untuk mengulang aktivitas, ketuk ‘Mulai Lagi’.",
       buttonStartOver: "Mulai Lagi",
+
+      symbol: "simbol",
+      symbolCode: "simbol :",
+      word: "kata",
+      wordTo: "kata ke",
+      fraction: "pecahan",
+      fractionForm: "bentuk pecahan",
+
+      toOption: "{{num1}} ke {{num2}}",
     },
   },
 };
 
 // Current language comes from global APP_LANGUAGE set in index.html
+// ✅ Detect language (fallback to English)
 const currentLang = window.APP_LANGUAGE || "en";
 
-// Helper: resolve nested keys like "storyOne.optionOne"
+// ✅ Function to safely get nested keys
 function getNested(obj, path) {
-  return path.split(".").reduce((acc, key) => {
-    return acc && acc[key] !== undefined ? acc[key] : null;
-  }, obj);
+  try {
+    return path.split(".").reduce((acc, key) => acc[key], obj);
+  } catch {
+    return null;
+  }
 }
 
-// Translator function
+// ✅ Translation function
 function t(key, params = {}) {
-  let text = getNested(appData[currentLang].translation, key) || key;
+  // Try to find the key in current language
+  let text = getNested(appData[currentLang].translation, key);
 
-  // Replace variables if any (like {{count}})
+  // If not found, fallback to English
+  if (!text) text = getNested(appData.en.translation, key) || key;
+
+  // Replace variables like {{num1}} and {{num2}}
   Object.keys(params).forEach((p) => {
-    text = text.replace(`{{${p}}}`, params[p]);
+    text = text.replace(new RegExp(`{{${p}}}`, "g"), params[p]);
   });
 
   return text;
 }
-
 // Expose globally so all components can use it
 window.t = t;

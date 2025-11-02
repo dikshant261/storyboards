@@ -22,7 +22,7 @@ const appData = {
       startpage: {
         weHaveLearned:
           "We learned how to divide a fraction by a whole number \nusing the reciprocal.",
-        letPractice: "Now, it’s your turn to try own your own.",
+        letPractice: "Now, it’s your turn to try on your own.",
         tapStart: "Tap “Start” to start the activity.",
       },
       mainHeading: "Find the value of the given division.",
@@ -47,7 +47,7 @@ const appData = {
         hint: "Hint",
         heading: "To divide a Fraction by a Whole Number",
         listOne: "Change division(÷) to multiplication(×).",
-        listeTwo: "Take the reciprocal of the whole number.",
+        listTwo: "Take the reciprocal of the whole number.",
         listThree: "Multiply the fractions.",
         reciprocal: "Reciprocal",
       },
@@ -75,7 +75,7 @@ const appData = {
       startpage: {
         weHaveLearned:
           "Kita telah belajar cara membagi pecahan dengan bilangan bulat \nmenggunakan kebalikannya.",
-        letPractice: "Sekarang, giliranmu untuk mencoba sendiri.",
+        letPractice: "Sekarang giliran Anda untuk mencobanya sendiri.",
         tapStart: "Ketuk “Mulai” untuk memulai aktivitas.",
       },
       mainHeading: "Temukan nilai dari pembagian yang diberikan.",
@@ -100,7 +100,7 @@ const appData = {
         hint: "Petunjuk",
         heading: "Cara membagi Pecahan dengan Bilangan Bulat",
         listOne: "Ubah pembagian (÷) menjadi perkalian (×).",
-        listeTwo: "Ambil kebalikan dari bilangan bulat.",
+        listTwo: "Ambil kebalikan dari bilangan bulat.",
         listThree: "Kalikan pecahannya.",
         reciprocal: "Kebalikan",
       },
