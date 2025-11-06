@@ -1,0 +1,58 @@
+.frame-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 33vw;
+    height: 75vh;
+    flex-direction: column;
+}
+
+.frame-container .length-line {
+    width: 37vw;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 47%;
+    left: -26%;
+    /* height: 60%; */
+}
+
+.frame-container .width-line {
+    width: 29vw;
+    transform: rotate(0deg);
+    position: absolute;
+    bottom: 5%;
+    left: 21.5%;
+}
+
+.frame-container .length {
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    top: 46%;
+    left: 2%;
+}
+
+.frame-container .width {
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    bottom: 1%;
+    left: 57%;
+}
+
+.frame-container .red-circle {
+    width: 20vw;
+    height: 22vh;
+    background-color: #ff2d28;
+}
+.frame-slider {
+  width: 60%;
+  margin-top: 2vh;
+  accent-color: #ffae00; /* orange color for thumb */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.frame-slider:hover {
+  transform: scale(1.05);
+}

@@ -1,0 +1,19 @@
+.question-fraction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1;
+}
+
+.question-fraction .numerator,
+.denominator {
+  display: block;
+  font-weight: bold;
+}
+
+.question-fraction .line {
+  display: block;
+  margin: 0.2vh auto;
+}
+
