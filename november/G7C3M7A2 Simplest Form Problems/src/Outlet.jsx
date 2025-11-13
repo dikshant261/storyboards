@@ -14,6 +14,15 @@ import SceneTen from "./components/Question/SceneTen";
 import SceneEleven from "./components/Question/SceneEleven";
 import SceneTwelve from "./components/Question/SceneTwelve";
 import ActivityCompleted from "./components/ActivityCompleted";
+import NextQuestion from "./components/NextQuestion";
+import SceneThirteen from "./components/Question/SceneThirteen";
+import SceneFourteen from "./components/Question/SceneFourteen";
+import SceneFifteen from "./components/Question/SceneFifteen";
+import SceneSixteen from "./components/Question/SceneSixteen";
+import SceneSeventeen from "./components/Question/SceneSeventeen";
+import SceneEighteen from "./components/Question/SceneEighteen";
+import SceneTwenty from "./components/Question/SceneTwenty";
+import SceneNineteen from "./components/Question/SceneNineteen";
 
 const Outlet = () => {
   const [currentScene, setCurrentScene] = React.useState(0);
@@ -30,6 +39,15 @@ const Outlet = () => {
     SceneTen,
     SceneEleven,
     SceneTwelve,
+    NextQuestion,
+    SceneThirteen,
+    SceneFourteen,
+    SceneFifteen,
+    SceneSixteen,
+    SceneSeventeen,
+    SceneEighteen,
+    SceneNineteen,
+    SceneTwenty,
     ActivityCompleted,
   ];
   console.log("Current Scene:", currentScene);

@@ -8,7 +8,7 @@ import Keypad from "../Keypad";
 import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
-const SceneEleven = ({ goNext, goPrev }) => {
+const SceneEleven = ({ goNext, goPrev, setCrossBoxOneValue }) => {
   const { t } = useTranslation();
   const [beatOne, setBeatOne] = useState(true);
   const [beatTwo, setBeatTwo] = useState(false);
@@ -40,8 +40,13 @@ const SceneEleven = ({ goNext, goPrev }) => {
   const handleCheck = () => {
     if (beatOne) {
       setErrorShow(true);
-      if (boxOneValue === "4.5") {
+      if (
+        boxOneValue === "4.5" ||
+        boxOneValue === "04.5" ||
+        boxOneValue === "4.50"
+      ) {
         playCorrect();
+        setCrossBoxOneValue(boxOneValue);
         setBeatOne(false);
         setSuccess(true);
         setDisabled(false);
@@ -77,17 +82,18 @@ const SceneEleven = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-7%",
-                width: "30%",
+                bottom: "-14%",
+                width: "31%",
                 zIndex: "1",
-                transform: "rotate(-30deg)",
+                transform: "rotate(-34deg)",
+                left: "36%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="white"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <div className="image-1">
@@ -145,7 +151,7 @@ const SceneEleven = ({ goNext, goPrev }) => {
               boxOneValue={boxOneValue}
               disabled={disabled}
               message={message}
-              ans={"4.5"}
+              ans={boxOneValue}
             />
           </p>
         </div>

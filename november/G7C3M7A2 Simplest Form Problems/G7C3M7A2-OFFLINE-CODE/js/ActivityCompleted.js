@@ -12,7 +12,7 @@ const ActivityCompleted = () => {
       {
         className: "startpage-heading",
       },
-      t("activityComplete.activityCompleted")
+      t("activityComplete.activityComplete")
     ),
     /*#__PURE__*/ React.createElement(
       "div",

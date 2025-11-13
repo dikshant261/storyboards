@@ -64,7 +64,8 @@ const appData = {
         letsFind:
           "Let’s find the ratio of the frame’s length to its width using the given measurements.",
         error: "Oops! Remember, the first part of the ratio is for the length.",
-        success: "Good job! The ratio is 120 : 80 which can also be written as",
+        success:
+          "Good job! The ratio is 120 : 80 which can also be written as ",
       },
       sceneSix: {
         ratioOfLengthWidth: "Ratio of length to width",
@@ -114,6 +115,65 @@ const appData = {
         theSmallerFrame:
           "The smaller frame enlarges in the\n same ratio — 3 : 2 — and fits \nperfectly over the original frame. \n\nSo, 3 : 2 is the simplest form of the \nratio 120 : 80.",
       },
+      nextQuestion: {
+        motherBought:
+          "Mother bought 2.8 kg of mangoes and 4.2 kg of oranges \nand placed them in a basket.\n\nWhat is the ratio of the weight of mangoes to oranges?",
+      },
+      sceneThirteen: {
+        motherBought: "Mother bought ",
+        mangoes: "2.8 kg of mangoes ",
+        and: " and ",
+        oranges: "4.2 kg of oranges ",
+
+        andPlaced:
+          "and placed them in a basket.\nWhat is the ratio of the weight of mangoes to oranges?",
+        ratioOfMangoesOranges: "Ratio of the weight of \nMangoes to oranges ",
+        error:
+          "Oops! Be careful with the order — it’s mangoes first, then oranges.",
+        success: "Good! The ratio of mangoes to oranges is 2.8 : 4.2.",
+        whatIsWidth: "Identify the required ratio.",
+      },
+      sceneFourteen: {
+        convertEach: "Convert each decimal to its fraction form.",
+        whatIsWidth: "Express 2.8 as a fraction.",
+        error:
+          "Not quite. 2.8 has one decimal place, so write it as 28 over 10.",
+        success: "That’s correct!",
+      },
+      sceneFifteen: {
+        whatIsWidth: "Express 4.2 in fraction form.",
+        error:
+          "Not quite. 4.2 has one decimal place, so write it as 42 over 10.",
+      },
+      sceneSixteen: {
+        letSimplifyRatio: "Let’s simplify the ratio.",
+        canWe: "Can we cancel the common\n factor ",
+        inBoth: "in both terms?",
+        error: "Not quite. We can remove the common factor ",
+        errorFromBoth: " from both terms.",
+        success: "That’s correct! Let’s cancel it out.",
+      },
+      sceneSeventeen: {
+        whichNumber: "Which number divides 28 and\n 42 to simplify the ratio?",
+        error: "Not quite. To simplify, divide 29 and 42 by their GCF.",
+        success:
+          "Perfect! The greatest common factor helps simplify the ratio.",
+        lcm: "LCM of \n28 and 42",
+        gcf: "GCF of 28 and 42",
+      },
+      sceneEighteen: {
+        whatIs: "What is the GCF of 28 and 42.",
+        simplestForm: "Simplest form",
+        error: "Not quite! Try again.",
+        success: "Yes! 14 is the greatest number that divides both 28 and 42.",
+      },
+      sceneNineteen: {
+        whatIs: "What is the simplest form?",
+        error: "Oops! Check your order of ratio.",
+        success: "That’s correct.",
+        ratioOfWeight:
+          "2 : 3 is the ratio of the\n weight of mangoes and\n oranges.\n\nThis means that for\n every 2 kg of mangoes\n there are 3 kg of\n oranges.",
+      },
       activityComplete: {
         activityComplete: "Activity Completed!",
         youCompleted:
@@ -136,6 +196,7 @@ const appData = {
         yes: "Ya",
         no: "Tidak",
       },
+
       length: "Panjang",
       width: "Lebar",
       ml: "ml",
@@ -144,102 +205,182 @@ const appData = {
       paintB: "Cat B",
       red: "merah",
       blue: "biru",
-      crossProduct: "Hasil Silang ",
+      crossProduct: "Perkalian Silang",
+
       startPage: {
-        letWrite: "Mari tulis rasio dalam bentuk paling sederhana",
+        letWrite: "Mari tulis perbandingannya dalam bentuk paling sederhana",
         aFrame:
-          "Sebuah bingkai berukuran 120 cm × 80 cm.\nBerapakah rasio panjang dan lebar bingkai tersebut?",
+          "Sebuah bingkai berukuran 120 cm × 80 cm.\nBerapa perbandingan panjang dan lebar bingkai tersebut?",
       },
+
       navigation: {
-        tapContinue: "Ketuk » untuk melanjutkan.",
-        tapProceed: "Ketuk » untuk melanjutkan.",
-        tapCorrectOption: "Ketuk opsi yang benar.",
-        slideToMove: "Geser penggeser untuk memperbesar bingkai kecil.",
-        tapContinue: "Ketuk » untuk melanjutkan.",
+        tapContinue: "Tap » untuk melanjutkan.",
+        tapProceed: "Tap » untuk lanjut.",
+        tapCorrectOption: "Tap pilihan yang benar.",
+        slideToMove: "Geser slider untuk memperbesar bingkai kecil.",
       },
+
       sceneTwo: {
         aFrameMeasure: "Sebuah bingkai berukuran",
         measurement: "120 cm × 80 cm.\n",
-        whatIs: "Berapakah rasio panjang dan lebar bingkai?",
+        whatIs: "Berapa perbandingan panjang dan lebar bingkai?",
         showsTheMeasurement:
-          "120 cm × 80 cm menunjukkan\nukuran bingkai.\n\nMari kita ambil ukuran yang lebih besar sebagai\npanjang dan ukuran yang lebih kecil sebagai\nlebar.",
+          "120 cm × 80 cm menunjukkan\nukuran bingkai.\n\nMari ambil ukuran yang lebih besar sebagai\npanjang dan ukuran yang lebih kecil sebagai lebar.",
       },
+
       sceneThree: {
         given: "Diketahui:",
         lengthOfFrame: "Panjang bingkai",
         widthOfFrame: "Lebar bingkai",
-        whatIsLength: "Berapakah panjang\nbingkai?",
-        error: "Kurang tepat. Ukuran yang lebih besar adalah panjang bingkai.",
-        success: "Ya! Panjangnya adalah 120 cm. ",
+        whatIsLength: "Berapa panjang\nbingkai?",
+        error: "Belum tepat. Ukuran yang lebih besar adalah panjang bingkai.",
+        success: "Ya! Panjangnya adalah 120 cm.",
       },
+
       sceneFour: {
-        whatIsWidth: "Berapakah lebar\nbingkai?",
-        error: "Kurang tepat. Ukuran yang lebih kecil adalah lebar bingkai.",
-        success: "Betul! Lebarnya adalah 80 cm.",
+        whatIsWidth: "Berapa lebar bingkai?",
+        error: "Belum tepat. Ukuran yang lebih kecil adalah lebar bingkai.",
+        success: "Benar! Lebarnya adalah 80 cm.",
       },
+
       sceneFive: {
-        ratioOfLengthWidth: "Rasio panjang terhadap\nlebar",
-        whatIsWidth: "Apa rasio panjang terhadap\nlebar?",
+        ratioOfLengthWidth: "Perbandingan panjang terhadap\nlebar",
+        whatIsWidth: "Berapa perbandingan panjang terhadap lebar?",
         letsFind:
-          "Mari kita temukan rasio panjang terhadap lebar bingkai menggunakan ukuran yang diberikan.",
-        error: "Ups! Ingat, bagian pertama rasio adalah untuk panjang.",
+          "Mari kita cari perbandingan panjang bingkai terhadap lebarnya menggunakan ukuran yang diberikan.",
+        error: "Ups! Ingat, bagian pertama dari perbandingan adalah panjang.",
         success:
-          "Bagus! Rasionya adalah 120 : 80 yang juga dapat ditulis sebagai",
+          "Bagus! Perbandingannya adalah 120 : 80 yang juga dapat ditulis sebagai",
       },
+
       sceneSix: {
-        ratioOfLengthWidth: "Rasio panjang terhadap lebar",
-        whatIsWidth: "Representasikan 120 sebagai kelipatan\n10.",
+        ratioOfLengthWidth: "Perbandingan panjang terhadap lebar",
+        whatIsWidth: "Tuliskan 120 sebagai kelipatan\n10.",
         letsFind:
-          "Mari kita sederhanakan rasio dengan menyatakan tiap angka sebagai kelipatan dari 10.",
+          "Mari sederhanakan perbandingan dengan menuliskan setiap angka sebagai kelipatan 10.",
         error: "Belum tepat! Coba lagi.",
-        success: "Benar! \n\n120 dapat ditulis sebagai 12 × 10.",
+        success: "Benar!\n\n120 dapat ditulis sebagai 12 × 10.",
       },
+
       sceneSeven: {
-        whatIsWidth: "Representasikan 80 sebagai kelipatan\n10.",
+        whatIsWidth: "Tuliskan 80 sebagai kelipatan\n10.",
         error: "Belum tepat! Coba lagi.",
-        success: "Benar! \n\n80 dapat ditulis sebagai 8 × 10.",
+        success: "Benar!\n\n80 dapat ditulis sebagai 8 × 10.",
       },
+
       sceneEight: {
-        whatIsWidth: "Bisakah kita membagi 10 pada\nkedua angka?",
-        letsFind: "Mari kita sederhanakan rasio.",
-        error: "Periksa lagi — kedua angka memiliki 10 sebagai faktor bersama.",
+        whatIsWidth: "Bisakah kita mencoret angka 10 pada\nkeduanya?",
+        letsFind: "Mari kita sederhanakan perbandingan.",
+        error: "Periksa kembali — kedua angka memiliki faktor 10.",
         success:
-          "Ya! Anda dapat membagi 10 pada kedua angka karena itu adalah faktor bersama.",
+          "Ya! Kamu dapat mencoret angka 10 pada keduanya karena merupakan faktor yang sama.",
       },
+
       sceneNine: {
         whatIsWidth:
-          "Angka manakah yang membagi 12 dan\n8 untuk menyederhanakan rasio?",
+          "Bilangan berapa yang membagi 12 dan 8 untuk menyederhanakan perbandingan?",
         error:
-          "Kurang tepat. Untuk menyederhanakan, bagi 12 dan 8 dengan FPB mereka.",
+          "Belum tepat. Untuk menyederhanakan, bagi 12 dan 8 dengan FPB-nya.",
         success:
-          "Sempurna! Faktor persekutuan terbesar membantu menyederhanakan rasio.",
+          "Bagus! Faktor Persekutuan Terbesar membantu menyederhanakan perbandingan.",
         lcmOf: "KPK dari\n12 dan 8",
         gcfOf: "FPB dari\n12 dan 8",
       },
+
       sceneTen: {
-        whatIsWidth: "Berapakah FPB dari 12 dan 8.",
-        simplestForm: "Bentuk paling sederhana ",
+        whatIsWidth: "Berapa FPB dari 12 dan 8?",
+        simplestForm: "Bentuk paling sederhana",
         error: "Belum tepat! Coba lagi.",
-        success: "Ya! 4 adalah angka terbesar yang membagi 12 dan 8.",
+        success: "Ya! 4 adalah bilangan terbesar yang membagi 12 dan 8.",
       },
+
       sceneEleven: {
-        whatIsWidth: "Apakah bentuk paling sederhana?",
-        error: "Ups! Periksa urutan rasio Anda.",
+        whatIsWidth: "Apa bentuk paling sederhananya?",
+        error: "Ups! Periksa urutan perbandingan.",
         correct: "Benar!",
         success:
-          "adalah bentuk paling sederhana dari rasio tersebut, yang juga dapat ditulis sebagai 3 : 2. Ini berarti bahwa untuk setiap 3 cm panjang, terdapat 2 cm lebar.",
-        lengthWidth: "Panjang : lebar ",
+          "adalah bentuk paling sederhana dari perbandingan, yang juga dapat ditulis sebagai 3 : 2. Ini berarti untuk setiap 3 cm panjang, terdapat 2 cm lebar.",
+        lengthWidth: "Panjang : lebar",
       },
+
       sceneTwelve: {
         letsFind:
-          "Pertimbangkan bingkai yang lebih kecil berukuran 3 cm × 2 cm.\nMari kita perbesar dan lihat apakah pas sempurna di atas bingkai asli 120 cm × 80 cm.",
+          "Pertimbangkan bingkai kecil berukuran 3 cm × 2 cm.\nMari kita perbesar dan lihat apakah ukurannya sama dengan bingkai 120 cm × 80 cm.",
         theSmallerFrame:
-          "Bingkai yang lebih kecil diperbesar dalam\nrasio yang sama — 3 : 2 — dan pas\nsempurna di atas bingkai asli. \n\nJadi, 3 : 2 adalah bentuk paling sederhana dari\nrasio 120 : 80.",
+          "Bingkai kecil membesar dalam perbandingan yang sama — 3 : 2 — dan cocok\nsempurna dengan bingkai asli.\n\nJadi, 3 : 2 adalah bentuk paling sederhana dari\nperbandingan 120 : 80.",
       },
+
+      nextQuestion: {
+        motherBought:
+          "Ibu membeli 2,8 kg mangga dan 4,2 kg jeruk\n dan meletakkannya dalam keranjang.\n\nBerapa perbandingan berat mangga terhadap jeruk?",
+      },
+
+      sceneThirteen: {
+        motherBought: "Ibu membeli ",
+        mangoes: "2.8 kg mangga ",
+        and: "dan",
+        oranges: "4.2 kg jeruk ",
+        andPlaced:
+          "dan meletakkannya dalam keranjang.\nBerapa perbandingan berat mangga terhadap jeruk?",
+        ratioOfMangoesOranges: "Perbandingan berat\nmangga terhadap jeruk ",
+        error: "Ups! Hati-hati dengan urutan — mangga dulu baru jeruk.",
+        success: "Bagus! Perbandingan mangga terhadap jeruk adalah 2.8 : 4.2.",
+        whatIsWidth: "Identifikasi perbandingan yang diperlukan.",
+      },
+
+      sceneFourteen: {
+        convertEach: "Ubah setiap desimal ke bentuk pecahannya.",
+        whatIsWidth: "Tuliskan 2.8 sebagai pecahan.",
+        error:
+          "Belum tepat. 2.8 memiliki satu angka desimal, jadi tulis sebagai 28 per 10.",
+        success: "Benar!",
+      },
+
+      sceneFifteen: {
+        whatIsWidth: "Tuliskan 4.2 sebagai pecahan.",
+        error:
+          "Belum tepat. 4.2 memiliki satu angka desimal, jadi tulis sebagai 42 per 10.",
+      },
+
+      sceneSixteen: {
+        letSimplifyRatio: "Mari sederhanakan perbandingan.",
+        canWe: "Bisakah kita mencoret faktor\nyang sama ",
+        inBoth: "pada kedua angka?",
+        error: "Belum tepat. Kita dapat menghilangkan faktor yang sama ",
+        errorFromBoth: " dari kedua angka.",
+        success: "Benar! Ayo kita coret.",
+      },
+
+      sceneSeventeen: {
+        whichNumber:
+          "Bilangan berapa yang membagi 28 dan\n42 untuk menyederhanakan perbandingan?",
+        error:
+          "Belum tepat. Untuk menyederhanakan, bagi 28 dan 42 dengan FPB-nya.",
+        success:
+          "Bagus! Faktor Persekutuan Terbesar membantu menyederhanakan perbandingan.",
+        lcm: "KPK dari\n28 dan 42",
+        gcf: "FPB dari 28 dan 42",
+      },
+
+      sceneEighteen: {
+        whatIs: "Berapa FPB dari 28 dan 42?",
+        simplestForm: "Bentuk paling sederhana",
+        error: "Belum tepat! Coba lagi.",
+        success: "Ya! 14 adalah bilangan terbesar yang membagi 28 dan 42.",
+      },
+
+      sceneNineteen: {
+        whatIs: "Apa bentuk paling sederhananya?",
+        error: "Ups! Periksa urutan perbandingan.",
+        success: "Benar.",
+        ratioOfWeight:
+          "2 : 3 adalah perbandingan\nberat mangga dan jeruk.\n\nIni berarti untuk setiap 2 kg mangga,\nada 3 kg jeruk.",
+      },
+
       activityComplete: {
-        activityCompleted: "Aktivitas Selesai!",
+        activityComplete: "Aktivitas Selesai!",
         youCompleted:
-          "Anda telah menyelesaikan menyelesaikan soal cerita\ndengan menulis rasio yang diperlukan\ndalam bentuk paling sederhana.",
+          "Kamu telah menyelesaikan soal cerita\ndengan menuliskan perbandingan dalam\nbentuk paling sederhana.",
       },
     },
   },

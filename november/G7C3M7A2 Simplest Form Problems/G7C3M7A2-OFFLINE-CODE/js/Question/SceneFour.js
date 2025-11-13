@@ -2,7 +2,7 @@ const SceneFour = ({
   goNext,
   goPrev
 }) => {
-   const [beat, setBeat] = useState(true);
+  const [beat, setBeat] = useState(true);
   const [showFeedback, setShowFeedback] = useState("");
   const [optionValue, setOptionValue] = useState("");
   const [boxCss, setBoxCss] = useState("");

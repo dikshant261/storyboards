@@ -221,7 +221,7 @@ const SceneTwelve = ({
   })), /*#__PURE__*/React.createElement("div", {
     className: "align-row",
     style: {
-      gridTemplateColumns: "minmax(18vw, 1fr) 2.5vw 10.2vw 3vw 10vw 1.5vw 5vw"
+      gridTemplateColumns: "minmax(18vw, 1fr) 2.5vw 9.2vw 0vw 6vw 1.5vw 5vw"
     }
   }, /*#__PURE__*/React.createElement("p", {
     style: {

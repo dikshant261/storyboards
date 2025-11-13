@@ -1,9 +1,7 @@
-
 const SceneEight = ({
   goNext,
   goPrev
 }) => {
-  
   const [beat, setBeat] = useState(true);
   const [showFeedback, setShowFeedback] = useState("");
   const [optionValue, setOptionValue] = useState("");
@@ -67,7 +65,7 @@ const SceneEight = ({
     style: {
       justifyContent: "flex-start",
       alignItems: "flex-start",
-      padding: "1vh 2vw"
+      padding: "1vh 1vw"
     }
   }, /*#__PURE__*/React.createElement("p", {
     style: {
@@ -167,7 +165,24 @@ const SceneEight = ({
       background: "#ffffffbd",
       border: "none"
     }
-  }))))), /*#__PURE__*/React.createElement("div", {
+  }))), allDisabled && /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: "white"
+    }
+  }, "="), allDisabled && /*#__PURE__*/React.createElement(Box, {
+    value: /*#__PURE__*/React.createElement(Fraction, {
+      numerator: 12,
+      denominator: 8,
+      fontSize: "2.5vw",
+      color: "black"
+    }),
+    style: {
+      height: "13vh",
+      width: "5vw",
+      background: "#ffffffbd",
+      border: "none"
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "keypad"
   }, /*#__PURE__*/React.createElement("p", {
     className: "para"

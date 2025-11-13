@@ -5,6 +5,7 @@ import FrameImagTwo from "./FrameImageTwo";
 import Tap from "../Tap";
 import { playClick } from "../PlayAudio";
 import FrameImagTwoL from "./FrameImageTwoL";
+import FrameImagThreeL from "./FrameImageThreeL";
 const SceneFourteen = ({
   goNext,
   goPrev
@@ -28,13 +29,13 @@ const SceneFourteen = ({
     className: "main"
   }, /*#__PURE__*/React.createElement("div", {
     className: "image-1"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "10vw",
     redml: "1.5",
     blueml: "2.4"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "8vw",
     redml: "1.2",
     blueml: "1.8"

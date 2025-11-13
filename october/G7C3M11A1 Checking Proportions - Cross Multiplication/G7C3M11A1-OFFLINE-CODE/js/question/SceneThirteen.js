@@ -1,8 +1,9 @@
 const SceneThirteen = ({
   goNext,
-  goPrev
+  goPrev,
+  crossBoxTwoValue,
+  crossBoxOneValue,
 }) => {
-  const purple="assets/purple.png";
   const [beatOne, setBeatOne] = useState(true);
   const [beatTwo, setBeatTwo] = useState(false);
   const [boxOneValue, setBoxOneValue] = useState("");
@@ -15,11 +16,13 @@ const SceneThirteen = ({
   const [buttonId, setButtonId] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const [showPurple, setShowPurple] = useState(false);
-  const [message, setMessage] = useState(t("sceneFive.findProduct", {
-    num1: 50,
-    num2: 15
-  }));
-  const handleResult = id => {
+  const [message, setMessage] = useState(
+    t("sceneFive.findProduct", {
+      num1: 50,
+      num2: 15,
+    })
+  );
+  const handleResult = (id) => {
     if (id === 1) {
       playCorrect();
       setErrorMessage(t("feedBack.yesSuccessOne"));
@@ -38,194 +41,338 @@ const SceneThirteen = ({
     playClick();
     goNext();
   };
-  return /*#__PURE__*/React.createElement("div", {
-    className: "scenethree-container"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "heading"
-  }, /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: "2.6vw"
-    }
-  }, t("sceneSeven.expressThe"), /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: "white"
-    }
-  }, t("sceneSeven.lengthRatio")), /*#__PURE__*/React.createElement("span", null, t("sceneSeven.frameA")))), /*#__PURE__*/React.createElement("div", {
-    className: "main"
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "align-col"
-  }, /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      gap: "1vw",
-      position: "relative"
-    }
-  }, /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "5.9 5.9 12.2 12.2",
-    style: {
-      position: "absolute",
-      bottom: "-7%",
-      width: "30%",
-      zIndex: "1",
-      transform: "rotate(-30deg)"
-    }
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
-    stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
-  })), /*#__PURE__*/React.createElement("svg", {
-    xmlns: "http://www.w3.org/2000/svg",
-    viewBox: "5.9 5.9 12.2 12.2",
-    style: {
-      position: "absolute",
-      bottom: "-9%",
-      width: "30%",
-      zIndex: "1",
-      transform: "rotate(121deg)",
-      left: "33%"
-    }
-  }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
-    stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "image-1",
-    style: {
-      gap: showPurple ? "4vh" : ""
-    }
-  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), !showPurple && /*#__PURE__*/React.createElement(FrameImagTwoL, {
-    width: "8vw",
-    redml: "1.5",
-    blueml: "2"
-  }), showPurple && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "flex-end",
-      width: "34vw",
-      height: "20vh"
-    }
-  }, /*#__PURE__*/React.createElement("img", {
-    src: purple,
-    style: {
-      width: "8vw"
-    }
-  })), /*#__PURE__*/React.createElement(LenghtBox, {
-    boxOneValue: "1.5",
-    boxTwoValue: "2",
-    color: "rgba(2, 2, 63, 0.758)",
-    success: true,
-    numberColor: "gray",
-    allGray: true
-  })), /*#__PURE__*/React.createElement("div", {
-    className: "image-2",
-    style: {
-      gap: showPurple ? "4vh" : ""
-    }
-  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), !showPurple && /*#__PURE__*/React.createElement(FrameImagTwoL, {
-    width: "10vw",
-    redml: "2.25",
-    blueml: "3"
-  }), showPurple && /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "flex-end",
-      width: "34vw",
-      height: "20vh"
-    }
-  }, /*#__PURE__*/React.createElement("img", {
-    src: purple,
-    style: {
-      width: "8vw"
-    }
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBox, {
-    boxOneValue: "2.25",
-    boxTwoValue: "3",
-    color: "rgba(2, 2, 63, 0.758)",
-    success: true,
-    numberColor: "gray",
-    allGray: true
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "cross-box"
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBoxTwo, {
-    boxOneValue: "4.5",
-    success: true,
-    color: buttonId === null ? "rgba(2, 2, 63, 0.758)" : disabled ? "" : "#855250",
-    num: 1
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBoxTwo, {
-    boxOneValue: "4.5",
-    success: true,
-    color: buttonId === null ? "rgba(2, 2, 63, 0.758)" : disabled ? "" : "#855250",
-    num: 2
-  })))), /*#__PURE__*/React.createElement("div", {
-    className: "keypad",
-    style: {
-      justifyContent: "flex-start",
-      gap: "3vh"
-    }
-  }, /*#__PURE__*/React.createElement("p", {
-    className: "para",
-    style: {
-      fontSize: "2vw"
-    }
-  }, t("sceneSeven.sideKeypadHeading")), /*#__PURE__*/React.createElement("div", {
-    style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      gap: "4vw"
-    }
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "yes-button",
-    onClick: () => handleResult(1),
-    style: {
-      backgroundColor: disabled ? "#5a7f5e" : "",
-      cursor: disabled ? "not-allowed" : "pointer"
+  return /*#__PURE__*/ React.createElement(
+    "div",
+    {
+      className: "scenethree-container",
     },
-    disabled: disabled
-  }, t("buttons.yes")), /*#__PURE__*/React.createElement("button", {
-    className: "yes-button",
-    onClick: () => handleResult(2),
-    style: {
-      backgroundColor: buttonId === 2 ? "#855250" : "",
-      cursor: buttonId === 2 || disabled ? "not-allowed" : "pointer"
-    },
-    disabled: buttonId === 2 || disabled
-  }, t("buttons.no"))), errorMessage !== "" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      fontSize: "2vw",
-      color: "white",
-      backgroundColor: disabled ? "#5a7f5e" : "#855250",
-      border: disabled ? "0.3vw dashed darkgreen" : "0.3vw dashed darksalmon",
-      width: "23vw",
-      height: "38vh",
-      borderRadius: "1.3vw",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      textAlign: "center",
-      whiteSpace: "pre-line"
-    }
-  }, errorMessage))), /*#__PURE__*/React.createElement("div", {
-    className: "footer"
-  }, /*#__PURE__*/React.createElement("button", {
-    onClick: () => {
-      playClick();
-      goPrev();
-    }
-  }, t("buttons.previous")), !next && /*#__PURE__*/React.createElement("p", null, t("navigation.obServeCross")), next && /*#__PURE__*/React.createElement("p", null, t("navigation.nextQuestion")), !next && /*#__PURE__*/React.createElement("button", {
-    className: "disabled"
-  }, t("buttons.next")), next && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
-    onClick: handleClick
-  }, t("buttons.next")), /*#__PURE__*/React.createElement(Tap, {
-    onClick: handleClick,
-    bottom: 0
-  }))));
+    /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        className: "heading",
+      },
+      /*#__PURE__*/ React.createElement(
+        "p",
+        {
+          style: {
+            fontSize: "2.4vw",
+          },
+        },
+        t("sceneSeven.expressThe"),
+        /*#__PURE__*/ React.createElement(
+          "span",
+          {
+            style: {
+              color: "white",
+            },
+          },
+          t("sceneSeven.lengthRatio")
+        ),
+        /*#__PURE__*/ React.createElement("span", null, t("sceneSeven.frameA"))
+      )
+    ),
+    /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        className: "main",
+      },
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          className: "align-col",
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            style: {
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "1vw",
+              position: "relative",
+            },
+          },
+          /*#__PURE__*/ React.createElement(
+            "svg",
+            {
+              xmlns: "http://www.w3.org/2000/svg",
+              viewBox: "5.9 5.9 12.2 12.2",
+              style: {
+                position: "absolute",
+                bottom: "-14%",
+                width: "31%",
+                zIndex: "1",
+                transform: "rotate(-34deg)",
+                left: "36%",
+              },
+            },
+            /*#__PURE__*/ React.createElement("path", {
+              d: "M18 18L6 6M6 6V7M6 6H7",
+              stroke: "gray",
+              strokeWidth: "0.1",
+              fill: "#fff",
+            })
+          ),
+          /*#__PURE__*/ React.createElement(
+            "svg",
+            {
+              xmlns: "http://www.w3.org/2000/svg",
+              viewBox: "5.9 5.9 12.2 12.2",
+              style: {
+                position: "absolute",
+                bottom: "-13%",
+                width: "30%",
+                zIndex: "1",
+                transform: "rotate(125deg)",
+                left: "33%",
+              },
+            },
+            /*#__PURE__*/ React.createElement("path", {
+              d: "M18 18L6 6M6 6V7M6 6H7",
+              stroke: "gray",
+              strokeWidth: "0.1",
+              fill: "#fff",
+            })
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "image-1",
+              style: {
+                gap: showPurple ? "4vh" : "",
+              },
+            },
+            /*#__PURE__*/ React.createElement("p", null, t("paintA")),
+            /*#__PURE__*/ React.createElement(FrameImagTwoL, {
+              width: "8vw",
+              redml: "1.5",
+              blueml: "2",
+              overlap: showPurple,
+              style: {
+                height: showPurple ? "27vh" : "",
+              },
+            }),
+            /*#__PURE__*/ React.createElement(LenghtBox, {
+              boxOneValue: "1.5",
+              boxTwoValue: "2",
+              color: "rgba(2, 2, 63, 0.758)",
+              success: true,
+              numberColor: "gray",
+              allGray: true,
+              style: {
+                position: "fixed",
+                left: "7%",
+                top: "47%",
+              },
+            })
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "image-2",
+              style: {
+                gap: showPurple ? "4vh" : "",
+              },
+            },
+            /*#__PURE__*/ React.createElement("p", null, t("paintB")),
+            /*#__PURE__*/ React.createElement(FrameImagTwoL, {
+              width: "10vw",
+              redml: "2.25",
+              blueml: "3",
+              overlap: showPurple,
+              style: {
+                height: showPurple ? "27vh" : "",
+              },
+            }),
+            /*#__PURE__*/ React.createElement(
+              "div",
+              null,
+              /*#__PURE__*/ React.createElement(LenghtBox, {
+                boxOneValue: "2.25",
+                boxTwoValue: "3",
+                color: "rgba(2, 2, 63, 0.758)",
+                success: true,
+                numberColor: "gray",
+                allGray: true,
+                style: {
+                  position: "fixed",
+                  right: "33.5%",
+                  top: "47%",
+                },
+              })
+            )
+          )
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            className: "cross-box",
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            null,
+            /*#__PURE__*/ React.createElement(LenghtBoxTwo, {
+              boxOneValue: crossBoxOneValue,
+              success: true,
+              color:
+                buttonId === null
+                  ? "rgba(2, 2, 63, 0.758)"
+                  : disabled
+                  ? ""
+                  : "#855250",
+              num: 1,
+            })
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            null,
+            /*#__PURE__*/ React.createElement(LenghtBoxTwo, {
+              boxOneValue: crossBoxTwoValue,
+              success: true,
+              color:
+                buttonId === null
+                  ? "rgba(2, 2, 63, 0.758)"
+                  : disabled
+                  ? ""
+                  : "#855250",
+              num: 2,
+            })
+          )
+        )
+      ),
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          className: "keypad",
+          style: {
+            justifyContent: "flex-start",
+            gap: "3vh",
+          },
+        },
+        /*#__PURE__*/ React.createElement(
+          "p",
+          {
+            className: "para",
+            style: {
+              fontSize: "2vw",
+            },
+          },
+          t("sceneSeven.sideKeypadHeading")
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            style: {
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "4vw",
+            },
+          },
+          /*#__PURE__*/ React.createElement(
+            "button",
+            {
+              className: "yes-button",
+              onClick: () => handleResult(1),
+              style: {
+                backgroundColor: disabled ? "#5a7f5e" : "",
+                cursor: disabled ? "not-allowed" : "pointer",
+              },
+              disabled: disabled,
+            },
+            t("buttons.yes")
+          ),
+          /*#__PURE__*/ React.createElement(
+            "button",
+            {
+              className: "yes-button",
+              onClick: () => handleResult(2),
+              style: {
+                backgroundColor: buttonId === 2 ? "#855250" : "",
+                cursor: buttonId === 2 || disabled ? "not-allowed" : "pointer",
+              },
+              disabled: buttonId === 2 || disabled,
+            },
+            t("buttons.no")
+          )
+        ),
+        errorMessage !== "" &&
+          /*#__PURE__*/ React.createElement(
+            "p",
+            {
+              style: {
+                fontSize: "2vw",
+                color: "white",
+                backgroundColor: disabled ? "#5a7f5e" : "#855250",
+                border: disabled
+                  ? "0.3vw dashed darkgreen"
+                  : "0.3vw dashed darksalmon",
+                width: "23vw",
+                height: "38vh",
+                borderRadius: "1.3vw",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                whiteSpace: "pre-line",
+              },
+            },
+            errorMessage
+          )
+      )
+    ),
+    /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        className: "footer",
+      },
+      /*#__PURE__*/ React.createElement(
+        "button",
+        {
+          onClick: () => {
+            playClick();
+            goPrev();
+          },
+        },
+        t("buttons.previous")
+      ),
+      !next &&
+        /*#__PURE__*/ React.createElement(
+          "p",
+          null,
+          t("navigation.obServeCross")
+        ),
+      next &&
+        /*#__PURE__*/ React.createElement(
+          "p",
+          null,
+          t("navigation.nextQuestion")
+        ),
+      !next &&
+        /*#__PURE__*/ React.createElement(
+          "button",
+          {
+            className: "disabled",
+          },
+          t("buttons.next")
+        ),
+      next &&
+        /*#__PURE__*/ React.createElement(
+          "div",
+          null,
+          /*#__PURE__*/ React.createElement(
+            "button",
+            {
+              onClick: handleClick,
+            },
+            t("buttons.next")
+          ),
+          /*#__PURE__*/ React.createElement(Tap, {
+            onClick: handleClick,
+            bottom: 0,
+          })
+        )
+    )
+  );
 };
-window.SceneThirteen=SceneThirteen;
+window.SceneThirteen = SceneThirteen;

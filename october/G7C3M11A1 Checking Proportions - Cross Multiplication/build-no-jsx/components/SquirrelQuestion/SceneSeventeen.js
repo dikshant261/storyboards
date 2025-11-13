@@ -9,9 +9,11 @@ import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
 import SceneSixteen from "./SceneSixteen";
+import FrameImagThreeL from "./FrameImageThreeL";
 const SceneSeventeen = ({
   goNext,
-  goPrev
+  goPrev,
+  setCrossBoxThreeValue
 }) => {
   const {
     t
@@ -47,11 +49,12 @@ const SceneSeventeen = ({
   const handleCheck = () => {
     if (beatOne) {
       setErrorShow(true);
-      if (boxOneValue === "2.7") {
+      if (boxOneValue === "2.7" || boxOneValue === "02.7" || boxOneValue === "2.70") {
         playCorrect();
         setBeatOne(false);
         setSuccess(true);
         setDisabled(false);
+        setCrossBoxThreeValue(boxOneValue);
         setNext(true);
       } else {
         playWrong();
@@ -84,19 +87,20 @@ const SceneSeventeen = ({
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-7%",
-      width: "30%",
+      bottom: "-14%",
+      width: "31%",
       zIndex: "1",
-      transform: "rotate(-30deg)"
+      transform: "rotate(-34deg)",
+      left: "36%"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "white",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-1"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "10vw",
     redml: "1.5",
     blueml: "2.4"
@@ -109,7 +113,7 @@ const SceneSeventeen = ({
     numberColor: "gray"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "8vw",
     redml: "1.2",
     blueml: "1.8"
@@ -145,7 +149,7 @@ const SceneSeventeen = ({
     boxOneValue: boxOneValue,
     disabled: disabled,
     message: message,
-    ans: "2.7"
+    ans: boxOneValue
   })))), /*#__PURE__*/React.createElement("div", {
     className: "footer"
   }, /*#__PURE__*/React.createElement("button", {

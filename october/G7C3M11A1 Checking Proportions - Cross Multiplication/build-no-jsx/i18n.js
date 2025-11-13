@@ -45,13 +45,14 @@ i18n.use(initReactI18next).init({
           tapForNextChallange: "Tap ≫ for another challenge.",
           tapCheckRatio: "Tap ≫ to check proportionality.",
           obServeCross: "Observe the cross products and tap yes or no.",
-          nextQuestion: "Tap ≫ for another challenge."
+          nextQuestion: "Tap ≫ for another challenge.",
+          Tap: "Tap ≫"
         },
         sceneTwo: {
           clickIf: "Check if the",
           ratioOfRed: "ratio of red to blue",
           inPaintA: "in Paint A and Paint B are in proportion.",
-          keypadHeading: "Let’s test if the ratio\n of red to blue in paint\n A and Paint B using\n  cross-multiplication\n method."
+          keypadHeading: "Let's test if the ratios of red to blue in Paint A and Paint B are proportional using cross-multiplication method. "
         },
         sceneThree: {
           expressThe: "Express the ratio of",
@@ -76,10 +77,10 @@ i18n.use(initReactI18next).init({
           success: "Good job. The ratio of red to blue paints in Paint {{frame}} is ",
           crossError: "Not quite! {{num1}} × {{num2}} is not equal to {{ans}}.",
           crossSuccess: "Good job. \n{{num1}} × {{num2}} = {{ans}}.",
-          yesError: "Oops!\n Observe the purple shade of Paint A and Paint B are different.\n\nFor the paints to be proportional, the cross-products should be equal.",
-          yesSuccess: "Correct!\nThe cross-products are not equal, so Paint A is not proportional to Paint B.\n\nThat’s why the purple shades don’t match.",
-          yesSuccessOne: "Correct! \nThe cross-products are equal, so Paint A is proportional to Paint B.\n\nThat’s why the purple shades are same.",
-          yesErrorOne: "Oops!\n See how the purple shade of Paint A and Paint B match?\n\nFor the paints to be proportional, the cross-products should be equal."
+          yesError: "Oops!\n Observe the purple shade of Paint A and Paint B are different.\n\nFor the ratios to be proportional, the cross-products should be equal.",
+          yesSuccess: "Correct!\nThe cross-products are not equal, so the ratio of red to blue in Paint A is not proportional to ratio of red to blue in Paint B. \n\nThat’s why the purple shades don’t match.",
+          yesSuccessOne: "Correct! \nThe cross-products are equal, so the ratio of red to blue in Paint A is proportional to ratio of red to blue in Paint B. \n\nThat’s why the purple shades are same.",
+          yesErrorOne: "Oops!\n See how the purple shade of Paint A and Paint B match?\n\nFor the ratios to be proportional, the cross-products should be equal."
         },
         activityComplete: {
           activityComplete: "Activity Completed!",

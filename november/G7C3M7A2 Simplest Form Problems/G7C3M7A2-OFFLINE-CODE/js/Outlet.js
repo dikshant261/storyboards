@@ -1,6 +1,6 @@
-const { useState,useEffect } = React;
+const { useState, useEffect } = React;
 const Outlet = () => {
-  const [currentScene, setCurrentScene] = useState(0);
+  const [currentScene, setCurrentScene] = React.useState(0);
   const sceneComponents = [
     StartPage,
     SceneTwo,
@@ -14,6 +14,15 @@ const Outlet = () => {
     SceneTen,
     SceneEleven,
     SceneTwelve,
+    NextQuestion,
+    SceneThirteen,
+    SceneFourteen,
+    SceneFifteen,
+    SceneSixteen,
+    SceneSeventeen,
+    SceneEighteen,
+    SceneNineteen,
+    SceneTwenty,
     ActivityCompleted,
   ];
   console.log("Current Scene:", currentScene);

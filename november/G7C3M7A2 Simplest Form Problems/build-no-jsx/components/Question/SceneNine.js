@@ -182,12 +182,17 @@ const SceneNine = ({
       color: "white"
     }
   }, "="), /*#__PURE__*/React.createElement(Box, {
-    value: optionValue,
-    beat: beat,
-    boxCss: boxCss,
+    value: /*#__PURE__*/React.createElement(Fraction, {
+      numerator: 12,
+      denominator: 8,
+      fontSize: "2.5vw",
+      color: "black"
+    }),
     style: {
       height: "13vh",
-      width: "6vw"
+      width: "5vw",
+      background: "#ffffffbd",
+      border: "none"
     }
   }))), /*#__PURE__*/React.createElement("div", {
     className: "keypad"

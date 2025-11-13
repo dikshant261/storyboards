@@ -106,7 +106,6 @@ const SceneThree = ({ goNext, goPrev }) => {
                 boxTwoValue={boxTwoValue}
                 boxCss={boxCss}
                 success={success}
-                value={1}
               />
             </div>
             <div className="image-2 opacity">
@@ -145,10 +144,14 @@ const SceneThree = ({ goNext, goPrev }) => {
         </div>
       </div>
       <div className="footer">
-        <button onClick={()=>{
-          playClick();
-          goPrev();
-        }}>{t("buttons.previous")}</button>
+        <button
+          onClick={() => {
+            playClick();
+            goPrev();
+          }}
+        >
+          {t("buttons.previous")}
+        </button>
         {!next && <p>{t("navigation.enterEach")}</p>}
         {next && <p>{t("navigation.tapRatioPaintB", { paint: "B" })}</p>}
         {!next && <button className="disabled">{t("buttons.next")}</button>}

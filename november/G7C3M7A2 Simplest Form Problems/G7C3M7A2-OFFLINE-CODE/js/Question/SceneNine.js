@@ -262,12 +262,17 @@ const SceneNine = ({ goNext, goPrev }) => {
             "="
           ),
           /*#__PURE__*/ React.createElement(Box, {
-            value: optionValue,
-            beat: beat,
-            boxCss: boxCss,
+            value: /*#__PURE__*/ React.createElement(Fraction, {
+              numerator: 12,
+              denominator: 8,
+              fontSize: "2.5vw",
+              color: "black",
+            }),
             style: {
               height: "13vh",
               width: "5vw",
+              background: "#ffffffbd",
+              border: "none",
             },
           })
         )
@@ -281,6 +286,9 @@ const SceneNine = ({ goNext, goPrev }) => {
           "p",
           {
             className: "para",
+            style:{
+              fontSize:'2.2vw'
+            }
           },
           t("sceneNine.whatIsWidth")
         ),
@@ -343,9 +351,6 @@ const SceneNine = ({ goNext, goPrev }) => {
             "p",
             {
               className: `${allDisabled ? "frame-success" : "frame-error"}`,
-              style:{
-                marginTop:'1vh'
-              }
             },
             showFeedback
           )

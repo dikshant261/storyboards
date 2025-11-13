@@ -8,9 +8,10 @@ const Fraction = ({
   color = "white",
   lineWidth = "100%",
   lineHeight = "0.4vh",
+  style,
 }) => {
   return (
-    <div className="question-fraction" style={{ fontSize, color }}>
+    <div className="question-fraction" style={{ fontSize, color, ...style }}>
       <span className="numerator">{numerator}</span>
       <span
         className="line"

@@ -115,8 +115,7 @@ const SceneTen = ({
     boxOneValue: "1.5",
     boxTwoValue: "2",
     color: "rgba(2, 2, 63, 0.758)",
-    success: true,
-    value: 1
+    success: true
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2"
   }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
@@ -129,8 +128,7 @@ const SceneTen = ({
     boxOneValue: boxOneValue,
     boxTwoValue: boxTwoValue,
     boxCss: boxCss,
-    success: success,
-    value: 1
+    success: success
   })))), /*#__PURE__*/React.createElement("div", {
     className: "cross-box opacity"
   }, /*#__PURE__*/React.createElement("div", {

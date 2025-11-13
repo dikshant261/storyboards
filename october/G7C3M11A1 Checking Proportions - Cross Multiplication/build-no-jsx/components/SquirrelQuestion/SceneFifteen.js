@@ -8,6 +8,7 @@ import Keypad from "../Keypad";
 import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
+import FrameImagThreeL from "./FrameImageThreeL";
 const SceneFifteen = ({
   goNext,
   goPrev
@@ -110,7 +111,7 @@ const SceneFifteen = ({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "image-1"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "10vw",
     redml: "1.5",
     blueml: "2.4"
@@ -120,11 +121,10 @@ const SceneFifteen = ({
     boxOneValue: boxOneValue,
     boxTwoValue: boxTwoValue,
     boxCss: boxCss,
-    success: success,
-    value: 1
+    success: success
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2 opacity"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "8vw",
     redml: "1.2",
     blueml: "1.8"

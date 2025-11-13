@@ -8,6 +8,7 @@ import Keypad from "../Keypad";
 import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
+import FrameImagThreeL from "./FrameImageThreeL";
 const SceneSixteen = ({ goNext, goPrev }) => {
   const { t } = useTranslation();
   const [beatOne, setBeatOne] = useState(true);
@@ -96,18 +97,17 @@ const SceneSixteen = ({ goNext, goPrev }) => {
           >
             <div className="image-1">
               <p>{t("paintA")}</p>
-              <FrameImagTwoL width="10vw" redml={"1.5"} blueml={"2.4"} />
+              <FrameImagThreeL width="10vw" redml={"1.5"} blueml={"2.4"} />
               <LenghtBox
                 boxOneValue={"1.5"}
                 boxTwoValue={"2.4"}
                 color={"rgba(2, 2, 63, 0.758)"}
                 success={true}
-                value={1}
               />
             </div>
             <div className="image-2">
               <p>{t("paintB")}</p>
-              <FrameImagTwoL width="8vw" redml={"1.2"} blueml={"1.8"} />
+              <FrameImagThreeL width="8vw" redml={"1.2"} blueml={"1.8"} />
               <div>
                 <LenghtBox
                   beatOne={beatOne}
@@ -116,7 +116,6 @@ const SceneSixteen = ({ goNext, goPrev }) => {
                   boxTwoValue={boxTwoValue}
                   boxCss={boxCss}
                   success={success}
-                  value={1}
                 />
               </div>
             </div>

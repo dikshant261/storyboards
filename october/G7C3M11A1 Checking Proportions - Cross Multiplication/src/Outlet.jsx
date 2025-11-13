@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Outlet.css";
 import StartPage from "./components/StartPage";
 import RefreshDetector from "./components/RefreshDetector";
@@ -24,6 +24,10 @@ import ActivityCompleted from "./components/ActivityCompleted";
 
 const Outlet = () => {
   const [currentScene, setCurrentScene] = React.useState(0);
+  const [crossBoxOneValue, setCrossBoxOneValue] = useState("");
+  const [crossBoxTwoValue, setCrossBoxTwoValue] = useState("");
+  const [crossBoxThreeValue, setCrossBoxThreeValue] = useState("");
+  const [crossBoxFourValue, setCrossBoxFourValue] = useState("");
   const sceneComponents = [
     StartPage,
     SceneTwo,
@@ -56,7 +60,18 @@ const Outlet = () => {
   const CurrentScene = sceneComponents[currentScene];
   return (
     <div className="outlet">
-      <CurrentScene goNext={goNext} goPrev={goPrev} />
+      <CurrentScene
+        goNext={goNext}
+        goPrev={goPrev}
+        setCrossBoxOneValue={setCrossBoxOneValue}
+        setCrossBoxTwoValue={setCrossBoxTwoValue}
+        setCrossBoxThreeValue={setCrossBoxThreeValue}
+        setCrossBoxFourValue={setCrossBoxFourValue}
+        crossBoxOneValue={crossBoxOneValue}
+        crossBoxTwoValue={crossBoxTwoValue}
+        crossBoxThreeValue={crossBoxThreeValue}
+        crossBoxFourValue={crossBoxFourValue}
+      />
       <RefreshDetector />
     </div>
   );

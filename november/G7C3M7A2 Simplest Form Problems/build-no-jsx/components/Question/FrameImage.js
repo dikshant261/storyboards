@@ -11,8 +11,8 @@ const FrameImag = ({
   return /*#__PURE__*/React.createElement("div", {
     className: "frame-container",
     style: {
-      justifyContent: 'center',
-      alignItems: 'flex-end'
+      justifyContent: "center",
+      alignItems: "flex-end"
     }
   }, /*#__PURE__*/React.createElement("img", {
     src: frame,

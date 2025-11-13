@@ -43,6 +43,7 @@ const appData = {
         tapCheckRatio: "Tap ≫ to check proportionality.",
         obServeCross: "Observe the cross products and tap yes or no.",
         nextQuestion: "Tap ≫ for another challenge.",
+        Tap: "Tap ≫",
       },
 
       sceneTwo: {
@@ -50,7 +51,7 @@ const appData = {
         ratioOfRed: "ratio of red to blue",
         inPaintA: "in Paint A and Paint B are in proportion.",
         keypadHeading:
-          "Let’s test if the ratio\n of red to blue in paint\n A and Paint B using\n  cross-multiplication\n method.",
+          "Let's test if the ratios of red to blue in Paint A and Paint B are proportional using cross-multiplication method. ",
       },
       sceneThree: {
         expressThe: "Express the ratio of",
@@ -80,13 +81,13 @@ const appData = {
         crossError: "Not quite! {{num1}} × {{num2}} is not equal to {{ans}}.",
         crossSuccess: "Good job. \n{{num1}} × {{num2}} = {{ans}}.",
         yesError:
-          "Oops!\n Observe the purple shade of Paint A and Paint B are different.\n\nFor the paints to be proportional, the cross-products should be equal.",
+          "Oops!\n Observe the purple shade of Paint A and Paint B are different.\n\nFor the ratios to be proportional, the cross-products should be equal.",
         yesSuccess:
-          "Correct!\nThe cross-products are not equal, so Paint A is not proportional to Paint B.\n\nThat’s why the purple shades don’t match.",
+          "Correct!\nThe cross-products are not equal, so the ratio of red to blue in Paint A is not proportional to ratio of red to blue in Paint B. \n\nThat’s why the purple shades don’t match.",
         yesSuccessOne:
-          "Correct! \nThe cross-products are equal, so Paint A is proportional to Paint B.\n\nThat’s why the purple shades are same.",
+          "Correct! \nThe cross-products are equal, so the ratio of red to blue in Paint A is proportional to ratio of red to blue in Paint B. \n\nThat’s why the purple shades are same.",
         yesErrorOne:
-          "Oops!\n See how the purple shade of Paint A and Paint B match?\n\nFor the paints to be proportional, the cross-products should be equal.",
+          "Oops!\n See how the purple shade of Paint A and Paint B match?\n\nFor the ratios to be proportional, the cross-products should be equal.",
       },
       activityComplete: {
         activityComplete: "Activity Completed!",
@@ -119,82 +120,82 @@ const appData = {
       paintB: "Cat B",
       red: "merah",
       blue: "biru",
-      crossProduct: "Hasil Kali Silang ",
+      crossProduct: "Hasil Kali Silang",
 
       startPage: {
-        checkProportionality: "Mari kita periksa proporsionalitas!",
+        checkProportionality: "Mari periksa proporsionalitas!",
         getPurple:
           "Kita mendapatkan warna ungu saat \nmencampur cat merah dan biru!",
         mixGiven:
-          "Mari kita campur jumlah cat merah \ndan biru yang diberikan dan periksa\n apakah rasio mereka proporsional.",
+          "Mari kita campur jumlah cat merah\n dan biru yang diberikan \ndan periksa apakah perbandingannya sebanding.",
       },
 
       navigation: {
-        tapStart: "Ketuk ≫ untuk mulai menghitung rasio.",
+        tapStart: "Ketuk ≫ untuk mulai menghitung perbandingan.",
         enterEach:
-          "Masukkan setiap istilah rasio menggunakan numpad dan ketuk ‘periksa’.",
-        tapSimplify: "Ketuk ≫ untuk menyederhanakan rasio.",
-        tapRatioPaintB: "Ketuk ≫ untuk mengisi rasio Cat {{paint}}.",
-        tapForCross: "Ketuk ≫ untuk mengalikan silang rasio.",
-        tapForNextPair: "Ketuk ≫ untuk mengalikan silang pasangan berikutnya.",
+          "Masukkan setiap nilai perbandingan menggunakan keypad dan ketuk ‘periksa’.",
+        tapSimplify: "Ketuk ≫ untuk menyederhanakan perbandingan.",
+        tapRatioPaintB: "Ketuk ≫ untuk mengisi perbandingan Cat {{paint}}.",
+        tapForCross: "Ketuk ≫ untuk melakukan perkalian silang perbandingan.",
+        tapForNextPair: "Ketuk ≫ untuk menyilangkan pasangan berikutnya.",
         tapForNextChallange: "Ketuk ≫ untuk tantangan berikutnya.",
         tapCheckRatio: "Ketuk ≫ untuk memeriksa proporsionalitas.",
         obServeCross: "Amati hasil kali silang dan ketuk ya atau tidak.",
-        nextQuestion: "Ketuk ≫ untuk tantangan berikutnya.",
+        nextQuestion: "Ketuk ≫ untuk pertanyaan berikutnya.",
+        Tap: "Ketuk ≫",
       },
 
       sceneTwo: {
         clickIf: "Periksa apakah",
-        ratioOfRed: "rasio cat merah terhadap biru",
-        inPaintA: "pada Cat A dan Cat B proporsional.",
+        ratioOfRed: "perbandingan cat merah dengan biru",
+        inPaintA: "pada Cat A dan Cat B adalah sebanding.",
         keypadHeading:
-          "Mari kita uji apakah rasio\n cat merah terhadap biru pada\n Cat A dan Cat B menggunakan\n metode perkalian silang.",
+          "Mari periksa apakah perbandingan cat merah dan biru pada Cat A dan Cat B sebanding menggunakan metode perkalian silang.",
       },
 
       sceneThree: {
-        expressThe: "Nyatakan rasio",
-        lengthRatio: "cat merah terhadap biru",
-        frameA: "dalam Cat {{paint}} sebagai pecahan.",
-        termA: "Masukkan istilah pertama dalam rasio untuk Cat {{paint}}.",
-        termB: "Masukkan istilah kedua dalam rasio untuk Cat {{paint}}.",
+        expressThe: "Nyatakan perbandingan",
+        lengthRatio: "cat merah dengan biru",
+        frameA: "pada Cat {{paint}} sebagai pecahan.",
+        termA: "Masukkan nilai pertama dalam perbandingan untuk Cat {{paint}}.",
+        termB: "Masukkan nilai kedua dalam perbandingan untuk Cat {{paint}}.",
       },
 
       sceneFive: {
-        findProduct: "Temukan hasil kali dari {{num1}} dan {{num2}}.",
-        letsDoCross: "Mari kita lakukan perkalian silang!",
+        findProduct: "Temukan hasil dari {{num1}} dan {{num2}}.",
+        letsDoCross: "Mari lakukan perkalian silang!",
       },
 
       sceneSeven: {
-        expressThe: "Nyatakan rasio ",
-        lengthRatio: "cat merah terhadap biru ",
-        frameA: "dalam Cat A dan Cat B apakah proporsional.",
+        expressThe: "Nyatakan perbandingan ",
+        lengthRatio: "cat merah dengan biru ",
+        frameA: "pada Cat A dan Cat B apakah sebanding.",
         sideKeypadHeading:
-          "Apakah rasio cat merah terhadap biru\n pada Cat A proporsional\n dengan rasio cat merah terhadap biru\n pada Cat B?",
+          "Apakah perbandingan cat merah\ndengan biru pada Cat A\nsebanding dengan Cat B?",
       },
 
       feedBack: {
-        errorOne:
-          "Ups! Kita mulai dengan cat merah terlebih dahulu. Coba lagi!",
-        errorTwo: "Ups! Istilah kedua menunjukkan jumlah cat biru. Coba lagi!",
+        errorOne: "Ups! Kita mulai dengan cat merah dulu. Coba lagi!",
+        errorTwo: "Ups! Nilai kedua menunjukkan jumlah cat biru. Coba lagi!",
         success:
-          "Kerja bagus. Rasio cat merah terhadap biru pada Cat {{frame}} adalah ",
+          "Bagus. Perbandingan cat merah dan biru pada Cat {{frame}} adalah ",
         crossError:
-          "Belum tepat! {{num1}} × {{num2}} tidak sama dengan {{ans}}.",
-        crossSuccess: "Kerja bagus. \n{{num1}} × {{num2}} = {{ans}}.",
+          "Tidak tepat! {{num1}} × {{num2}} tidak sama dengan {{ans}}.",
+        crossSuccess: "Bagus. \n{{num1}} × {{num2}} = {{ans}}.",
         yesError:
-          "Ups!\n Amati warna ungu dari Cat A dan Cat B yang berbeda.\n\nAgar proporsional, hasil kali silang harus sama.",
+          "Ups!\n Amati bahwa warna ungu pada Cat A dan Cat B berbeda.\n\nAgar perbandingan sebanding, hasil kali silang harus sama.",
         yesSuccess:
-          "Benar!\nHasil kali silang tidak sama, jadi Cat A tidak proporsional dengan Cat B.\n\nItulah sebabnya warna ungunya berbeda.",
+          "Benar!\nHasil kali silang tidak sama, jadi perbandingan cat merah dan biru pada Cat A tidak sebanding dengan Cat B.\n\nKarena itu warna ungunya tidak sama.",
         yesSuccessOne:
-          "Benar! \nHasil kali silang sama, jadi Cat A proporsional dengan Cat B.\n\nItulah sebabnya warna ungunya sama.",
+          "Benar!\nHasil kali silang sama, jadi perbandingan cat merah dan biru pada Cat A sebanding dengan Cat B.\n\nKarena itu warna ungunya sama.",
         yesErrorOne:
-          "Ups!\n Lihat bagaimana warna ungu Cat A dan Cat B sama?\n\nAgar proporsional, hasil kali silang harus sama.",
+          "Ups!\n Lihat bagaimana warna ungu pada Cat A dan Cat B cocok?\n\nAgar perbandingan sebanding, hasil kali silang harus sama.",
       },
 
       activityComplete: {
         activityComplete: "Aktivitas Selesai!",
         whenRatio:
-          "Ketika rasio cat merah dan biru proporsional,\nCat A dan Cat B memiliki warna yang sama.\n\n\nKetika dua hasil kali silang dari rasio sama,\nmaka rasio tersebut proporsional.",
+          "Ketika perbandingan cat merah dan biru sebanding,\nCat A dan Cat B memiliki warna yang sama.\n\n\nKetika hasil kali silang dari dua perbandingan sama,\n maka perbandingan tersebut sebanding.",
       },
     },
   },

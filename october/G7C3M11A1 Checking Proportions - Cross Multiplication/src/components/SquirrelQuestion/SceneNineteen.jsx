@@ -9,7 +9,14 @@ import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import purple from "../../assets/purple.png";
 import FrameImagTwoL from "./FrameImageTwoL";
-const SceneNineteen = ({ goNext, goPrev }) => {
+import FrameImagThreeL from "./FrameImageThreeL";
+import FrameImageThreeL from "./FrameImageThreeL";
+const SceneNineteen = ({
+  goNext,
+  goPrev,
+  crossBoxFourValue,
+  crossBoxThreeValue,
+}) => {
   const { t } = useTranslation();
   const [beatOne, setBeatOne] = useState(true);
   const [beatTwo, setBeatTwo] = useState(false);
@@ -67,17 +74,18 @@ const SceneNineteen = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-7%",
-                width: "30%",
+                bottom: "-14%",
+                width: "31%",
                 zIndex: "1",
-                transform: "rotate(-30deg)",
+                transform: "rotate(-34deg)",
+                left: "36%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="gray"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <svg
@@ -85,17 +93,18 @@ const SceneNineteen = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-9%",
+                bottom: "-14%",
                 width: "30%",
                 zIndex: "1",
-                transform: "rotate(121deg)",
+                transform: "rotate(125deg)",
+                left: "36%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="gray"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <div
@@ -105,28 +114,16 @@ const SceneNineteen = ({ goNext, goPrev }) => {
               }}
             >
               <p>{t("paintA")}</p>
-              {!showPurple && (
-                <FrameImagTwoL width="10vw" redml={"1.5"} blueml={"2.4"} />
-              )}
-              {showPurple && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-end",
-                    width: "34vw",
-                    height: "20vh",
-                  }}
-                >
-                  <img
-                    src={purple}
-                    style={{
-                      width: "8vw",
-                      opacity: "0.7",
-                    }}
-                  />
-                </div>
-              )}
+              {
+                <FrameImagThreeL
+                  width="10vw"
+                  redml={"1.5"}
+                  blueml={"2.4"}
+                  overlap={showPurple}
+                  style={{ height: showPurple ? "27vh" : "" }}
+                  opacity={"0.7"}
+                />
+              }
               <LenghtBox
                 boxOneValue={"1.5"}
                 boxTwoValue={"2.4"}
@@ -134,6 +131,11 @@ const SceneNineteen = ({ goNext, goPrev }) => {
                 success={true}
                 numberColor="gray"
                 allGray={true}
+                style={{
+                  position: "fixed",
+                  left: "7%",
+                  top: "47%",
+                }}
               />
             </div>
             <div
@@ -143,27 +145,15 @@ const SceneNineteen = ({ goNext, goPrev }) => {
               }}
             >
               <p>{t("paintB")}</p>
-              {!showPurple && (
-                <FrameImagTwoL width="8vw" redml={"1.2"} blueml={"1.8"} />
-              )}
-              {showPurple && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-end",
-                    width: "34vw",
-                    height: "20vh",
-                  }}
-                >
-                  <img
-                    src={purple}
-                    style={{
-                      width: "8vw",
-                    }}
-                  />
-                </div>
-              )}
+              {
+                <FrameImagThreeL
+                  width="8vw"
+                  redml={"1.2"}
+                  blueml={"1.8"}
+                  overlap={showPurple}
+                  style={{ height: showPurple ? "27vh" : "" }}
+                />
+              }
               <div>
                 <LenghtBox
                   boxOneValue={"1.2"}
@@ -172,6 +162,11 @@ const SceneNineteen = ({ goNext, goPrev }) => {
                   success={true}
                   numberColor="gray"
                   allGray={true}
+                  style={{
+                    position: "fixed",
+                    right: "33.5%",
+                    top: "47%",
+                  }}
                 />
               </div>
             </div>
@@ -179,7 +174,7 @@ const SceneNineteen = ({ goNext, goPrev }) => {
           <div className="cross-box">
             <div>
               <LenghtBoxTwo
-                boxOneValue={"2.7"}
+                boxOneValue={crossBoxThreeValue}
                 success={true}
                 color={
                   buttonId === null
@@ -193,7 +188,7 @@ const SceneNineteen = ({ goNext, goPrev }) => {
             </div>
             <div>
               <LenghtBoxTwo
-                boxOneValue={"2.88"}
+                boxOneValue={crossBoxFourValue}
                 success={true}
                 color={
                   buttonId === null
@@ -287,7 +282,7 @@ const SceneNineteen = ({ goNext, goPrev }) => {
           {t("buttons.previous")}
         </button>
         {!next && <p>{t("navigation.obServeCross")}</p>}
-        {next && <p>{t("navigation.nextQuestion")}</p>}
+        {next && <p>{t("navigation.Tap")}</p>}
         {!next && <button className="disabled">{t("buttons.next")}</button>}
         {next && (
           <div>

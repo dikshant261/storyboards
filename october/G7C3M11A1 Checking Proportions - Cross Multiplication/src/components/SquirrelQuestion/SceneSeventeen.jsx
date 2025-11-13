@@ -9,7 +9,8 @@ import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
 import SceneSixteen from "./SceneSixteen";
-const SceneSeventeen = ({ goNext, goPrev }) => {
+import FrameImagThreeL from "./FrameImageThreeL";
+const SceneSeventeen = ({ goNext, goPrev, setCrossBoxThreeValue }) => {
   const { t } = useTranslation();
   const [beatOne, setBeatOne] = useState(true);
   const [beatTwo, setBeatTwo] = useState(false);
@@ -41,11 +42,16 @@ const SceneSeventeen = ({ goNext, goPrev }) => {
   const handleCheck = () => {
     if (beatOne) {
       setErrorShow(true);
-      if (boxOneValue === "2.7") {
+      if (
+        boxOneValue === "2.7" ||
+        boxOneValue === "02.7" ||
+        boxOneValue === "2.70"
+      ) {
         playCorrect();
         setBeatOne(false);
         setSuccess(true);
         setDisabled(false);
+        setCrossBoxThreeValue(boxOneValue);
         setNext(true);
       } else {
         playWrong();
@@ -78,22 +84,23 @@ const SceneSeventeen = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-7%",
-                width: "30%",
+                bottom: "-14%",
+                width: "31%",
                 zIndex: "1",
-                transform: "rotate(-30deg)",
+                transform: "rotate(-34deg)",
+                left: "36%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="white"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <div className="image-1">
               <p>{t("paintA")}</p>
-              <FrameImagTwoL width="10vw" redml={"1.5"} blueml={"2.4"} />
+              <FrameImagThreeL width="10vw" redml={"1.5"} blueml={"2.4"} />
               <LenghtBox
                 boxOneValue={"1.5"}
                 boxTwoValue={"2.4"}
@@ -105,7 +112,7 @@ const SceneSeventeen = ({ goNext, goPrev }) => {
             </div>
             <div className="image-2">
               <p>{t("paintB")}</p>
-              <FrameImagTwoL width="8vw" redml={"1.2"} blueml={"1.8"} />
+              <FrameImagThreeL width="8vw" redml={"1.2"} blueml={"1.8"} />
               <div>
                 <LenghtBox
                   boxOneValue={"1.2"}
@@ -146,7 +153,7 @@ const SceneSeventeen = ({ goNext, goPrev }) => {
               boxOneValue={boxOneValue}
               disabled={disabled}
               message={message}
-              ans={"2.7"}
+              ans={boxOneValue}
             />
           </p>
         </div>

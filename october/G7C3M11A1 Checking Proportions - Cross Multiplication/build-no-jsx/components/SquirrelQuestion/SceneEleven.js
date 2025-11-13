@@ -10,7 +10,8 @@ import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
 const SceneEleven = ({
   goNext,
-  goPrev
+  goPrev,
+  setCrossBoxOneValue
 }) => {
   const {
     t
@@ -46,8 +47,9 @@ const SceneEleven = ({
   const handleCheck = () => {
     if (beatOne) {
       setErrorShow(true);
-      if (boxOneValue === "4.5") {
+      if (boxOneValue === "4.5" || boxOneValue === "04.5" || boxOneValue === "4.50") {
         playCorrect();
+        setCrossBoxOneValue(boxOneValue);
         setBeatOne(false);
         setSuccess(true);
         setDisabled(false);
@@ -83,16 +85,17 @@ const SceneEleven = ({
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-7%",
-      width: "30%",
+      bottom: "-14%",
+      width: "31%",
       zIndex: "1",
-      transform: "rotate(-30deg)"
+      transform: "rotate(-34deg)",
+      left: "36%"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "white",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-1"
   }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
@@ -144,7 +147,7 @@ const SceneEleven = ({
     boxOneValue: boxOneValue,
     disabled: disabled,
     message: message,
-    ans: "4.5"
+    ans: boxOneValue
   })))), /*#__PURE__*/React.createElement("div", {
     className: "footer"
   }, /*#__PURE__*/React.createElement("button", {

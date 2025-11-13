@@ -177,7 +177,7 @@ const SceneEleven = ({ goNext, goPrev }) => {
                 height: "13vh",
                 background: "#ffffffbd",
                 border: "none",
-                width: "6vw",
+                width: "5vw",
               }}
             />
           </div>
@@ -230,7 +230,7 @@ const SceneEleven = ({ goNext, goPrev }) => {
         </div>
 
         <div className="keypad">
-          <p className="para">{t("sceneTen.whatIsWidth")}</p>
+          <p className="para">{t("sceneEleven.whatIsWidth")}</p>
           <div className="align-buttons">
             <button
               type="button"

@@ -195,7 +195,7 @@ const SceneEleven = ({
       height: "13vh",
       background: "#ffffffbd",
       border: "none",
-      width: "6vw"
+      width: "5vw"
     }
   })), /*#__PURE__*/React.createElement("div", {
     className: "align-row",
@@ -273,7 +273,7 @@ const SceneEleven = ({
     className: "keypad"
   }, /*#__PURE__*/React.createElement("p", {
     className: "para"
-  }, t("sceneTen.whatIsWidth")), /*#__PURE__*/React.createElement("div", {
+  }, t("sceneEleven.whatIsWidth")), /*#__PURE__*/React.createElement("div", {
     className: "align-buttons"
   }, /*#__PURE__*/React.createElement("button", {
     type: "button",

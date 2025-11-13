@@ -65,7 +65,7 @@ i18n.use(initReactI18next).init({
           whatIsWidth: "What the ratio of length to \nwidth?",
           letsFind: "Let’s find the ratio of the frame’s length to its width using the given measurements.",
           error: "Oops! Remember, the first part of the ratio is for the length.",
-          success: "Good job! The ratio is 120 : 80 which can also be written as"
+          success: "Good job! The ratio is 120 : 80 which can also be written as "
         },
         sceneSix: {
           ratioOfLengthWidth: "Ratio of length to width",
@@ -108,6 +108,57 @@ i18n.use(initReactI18next).init({
         sceneTwelve: {
           letsFind: "Consider a smaller frame of 3 cm × 2 cm.\nLet’s enlarge it and see if it fits perfectly over the original 120 cm × 80 cm frame.",
           theSmallerFrame: "The smaller frame enlarges in the\n same ratio — 3 : 2 — and fits \nperfectly over the original frame. \n\nSo, 3 : 2 is the simplest form of the \nratio 120 : 80."
+        },
+        nextQuestion: {
+          motherBought: "Mother bought 2.8 kg of mangoes and 4.2 kg of oranges \nand placed them in a basket.\n\nWhat is the ratio of the weight of mangoes to oranges?"
+        },
+        sceneThirteen: {
+          motherBought: "Mother bought ",
+          mangoes: "2.8 kg of mangoes ",
+          and: " and ",
+          oranges: "4.2 kg of oranges ",
+          andPlaced: "and placed them in a basket.\nWhat is the ratio of the weight of mangoes to oranges?",
+          ratioOfMangoesOranges: "Ratio of the weight of \nMangoes to oranges ",
+          error: "Oops! Be careful with the order — it’s mangoes first, then oranges.",
+          success: "Good! The ratio of mangoes to oranges is 2.8 : 4.2.",
+          whatIsWidth: "Identify the required ratio."
+        },
+        sceneFourteen: {
+          convertEach: "Convert each decimal to its fraction form.",
+          whatIsWidth: "Express 2.8 as a fraction.",
+          error: "Not quite. 2.8 has one decimal place, so write it as 28 over 10.",
+          success: "That’s correct!"
+        },
+        sceneFifteen: {
+          whatIsWidth: "Express 4.2 in fraction form.",
+          error: "Not quite. 4.2 has one decimal place, so write it as 42 over 10."
+        },
+        sceneSixteen: {
+          letSimplifyRatio: "Let’s simplify the ratio.",
+          canWe: "Can we cancel the common\n factor ",
+          inBoth: "in both terms?",
+          error: "Not quite. We can remove the common factor ",
+          errorFromBoth: " from both terms.",
+          success: "That’s correct! Let’s cancel it out."
+        },
+        sceneSeventeen: {
+          whichNumber: "Which number divides 28 and\n 42 to simplify the ratio?",
+          error: "Not quite. To simplify, divide 29 and 42 by their GCF.",
+          success: "Perfect! The greatest common factor helps simplify the ratio.",
+          lcm: "LCM of \n28 and 42",
+          gcf: "GCF of 28 and 42"
+        },
+        sceneEighteen: {
+          whatIs: "What is the GCF of 28 and 42.",
+          simplestForm: "Simplest form",
+          error: "Not quite! Try again.",
+          success: "Yes! 14 is the greatest number that divides both 28 and 42."
+        },
+        sceneNineteen: {
+          whatIs: "What is the simplest form?",
+          error: "Oops! Check your order of ratio.",
+          success: "That’s correct.",
+          ratioOfWeight: "2 : 3 is the ratio of the\n weight of mangoes and\n oranges.\n\nThis means that for\n every 2 kg of mangoes\n there are 3 kg of\n oranges."
         },
         activityComplete: {
           activityComplete: "Activity Completed!",

@@ -101,7 +101,7 @@ const SceneFour = ({ goNext, goPrev }) => {
                 boxTwoValue={15}
                 color={"rgba(2, 2, 63, 0.758)"}
                 success={true}
-                value={1}
+                
               />
             </div>
             <div className="image-2">
@@ -115,7 +115,7 @@ const SceneFour = ({ goNext, goPrev }) => {
                   boxTwoValue={boxTwoValue}
                   boxCss={boxCss}
                   success={success}
-                  value={1}
+                  
                 />
               </div>
             </div>
@@ -135,7 +135,7 @@ const SceneFour = ({ goNext, goPrev }) => {
               onInput={handleKeypadInput}
               checkHandle={handleCheck}
               flag={flag}
-              frame={"A"}
+              frame={"B"}
               num1={"50"}
               num2={"20"}
               errorShow={errorShow}

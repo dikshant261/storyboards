@@ -1,0 +1,145 @@
+.activity-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  position: relative;
+  gap: 1vw;
+}
+
+/* .header {
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header h2 {
+  font-size: 4vw;
+  font-weight: bold;
+  color: orange;
+}
+
+.exit {
+  background: none;
+  border: none;
+  font-size: 2vh;
+  font-weight: bold;
+  color: #adff2f;
+  cursor: pointer;
+}
+
+.description {
+  margin: 2vh 0;
+  font-size: 3vw;
+  width: 70vw;
+}
+
+.equation-box {
+  border-radius: 1vh;
+  padding: 3vh 4vw;
+  margin: 3vh 0;
+  font-size: 3vw;
+  width:100%
+}
+
+.highlight {
+  color: #ffcc33;
+  font-weight: bold;
+}
+
+.fraction {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2vw;
+  margin-left: 0.5vw;
+}
+
+.fraction span {
+  line-height: 2vh;
+}
+
+.fraction .deno {
+      border-top: 0.6vh solid #00bcd4;
+    width: 9vw;
+    text-align: center;
+    color: #00bcd4;
+    margin-top: 1.4vh;
+}
+
+.restart-text {
+  font-size: 3vw;
+  margin-top: 2vh;
+}
+
+.start-btn {
+  background: #8b5e3c;
+  border: none;
+  padding: 1.5vh 6vw;
+  font-size: 2.5vh;
+  font-weight: bold;
+  color: white;
+  border-radius: 1vh;
+  margin-top: 2vh;
+  cursor: pointer;
+  box-shadow: 0 0.5vh 1vh rgba(0, 0, 0, 0.4);
+}
+
+.start-btn:hover {
+  background: #a66a44;
+} */
+.activity-container .hint-title {
+  font-size: 5vw;
+  color: yellow;
+  margin-bottom: 2vh;
+}
+.activity-container .hint-description {
+  font-size: 3vw;
+  margin-bottom: 4vh;
+  white-space: pre-line;
+}
+
+/* Hint Box */
+.activity-container .hint-box {
+  width: 52vw;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 1vw;
+  padding: 3vh 3vw;
+  font-size: 2.5vw;
+  line-height: 6vh;
+  border: 0.2vh solid #ccc;
+}
+
+/* Highlighted text */
+.activity-container .highlight-yellow {
+  color: #f5c518;
+  font-weight: bold;
+}
+
+.activity-container .highlight-blue {
+  color: #00d0ff;
+  font-weight: bold;
+}
+
+/* Fraction display */
+.activity-container .fraction {
+  display: inline-block;
+  text-align: center;
+  line-height: normal;
+  vertical-align: middle;
+}
+
+.activity-container .numerator {
+  font-size: 2.5vw;
+}
+
+.activity-container .denominator {
+  display: block;
+  border-top: 0.4vh solid #00d0ff;
+  font-size: 2.5vw;
+}

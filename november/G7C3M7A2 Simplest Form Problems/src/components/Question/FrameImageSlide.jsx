@@ -29,49 +29,25 @@ const FrameImageSlide = ({ width = "80%", setNext }) => {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        position: "relative",
       }}
     >
       {/* Background Frame */}
-      <img
-        src={frame}
-        alt="frame"
-        style={{
-          width: width,
-          background: "white",
-        }}
-      />
+      {/* Background Frame */}
+      <div className="frame-wrapper">
+        <img src={frame} alt="frame" className="frame-base" />
 
-      {/* Overlay Frame (Animated) */}
-      <img
-        src={frame}
-        alt="overlay frame"
-        style={{
-          width: `${overlayWidth}%`,
-          background: "white",
-          position: "absolute",
-          top: "4%",
-          left: "10%",
-          opacity: "0.9",
-          transition: "width 0.6s ease",
-        }}
-      />
+        {/* Overlay Frame */}
+        <img
+          src={frame}
+          alt="overlay frame"
+          className="frame-overlay"
+          style={{ width: `${overlayWidth}%` }}
+        />
 
-      {/* Label */}
-      <p
-        style={{
-          position: "absolute",
-          top: "60%",
-          left: "22%",
-          fontSize: "2.5vw",
-          backgroundColor: "rgba(255, 255, 255, 0.718)",
-          padding: "1vh",
-          zIndex: "0",
-          fontWeight: "600",
-        }}
-      >
-        120 cm × 80 cm
-      </p>
+        {/* Label */}
+        <p className="frame-label">120 cm × 80 cm</p>
+        {overlayWidth <= 25 && <p className="frame-label-two">3 cm × 2 cm</p>}
+      </div>
 
       {/* Slider Control */}
       <input

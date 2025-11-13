@@ -5,6 +5,7 @@ import FrameImagTwo from "./FrameImageTwo";
 import Tap from "../Tap";
 import { playClick } from "../PlayAudio";
 import FrameImagTwoL from "./FrameImageTwoL";
+import FrameImagThreeL from "./FrameImageThreeL";
 const SceneFourteen = ({ goNext, goPrev }) => {
   const { t } = useTranslation();
   const handleClick = () => {
@@ -29,11 +30,11 @@ const SceneFourteen = ({ goNext, goPrev }) => {
       <div className="main">
         <div className="image-1">
           <p>{t("paintA")}</p>
-          <FrameImagTwoL width="10vw" redml={"1.5"} blueml={"2.4"} />
+          <FrameImagThreeL width="10vw" redml={"1.5"} blueml={"2.4"} />
         </div>
         <div className="image-2">
           <p>{t("paintB")}</p>
-          <FrameImagTwoL width="8vw" redml={"1.2"} blueml={"1.8"} />
+          <FrameImagThreeL width="8vw" redml={"1.2"} blueml={"1.8"} />
         </div>
         <div className="keypad">
           <p className="para">{t("sceneTwo.keypadHeading")}</p>

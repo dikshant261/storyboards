@@ -161,10 +161,20 @@ const SceneNine = ({ goNext, goPrev }) => {
             </div>
             <p style={{ color: "white" }}>=</p>
             <Box
-              value={optionValue}
-              beat={beat}
-              boxCss={boxCss}
-              style={{ height: "13vh", width: "6vw" }}
+              value={
+                <Fraction
+                  numerator={12}
+                  denominator={8}
+                  fontSize="2.5vw"
+                  color="black"
+                />
+              }
+              style={{
+                height: "13vh",
+                width: "5vw",
+                background: "#ffffffbd",
+                border: "none",
+              }}
             />
           </div>
         </div>

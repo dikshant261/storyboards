@@ -1,6 +1,10 @@
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 const Outlet = () => {
-  const [currentScene, setCurrentScene] = useState(0);
+  const [currentScene, setCurrentScene] = React.useState(0);
+  const [crossBoxOneValue, setCrossBoxOneValue] = useState("");
+  const [crossBoxTwoValue, setCrossBoxTwoValue] = useState("");
+  const [crossBoxThreeValue, setCrossBoxThreeValue] = useState("");
+  const [crossBoxFourValue, setCrossBoxFourValue] = useState("");
   const sceneComponents = [
     StartPage,
     SceneTwo,
@@ -38,8 +42,16 @@ const Outlet = () => {
     /*#__PURE__*/ React.createElement(CurrentScene, {
       goNext: goNext,
       goPrev: goPrev,
+      setCrossBoxOneValue: setCrossBoxOneValue,
+      setCrossBoxTwoValue: setCrossBoxTwoValue,
+      setCrossBoxThreeValue: setCrossBoxThreeValue,
+      setCrossBoxFourValue: setCrossBoxFourValue,
+      crossBoxOneValue: crossBoxOneValue,
+      crossBoxTwoValue: crossBoxTwoValue,
+      crossBoxThreeValue: crossBoxThreeValue,
+      crossBoxFourValue: crossBoxFourValue,
     }),
     /*#__PURE__*/ React.createElement(RefreshDetector, null)
   );
 };
-window.Outlet=Outlet;
+window.Outlet = Outlet;

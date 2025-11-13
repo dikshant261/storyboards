@@ -135,9 +135,9 @@ const SceneFive = ({ goNext, goPrev }) => {
                   <path
                     d="M18 18L6 6M6 6V8M6 6H8"
                     stroke="white"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="0.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               )}

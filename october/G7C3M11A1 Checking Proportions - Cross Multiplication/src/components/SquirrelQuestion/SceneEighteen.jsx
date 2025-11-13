@@ -8,7 +8,13 @@ import Keypad from "../Keypad";
 import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
-const SceneEighteen = ({ goNext, goPrev }) => {
+import FrameImagThreeL from "./FrameImageThreeL";
+const SceneEighteen = ({
+  goNext,
+  goPrev,
+  setCrossBoxFourValue,
+  crossBoxThreeValue,
+}) => {
   const { t } = useTranslation();
   const [beatOne, setBeatOne] = useState(true);
   const [beatTwo, setBeatTwo] = useState(false);
@@ -40,11 +46,16 @@ const SceneEighteen = ({ goNext, goPrev }) => {
   const handleCheck = () => {
     if (beatOne) {
       setErrorShow(true);
-      if (boxOneValue === "2.88") {
+      if (
+        boxOneValue === "2.88" ||
+        boxOneValue === "02.88" ||
+        boxOneValue === "2.880"
+      ) {
         playCorrect();
         setBeatOne(false);
         setSuccess(true);
         setDisabled(false);
+        setCrossBoxFourValue(boxOneValue);
         setNext(true);
       } else {
         playWrong();
@@ -77,17 +88,18 @@ const SceneEighteen = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-7%",
-                width: "30%",
+                bottom: "-14%",
+                width: "31%",
                 zIndex: "1",
-                transform: "rotate(-30deg)",
+                transform: "rotate(-34deg)",
+                left: "36%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="gray"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <svg
@@ -95,23 +107,23 @@ const SceneEighteen = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-9%",
+                bottom: "-14%",
                 width: "30%",
                 zIndex: "1",
-                transform: "rotate(121deg)",
-                
+                transform: "rotate(125deg)",
+                left: "36%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="white"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <div className="image-1">
               <p>{t("paintA")}</p>
-              <FrameImagTwoL width="10vw" redml={"1.5"} blueml={"2.4"} />
+              <FrameImagThreeL width="10vw" redml={"1.5"} blueml={"2.4"} />
               <LenghtBox
                 boxOneValue={"1.5"}
                 boxTwoValue={"2.4"}
@@ -123,7 +135,7 @@ const SceneEighteen = ({ goNext, goPrev }) => {
             </div>
             <div className="image-2">
               <p>{t("paintB")}</p>
-              <FrameImagTwoL width="8vw" redml={"1.2"} blueml={"1.8"} />
+              <FrameImagThreeL width="8vw" redml={"1.2"} blueml={"1.8"} />
               <div>
                 <LenghtBox
                   boxOneValue={"1.2"}
@@ -139,7 +151,7 @@ const SceneEighteen = ({ goNext, goPrev }) => {
           <div className="cross-box">
             <div>
               <LenghtBoxTwo
-                boxOneValue={"2.7"}
+                boxOneValue={crossBoxThreeValue}
                 success={true}
                 color={"rgba(2, 2, 63, 0.758)"}
                 num={1}
@@ -169,7 +181,7 @@ const SceneEighteen = ({ goNext, goPrev }) => {
               boxOneValue={boxOneValue}
               disabled={disabled}
               message={message}
-              ans={"2.88"}
+              ans={boxOneValue}
             />
           </p>
         </div>

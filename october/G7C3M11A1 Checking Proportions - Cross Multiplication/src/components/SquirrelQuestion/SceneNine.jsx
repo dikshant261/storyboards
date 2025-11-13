@@ -107,7 +107,7 @@ const SceneNine = ({ goNext, goPrev }) => {
                 boxTwoValue={boxTwoValue}
                 boxCss={boxCss}
                 success={success}
-                value={1}
+                
               />
             </div>
             <div className="image-2 opacity">

@@ -28,7 +28,11 @@ const SceneTwo = ({
     className: "main"
   }, /*#__PURE__*/React.createElement("div", {
     className: "main-content"
-  }, /*#__PURE__*/React.createElement("p", null, t("sceneTwo.showsTheMeasurement"))), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      textAlign: 'center'
+    }
+  }, t("sceneTwo.showsTheMeasurement"))), /*#__PURE__*/React.createElement("div", {
     className: "keypad",
     style: {
       padding: "2vh"

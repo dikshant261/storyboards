@@ -5,23 +5,23 @@
     width: 33vw;
     height: 75vh;
     flex-direction: column;
+    position: relative;
 }
 
 .frame-container .length-line {
-    width: 37vw;
+    width: 34.6vw;
     transform: rotate(90deg);
     position: absolute;
-    top: 47%;
-    left: -26%;
-    /* height: 60%; */
+    top: 47.6%;
+    left: -37%;
 }
 
 .frame-container .width-line {
-    width: 29vw;
+    width: 26.6vw;
     transform: rotate(0deg);
     position: absolute;
-    bottom: 5%;
-    left: 21.5%;
+    bottom: 2%;
+    left: 20.3%;
 }
 
 .frame-container .length {
@@ -29,15 +29,15 @@
     color: white;
     position: absolute;
     top: 46%;
-    left: 2%;
+    left: -6%;
 }
 
 .frame-container .width {
     font-size: 2vw;
     color: white;
     position: absolute;
-    bottom: 1%;
-    left: 57%;
+    bottom: -2%;
+    left: 55%;
 }
 
 .frame-container .red-circle {
@@ -45,14 +45,74 @@
     height: 22vh;
     background-color: #ff2d28;
 }
+
+/* Wrapper that keeps both frames aligned */
+.frame-wrapper {
+    position: relative;
+    width: 100%;
+    /* same width as your prop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Main frame */
+.frame-base {
+    width: 80%;
+    display: block;
+    background-color: #ffffffc4;
+}
+
+/* Overlay frame */
+.frame-overlay {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    opacity: 0.9;
+    transition: width 0.6s ease;
+    background-color: #ffffffc4;
+}
+
+/* Label stays fixed to frame */
+.frame-label {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5vw;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1vh 2vh;
+    font-weight: 600;
+    border-radius: 0.6vh;
+    width: 64%;
+    text-align: center;
+}
+
+.frame-label-two {
+    position: absolute;
+    top: 19%;
+    left: 22.4%;
+    transform: translateX(-50%);
+    font-size: 1.3vw;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.5vh 0.5vh;
+    font-weight: 600;
+    border-radius: 0.6vh;
+    width: 25%;
+    text-align: center;
+    height: 4vh;
+}
+
 .frame-slider {
-  width: 60%;
-  margin-top: 2vh;
-  accent-color: #ffae00; /* orange color for thumb */
-  cursor: pointer;
-  transition: all 0.3s ease;
+    width: 60%;
+    margin-top: 2vh;
+    accent-color: #ffae00;
+    /* orange color for thumb */
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .frame-slider:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }

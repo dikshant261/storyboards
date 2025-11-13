@@ -173,7 +173,7 @@ const SceneTen = ({ goNext, goPrev }) => {
                 height: "13vh",
                 background: "#ffffffbd",
                 border: "none",
-                width: "6vw",
+                width: "5vw",
               }}
             />
           </div>

@@ -119,8 +119,7 @@ const SceneThree = ({
     boxOneValue: boxOneValue,
     boxTwoValue: boxTwoValue,
     boxCss: boxCss,
-    success: success,
-    value: 1
+    success: success
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2 opacity"
   }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwo, {

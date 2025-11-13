@@ -69,17 +69,17 @@ const SceneSeven = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-7%",
+                bottom: "-13%",
                 width: "30%",
                 zIndex: "1",
-                transform: "rotate(-30deg)",
+                transform: "rotate(-34deg)",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="gray"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <svg
@@ -87,17 +87,17 @@ const SceneSeven = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-8%",
+                bottom: "-13%",
                 width: "30%",
                 zIndex: "1",
-                transform: "rotate(121deg)",
+                transform: "rotate(124deg)",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="gray"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <div
@@ -107,27 +107,15 @@ const SceneSeven = ({ goNext, goPrev }) => {
               }}
             >
               <p>{t("paintA")}</p>
-              {!showPurple && (
-                <FrameImagTwo width="8vw" redml={25} blueml={15} />
-              )}
-              {showPurple && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-end",
-                    width: "34vw",
-                    height: "20vh",
-                  }}
-                >
-                  <img
-                    src={purple}
-                    style={{
-                      width: "8vw",
-                    }}
-                  />
-                </div>
-              )}
+              {
+                <FrameImagTwo
+                  width="8vw"
+                  redml={25}
+                  blueml={15}
+                  overlap={showPurple}
+                  style={{ height: showPurple ? "27vh" : "" }}
+                />
+              }
               <LenghtBox
                 boxOneValue={25}
                 boxTwoValue={15}
@@ -135,6 +123,11 @@ const SceneSeven = ({ goNext, goPrev }) => {
                 success={true}
                 numberColor="gray"
                 allGray={true}
+                style={{
+                  position: "fixed",
+                  left: "7%",
+                  top: "47%",
+                }}
               />
             </div>
             <div
@@ -144,28 +137,16 @@ const SceneSeven = ({ goNext, goPrev }) => {
               }}
             >
               <p>{t("paintB")}</p>
-              {!showPurple && (
-                <FrameImagTwo width="10vw" redml={50} blueml={20} />
-              )}
-              {showPurple && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-end",
-                    width: "34vw",
-                    height: "20vh",
-                  }}
-                >
-                  <img
-                    src={purple}
-                    style={{
-                      width: "8vw",
-                      opacity:'0.7'
-                    }}
-                  />
-                </div>
-              )}
+              {
+                <FrameImagTwo
+                  width="10vw"
+                  redml={50}
+                  blueml={20}
+                  overlap={showPurple}
+                  style={{ height: showPurple ? "27vh" : "" }}
+                  opacity={"0.7"}
+                />
+              }
               <div>
                 <LenghtBox
                   boxOneValue={50}
@@ -174,6 +155,11 @@ const SceneSeven = ({ goNext, goPrev }) => {
                   success={true}
                   numberColor="gray"
                   allGray={true}
+                  style={{
+                    position: "fixed",
+                    right: "34%",
+                    top: "47%",
+                  }}
                 />
               </div>
             </div>

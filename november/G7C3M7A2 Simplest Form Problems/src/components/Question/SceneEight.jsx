@@ -76,7 +76,7 @@ const SceneEight = ({ goNext, goPrev }) => {
           style={{
             justifyContent: "flex-start",
             alignItems: "flex-start",
-            padding: "1vh 2vw",
+            padding: "1vh 1vw",
           }}
         >
           <p style={{ color: "white" }}>{t("sceneThree.given")}</p>
@@ -159,6 +159,26 @@ const SceneEight = ({ goNext, goPrev }) => {
                 />
               </div>
             </div>
+
+            {allDisabled && <p style={{ color: "white" }}>=</p>}
+            {allDisabled && (
+              <Box
+                value={
+                  <Fraction
+                    numerator={12}
+                    denominator={8}
+                    fontSize="2.5vw"
+                    color="black"
+                  />
+                }
+                style={{
+                  height: "13vh",
+                  width: "5vw",
+                  background: "#ffffffbd",
+                  border: "none",
+                }}
+              />
+            )}
           </div>
         </div>
 

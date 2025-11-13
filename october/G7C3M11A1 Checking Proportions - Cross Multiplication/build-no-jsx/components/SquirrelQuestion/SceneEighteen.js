@@ -8,9 +8,12 @@ import Keypad from "../Keypad";
 import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
+import FrameImagThreeL from "./FrameImageThreeL";
 const SceneEighteen = ({
   goNext,
-  goPrev
+  goPrev,
+  setCrossBoxFourValue,
+  crossBoxThreeValue
 }) => {
   const {
     t
@@ -46,11 +49,12 @@ const SceneEighteen = ({
   const handleCheck = () => {
     if (beatOne) {
       setErrorShow(true);
-      if (boxOneValue === "2.88") {
+      if (boxOneValue === "2.88" || boxOneValue === "02.88" || boxOneValue === "2.880") {
         playCorrect();
         setBeatOne(false);
         setSuccess(true);
         setDisabled(false);
+        setCrossBoxFourValue(boxOneValue);
         setNext(true);
       } else {
         playWrong();
@@ -83,34 +87,36 @@ const SceneEighteen = ({
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-7%",
-      width: "30%",
+      bottom: "-14%",
+      width: "31%",
       zIndex: "1",
-      transform: "rotate(-30deg)"
+      transform: "rotate(-34deg)",
+      left: "36%"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-9%",
+      bottom: "-14%",
       width: "30%",
       zIndex: "1",
-      transform: "rotate(121deg)"
+      transform: "rotate(125deg)",
+      left: "36%"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "white",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-1"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "10vw",
     redml: "1.5",
     blueml: "2.4"
@@ -123,7 +129,7 @@ const SceneEighteen = ({
     numberColor: "gray"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "8vw",
     redml: "1.2",
     blueml: "1.8"
@@ -137,7 +143,7 @@ const SceneEighteen = ({
   })))), /*#__PURE__*/React.createElement("div", {
     className: "cross-box"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBoxTwo, {
-    boxOneValue: "2.7",
+    boxOneValue: crossBoxThreeValue,
     success: true,
     color: "rgba(2, 2, 63, 0.758)",
     num: 1
@@ -160,7 +166,7 @@ const SceneEighteen = ({
     boxOneValue: boxOneValue,
     disabled: disabled,
     message: message,
-    ans: "2.88"
+    ans: boxOneValue
   })))), /*#__PURE__*/React.createElement("div", {
     className: "footer"
   }, /*#__PURE__*/React.createElement("button", {

@@ -8,6 +8,7 @@ import Keypad from "../Keypad";
 import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import FrameImagTwoL from "./FrameImageTwoL";
+import FrameImagThreeL from "./FrameImageThreeL";
 const SceneSixteen = ({
   goNext,
   goPrev
@@ -107,7 +108,7 @@ const SceneSixteen = ({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "image-1"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "10vw",
     redml: "1.5",
     blueml: "2.4"
@@ -115,11 +116,10 @@ const SceneSixteen = ({
     boxOneValue: "1.5",
     boxTwoValue: "2.4",
     color: "rgba(2, 2, 63, 0.758)",
-    success: true,
-    value: 1
+    success: true
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2"
-  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagThreeL, {
     width: "8vw",
     redml: "1.2",
     blueml: "1.8"
@@ -129,8 +129,7 @@ const SceneSixteen = ({
     boxOneValue: boxOneValue,
     boxTwoValue: boxTwoValue,
     boxCss: boxCss,
-    success: success,
-    value: 1
+    success: success
   })))), /*#__PURE__*/React.createElement("div", {
     className: "cross-box opacity"
   }, /*#__PURE__*/React.createElement("div", {

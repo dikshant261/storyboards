@@ -26,7 +26,7 @@ const FrameImag = ({ width = "80%" }) => {
       /*#__PURE__*/ React.createElement("path", {
         d: "M 57 38 L 44 48 L 57 56 V 50 L 340 48 V 55 L 355 45 L 340 36 V 43 L 57 45 Z",
         stroke: "white",
-        "strokeWidth": "0.1",
+        "stroke-width": "0.1",
         fill: "#fff",
       })
     ),
@@ -40,7 +40,7 @@ const FrameImag = ({ width = "80%" }) => {
       /*#__PURE__*/ React.createElement("path", {
         d: "M 57 38 L 44 48 L 57 56 V 50 L 340 48 V 55 L 355 45 L 340 36 V 43 L 57 45 Z",
         stroke: "white",
-        "strokeWidth": "0.1",
+        "stroke-width": "0.1",
         fill: "#fff",
       })
     ),

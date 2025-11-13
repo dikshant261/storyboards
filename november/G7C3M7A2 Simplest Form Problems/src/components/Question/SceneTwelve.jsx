@@ -185,7 +185,7 @@ const SceneTwelve = ({ goNext, goPrev }) => {
             className="align-row"
             style={{
               gridTemplateColumns:
-                "minmax(18vw, 1fr) 2.5vw 10.2vw 3vw 10vw 1.5vw 5vw",
+                "minmax(18vw, 1fr) 2.5vw 9.2vw 0vw 6vw 1.5vw 5vw",
             }}
           >
             <p style={{ color: "white" }}>{t("sceneEleven.lengthWidth")}</p>

@@ -11,7 +11,9 @@ import purple from "../../assets/purple.png";
 import FrameImagTwoL from "./FrameImageTwoL";
 const SceneThirteen = ({
   goNext,
-  goPrev
+  goPrev,
+  crossBoxTwoValue,
+  crossBoxOneValue
 }) => {
   const {
     t
@@ -80,99 +82,92 @@ const SceneThirteen = ({
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-7%",
-      width: "30%",
+      bottom: "-14%",
+      width: "31%",
       zIndex: "1",
-      transform: "rotate(-30deg)"
+      transform: "rotate(-34deg)",
+      left: "36%"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
+    strokeWidth: "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-9%",
+      bottom: "-13%",
       width: "30%",
       zIndex: "1",
-      transform: "rotate(121deg)",
+      transform: "rotate(125deg)",
       left: "33%"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
+    strokeWidth: "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-1",
     style: {
       gap: showPurple ? "4vh" : ""
     }
-  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), !showPurple && /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
     width: "8vw",
     redml: "1.5",
-    blueml: "2"
-  }), showPurple && /*#__PURE__*/React.createElement("div", {
+    blueml: "2",
+    overlap: showPurple,
     style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "flex-end",
-      width: "34vw",
-      height: "20vh"
+      height: showPurple ? "27vh" : ""
     }
-  }, /*#__PURE__*/React.createElement("img", {
-    src: purple,
-    style: {
-      width: "8vw"
-    }
-  })), /*#__PURE__*/React.createElement(LenghtBox, {
+  }), /*#__PURE__*/React.createElement(LenghtBox, {
     boxOneValue: "1.5",
     boxTwoValue: "2",
     color: "rgba(2, 2, 63, 0.758)",
     success: true,
     numberColor: "gray",
-    allGray: true
+    allGray: true,
+    style: {
+      position: "fixed",
+      left: "7%",
+      top: "47%"
+    }
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2",
     style: {
       gap: showPurple ? "4vh" : ""
     }
-  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), !showPurple && /*#__PURE__*/React.createElement(FrameImagTwoL, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwoL, {
     width: "10vw",
     redml: "2.25",
-    blueml: "3"
-  }), showPurple && /*#__PURE__*/React.createElement("div", {
+    blueml: "3",
+    overlap: showPurple,
     style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "flex-end",
-      width: "34vw",
-      height: "20vh"
+      height: showPurple ? "27vh" : ""
     }
-  }, /*#__PURE__*/React.createElement("img", {
-    src: purple,
-    style: {
-      width: "8vw"
-    }
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBox, {
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBox, {
     boxOneValue: "2.25",
     boxTwoValue: "3",
     color: "rgba(2, 2, 63, 0.758)",
     success: true,
     numberColor: "gray",
-    allGray: true
+    allGray: true,
+    style: {
+      position: "fixed",
+      right: "33.5%",
+      top: "47%"
+    }
   })))), /*#__PURE__*/React.createElement("div", {
     className: "cross-box"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBoxTwo, {
-    boxOneValue: "4.5",
+    boxOneValue: crossBoxOneValue,
     success: true,
     color: buttonId === null ? "rgba(2, 2, 63, 0.758)" : disabled ? "" : "#855250",
     num: 1
   })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBoxTwo, {
-    boxOneValue: "4.5",
+    boxOneValue: crossBoxTwoValue,
     success: true,
     color: buttonId === null ? "rgba(2, 2, 63, 0.758)" : disabled ? "" : "#855250",
     num: 2

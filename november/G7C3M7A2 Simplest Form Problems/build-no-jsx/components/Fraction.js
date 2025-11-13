@@ -6,13 +6,15 @@ const Fraction = ({
   fontSize = "2vw",
   color = "white",
   lineWidth = "100%",
-  lineHeight = "0.4vh"
+  lineHeight = "0.4vh",
+  style
 }) => {
   return /*#__PURE__*/React.createElement("div", {
     className: "question-fraction",
     style: {
       fontSize,
-      color
+      color,
+      ...style
     }
   }, /*#__PURE__*/React.createElement("span", {
     className: "numerator"

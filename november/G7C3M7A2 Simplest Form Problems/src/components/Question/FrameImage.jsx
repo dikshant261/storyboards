@@ -5,10 +5,13 @@ import { useTranslation } from "react-i18next";
 const FrameImag = ({ width = "80%" }) => {
   const { t } = useTranslation();
   return (
-    <div className="frame-container" style={{
-      justifyContent:'center',
-      alignItems:'flex-end'
-    }}>
+    <div
+      className="frame-container"
+      style={{
+        justifyContent: "center",
+        alignItems: "flex-end",
+      }}
+    >
       <img
         src={frame}
         style={{

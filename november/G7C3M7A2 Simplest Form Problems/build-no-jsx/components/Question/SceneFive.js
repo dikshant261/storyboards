@@ -183,7 +183,20 @@ const SceneFive = ({
     color: "black"
   }))), showFeedback !== "" && /*#__PURE__*/React.createElement("p", {
     className: `${allDisabled ? "frame-success" : "frame-error"}`
-  }, showFeedback))), /*#__PURE__*/React.createElement("div", {
+  }, !allDisabled && showFeedback, allDisabled && /*#__PURE__*/React.createElement("p", {
+    style: {
+      fontSize: "3vw"
+    }
+  }, showFeedback, /*#__PURE__*/React.createElement(Fraction, {
+    numerator: 120,
+    denominator: 80,
+    lineWidth: "5vw",
+    fontSize: "3vw",
+    style: {
+      display: "inline-flex",
+      verticalAlign: "middle"
+    }
+  }), " ")))), /*#__PURE__*/React.createElement("div", {
     className: "footer"
   }, /*#__PURE__*/React.createElement("button", {
     onClick: () => {

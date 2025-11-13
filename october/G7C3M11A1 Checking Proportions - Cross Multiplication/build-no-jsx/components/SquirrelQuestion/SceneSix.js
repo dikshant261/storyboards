@@ -82,31 +82,31 @@ const SceneSix = ({
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-7%",
+      bottom: "-13%",
       width: "30%",
       zIndex: "1",
-      transform: "rotate(-30deg)"
+      transform: "rotate(-34deg)"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "gray"
   })), /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-8%",
+      bottom: "-13%",
       width: "30%",
       zIndex: "1",
-      transform: "rotate(121deg)"
+      transform: "rotate(124deg)"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "white",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-1"
   }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwo, {

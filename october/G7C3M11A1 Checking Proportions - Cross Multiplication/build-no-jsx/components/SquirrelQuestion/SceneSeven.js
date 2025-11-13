@@ -79,90 +79,82 @@ const SceneSeven = ({
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-7%",
+      bottom: "-13%",
       width: "30%",
       zIndex: "1",
-      transform: "rotate(-30deg)"
+      transform: "rotate(-34deg)"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-8%",
+      bottom: "-13%",
       width: "30%",
       zIndex: "1",
-      transform: "rotate(121deg)"
+      transform: "rotate(124deg)"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-1",
     style: {
       gap: showPurple ? "4vh" : ""
     }
-  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), !showPurple && /*#__PURE__*/React.createElement(FrameImagTwo, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwo, {
     width: "8vw",
     redml: 25,
-    blueml: 15
-  }), showPurple && /*#__PURE__*/React.createElement("div", {
+    blueml: 15,
+    overlap: showPurple,
     style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "flex-end",
-      width: "34vw",
-      height: "20vh"
+      height: showPurple ? "27vh" : ""
     }
-  }, /*#__PURE__*/React.createElement("img", {
-    src: purple,
-    style: {
-      width: "8vw"
-    }
-  })), /*#__PURE__*/React.createElement(LenghtBox, {
+  }), /*#__PURE__*/React.createElement(LenghtBox, {
     boxOneValue: 25,
     boxTwoValue: 15,
     color: "rgba(2, 2, 63, 0.758)",
     success: true,
     numberColor: "gray",
-    allGray: true
+    allGray: true,
+    style: {
+      position: "fixed",
+      left: "7%",
+      top: "47%"
+    }
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2",
     style: {
       gap: showPurple ? "4vh" : ""
     }
-  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), !showPurple && /*#__PURE__*/React.createElement(FrameImagTwo, {
+  }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwo, {
     width: "10vw",
     redml: 50,
-    blueml: 20
-  }), showPurple && /*#__PURE__*/React.createElement("div", {
+    blueml: 20,
+    overlap: showPurple,
     style: {
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "flex-end",
-      width: "34vw",
-      height: "20vh"
-    }
-  }, /*#__PURE__*/React.createElement("img", {
-    src: purple,
-    style: {
-      width: "8vw",
-      opacity: '0.7'
-    }
-  })), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBox, {
+      height: showPurple ? "27vh" : ""
+    },
+    opacity: "0.7"
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBox, {
     boxOneValue: 50,
     boxTwoValue: 20,
     color: "rgba(2, 2, 63, 0.758)",
     success: true,
     numberColor: "gray",
-    allGray: true
+    allGray: true,
+    style: {
+      position: "fixed",
+      right: "34%",
+      top: "47%"
+    }
   })))), /*#__PURE__*/React.createElement("div", {
     className: "cross-box"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBoxTwo, {

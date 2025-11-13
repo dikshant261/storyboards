@@ -2,6 +2,7 @@ import React from "react";
 import "./lengthbox.css";
 import { playClick } from "./PlayAudio";
 import { useTranslation } from "react-i18next";
+import Fraction from "./Fraction";
 const LenghtBox = ({
   beatOne,
   beatTwo,
@@ -13,6 +14,7 @@ const LenghtBox = ({
   color,
   numberColor,
   allGray,
+  style,
 }) => {
   const { t } = useTranslation();
   return (
@@ -79,6 +81,7 @@ const LenghtBox = ({
             background: color || "#5a7f5e",
             color: allGray ? "gray" : "white",
             fontSize: "5vw",
+            ...style,
           }}
         >
           <div
@@ -104,34 +107,21 @@ const LenghtBox = ({
               <span
                 style={{
                   width: "3vw",
-                  backgroundColor:allGray ? "gray" : "white",
+                  backgroundColor: allGray ? "gray" : "white",
                   height: "0.2vh",
                 }}
               ></span>
               <span>{t("blue")}</span>
             </p>
           </div>
-          <div
-            style={{
-              color: value === 1 ? numberColor : "",
-            }}
-          >
-            {boxOneValue}
-          </div>
-          <div
-            style={{
-              width: "11vw",
-              backgroundColor:allGray ? "gray" : "white",
-              height: "1vh",
-            }}
-          ></div>
-          <div
-            style={{
-              color: value === 2 ? numberColor : "",
-            }}
-          >
-            {boxTwoValue}
-          </div>
+          <Fraction
+            numerator={boxOneValue}
+            denominator={boxTwoValue}
+            color={allGray ? "gray" : "white"}
+            fontSize="5vw"
+            lineHeight="0.5vh"
+            value={value}
+          />
         </div>
       )}
     </div>

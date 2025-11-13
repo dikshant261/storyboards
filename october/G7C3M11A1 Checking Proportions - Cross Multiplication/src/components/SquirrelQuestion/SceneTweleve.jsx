@@ -7,7 +7,12 @@ import { playClick, playCorrect, playWrong } from "../PlayAudio";
 import Keypad from "../Keypad";
 import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
-const SceneTweleve = ({ goNext, goPrev }) => {
+const SceneTweleve = ({
+  goNext,
+  goPrev,
+  crossBoxOneValue,
+  setCrossBoxTwoValue,
+}) => {
   const { t } = useTranslation();
   const [beatOne, setBeatOne] = useState(true);
   const [beatTwo, setBeatTwo] = useState(false);
@@ -39,9 +44,14 @@ const SceneTweleve = ({ goNext, goPrev }) => {
   const handleCheck = () => {
     if (beatOne) {
       setErrorShow(true);
-      if (boxOneValue === "4.5") {
+      if (
+        boxOneValue === "4.5" ||
+        boxOneValue === "04.5" ||
+        boxOneValue === "4.50"
+      ) {
         playCorrect();
         setBeatOne(false);
+        setCrossBoxTwoValue(boxOneValue);
         setSuccess(true);
         setDisabled(false);
         setNext(true);
@@ -76,17 +86,18 @@ const SceneTweleve = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-7%",
-                width: "30%",
+                bottom: "-14%",
+                width: "31%",
                 zIndex: "1",
-                transform: "rotate(-30deg)",
+                transform: "rotate(-34deg)",
+                left: "36%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="gray"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <svg
@@ -94,18 +105,18 @@ const SceneTweleve = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-9%",
+                bottom: "-13%",
                 width: "30%",
                 zIndex: "1",
-                transform: "rotate(121deg)",
+                transform: "rotate(125deg)",
                 left: "33%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="white"
-                strokeWidth="0.4"
-                fill="none"
+                stroke-width="0.1"
+                fill="#fff"
               />
             </svg>
             <div className="image-1">
@@ -138,7 +149,7 @@ const SceneTweleve = ({ goNext, goPrev }) => {
           <div className="cross-box">
             <div>
               <LenghtBoxTwo
-                boxOneValue={"4.5"}
+                boxOneValue={crossBoxOneValue}
                 success={true}
                 color={"rgba(2, 2, 63, 0.758)"}
                 num={1}
@@ -168,7 +179,7 @@ const SceneTweleve = ({ goNext, goPrev }) => {
               boxOneValue={boxOneValue}
               disabled={disabled}
               message={message}
-              ans={"4.5"}
+              ans={boxOneValue}
             />
           </p>
         </div>

@@ -9,7 +9,9 @@ import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 const SceneTweleve = ({
   goNext,
-  goPrev
+  goPrev,
+  crossBoxOneValue,
+  setCrossBoxTwoValue
 }) => {
   const {
     t
@@ -45,9 +47,10 @@ const SceneTweleve = ({
   const handleCheck = () => {
     if (beatOne) {
       setErrorShow(true);
-      if (boxOneValue === "4.5") {
+      if (boxOneValue === "4.5" || boxOneValue === "04.5" || boxOneValue === "4.50") {
         playCorrect();
         setBeatOne(false);
+        setCrossBoxTwoValue(boxOneValue);
         setSuccess(true);
         setDisabled(false);
         setNext(true);
@@ -82,32 +85,33 @@ const SceneTweleve = ({
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-7%",
-      width: "30%",
+      bottom: "-14%",
+      width: "31%",
       zIndex: "1",
-      transform: "rotate(-30deg)"
+      transform: "rotate(-34deg)",
+      left: "36%"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "gray",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     viewBox: "5.9 5.9 12.2 12.2",
     style: {
       position: "absolute",
-      bottom: "-9%",
+      bottom: "-13%",
       width: "30%",
       zIndex: "1",
-      transform: "rotate(121deg)",
+      transform: "rotate(125deg)",
       left: "33%"
     }
   }, /*#__PURE__*/React.createElement("path", {
-    d: "M18 18L6 6M6 6V8M6 6H8",
+    d: "M18 18L6 6M6 6V7M6 6H7",
     stroke: "white",
-    strokeWidth: "0.4",
-    fill: "none"
+    "stroke-width": "0.1",
+    fill: "#fff"
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-1"
   }, /*#__PURE__*/React.createElement("p", null, t("paintA")), /*#__PURE__*/React.createElement(FrameImagTwo, {
@@ -137,7 +141,7 @@ const SceneTweleve = ({
   })))), /*#__PURE__*/React.createElement("div", {
     className: "cross-box"
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LenghtBoxTwo, {
-    boxOneValue: "4.5",
+    boxOneValue: crossBoxOneValue,
     success: true,
     color: "rgba(2, 2, 63, 0.758)",
     num: 1
@@ -160,7 +164,7 @@ const SceneTweleve = ({
     boxOneValue: boxOneValue,
     disabled: disabled,
     message: message,
-    ans: "4.5"
+    ans: boxOneValue
   })))), /*#__PURE__*/React.createElement("div", {
     className: "footer"
   }, /*#__PURE__*/React.createElement("button", {

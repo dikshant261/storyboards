@@ -2,6 +2,7 @@ import React from "react";
 import "./lengthbox.css";
 import { playClick } from "./PlayAudio";
 import { useTranslation } from "react-i18next";
+import Fraction from "./Fraction";
 const LenghtBox = ({
   beatOne,
   beatTwo,
@@ -12,7 +13,8 @@ const LenghtBox = ({
   value,
   color,
   numberColor,
-  allGray
+  allGray,
+  style
 }) => {
   const {
     t
@@ -57,7 +59,8 @@ const LenghtBox = ({
     style: {
       background: color || "#5a7f5e",
       color: allGray ? "gray" : "white",
-      fontSize: "5vw"
+      fontSize: "5vw",
+      ...style
     }
   }, /*#__PURE__*/React.createElement("div", {
     style: {
@@ -82,20 +85,13 @@ const LenghtBox = ({
       backgroundColor: allGray ? "gray" : "white",
       height: "0.2vh"
     }
-  }), /*#__PURE__*/React.createElement("span", null, t("blue")))), /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: value === 1 ? numberColor : ""
-    }
-  }, boxOneValue), /*#__PURE__*/React.createElement("div", {
-    style: {
-      width: "11vw",
-      backgroundColor: allGray ? "gray" : "white",
-      height: "1vh"
-    }
-  }), /*#__PURE__*/React.createElement("div", {
-    style: {
-      color: value === 2 ? numberColor : ""
-    }
-  }, boxTwoValue)));
+  }), /*#__PURE__*/React.createElement("span", null, t("blue")))), /*#__PURE__*/React.createElement(Fraction, {
+    numerator: boxOneValue,
+    denominator: boxTwoValue,
+    color: allGray ? "gray" : "white",
+    fontSize: "5vw",
+    lineHeight: "0.5vh",
+    value: value
+  })));
 };
 export default LenghtBox;

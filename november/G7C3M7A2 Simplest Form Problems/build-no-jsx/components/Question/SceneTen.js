@@ -192,7 +192,7 @@ const SceneTen = ({
       height: "13vh",
       background: "#ffffffbd",
       border: "none",
-      width: "6vw"
+      width: "5vw"
     }
   })), /*#__PURE__*/React.createElement("div", {
     className: "align-row",

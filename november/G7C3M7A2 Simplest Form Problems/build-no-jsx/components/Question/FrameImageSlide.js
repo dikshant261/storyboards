@@ -30,40 +30,26 @@ const FrameImageSlide = ({
     className: "frame-container",
     style: {
       justifyContent: "center",
-      alignItems: "center",
-      position: "relative"
+      alignItems: "center"
     }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "frame-wrapper"
   }, /*#__PURE__*/React.createElement("img", {
     src: frame,
     alt: "frame",
-    style: {
-      width: width,
-      background: "white"
-    }
+    className: "frame-base"
   }), /*#__PURE__*/React.createElement("img", {
     src: frame,
     alt: "overlay frame",
+    className: "frame-overlay",
     style: {
-      width: `${overlayWidth}%`,
-      background: "white",
-      position: "absolute",
-      top: "4%",
-      left: "10%",
-      opacity: "0.9",
-      transition: "width 0.6s ease"
+      width: `${overlayWidth}%`
     }
   }), /*#__PURE__*/React.createElement("p", {
-    style: {
-      position: "absolute",
-      top: "60%",
-      left: "22%",
-      fontSize: "2.5vw",
-      backgroundColor: "rgba(255, 255, 255, 0.718)",
-      padding: "1vh",
-      zIndex: "0",
-      fontWeight: "600"
-    }
-  }, "120 cm \xD7 80 cm"), /*#__PURE__*/React.createElement("input", {
+    className: "frame-label"
+  }, "120 cm \xD7 80 cm"), overlayWidth <= 25 && /*#__PURE__*/React.createElement("p", {
+    className: "frame-label-two"
+  }, "3 cm \xD7 2 cm")), /*#__PURE__*/React.createElement("input", {
     type: "range",
     min: "25",
     max: "80",

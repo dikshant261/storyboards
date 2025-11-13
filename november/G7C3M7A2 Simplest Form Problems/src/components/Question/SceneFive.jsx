@@ -175,7 +175,22 @@ const SceneFive = ({ goNext, goPrev }) => {
           </div>
           {showFeedback !== "" && (
             <p className={`${allDisabled ? "frame-success" : "frame-error"}`}>
-              {showFeedback}
+              {!allDisabled && showFeedback}
+              {allDisabled && (
+                <p style={{ fontSize: "3vw" }}>
+                  {showFeedback}
+                  <Fraction
+                    numerator={120}
+                    denominator={80}
+                    lineWidth="5vw"
+                    fontSize="3vw"
+                    style={{
+                      display: "inline-flex",
+                      verticalAlign: "middle",
+                    }}
+                  />{" "}
+                </p>
+              )}
             </p>
           )}
         </div>

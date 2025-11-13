@@ -1,5 +1,6 @@
 const FrameImag = ({ width = "70%" }) => {
   const redBlueCircle = "assets/redBlueCircle.png";
+
   return /*#__PURE__*/ React.createElement(
     "div",
     {

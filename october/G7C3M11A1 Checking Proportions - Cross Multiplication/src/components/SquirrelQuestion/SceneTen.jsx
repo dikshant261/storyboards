@@ -102,7 +102,7 @@ const SceneTen = ({ goNext, goPrev }) => {
                 boxTwoValue={"2"}
                 color={"rgba(2, 2, 63, 0.758)"}
                 success={true}
-                value={1}
+                
               />
             </div>
             <div className="image-2">
@@ -116,7 +116,7 @@ const SceneTen = ({ goNext, goPrev }) => {
                   boxTwoValue={boxTwoValue}
                   boxCss={boxCss}
                   success={success}
-                  value={1}
+                  
                 />
               </div>
             </div>

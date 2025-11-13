@@ -1,0 +1,65 @@
+.box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5vw;
+    background-color: rgba(2, 2, 63, 0.758);
+    border-radius: 1.3vw;
+    width: 24vw;
+    height: 24vh;
+    padding: 1vh;
+    flex-direction: column;
+    position: relative;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10vw;
+    height: 8vh;
+    border: 0.3vw solid var(--secondary-color);
+    border-radius: 1.3vw;
+    font-size: 2.5vw;
+    color: black;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.wrong {
+    background: #865554;
+    border-color: darksalmon;
+}
+
+.correct {
+    background-color: #5b8569;
+    border-color: darkgreen;
+}
+
+.active {
+    animation: pulse-two 1.5s infinite;
+}
+
+@keyframes pulse-two {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw white,
+            0 0 1vw white,
+            0 0 1vw white;
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 2vw white,
+            0 0 4vw white,
+            0 0 6vw white;
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0.5vw white,
+            0 0 1vw white,
+            0 0 2vw white;
+    }
+}

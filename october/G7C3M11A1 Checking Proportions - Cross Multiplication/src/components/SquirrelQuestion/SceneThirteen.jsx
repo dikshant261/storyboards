@@ -9,7 +9,12 @@ import LenghtBox from "../LenghtBox";
 import LenghtBoxTwo from "../LengthBoxTwo";
 import purple from "../../assets/purple.png";
 import FrameImagTwoL from "./FrameImageTwoL";
-const SceneThirteen = ({ goNext, goPrev }) => {
+const SceneThirteen = ({
+  goNext,
+  goPrev,
+  crossBoxTwoValue,
+  crossBoxOneValue,
+}) => {
   const { t } = useTranslation();
   const [beatOne, setBeatOne] = useState(true);
   const [beatTwo, setBeatTwo] = useState(false);
@@ -70,17 +75,18 @@ const SceneThirteen = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-7%",
-                width: "30%",
+                bottom: "-14%",
+                width: "31%",
                 zIndex: "1",
-                transform: "rotate(-30deg)",
+                transform: "rotate(-34deg)",
+                left: "36%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="gray"
-                strokeWidth="0.4"
-                fill="none"
+                strokeWidth="0.1"
+                fill="#fff"
               />
             </svg>
             <svg
@@ -88,20 +94,21 @@ const SceneThirteen = ({ goNext, goPrev }) => {
               viewBox="5.9 5.9 12.2 12.2"
               style={{
                 position: "absolute",
-                bottom: "-9%",
+                bottom: "-13%",
                 width: "30%",
                 zIndex: "1",
-                transform: "rotate(121deg)",
+                transform: "rotate(125deg)",
                 left: "33%",
               }}
             >
               <path
-                d="M18 18L6 6M6 6V8M6 6H8"
+                d="M18 18L6 6M6 6V7M6 6H7"
                 stroke="gray"
-                strokeWidth="0.4"
-                fill="none"
+                strokeWidth="0.1"
+                fill="#fff"
               />
             </svg>
+
             <div
               className="image-1"
               style={{
@@ -109,27 +116,15 @@ const SceneThirteen = ({ goNext, goPrev }) => {
               }}
             >
               <p>{t("paintA")}</p>
-              {!showPurple && (
-                <FrameImagTwoL width="8vw" redml={"1.5"} blueml={"2"} />
-              )}
-              {showPurple && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-end",
-                    width: "34vw",
-                    height: "20vh",
-                  }}
-                >
-                  <img
-                    src={purple}
-                    style={{
-                      width: "8vw",
-                    }}
-                  />
-                </div>
-              )}
+              {
+                <FrameImagTwoL
+                  width="8vw"
+                  redml={"1.5"}
+                  blueml={"2"}
+                  overlap={showPurple}
+                  style={{ height: showPurple ? "27vh" : "" }}
+                />
+              }
               <LenghtBox
                 boxOneValue={"1.5"}
                 boxTwoValue={"2"}
@@ -137,6 +132,11 @@ const SceneThirteen = ({ goNext, goPrev }) => {
                 success={true}
                 numberColor="gray"
                 allGray={true}
+                style={{
+                  position: "fixed",
+                  left: "7%",
+                  top: "47%",
+                }}
               />
             </div>
             <div
@@ -146,27 +146,15 @@ const SceneThirteen = ({ goNext, goPrev }) => {
               }}
             >
               <p>{t("paintB")}</p>
-              {!showPurple && (
-                <FrameImagTwoL width="10vw" redml={"2.25"} blueml={"3"} />
-              )}
-              {showPurple && (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "flex-end",
-                    width: "34vw",
-                    height: "20vh",
-                  }}
-                >
-                  <img
-                    src={purple}
-                    style={{
-                      width: "8vw",
-                    }}
-                  />
-                </div>
-              )}
+              {
+                <FrameImagTwoL
+                  width="10vw"
+                  redml={"2.25"}
+                  blueml={"3"}
+                  overlap={showPurple}
+                  style={{ height: showPurple ? "27vh" : "" }}
+                />
+              }
               <div>
                 <LenghtBox
                   boxOneValue={"2.25"}
@@ -175,6 +163,11 @@ const SceneThirteen = ({ goNext, goPrev }) => {
                   success={true}
                   numberColor="gray"
                   allGray={true}
+                  style={{
+                    position: "fixed",
+                    right: "33.5%",
+                    top: "47%",
+                  }}
                 />
               </div>
             </div>
@@ -182,7 +175,7 @@ const SceneThirteen = ({ goNext, goPrev }) => {
           <div className="cross-box">
             <div>
               <LenghtBoxTwo
-                boxOneValue={"4.5"}
+                boxOneValue={crossBoxOneValue}
                 success={true}
                 color={
                   buttonId === null
@@ -196,7 +189,7 @@ const SceneThirteen = ({ goNext, goPrev }) => {
             </div>
             <div>
               <LenghtBoxTwo
-                boxOneValue={"4.5"}
+                boxOneValue={crossBoxTwoValue}
                 success={true}
                 color={
                   buttonId === null

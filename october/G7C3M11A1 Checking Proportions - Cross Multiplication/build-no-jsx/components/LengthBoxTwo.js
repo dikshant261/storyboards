@@ -32,14 +32,14 @@ const LenghtBoxTwo = ({
     className: `box ${beatOne ? "active" : ""} ${beatOne ? boxCss : ""}`,
     style: {
       width: "10vw",
-      height: "11vh"
+      height: "9vh"
     }
   }, boxOneValue)), success && /*#__PURE__*/React.createElement("div", {
     className: "box-container",
     style: {
       background: color || "#5a7f5e",
       color: "white",
-      fontSize: "5vw",
+      fontSize: "4vw",
       width: "19vw",
       height: "17vh"
     }

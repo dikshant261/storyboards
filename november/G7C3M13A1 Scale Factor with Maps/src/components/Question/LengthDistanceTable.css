@@ -1,0 +1,62 @@
+.table-container {
+    width: 40vw;
+    margin: auto;
+    border-radius: 1vw;
+    padding: 1.5vw;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flow;
+    transform: translateX(-3.1vw);
+}
+
+.table-heading {
+    text-align: center;
+    margin-bottom: 1vw;
+    font-weight: 600;
+    color: white;
+    font-size: 1.9vw;
+}
+
+.table-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8vw;
+    margin-bottom: 0.8vw;
+}
+
+.table-tile {
+    background-color: #1f2941;
+    border-radius: 0.6vw;
+    width: 100%;
+    height: 10vh;
+    text-align: center;
+    font-size: 1.7vw;
+    font-weight: 500;
+    transition: 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Header row */
+.header-row .table-tile {
+    background-color: #2d3a5e;
+    font-weight: 700;
+    color: #e3e8ff;
+}
+
+/* Alternating row colors */
+.even .table-tile {
+    background-color: #24314b;
+}
+
+.odd .table-tile {
+    background-color: #1f2941;
+}
+
+/* Hover effect for interactivity */
+.table-tile:hover {
+    background-color: #3a4b77;
+    transform: scale(1.02);
+}

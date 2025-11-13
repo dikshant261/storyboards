@@ -114,8 +114,7 @@ const SceneFour = ({
     boxOneValue: 25,
     boxTwoValue: 15,
     color: "rgba(2, 2, 63, 0.758)",
-    success: true,
-    value: 1
+    success: true
   })), /*#__PURE__*/React.createElement("div", {
     className: "image-2"
   }, /*#__PURE__*/React.createElement("p", null, t("paintB")), /*#__PURE__*/React.createElement(FrameImagTwo, {
@@ -128,8 +127,7 @@ const SceneFour = ({
     boxOneValue: boxOneValue,
     boxTwoValue: boxTwoValue,
     boxCss: boxCss,
-    success: success,
-    value: 1
+    success: success
   })))), /*#__PURE__*/React.createElement("div", {
     className: "cross-box opacity"
   }, /*#__PURE__*/React.createElement("div", {
@@ -146,7 +144,7 @@ const SceneFour = ({
     onInput: handleKeypadInput,
     checkHandle: handleCheck,
     flag: flag,
-    frame: "A",
+    frame: "B",
     num1: "50",
     num2: "20",
     errorShow: errorShow,

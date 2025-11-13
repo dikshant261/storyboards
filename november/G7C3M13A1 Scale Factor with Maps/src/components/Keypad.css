@@ -1,0 +1,108 @@
+.keypad-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1vh;
+    width: 23vw;
+}
+
+.hint-btn {
+    width: 11vw;
+    height: 6vh;
+    background-color: var(--secondary-color);
+    color: black;
+    font-size: 2vw;
+    font-weight: bold;
+    border: none;
+    border-radius: 1vh;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* gap: 0.4vw; */
+    margin-bottom: 19vh;
+    transition: 0.3s;
+}
+
+.hint-btn:hover {
+    background-color: rgb(136, 99, 51);
+    transform: scale(1.2);
+}
+
+.bulb {
+    width: 4vw;
+    object-fit: contain;
+}
+
+.feedback-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22vw;
+    height: 24vh;
+    border: none;
+    border-radius: 1vw;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5vh;
+    width: 12vw;
+    margin-bottom: 2vh;
+    justify-content: center;
+}
+
+.keypad-grid button {
+    background-color: #ffdb58;
+    border: 0.3vh solid #222;
+    border-radius: 0.8vh;
+    font-size: 2vw;
+    font-weight: bold;
+    cursor: pointer;
+    height: 7vh;
+    transition: 0.3s;
+    width: 7vw;
+    border: 0.4vw solid #998437;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keypad-grid button:hover {
+    background-color: #f5c842;
+    transform: scale(1.1);
+}
+
+.keypad-container .check-btn {
+    width: 12vw;
+    height: 8vh;
+    background-color: var(--secondary-color);
+    color: black;
+    font-size: 2.5vw;
+    font-weight: bold;
+    border: none;
+    border-radius: 1vh;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    transition: 0.3s;
+    border: 0.3vw solid #998437;
+
+}
+
+.hint-message {
+    background-color: white;
+    font-size: 2vw;
+    border-radius: 0.3vw;
+    color: black;
+    padding: 0.3vw;
+    margin: 0.2vw;
+    text-align: center;
+    position: fixed;
+    top: -1%;
+    right: 15%;
+}
