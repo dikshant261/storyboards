@@ -21,6 +21,7 @@ const AppData = {
         next: "»",
         previous: "«",
         startOver: "Start Over",
+        check: "CHECK",
       },
 
       common: {
@@ -89,468 +90,195 @@ const AppData = {
             tapTheZoom:
               "Tap the map to zoom in.\nEnter value using the keypad.",
           },
+          defaultText: "Enter the length of the black line in highlighted box.",
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "", "175"],
+              ["Jakarta–Jayapura", "", ""],
+              ["Jakarta–Medan", "", ""],
+              ["Jakarta–Palangkaraya", "", ""],
+            ],
+          },
+          feedBacks: {
+            inCorrect:
+              "No! Observe the length of black portion of the line in the scale.",
+            correct: "Good! Length of the black portion is 1 cm.",
+          },
         },
         page3: {
-          sideHeading:'Join the points to find the length on the map.',
-          instructionText:{
-            dragFrom:"Drag from one point to another."
-          }
+          sideHeading: "Join the points to find the length on the map.",
+          instructionText: {
+            dragFrom: "Drag from one point to another.",
+          },
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "", ""],
+              ["Jakarta–Medan", "", ""],
+              ["Jakarta–Palangkaraya", "", ""],
+            ],
+          },
         },
         page4: {
-          instructionText:{
-            enterScale:"Enter scale factor using the keypad."
-          }
+          instructionText: {
+            enterScale: "Enter scale factor using the keypad.",
+          },
+          defaultText: "Find the scale factor.",
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", ""],
+              ["Jakarta–Medan", "", ""],
+              ["Jakarta–Palangkaraya", "", ""],
+            ],
+          },
+          feedBacks: {
+            inCorrect: "No! Try again!",
+            correct: "Good job!",
+          },
         },
         page5: {
-          instructionText:{
-          enterTheActual:'Enter the actual distance using keypad.'
-          }
+          instructionText: {
+            enterTheActual: "Enter the actual distance using keypad.",
+          },
+          defaultText: "Find the scale factor.",
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", ""],
+              ["Jakarta–Medan", "", ""],
+              ["Jakarta–Palangkaraya", "", ""],
+            ],
+          },
+          feedBacks: {
+            inCorrect: "No! Try again. 175 × 21.2 = ??",
+            correct: "Correct!",
+          },
         },
         page6: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
+          sideHeading: "Join the points to find the length on the map.",
+          instructionText: {
+            dragFrom: "Drag from one point to another.",
           },
-          questionTable2: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
-          },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [{ text: "1 liter = 1000 ml", color: highlight1 }],
-            impFormulae: [],
-          },
-          fillBlanks: {
-            instructionText:
-              "Dona's teapot measures 1 liter. To compare correctly, we need to convert that to milliliters. 1 liter  = ?",
-            options: [
-              {
-                id: "opt1",
-                text: "250 ml",
-                feedbackText: "Not quite! Try again.",
-                blankID: [],
-              },
-              {
-                id: "opt2",
-                text: "500 ml",
-                feedbackText: "Not quite! Try again.",
-                blankID: [],
-              },
-              {
-                id: "opt3",
-                text: "750 ml",
-                feedbackText: "Not quite! Try again.",
-                blankID: [],
-              },
-              {
-                id: "opt4",
-                text: "1000 ml",
-                feedbackText:
-                  "Great! Let’s replace 1 liter with 1000 ml in Dona’s table.",
-                blankID: [{ bid: "blank4", text: "1000 ml" }],
-              },
-            ],
-            containers: {},
-            impFormulae: [
-              {
-                text: "Dona’s mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", "3710"],
+              ["Jakarta–Medan", "", ""],
+              ["Jakarta–Palangkaraya", "", ""],
             ],
           },
         },
         page7: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
+          instructionText: {
+            enterScale: "Enter scale factor using the keypad.",
+          },
+          defaultText: "Find the scale factor.",
+          mapTable: {
+            headers: ["", "", ""],
             rows: [
-              ["", "", ""],
-              ["", "", ""],
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", "3710"],
+              ["Jakarta–Medan", "8", ""],
+              ["Jakarta–Palangkaraya", "", ""],
             ],
           },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [{ text: "1 liter = 1000 ml", color: highlight1 }],
-            impFormulae: [
-              {
-                text: "Dona’s mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
-            ],
-          },
-          fillBlanks: {
-            instructionText:
-              "If Dona's mom made 1000 ml of coffee how many cups of 250 ml will she need?",
-            options: [
-              {
-                id: "opt1",
-                text: "2",
-                feedbackText: "Not quite! 250 ml × 2 = 500 ml",
-                blankID: [],
-              },
-              {
-                id: "opt2",
-                text: "4",
-                feedbackText: "Great! Let’s put that in Mom’s ratio table",
-                blankID: [{ bid: "blank5", text: "4" }],
-              },
-              {
-                id: "opt3",
-                text: "6",
-                feedbackText: "Not quite! 250 ml × 2 = 1500 ml",
-                blankID: [],
-              },
-              {
-                id: "opt4",
-                text: "8",
-                feedbackText: "Not quite! 250 ml × 8 = 2000 ml",
-                blankID: [],
-              },
-            ],
-            containers: {},
-            impFormulae: [],
+          feedBacks: {
+            inCorrect: "No! Try again!",
+            correct: "Good job!",
           },
         },
         page8: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
+          instructionText: {
+            enterTheActual: "Enter the actual distance using keypad.",
           },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [{ text: "1 liter = 1000 ml", color: highlight1 }],
-            impFormulae: [
-              {
-                text: "Dona’s mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
+          defaultText: "Find the scale factor.",
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", "3710"],
+              ["Jakarta–Medan", "8", "1400"],
+              ["Jakarta–Palangkaraya", "", ""],
             ],
           },
-          fillBlanks: {
-            instructionText:
-              "What is the ratio of coffee to sugar in 250 ml of coffee?",
-            options: [
-              {
-                id: "opt1",
-                text: "2 : 1",
-                feedbackText: "No, that's the ratio of sugar to coffee.",
-                blankID: [],
-              },
-              {
-                id: "opt2",
-                text: "1 : 2",
-                feedbackText: "Yes, it is 1 tsp of coffee to 2 tsp of sugar.",
-                blankID: [
-                  { bid: "blank2", text: "1" },
-                  { bid: "blank3", text: "2" },
-                ],
-              },
-              {
-                id: "opt3",
-                text: "1 : 250",
-                feedbackText: "No, that’s not the ratio of coffee to sugar.",
-                blankID: [],
-              },
-              {
-                id: "opt4",
-                text: "2 : 250",
-                feedbackText: "No, that's not the ratio of coffee to sugar.",
-                blankID: [],
-              },
-            ],
-            containers: {},
-            impFormulae: [
-              { text: "Ratio of coffee to sugar = 1 : 2", color: highlight1 },
-            ],
+          feedBacks: {
+            inCorrect: "No! Try again. 3710 × 8 = ??",
+            correct: "Correct!",
           },
         },
         page9: {
-          highlights: [],
-          quizPanel: {
-            quiz: {
-              mcqType: "MCQ",
-              qti4Subtype: "QT2",
-              emptyFeedback:
-                "In simplest form, both terms of ratio do not have any common factor other than 1.",
-            },
-            headerText: "Connect with Concepts",
-            questionText:
-              "Let's assume there are 'a' tsp of coffee and 'b' tsp of sugar in 1000 ml of coffee. <br><br>State whether true or false –<br>To keep the same taste, a : b should be equivalent to 1 : 2.",
-            imageText: "",
-            options: [
-              {
-                text: "False",
-                iscorrect: false,
-                feedback:
-                  "If the ratio is not equivalent, the coffee will taste different.",
-              },
-              {
-                text: "True",
-                iscorrect: true,
-                feedback:
-                  "Yes, to keep the same taste, we need to add equivalent amounts of coffee and sugar.",
-              },
-            ],
-            keyConcepts: [],
-            impFormulae: [{ text: "a : b = 1 : 2", color: highlight1 }],
+          sideHeading: "Join the points to find the length on the map.",
+          instructionText: {
+            dragFrom: "Drag from one point to another.",
           },
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [{ text: "1 liter = 1000 ml", color: highlight1 }],
-            impFormulae: [
-              {
-                text: "Dona’s mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
-              { text: "Ratio of coffee to sugar = 1 : 2", color: highlight1 },
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", "3710"],
+              ["Jakarta–Medan", "8", "1400"],
+              ["Jakarta–Palangkaraya", "", ""],
             ],
           },
         },
         page10: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
+          instructionText: {
+            enterScale: "Enter scale factor using the keypad.",
           },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [],
-            impFormulae: [
-              {
-                text: "Dona’s mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
-              { text: "Ratio of coffee to sugar = 1 : 2", color: highlight1 },
-              { text: "a : b = 1 : 2", color: highlight1 },
+          defaultText: "Find the scale factor.",
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", "3710"],
+              ["Jakarta–Medan", "8", "1400"],
+              ["Jakarta–Palangkaraya", "5.1", ""],
             ],
           },
-          fillBlanks: {
-            instructionText:
-              "What is the ratio of coffee to sugar in 250 ml of coffee?",
-            options: [
-              {
-                id: "opt1",
-                text: "1",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-              {
-                id: "opt2",
-                text: "2",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-              {
-                id: "opt3",
-                text: "4",
-                feedbackText:
-                  "Right! To keep the ratio equivalent, we need to multiply by 4.",
-                blankID: [{ bid: "blank5", text: "4" }],
-              },
-              {
-                id: "opt4",
-                text: "8",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-            ],
-            containers: {},
-            impFormulae: [{ text: "a = 4", color: highlight1 }],
+          feedBacks: {
+            inCorrect: "No! Try again!",
+            correct: "Good job!",
           },
         },
         page11: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
+          instructionText: {
+            enterTheActual: "Enter the actual distance using keypad.",
           },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [],
-            impFormulae: [
-              {
-                text: "Dona’s mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
-              { text: "Ratio of coffee to sugar = 1 : 2", color: highlight1 },
-              { text: "a : b = 1 : 2", color: highlight1 },
-              { text: "a = 4", color: highlight1 },
+          defaultText: "Find the scale factor.",
+          mapTable: {
+            headers: ["", "", ""],
+            rows: [
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", "3710"],
+              ["Jakarta–Medan", "8", "1400"],
+              ["Jakarta–Palangkaraya", "5.1", ""],
             ],
           },
-          fillBlanks: {
-            instructionText:
-              "What is the ratio of coffee to sugar in 250 ml of coffee?",
-            options: [
-              {
-                id: "opt1",
-                text: "4",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-              {
-                id: "opt2",
-                text: "6",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-              {
-                id: "opt3",
-                text: "8",
-                feedbackText:
-                  "Right! To keep the ratio equivalent, we need to multiply by 4.",
-                blankID: [{ bid: "blank6", text: "8" }],
-              },
-              {
-                id: "opt4",
-                text: "10",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-            ],
-            containers: {},
-            impFormulae: [{ text: "b = 8", color: highlight1 }],
+          feedBacks: {
+            inCorrect: "No! Try again. 1400 × 5.1 = ??",
+            correct: "Correct!",
           },
         },
 
         page12: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
+          sideHeading:
+            "Using scale factor, you were able to calculate actual distances from lengths on the map.",
+          instructionText: {
+            dragFrom: "Challenge Completed!",
+          },
+          mapTable: {
+            headers: ["", "", ""],
             rows: [
-              ["", "", ""],
-              ["", "", ""],
-            ],
-          },
-          questionTable2: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
-          },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [],
-            impFormulae: [
-              {
-                text: "Dona's mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
-              { text: "Ratio of coffee to sugar = 1 : 2", color: highlight1 },
-              { text: "a : b = 1 : 2", color: highlight1 },
-              { text: "a = 4", color: highlight1 },
-              { text: "b = 8", color: highlight1 },
-            ],
-          },
-          conclusion: {
-            text: "The amount of sugar is different in Mom's and Dona's coffee.<br>So, Dona's coffee tastes <span style=\"color: transparent;\">sweeter than</span> \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0mom's coffee.",
-          },
-          fillBlanks: {
-            instructionText:
-              "Drag and drop the correct options to fill in the highlighted blank in blue box.",
-            blank10Coordinate: [390, 705, 600, 765],
-            options: [
-              {
-                id: "opt1",
-                text: "same as",
-                feedbackText:
-                  "Not quite! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [],
-              },
-              {
-                id: "opt2",
-                text: "sweeter than",
-                feedbackText:
-                  "You are right! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [{ bid: "blank10", text: "sweeter than" }],
-              },
-              {
-                id: "opt3",
-                text: "bitter than",
-                feedbackText:
-                  "Not quite! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [],
-              },
-            ],
-            containers: {},
-            impFormulae: [
-              { text: "Dona's coffee is sweeter", color: highlight1 },
+              ["Black line", "1", "175"],
+              ["Jakarta–Jayapura", "21.2", "3710"],
+              ["Jakarta–Medan", "8", "1400"],
+              ["Jakarta–Palangkaraya", "5.1", "892.5"],
             ],
           },
         },
@@ -638,6 +366,7 @@ const AppData = {
         next: "»",
         previous: "«",
         startOver: "Mulai Lagi",
+        check: "CEK",
       },
 
       common: {

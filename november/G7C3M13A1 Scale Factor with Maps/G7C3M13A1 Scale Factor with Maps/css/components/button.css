@@ -63,7 +63,7 @@
 /* Next Button Three-Layer Styles */
 .next-button-container {
     background-color: #FF9900;
-    border: 3px solid #000000;
+    border: none;
     color: #000000;
 }
 
@@ -100,7 +100,7 @@
 
 .next-button-container.disabled {
     background-color: var(--color-button-disabled);
-    border-color: var(--color-silver);
+    border: none;
     cursor: not-allowed;
     opacity: 0.5;
     color: var(--color-white);
@@ -109,7 +109,7 @@
 /* Previous Button Three-Layer Styles */
 .previous-button-container {
     background-color: #6699CC;
-    border: 3px solid #000000;
+    border: none;
     color: #000000;
 }
 
@@ -146,7 +146,7 @@
 
 .previous-button-container.disabled {
     background-color: var(--color-button-disabled);
-    border-color: var(--color-silver);
+    border: none;
     cursor: not-allowed;
     opacity: 0.5;
     color: var(--color-white);
@@ -187,14 +187,14 @@
 .next-button-container,
 .next-button-page2-container {
     background-color: #FF9900;
-    border: 3px solid #000000;
+    border: none;
     color: #000000;
 }
 
 .previous-button-container,
 .previous-button-page2-container {
     background-color: #6699CC;
-    border: 3px solid #000000;
+    border: none;
     color: #000000;
 }
 
@@ -302,7 +302,7 @@
 .next-button,
 [data-grid-position="next-button"] {
     background-color: var(--color-button-next);
-    border: 3px solid var(--color-black);
+    border: none;
     color: var(--color-black);
 }
 
@@ -317,7 +317,7 @@
 .math-app-button-next:disabled,
 .next-button:disabled {
     background-color: var(--color-button-disabled);
-    border-color: var(--color-silver);
+    border: none;
     cursor: not-allowed;
     opacity: 0.5;
     color: var(--color-white);
@@ -332,7 +332,7 @@
 .previous-button,
 [data-grid-position="previous-button"] {
     background-color: var(--color-button-previous);
-    border: 3px solid var(--color-black);
+    border: none;
     color: var(--color-black);
 }
 

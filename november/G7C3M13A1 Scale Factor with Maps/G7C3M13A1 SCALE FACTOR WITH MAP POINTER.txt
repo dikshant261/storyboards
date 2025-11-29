@@ -1,0 +1,9 @@
+1-> next button is not disabled until correct is dial by keypad.
+
+2-> image zoom funcnality is in page 2 is left,
+
+3-> tile component is not work which are use on page 4,7,and 10.
+
+4-> keypad not dial more then 3 number, but need 4 number dial.
+
+5-> drag on image is left, in page 3,6 and 9.

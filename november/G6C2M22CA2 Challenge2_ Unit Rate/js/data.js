@@ -4,7 +4,7 @@
 const highlight1 = "#ffd966";
 const highlight2 = "#70ACC7";
 const highlight3 = "#f08080";
-const highlight4 = "#254319";
+const highlight4 = "#ffd966";
 
 const AppData = {
   // Current language setting
@@ -31,21 +31,9 @@ const AppData = {
         questionText:
           "Mutia bought 1 box of pens for Rp36.000,00 which contains 15 pens. Determine:\na. How much does one pen cost?\nb. How much money does Mutia have to pay if she only wants to buy 5 pens?",
         labels: {
-          mom: "Mom",
-          dona: "Dona",
-          quantity250ml: "250 ml",
-          quantity1liter: "1 liter",
-          quantity1000ml: "1000 ml",
-          number1: "1",
-          number2: "2",
-          number4: "4",
-          number8: "8",
-          number10: "10",
-          variableA: "a",
-          variableB: "b",
-          times4: "×4",
-          timesQuestion: "×?",
-          dropHere: "Drop here",
+          pens: "15 pens \nRp36.000,00",
+          fivePens: "5 pens \nprice = ?",
+          onePen: "1 pen \nprice = ?",
         },
         informationAnalysis: {
           header: "INFORMATION ANALYSIS",
@@ -760,214 +748,76 @@ const AppData = {
           },
         },
         page11: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
-          },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [],
-            impFormulae: [
-              {
-                text: "Dona’s mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
-              { text: "Ratio of coffee to sugar = 1 : 2", color: highlight1 },
-              { text: "a : b = 1 : 2", color: highlight1 },
-              { text: "a = 4", color: highlight1 },
-            ],
-          },
-          fillBlanks: {
-            instructionText:
-              "What is the ratio of coffee to sugar in 250 ml of coffee?",
-            options: [
-              {
-                id: "opt1",
-                text: "4",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-              {
-                id: "opt2",
-                text: "6",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-              {
-                id: "opt3",
-                text: "8",
-                feedbackText:
-                  "Right! To keep the ratio equivalent, we need to multiply by 4.",
-                blankID: [{ bid: "blank6", text: "8" }],
-              },
-              {
-                id: "opt4",
-                text: "10",
-                feedbackText: "No, try again!",
-                blankID: [],
-              },
-            ],
-            containers: {},
-            impFormulae: [{ text: "b = 8", color: highlight1 }],
-          },
-        },
-
-        page12: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [
-              ["", "", ""],
-              ["", "", ""],
-            ],
-          },
-          questionTable2: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
-          },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [],
-            impFormulae: [
-              {
-                text: "Dona's mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
-              { text: "Ratio of coffee to sugar = 1 : 2", color: highlight1 },
-              { text: "a : b = 1 : 2", color: highlight1 },
-              { text: "a = 4", color: highlight1 },
-              { text: "b = 8", color: highlight1 },
-            ],
-          },
-          conclusion: {
-            text: "The amount of sugar is different in Mom's and Dona's coffee.<br>So, Dona's coffee tastes <span style=\"color: transparent;\">sweeter than</span> \u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0mom's coffee.",
-          },
-          fillBlanks: {
-            instructionText:
-              "Drag and drop the correct options to fill in the highlighted blank in blue box.",
-            blank10Coordinate: [390, 705, 600, 765],
-            options: [
-              {
-                id: "opt1",
-                text: "same as",
-                feedbackText:
-                  "Not quite! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [],
-              },
-              {
-                id: "opt2",
-                text: "sweeter than",
-                feedbackText:
-                  "You are right! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [{ bid: "blank10", text: "sweeter than" }],
-              },
-              {
-                id: "opt3",
-                text: "bitter than",
-                feedbackText:
-                  "Not quite! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [],
-              },
-            ],
-            containers: {},
-            impFormulae: [
-              { text: "Dona's coffee is sweeter", color: highlight1 },
-            ],
-          },
-        },
-        page13: {
-          questionTable1: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [
-              ["", "", ""],
-              ["", "", ""],
-            ],
-          },
-          questionTable2: {
-            headers: ["Quantity", "Coffee (in tsp)", "Sugar (in tsp)"],
-            rows: [["", "", ""]],
-          },
-          highlights: [],
-
-          conceptSummary: {
-            given: [
-              {
-                text: "250 ml has 1 tsp of coffee and 2 tsp of sugar",
-                color: highlight2,
-              },
-              {
-                text: "1 liter has 4 tsp of coffee and 10 tsp of sugar",
-                color: highlight2,
-              },
-            ],
-            toFind: [],
-            keyConcepts: [],
-            impFormulae: [
-              {
-                text: "Dona’s mom needs 4 cups of 250 ml to make 1000 ml",
-                color: highlight1,
-              },
-              { text: "Ratio of coffee to sugar = 1 : 2", color: highlight1 },
-              { text: "a : b = 1 : 2", color: highlight1 },
-              { text: "a = 4", color: highlight1 },
-              { text: "b = 8", color: highlight1 },
-              { text: "Dona's coffee is sweeter", color: highlight1 },
-            ],
-          },
-          fillBlanks: {
-            instructionText:
-              "Drag and drop the correct options to fill in the highlighted blank in blue box.",
-            options: [
-              {
-                id: "opt1",
-                text: "same as",
-                feedbackText:
-                  "Not quite! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [{ bid: "blank1", text: "250 ml" }],
-              },
-              {
-                id: "opt2",
-                text: "sweeter than",
-                feedbackText:
-                  "You are right! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [{ bid: "blank10", text: "sweeter than" }],
-              },
-              {
-                id: "opt3",
-                text: "bitter than",
-                feedbackText:
-                  "Not quite! Dona's coffee has same amount of water and coffee but more sugar.",
-                blankID: [{ bid: "blank5", text: "4" }],
-              },
-            ],
-            containers: {},
-            impFormulae: [],
-          },
+          highlights: [
+            {
+              text: "1 box of pens for Rp36.000,00 which contains 15 pens",
+              highlightColor: highlight1,
+              fontColor: "#000000",
+              fontSize: "24gc",
+              bold: true,
+              underline: false,
+            },
+            {
+              text: "How much does one pen cost?",
+              highlightColor: highlight2,
+              fontColor: "#000000",
+              fontSize: "24gc",
+              bold: true,
+              underline: false,
+            },
+            {
+              text: "How much money does Mutia have to pay if she only wants to buy 5 pens?",
+              highlightColor: highlight3,
+              fontColor: "#000000",
+              fontSize: "24gc",
+              bold: true,
+              underline: false,
+            },
+          ],
           feedbackTextbox: {
-            text: "The amount of sugar is different in Mom's and Dona's coffee.<br>So, Dona's coffee tastes sweeter than mom's coffee.",
+            text: 'We concluded that:<br>a. Banyu traveled <span style="background-color: #FFD700; color: #000000; padding: 2px 4px;">2 km in 1 hour</span>.<br>b. He needs <span style="background-color: #FFAB40; color: #000000; padding: 2px 4px;">4.5 hours to travel 9 km</span>.<br>c. He walks <span style="background-color: #F28283; color: #000000; padding: 2px 4px;">7 km in 3.5 hours</span>',
+          },
+          conceptSummary: {
+            given: [
+              {
+                text: "1 box = 15 pens = Rp36.000,00",
+                color: highlight1,
+              },
+            ],
+
+            toFind: [
+              {
+                text: "How much does one pen cost?",
+                color: highlight2,
+              },
+              {
+                text: "How much should be paid to buy 5 pens?",
+                color: highlight3,
+              },
+            ],
+
+            keyConcepts: [
+              {
+                text: "Cost of 1 pen = Divide total cost by number of pens.",
+                color: highlight4,
+              },
+              {
+                text: "Cost of 1 pen = Rp36.000 ÷ 15\nRp2.400 per 1 pen",
+                color: highlight4,
+              },
+              {
+                text: "Cost of 5 pens = multiply cost per 1 pen bt 5.",
+                color: highlight4,
+              },
+              {
+                text: "Cost of 5 pens = Rp2.400 × 5 = Rp.12.000",
+                color: highlight4,
+              },
+              {
+                text: "Multia has to pay Rp12.000 to buy 5 pens.",
+                color: highlight4,
+              },
+            ],
           },
         },
       },

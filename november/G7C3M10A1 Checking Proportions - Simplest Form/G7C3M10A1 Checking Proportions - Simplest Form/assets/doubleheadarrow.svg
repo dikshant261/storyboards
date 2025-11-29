@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="300" viewBox="0 0 2000 300">
+  <style>
+    .arrow-line { stroke: #000; stroke-width: 30; }
+    .arrow-head { fill: #000; }
+  </style>
+
+  <!-- Left Arrow Head -->
+  <polygon class="arrow-head" points="60,150 180,90 180,210" />
+
+  <!-- Line -->
+  <line class="arrow-line" x1="180" y1="150" x2="1820" y2="150" />
+
+  <!-- Right Arrow Head -->
+  <polygon class="arrow-head" points="1940,150 1820,90 1820,210" />
+</svg>

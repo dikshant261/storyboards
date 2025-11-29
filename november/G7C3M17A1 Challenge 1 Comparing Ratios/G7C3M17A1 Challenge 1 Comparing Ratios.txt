@@ -1,0 +1,5 @@
+1-> on page 8 need to arrange option in Correct order: 3, 1, 4, 2. by dragging.
+
+2-> on page 11 option need to render in fraction but not render.
+
+3-> after page 13, 5 pages are left in which have show option with image cross multiplication.

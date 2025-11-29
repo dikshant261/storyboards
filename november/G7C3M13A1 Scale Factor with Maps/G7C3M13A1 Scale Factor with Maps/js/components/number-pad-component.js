@@ -14,11 +14,43 @@ const NumberPadPanelComponent = React.memo((props) => {
   
   // Use the elementProps passed from the ElementRenderer
   console.log('🔢 [NumberPad] Received props:', { currentPage, elementName, elementProps });
-  const config = elementProps || {
+  
+  // Use a persistent ref stored on window to track previous values across re-mounts
+  // This ensures state persists even if component is unmounted and remounted
+  const componentKey = `numberPad_${elementName || 'default'}_${currentPage}`;
+  if (!window.numberPadInstanceRefs) {
+    window.numberPadInstanceRefs = {};
+  }
+  if (!window.numberPadInstanceRefs[componentKey]) {
+    window.numberPadInstanceRefs[componentKey] = {
+      mountTime: Date.now(),
+      prevPage: currentPage,
+      prevDestinationsLength: elementProps?.destinations?.length,
+      prevDestinationIndex: elementProps?.destinationIndex,
+      initialized: false
+    };
+  }
+  const instanceRef = window.numberPadInstanceRefs[componentKey];
+  
+  const defaultConfig = {
     backgroundColor: 'transparent',
     borderRadius: '15gc',
     border: '4px solid #FFAB40',
     padding: '15gc',
+    layout: 'vertical',            // Layout type: 'vertical' (4 rows, 3 cols) or 'horizontal' (3 rows, 4 cols)
+    buttonConfig: 1,               // Button configuration: 1 (numbers only), 2 (numbers + C + ⌫), 3 (numbers + + - . + C + ⌫), 4 (numbers + × ÷ . + C + ⌫)
+    enableClickSound: true,        // Enable click sound for number pad buttons (default: true)
+    inputMode: 'append',           // Input mode: 'replace' (each click replaces text) or 'append' (each click appends to text)
+    maxNumber: null,               // Maximum number allowed in append mode (if exceeded, plays wrong sound and prevents input)
+    feedbackMode: 'feedback',       // Feedback mode: 'instruction' (text doesn't change on check) or 'feedback' (text changes on check)
+    feedbackComponentId: null,     // ID of external feedback component to update when check is pressed (e.g., 'page2-feedback-textbox')
+    setFocusOnLoad: false,         // If true, set destination cell to 'focus' mode on component load
+    destinations: [],              // Array of destination objects: [{destinationId, correctValue, correctFeedback, incorrectFeedback}, ...]
+    destinationIndex: 0,           // Current index in destinations array (starts at 0)
+    // Height percentages for layout sections
+    feedbackRowHeight: '35%',      // Height percentage for feedback text area
+    buttonGridHeight: '51%',       // Height percentage for number pad grid
+    checkButtonHeight: '10%',      // Height percentage for check button
     showButton: {
       backgroundColor: '#FFD700',
       color: '#000000',
@@ -35,7 +67,9 @@ const NumberPadPanelComponent = React.memo((props) => {
       border: '2px solid #FF9900',
       margin: '3gc',
       // New customizable props
-      buttonSize: '50gc',        // Overall button size (width & height)
+      buttonSize: '50gc',        // Overall button size (width & height) - deprecated, use buttonWidthPercent/buttonHeightPercent
+      buttonWidthPercent: '90%', // Width percentage of grid cell (default: 90%)
+      buttonHeightPercent: '90%', // Height percentage of grid cell (default: 90%)
       rowGap: '3gc',            // Gap between button rows
       columnGap: '3gc'          // Gap between button columns
     },
@@ -62,19 +96,155 @@ const NumberPadPanelComponent = React.memo((props) => {
       padding: '10gc',
       textAlign: 'center',
       display: 'flex',
-      height: '60gc'
+      height: '60gc',
+      defaultText: ''           // Default text to display in feedback area
     }
   };
   
-  // State for text area content
-  const [textAreaContent, setTextAreaContent] = React.useState('');
+  // Merge defaultConfig with elementProps (elementProps takes precedence)
+  const config = { ...defaultConfig, ...(elementProps || {}) };
+  
+  // Log initial config to debug destinationId
+  React.useEffect(() => {
+    console.log(`🔍 [NumberPad] Component initialized with config:`, {
+      destinationId: config.destinationId,
+      elementPropsDestinationId: elementProps?.destinationId,
+      allConfigKeys: Object.keys(config || {}),
+      elementPropsKeys: Object.keys(elementProps || {})
+    });
+  }, []);
+  
+  // State for user input value (what they're typing)
+  const [inputValue, setInputValue] = React.useState('');
+  // State for feedback message (shown when check is pressed)
+  const [feedbackMessage, setFeedbackMessage] = React.useState('');
+  // Default text to show when there's no feedback and no input
+  const defaultFeedbackText = config.feedbackTextArea?.defaultText || '';
+  // State for current destination index (starts at 0 on app load)
+  const [currentDestinationIndex, setCurrentDestinationIndex] = React.useState(() => {
+    // Initialize from config, default to 0
+    return config.destinationIndex !== undefined ? config.destinationIndex : 0;
+  });
+  // State to track if last check was incorrect (used to set focus mode on next number click)
+  const [lastCheckWasIncorrect, setLastCheckWasIncorrect] = React.useState(false);
+  
+  // Helper function to update table cell mode (shared between handleNumberClick and handleCheckClick)
+  const updateDestinationCellMode = React.useCallback((destinationId, mode) => {
+    if (!destinationId) {
+      console.warn(`⚠️ [NumberPad] No destinationId provided for cell mode update`);
+      return;
+    }
+    
+    try {
+      // Extract table component ID from destinationId (e.g., 'page2-map-table-R1C1' -> 'page2-map-table')
+      const cellIdMatch = destinationId.match(/^(.+?)-R\d+C\d+$/);
+      if (!cellIdMatch) {
+        console.warn(`⚠️ [NumberPad] Could not extract table component ID from destinationId: ${destinationId}`);
+        return;
+      }
+      
+      const tableComponentId = cellIdMatch[1];
+      console.log(`🔍 [NumberPad] Extracted table component ID: ${tableComponentId} from destinationId: ${destinationId}`);
+      
+      // Get the cell mode update callback for this table component
+      if (typeof window !== 'undefined' && window.tableGridModeCallbacks && window.tableGridModeCallbacks[tableComponentId]) {
+        window.tableGridModeCallbacks[tableComponentId](destinationId, mode);
+        console.log(`✅ [NumberPad] Updated cell mode for ${destinationId} to ${mode}`);
+      } else {
+        console.warn(`⚠️ [NumberPad] No cell mode callback found for table component: ${tableComponentId}`);
+        console.log(`🔍 [NumberPad] Available table mode callbacks:`, Object.keys(window.tableGridModeCallbacks || {}));
+      }
+      
+      // Also update the destination element directly with data attribute
+      try {
+        const destinationElement = document.getElementById(destinationId);
+        if (destinationElement) {
+          destinationElement.setAttribute('data-cell-mode', mode);
+          console.log(`✅ [NumberPad] Set data-cell-mode="${mode}" on destination element ${destinationId}`);
+          
+          // Dispatch custom event to notify the destination element
+          destinationElement.dispatchEvent(new CustomEvent('cellModeUpdated', {
+            detail: { mode, destinationId },
+            bubbles: true
+          }));
+          console.log(`✅ [NumberPad] Dispatched cellModeUpdated event to ${destinationId}`);
+        } else {
+          console.warn(`⚠️ [NumberPad] Destination element not found: ${destinationId}`);
+        }
+      } catch (domError) {
+        console.error(`❌ [NumberPad] Error updating destination element ${destinationId}:`, domError);
+      }
+    } catch (error) {
+      console.error(`❌ [NumberPad] Error updating cell mode for ${destinationId}:`, error);
+    }
+  }, []);
+  
+  // Set destination cell to focus mode on load if setFocusOnLoad is enabled
+  React.useEffect(() => {
+    if (config.setFocusOnLoad) {
+      const destinations = config.destinations || [];
+      if (destinations.length > 0) {
+        const initialDestinationIndex = config.destinationIndex !== undefined ? config.destinationIndex : 0;
+        const initialDestination = destinations[initialDestinationIndex];
+        if (initialDestination?.destinationId) {
+          // Small delay to ensure table component is ready
+          setTimeout(() => {
+            updateDestinationCellMode(initialDestination.destinationId, 'focus');
+            console.log(`🎯 [NumberPad] Set destination cell to focus mode on load: ${initialDestination.destinationId}`);
+          }, 100);
+        }
+      }
+    }
+  }, []); // Run only once on mount
+  
+  // Reset destination index when page changes or destinations array changes
+  // Use window-stored instanceRef to track previous values (persists across re-mounts)
+  React.useEffect(() => {
+    // On first initialization, just set the refs and don't clear input
+    if (!instanceRef.initialized) {
+      instanceRef.initialized = true;
+      instanceRef.prevPage = currentPage;
+      instanceRef.prevDestinationsLength = config.destinations?.length;
+      instanceRef.prevDestinationIndex = config.destinationIndex;
+      console.log(`🔄 [NumberPad] Initial mount - Set refs:`, {
+        page: currentPage,
+        destinationsLength: config.destinations?.length,
+        destinationIndex: config.destinationIndex
+      });
+      return; // Don't reset on initial mount
+    }
+    
+    // Check if page, destinations length, or destinationIndex actually changed
+    const pageChanged = instanceRef.prevPage !== currentPage;
+    const destinationsLengthChanged = instanceRef.prevDestinationsLength !== config.destinations?.length;
+    const destinationIndexChanged = instanceRef.prevDestinationIndex !== config.destinationIndex;
+    
+    if (pageChanged || destinationsLengthChanged || destinationIndexChanged) {
+      setCurrentDestinationIndex(config.destinationIndex !== undefined ? config.destinationIndex : 0);
+      setInputValue(''); // Clear input only when page/destinations actually change
+      console.log(`🔄 [NumberPad] Reset destination index to: ${config.destinationIndex !== undefined ? config.destinationIndex : 0}`, {
+        pageChanged,
+        destinationsLengthChanged,
+        destinationIndexChanged,
+        prevPage: instanceRef.prevPage,
+        currentPage,
+        prevDestinationsLength: instanceRef.prevDestinationsLength,
+        currentDestinationsLength: config.destinations?.length
+      });
+      
+      // Update instance refs
+      instanceRef.prevPage = currentPage;
+      instanceRef.prevDestinationsLength = config.destinations?.length;
+      instanceRef.prevDestinationIndex = config.destinationIndex;
+    }
+  }, [currentPage, config.destinationIndex, config.destinations?.length]);
   const [textAreaColors, setTextAreaColors] = React.useState(() => {
-    // Initialize with CSS variables
+    // Initialize with config colors if provided, otherwise use CSS variables
     const rootStyles = getComputedStyle(document.documentElement);
     return {
-      color: rootStyles.getPropertyValue('--textarea-hint-color').trim() || '#FFFFFF',
-      backgroundColor: rootStyles.getPropertyValue('--textarea-hint-bg').trim() || 'transparent',
-      borderColor: rootStyles.getPropertyValue('--textarea-hint-border').trim() || '#FFFFFF'
+      color: config.feedbackTextArea?.color || rootStyles.getPropertyValue('--textarea-hint-color').trim() || '#FFFFFF',
+      backgroundColor: config.feedbackTextArea?.backgroundColor || rootStyles.getPropertyValue('--textarea-hint-bg').trim() || 'transparent',
+      borderColor: config.feedbackTextArea?.borderColor || rootStyles.getPropertyValue('--textarea-hint-border').trim() || '#FFFFFF'
     };
   });
   
@@ -91,10 +261,64 @@ const NumberPadPanelComponent = React.memo((props) => {
       // Fallback: Call the PageConfig handler directly
       console.log('🔄 [NumberPad] Using fallback number click handler');
       
-      // Play click sound for number pad
-      if (typeof window !== 'undefined' && window.playCarClickSound) {
+      // Play click sound for number pad (if enabled)
+      if (config.enableClickSound !== false && typeof window !== 'undefined' && window.playCarClickSound) {
         window.playCarClickSound('numberpad');
       }
+      
+      // If last check was incorrect, set destination cell mode to 'focus' when user starts typing again
+      if (lastCheckWasIncorrect) {
+        const destinations = config.destinations || [];
+        const currentDestination = destinations[currentDestinationIndex];
+        if (currentDestination?.destinationId) {
+          updateDestinationCellMode(currentDestination.destinationId, 'focus');
+          setLastCheckWasIncorrect(false); // Reset the flag
+          console.log(`🎯 [NumberPad] Set destination cell to focus mode after incorrect check`);
+        }
+      }
+      
+      // Update input value with the number based on input mode (clear feedback message)
+      setFeedbackMessage(''); // Clear any feedback message when user starts typing
+      
+      const inputMode = config.inputMode || 'append';
+      const maxNumber = config.maxNumber;
+      
+      // Check maxNumber limit in append mode
+      if (inputMode === 'append' && maxNumber !== null && maxNumber !== undefined) {
+        const currentText = typeof inputValue === 'string' ? inputValue : '';
+        const newText = currentText + number.toString();
+        const newNumber = parseFloat(newText);
+        
+        // Check if the new number would exceed maxNumber
+        if (!isNaN(newNumber) && newNumber > maxNumber) {
+          console.log(`⚠️ [NumberPad] Number ${newNumber} exceeds maxNumber ${maxNumber}, preventing input`);
+          
+          // Play wrong sound
+          if (typeof window !== 'undefined' && window.playAnswerSound) {
+            window.playAnswerSound(false);
+          }
+          
+          // Don't update input value
+          return;
+        }
+      }
+      
+      setInputValue(prev => {
+        const currentText = typeof prev === 'string' ? prev : '';
+        let newText;
+        
+        if (inputMode === 'replace') {
+          // Replace mode: each click replaces the current text
+          newText = number.toString();
+          console.log(`📝 [NumberPad] Replace mode: "${currentText}" -> "${newText}"`);
+        } else {
+          // Append mode: each click appends to the existing text (default)
+          newText = currentText + number.toString();
+          console.log(`📝 [NumberPad] Append mode: "${currentText}" -> "${newText}"`);
+        }
+        
+        return newText;
+      });
       
              // Update the answer state - simplified without state management
        if (typeof window !== 'undefined') {
@@ -145,7 +369,7 @@ const NumberPadPanelComponent = React.memo((props) => {
     }
   };
   
-  // Handle check button click - Simplified to only check minuend
+  // Handle check button click - Compare entered value with correctValue prop
   const handleCheckClick = () => {
     console.log('🔄 [NumberPad] Check button clicked');
     
@@ -154,129 +378,210 @@ const NumberPadPanelComponent = React.memo((props) => {
     } else if (config?.onCheckClick) {
       config.onCheckClick();
     } else {
-      // Fallback: Use simplified minuend-only check logic
-      console.log('🔄 [NumberPad] Using simplified minuend-only check logic');
+      // Fallback: Compare entered value with correctValue prop
+      console.log('🔄 [NumberPad] Using correctValue comparison logic');
       
       // Play click sound
       if (typeof window !== 'undefined' && window.playCarClickSound) {
         window.playCarClickSound('check');
       }
       
-      // Get user answer from DOM or use a simple approach
-      const answerContainer = document.querySelector('[data-element-name="answer-container-page2"]');
-      let userAnswer = 0;
+      // Get user's entered value from input value (not feedback message)
+      const userEnteredValue = inputValue?.trim() || '';
       
-      // Try to extract the number from the answer container
-      if (answerContainer) {
-        const textContent = answerContainer.textContent || answerContainer.innerHTML;
-        const numberMatch = textContent.match(/\d+/);
-        if (numberMatch) {
-          userAnswer = parseInt(numberMatch[0]);
-        }
+      // Get current destination from destinations array
+      const destinations = config.destinations || [];
+      if (destinations.length === 0) {
+        console.warn('⚠️ [NumberPad] No destinations configured, skipping validation');
+        return;
       }
       
-      console.log(`🔍 [NumberPad Debug] Final userAnswer: ${userAnswer}`);
+      const currentDestination = destinations[currentDestinationIndex];
+      if (!currentDestination) {
+        console.warn(`⚠️ [NumberPad] No destination at index ${currentDestinationIndex}, skipping validation`);
+        return;
+      }
       
-      // Get current question to check against minuend
-      const currentIndex = typeof window !== 'undefined' && window.currentQuestionIndex !== undefined 
-        ? window.currentQuestionIndex : 0;
-      const currentQuestion = { minuend: 5, subtrahend: 3, missing: 'subtrahend' };
+      const correctValue = currentDestination.correctValue;
+      const correctFeedback = currentDestination.correctFeedback || (typeof i18n !== 'undefined' ? i18n.t('numberPad.feedback.correct') : 'Correct! Well done!');
+      const incorrectFeedback = currentDestination.incorrectFeedback || (typeof i18n !== 'undefined' ? i18n.t('numberPad.feedback.incorrect') : 'Incorrect. Please try again.');
       
-      // Expected answer is always the minuend (total number of objects)
-      const expectedAnswer = currentQuestion.minuend;
+      console.log(`🔍 [NumberPad] User entered: "${userEnteredValue}" (type: ${typeof userEnteredValue})`);
+      console.log(`🔍 [NumberPad] Current destination index: ${currentDestinationIndex}`);
+      console.log(`🔍 [NumberPad] Correct value: ${correctValue} (type: ${typeof correctValue})`);
       
-      console.log(`🔄 [NumberPad] User answer: ${userAnswer} (type: ${typeof userAnswer}), Expected minuend: ${expectedAnswer} (type: ${typeof expectedAnswer})`);
-      console.log(`🔍 [NumberPad Debug] Current question:`, currentQuestion);
-      console.log(`🔍 [NumberPad Debug] Current question index: ${currentIndex}`);
-      console.log(`🔍 [NumberPad Debug] Comparison: ${userAnswer} === ${expectedAnswer} ? ${userAnswer === expectedAnswer}`);
+      // If no correctValue is set, skip validation
+      if (correctValue === null || correctValue === undefined) {
+        console.warn(`⚠️ [NumberPad] No correctValue configured for destination at index ${currentDestinationIndex}, skipping validation`);
+        return;
+      }
       
-      if (userAnswer < expectedAnswer) {
-        // Smaller number
+      // If user hasn't entered anything, show error
+      if (!userEnteredValue) {
         const feedbackText = typeof i18n !== 'undefined' ? 
-          i18n.t('subtraction.page2.feedback.smaller') : 
-          `Oops! Smaller number… Count the total number of objects, whether crossed or not…`;
-        console.log('❌ [NumberPad] Number too small');
+          i18n.t('numberPad.feedback.empty') : 
+          'Please enter a value';
+        console.log('❌ [NumberPad] No value entered');
         
         // Play error sound
         if (typeof window !== 'undefined' && window.playAnswerSound) {
           window.playAnswerSound(false);
         }
         
-        // Update feedback in number pad text area using new system
-        if (typeof window !== 'undefined' && window.updateNumberPadFeedback) {
+        // Update feedback in number pad text area only if feedbackMode is 'feedback'
+        const feedbackMode = config.feedbackMode || 'feedback';
+        if (feedbackMode === 'feedback' && typeof window !== 'undefined' && window.updateNumberPadFeedback) {
           window.updateNumberPadFeedback(feedbackText, 'incorrect');
         }
         
-        // Update feedback directly - state management removed
-        console.log('❌ [NumberPad] Feedback updated - state management removed');
-        
-      } else if (userAnswer > expectedAnswer) {
-        // Bigger number
-        const feedbackText = typeof i18n !== 'undefined' ? 
-          i18n.t('subtraction.page2.feedback.bigger') : 
-          `Oops! Larger number… Count the total number of objects, whether crossed or not…`;
-        console.log('❌ [NumberPad] Number too big');
-        
-        // Play error sound
-        if (typeof window !== 'undefined' && window.playAnswerSound) {
-          window.playAnswerSound(false);
+        // Update external feedback component
+        const feedbackComponentId = config.feedbackComponentId || elementProps?.feedbackComponentId;
+        if (feedbackComponentId) {
+          try {
+            const pageMatch = feedbackComponentId.match(/page(\d+)/);
+            const pageId = pageMatch ? `page${pageMatch[1]}` : null;
+            
+            if (pageId) {
+              const feedbackStateKey = `${pageId}FeedbackState`;
+              const feedbackEventName = `${pageId}FeedbackUpdate`;
+              
+              if (!window[feedbackStateKey]) {
+                window[feedbackStateKey] = { text: '', mode: 'normal' };
+              }
+              
+              window[feedbackStateKey].text = feedbackText;
+              window[feedbackStateKey].mode = 'incorrect';
+              
+              window.dispatchEvent(new CustomEvent(feedbackEventName, {
+                detail: { text: feedbackText, mode: 'incorrect' }
+              }));
+              
+              console.log(`✅ [NumberPad] Updated external feedback component ${feedbackComponentId}:`, { text: feedbackText, mode: 'incorrect' });
+            }
+          } catch (error) {
+            console.error(`❌ [NumberPad] Error updating external feedback component:`, error);
+          }
         }
         
-        // Update feedback in number pad text area using new system
-        if (typeof window !== 'undefined' && window.updateNumberPadFeedback) {
-          window.updateNumberPadFeedback(feedbackText, 'incorrect');
-        }
-        
-        // Update feedback directly - state management removed
-        console.log('❌ [NumberPad] Feedback updated - state management removed');
-        
+        return;
+      }
+      
+      // Compare values (handle both string and number comparisons)
+      let isCorrect = false;
+      
+      // Try numeric comparison first
+      const userNum = parseFloat(userEnteredValue);
+      const correctNum = parseFloat(correctValue);
+      
+      if (!isNaN(userNum) && !isNaN(correctNum)) {
+        // Both are numbers - compare numerically
+        isCorrect = userNum === correctNum;
+        console.log(`🔍 [NumberPad] Numeric comparison: ${userNum} === ${correctNum} ? ${isCorrect}`);
       } else {
-        // Correct answer - user entered the minuend correctly
-        const feedbackText = typeof i18n !== 'undefined' ? 
-          i18n.t('subtraction.page2.feedback.correct', { minuend: expectedAnswer }) : 
-          `Well Done! There are ${expectedAnswer} objects in the picture… Now how many are crossed?`;
-        console.log('✅ [NumberPad] Correct answer - minuend entered correctly!');
+        // String comparison (case-insensitive, trimmed)
+        isCorrect = String(userEnteredValue).trim().toLowerCase() === String(correctValue).trim().toLowerCase();
+        console.log(`🔍 [NumberPad] String comparison: "${userEnteredValue}" === "${correctValue}" ? ${isCorrect}`);
+      }
+      
+      // Only update feedback message if feedbackMode is 'feedback'
+      const feedbackMode = config.feedbackMode || 'feedback';
+      
+      // Helper function to update external feedback component
+      const updateExternalFeedback = (text, mode) => {
+        const feedbackComponentId = config.feedbackComponentId || elementProps?.feedbackComponentId;
+        if (feedbackComponentId) {
+          try {
+            // Extract page number from feedbackComponentId (e.g., 'page2-feedback-textbox' -> 'page2')
+            const pageMatch = feedbackComponentId.match(/page(\d+)/);
+            const pageId = pageMatch ? `page${pageMatch[1]}` : null;
+            
+            if (pageId) {
+              // Use the same pattern as FillBlanksComponent - update global state and dispatch event
+              const feedbackStateKey = `${pageId}FeedbackState`;
+              const feedbackEventName = `${pageId}FeedbackUpdate`;
+              
+              // Initialize or update global feedback state
+              if (!window[feedbackStateKey]) {
+                window[feedbackStateKey] = {
+                  text: '',
+                  mode: 'normal'
+                };
+              }
+              
+              window[feedbackStateKey].text = text;
+              window[feedbackStateKey].mode = mode;
+              
+              // Dispatch custom event to notify feedback textbox
+              window.dispatchEvent(new CustomEvent(feedbackEventName, {
+                detail: {
+                  text: text,
+                  mode: mode
+                }
+              }));
+              
+              console.log(`✅ [NumberPad] Updated external feedback component ${feedbackComponentId}:`, { text, mode });
+            } else {
+              console.warn(`⚠️ [NumberPad] Could not extract page number from feedbackComponentId: ${feedbackComponentId}`);
+            }
+          } catch (error) {
+            console.error(`❌ [NumberPad] Error updating external feedback component:`, error);
+          }
+        }
+      };
+      
+      if (isCorrect) {
+        // Correct answer
+        console.log('✅ [NumberPad] Correct answer!');
+        
+        // Reset incorrect flag
+        setLastCheckWasIncorrect(false);
         
         // Play success sound
         if (typeof window !== 'undefined' && window.playAnswerSound) {
           window.playAnswerSound(true);
         }
         
-        // Update feedback in number pad text area using new system
-        if (typeof window !== 'undefined' && window.updateNumberPadFeedback) {
-          window.updateNumberPadFeedback(feedbackText, 'correct');
+        // Update feedback in number pad text area only if feedbackMode is 'feedback'
+        if (feedbackMode === 'feedback' && typeof window !== 'undefined' && window.updateNumberPadFeedback) {
+          window.updateNumberPadFeedback(correctFeedback, 'correct');
         }
         
-        // Update feedback directly - state management removed
-        console.log('✅ [NumberPad] Correct answer - state management removed');
+        // Update external feedback component
+        updateExternalFeedback(correctFeedback, 'correct');
         
-        // Hide step 2 and step 3, show step 4
-        const step2Element = document.querySelector('[data-element-name="step2-instruction"]');
-        const step3Element = document.querySelector('[data-element-name="step3-page2"]');
-        const step4Element = document.querySelector('[data-element-name="step4-page2"]');
-        if (step2Element) {
-          step2Element.classList.add('hidden');
-          console.log('✅ [NumberPad] Step 2 hidden');
+        // Update destination cell mode to 'correct'
+        updateDestinationCellMode(currentDestination.destinationId, 'correct');
+        
+        // Move to next destination if available
+        if (currentDestinationIndex < destinations.length - 1) {
+          setCurrentDestinationIndex(prev => prev + 1);
+          setInputValue(''); // Clear input for next destination
+          console.log(`➡️ [NumberPad] Moving to next destination: index ${currentDestinationIndex + 1}`);
+        } else {
+          console.log(`✅ [NumberPad] All destinations completed!`);
         }
-        if (step3Element) {
-          step3Element.classList.add('hidden');
-          console.log('✅ [NumberPad] Step 3 hidden');
-        }
-        if (step4Element) {
-          step4Element.classList.remove('hidden');
-          step4Element.classList.add('visible');
-          console.log('✅ [NumberPad] Step 4 shown');
+      } else {
+        // Incorrect answer
+        console.log('❌ [NumberPad] Incorrect answer');
+        
+        // Set flag to indicate last check was incorrect
+        setLastCheckWasIncorrect(true);
+        
+        // Play error sound
+        if (typeof window !== 'undefined' && window.playAnswerSound) {
+          window.playAnswerSound(false);
         }
         
-        // Update all UI states directly - state management removed
-        console.log('✅ [NumberPad] All UI states updated directly');
-        
-        // Tap animations are now handled by the store/UI manager
-        
-        // Update button states
-        if (typeof window !== 'undefined' && window.updateButtonStates) {
-          setTimeout(() => window.updateButtonStates(), 100);
+        // Update feedback in number pad text area only if feedbackMode is 'feedback'
+        if (feedbackMode === 'feedback' && typeof window !== 'undefined' && window.updateNumberPadFeedback) {
+          window.updateNumberPadFeedback(incorrectFeedback, 'incorrect');
         }
+        
+        // Update external feedback component
+        updateExternalFeedback(incorrectFeedback, 'incorrect');
+        
+        // Update destination cell mode to 'incorrect'
+        updateDestinationCellMode(currentDestination.destinationId, 'incorrect');
       }
     }
   };
@@ -403,33 +708,149 @@ const NumberPadPanelComponent = React.memo((props) => {
   });
   
   
-  // 2. Text area (35% of height - extended from 26% + 9% from removed hint button) - use GridCellFontUtils for consistency
+  // 2. Text area - use configurable height percentage
+  const feedbackRowHeight = config.feedbackRowHeight || '35%';
+  
+  // Extract color-related props from feedbackTextArea to avoid conflicts
+  const { defaultText, color: configColor, backgroundColor: configBgColor, borderColor: configBorderColor, ...feedbackTextAreaProps } = config.feedbackTextArea || {};
+  
   const textAreaStyle = typeof GridCellFontUtils !== 'undefined' && GridCellFontUtils.processGcStyles
     ? GridCellFontUtils.processGcStyles({
-        ...config.feedbackTextArea,
+        ...feedbackTextAreaProps,
         width: '100%',
-        height: '35%',
+        height: feedbackRowHeight,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: '3%',
-        ...textAreaColors
+        // Use textAreaColors state (which includes config colors if provided)
+        color: textAreaColors.color,
+        backgroundColor: textAreaColors.backgroundColor,
+        borderColor: textAreaColors.borderColor
       })
     : processStyle({
-        ...config.feedbackTextArea,
+        ...feedbackTextAreaProps,
         width: '100%',
-        height: '35%',
+        height: feedbackRowHeight,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         marginBottom: '3%',
-        ...textAreaColors
+        // Use textAreaColors state (which includes config colors if provided)
+        color: textAreaColors.color,
+        backgroundColor: textAreaColors.backgroundColor,
+        borderColor: textAreaColors.borderColor
       });
   
-  // Get text area content from React state only
+  // Get text area content - show feedback message if present, otherwise show default text
+  // Never show input value in feedback area
   const getTextAreaContent = () => {
-    return textAreaContent;
+    if (feedbackMessage) {
+      return feedbackMessage;
+    }
+    // Show default text when there's no feedback message
+    return defaultFeedbackText;
   };
+  
+  // Helper function to update destination element text when number pad input changes
+  const updateDestinationText = React.useCallback((text) => {
+    const destinations = config.destinations || [];
+    if (destinations.length === 0) {
+      console.warn(`⚠️ [NumberPad] No destinations configured`);
+      return;
+    }
+    
+    const currentDestination = destinations[currentDestinationIndex];
+    if (!currentDestination) {
+      console.warn(`⚠️ [NumberPad] No destination at index ${currentDestinationIndex}`);
+      return;
+    }
+    
+    const destId = currentDestination.destinationId;
+    console.log(`🔍 [NumberPad] updateDestinationText called:`, { 
+      text, 
+      destinationIndex: currentDestinationIndex,
+      destinationId: destId,
+      totalDestinations: destinations.length
+    });
+    
+    if (destId) {
+      try {
+        // Extract table component ID and cell key from destinationId
+        // Format: 'page2-map-table-R1C1' -> componentId: 'page2-map-table', cellKey: '0-0' (row 1 = index 0, col 1 = index 0)
+        const cellIdMatch = destId.match(/^(.+?)-R(\d+)C(\d+)$/);
+        if (cellIdMatch) {
+          const tableComponentId = cellIdMatch[1];
+          const rowNum = parseInt(cellIdMatch[2], 10);
+          const colNum = parseInt(cellIdMatch[3], 10);
+          
+          // Convert cell ID format to cellKey format (R1C1 -> '0-0' for data rows, R0C0 -> 'header-0' for headers)
+          let cellKey;
+          if (rowNum === 0) {
+            // Header row
+            cellKey = `header-${colNum}`;
+          } else {
+            // Data row (rowNum is 1-indexed, cellKey is 0-indexed)
+            cellKey = `${rowNum - 1}-${colNum}`;
+          }
+          
+          console.log(`🔍 [NumberPad] Extracted table info:`, { 
+            tableComponentId, 
+            rowNum, 
+            colNum, 
+            cellKey 
+          });
+          
+          // Use table component's callback to update cell text via React state
+          // Add retry mechanism in case callback isn't ready yet
+          const maxRetries = 10;
+          const retryDelay = 50; // ms
+          
+          const tryUpdateCell = (attempt = 0) => {
+            if (typeof window !== 'undefined' && window.tableGridCallbacks && window.tableGridCallbacks[tableComponentId]) {
+              try {
+                window.tableGridCallbacks[tableComponentId](cellKey, { text });
+                console.log(`✅ [NumberPad] Updated cell text via table callback: ${cellKey} -> "${text}"`);
+                return true; // Success
+              } catch (error) {
+                console.error(`❌ [NumberPad] Error calling table callback:`, error);
+                return false; // Failed
+              }
+            }
+            return false; // Callback not available
+          };
+          
+          // Try immediate update
+          if (!tryUpdateCell(0)) {
+            // Callback not ready - retry with delay
+            console.warn(`⚠️ [NumberPad] Table callback not ready for ${tableComponentId}, retrying...`);
+            let retryCount = 0;
+            const retryInterval = setInterval(() => {
+              retryCount++;
+              if (tryUpdateCell(retryCount)) {
+                clearInterval(retryInterval);
+              } else if (retryCount >= maxRetries) {
+                clearInterval(retryInterval);
+                console.error(`❌ [NumberPad] Max retries reached. Table callback for ${tableComponentId} not available.`);
+              }
+            }, retryDelay);
+          }
+        } else {
+          console.warn(`⚠️ [NumberPad] Could not parse destinationId format: ${destId}. Expected format: 'componentId-R<row>C<col>'`);
+        }
+      } catch (error) {
+        console.error(`❌ [NumberPad] Error updating destination ${destId}:`, error);
+      }
+    } else {
+      console.warn(`⚠️ [NumberPad] No destinationId in destination at index ${currentDestinationIndex}`);
+    }
+  }, [config.destinations, currentDestinationIndex]);
+  
+  // Update destination element whenever input value changes (not feedback message)
+  React.useEffect(() => {
+    console.log(`🔄 [NumberPad] inputValue changed:`, inputValue);
+    updateDestinationText(inputValue);
+  }, [inputValue, updateDestinationText]);
 
 
   // Store subscription removed - using React state only
@@ -445,9 +866,11 @@ const NumberPadPanelComponent = React.memo((props) => {
   // Expose methods to update text area from external code
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
+      const componentId = elementName || elementProps?.id || `numberpad-${currentPage}`;
+      
       // Function to update feedback in the text area
       window.updateNumberPadFeedback = (message, type = 'default') => {
-        setTextAreaContent(message);
+        setFeedbackMessage(message);
         
         // Get CSS variables for consistent styling
         const rootStyles = getComputedStyle(document.documentElement);
@@ -487,7 +910,8 @@ const NumberPadPanelComponent = React.memo((props) => {
       
       // Function to clear feedback
       window.clearNumberPadFeedback = () => {
-        setTextAreaContent('');
+        setFeedbackMessage('');
+        setInputValue('');
         const rootStyles = getComputedStyle(document.documentElement);
         setTextAreaColors({ 
           color: rootStyles.getPropertyValue('--textarea-hint-color').trim() || '#FFFFFF',
@@ -499,15 +923,24 @@ const NumberPadPanelComponent = React.memo((props) => {
     
     return () => {
       if (typeof window !== 'undefined') {
+        const componentId = elementName || elementProps?.id || `numberpad-${currentPage}`;
         delete window.updateNumberPadFeedback;
         delete window.clearNumberPadFeedback;
       }
     };
-  }, []);
+  }, [elementName, currentPage, elementProps?.id]);
   
-  // 3. Number pad (51% of height) - use customizable button size
+  // 3. Number pad - use configurable height percentage
+  const buttonGridHeight = config.buttonGridHeight || '51%';
   const numberButtons = [];
-  const buttonSize = gcToCSS(config.numberButtons?.buttonSize || '50gc');
+  
+  // Get button size percentages (default to 90% for both)
+  const buttonWidthPercent = config.numberButtons?.buttonWidthPercent || '90%';
+  const buttonHeightPercent = config.numberButtons?.buttonHeightPercent || '90%';
+  
+  // Legacy support: if buttonSize is provided but percentages are not, calculate approximate percentage
+  // This is for backward compatibility
+  const buttonSize = config.numberButtons?.buttonSize ? gcToCSS(config.numberButtons.buttonSize) : null;
   
   console.log('🔢 [NumberPad] Button sizing:', {
     buttonSize: config.numberButtons?.buttonSize,
@@ -523,9 +956,9 @@ const NumberPadPanelComponent = React.memo((props) => {
   
   for (let i = 0; i <= 9; i++) {
     // Extract only button-specific properties, excluding grid properties and size properties
-    const { rowGap, columnGap, buttonSize: configButtonSize, width, height, ...buttonProps } = config.numberButtons;
+    const { rowGap, columnGap, buttonSize: configButtonSize, buttonWidthPercent: btnWidthPct, buttonHeightPercent: btnHeightPct, width, height, ...buttonProps } = config.numberButtons;
     
-    // Use GridCellFontUtils for consistent styling
+    // Use percentage-based sizing relative to grid cell
     const buttonStyle = typeof GridCellFontUtils !== 'undefined' && GridCellFontUtils.processGcStyles
       ? GridCellFontUtils.processGcStyles({
           ...buttonProps,
@@ -534,8 +967,8 @@ const NumberPadPanelComponent = React.memo((props) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: buttonSize,
-          height: buttonSize
+          width: buttonWidthPercent,
+          height: buttonHeightPercent
         })
       : processStyle({
           ...buttonProps,
@@ -544,8 +977,8 @@ const NumberPadPanelComponent = React.memo((props) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          width: buttonSize,
-          height: buttonSize
+          width: buttonWidthPercent,
+          height: buttonHeightPercent
         });
     
     if (i === 0) { // Only log for first button to avoid spam
@@ -569,13 +1002,243 @@ const NumberPadPanelComponent = React.memo((props) => {
     );
   }
   
-  // Layout the number pad in a 3x4 grid (calculator layout)
-  const keypadLayout = [1, 2, 3, 4, 5, 6, 7, 8, 9, null, 0, null];
-  const gridButtons = keypadLayout.map((num, index) => {
-    if (num === null) {
-      return React.createElement('div', { key: `empty-${index}` }); // Empty cell
+  // Determine layout type
+  const layoutType = config.layout || 'vertical';
+  const buttonConfig = config.buttonConfig || 1;
+  
+  // Define button configurations
+  // All configs: 0 and . are always in the middle column (column 2 of 3)
+  // Config 1: Numbers 0-9, 4 rows × 3 cols, 0 in last row middle
+  // Config 2: Numbers 0-9 + C + ⌫, 4 rows × 3 cols, 0 in last row middle
+  // Config 3: Numbers 0-9 + + - . + C + ⌫, 5 rows × 3 cols, 0 and . in middle column
+  // Config 4: Numbers 0-9 + × ÷ . + C + ⌫, 5 rows × 3 cols, 0 and . in middle column
+  const getButtonLayout = (configNum) => {
+    switch(configNum) {
+      case 1:
+        // Numbers only: 1,2,3 / 4,5,6 / 7,8,9 / null,0,null
+        // 0 is at index 10 (row 4, column 2 - middle) ✓
+        return [1, 2, 3, 4, 5, 6, 7, 8, 9, null, 0, null];
+      case 2:
+        // Numbers + C + ⌫: 1,2,3 / 4,5,6 / 7,8,9 / C,0,⌫
+        // 0 is at index 10 (row 4, column 2 - middle) ✓
+        return [1, 2, 3, 4, 5, 6, 7, 8, 9, 'C', 0, '⌫'];
+      case 3:
+        // Numbers + + - . + C + ⌫: 1,2,3 / 4,5,6 / 7,8,9 / +,0,- / C,.,⌫
+        // 0 is at index 10 (row 4, column 2 - middle) ✓
+        // . is at index 13 (row 5, column 2 - middle) ✓
+        return [1, 2, 3, 4, 5, 6, 7, 8, 9, '+', 0, '-', 'C', '.', '⌫'];
+      case 4:
+        // Numbers + × ÷ . + C + ⌫: 1,2,3 / 4,5,6 / 7,8,9 / ×,0,÷ / C,.,⌫
+        // 0 is at index 10 (row 4, column 2 - middle) ✓
+        // . is at index 13 (row 5, column 2 - middle) ✓
+        return [1, 2, 3, 4, 5, 6, 7, 8, 9, '\u00D7', 0, '\u00F7', 'C', '.', '⌫'];
+      default:
+        return [1, 2, 3, 4, 5, 6, 7, 8, 9, null, 0, null];
     }
-    return numberButtons[num];
+  };
+  
+  const keypadLayout = getButtonLayout(buttonConfig);
+  
+  // Determine number of rows based on button config
+  const getGridRows = (configNum) => {
+    switch(configNum) {
+      case 1:
+      case 2:
+        return 4; // 4 rows × 3 cols
+      case 3:
+      case 4:
+        return 5; // 5 rows × 3 cols
+      default:
+        return 4;
+    }
+  };
+  
+  const gridRows = getGridRows(buttonConfig);
+  
+  // Create operator buttons (+, -, ×, ÷, .)
+  const createOperatorButton = (operator, index) => {
+    const { rowGap, columnGap, buttonSize: configButtonSize, buttonWidthPercent: btnWidthPct, buttonHeightPercent: btnHeightPct, width, height, ...buttonProps } = config.numberButtons;
+    
+    const buttonWidthPercent = btnWidthPct || config.numberButtons?.buttonWidthPercent || '90%';
+    const buttonHeightPercent = btnHeightPct || config.numberButtons?.buttonHeightPercent || '90%';
+    
+    // Use percentage-based sizing relative to grid cell
+    const buttonStyle = typeof GridCellFontUtils !== 'undefined' && GridCellFontUtils.processGcStyles
+      ? GridCellFontUtils.processGcStyles({
+          ...buttonProps,
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: buttonWidthPercent,
+          height: buttonHeightPercent
+        })
+      : processStyle({
+          ...buttonProps,
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: buttonWidthPercent,
+          height: buttonHeightPercent
+        });
+    
+    const handleOperatorClick = () => {
+      console.log(`🔢 [NumberPad] Operator ${operator} clicked`);
+      
+      // Play click sound (if enabled)
+      if (config.enableClickSound !== false && typeof window !== 'undefined' && window.playCarClickSound) {
+        window.playCarClickSound('numberpad');
+      }
+      
+      if (elementProps?.onOperatorClick) {
+        elementProps.onOperatorClick(operator);
+      } else {
+        // Default behavior: append operator to text area
+        setFeedbackMessage(''); // Clear any feedback message when user starts typing
+        setInputValue(prev => {
+          const currentText = typeof prev === 'string' ? prev : '';
+          const inputMode = config.inputMode || 'append';
+          
+          // Operators typically append even in replace mode (for expressions like "5+3")
+          // But if replace mode is active and there's no existing content, just set the operator
+          if (inputMode === 'replace' && currentText === '') {
+            return operator;
+          } else {
+            // Append mode or replace mode with existing content - append operator
+            return currentText + operator;
+          }
+        });
+      }
+    };
+    
+    return React.createElement('button', {
+      key: `operator-${operator}-${index}`,
+      className: `number-pad-button operator-${operator}`,
+      style: buttonStyle,
+      onClick: handleOperatorClick,
+      onMouseOver: (e) => {
+        e.target.classList.add('hovered');
+      },
+      onMouseOut: (e) => {
+        e.target.classList.remove('hovered');
+      },
+      'data-operator': operator
+    }, operator);
+  };
+  
+  // Create clear and backspace buttons if needed
+  const createActionButton = (label, action, index) => {
+    const { rowGap, columnGap, buttonSize: configButtonSize, buttonWidthPercent: btnWidthPct, buttonHeightPercent: btnHeightPct, width, height, ...buttonProps } = config.numberButtons;
+    
+    // Use percentage-based sizing relative to grid cell
+    const buttonStyle = typeof GridCellFontUtils !== 'undefined' && GridCellFontUtils.processGcStyles
+      ? GridCellFontUtils.processGcStyles({
+          ...buttonProps,
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: buttonWidthPercent,
+          height: buttonHeightPercent
+        })
+      : processStyle({
+          ...buttonProps,
+          cursor: 'pointer',
+          transition: 'all 0.2s ease',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: buttonWidthPercent,
+          height: buttonHeightPercent
+        });
+    
+    return React.createElement('button', {
+      key: `action-${label}-${index}`,
+      className: `number-pad-button action-${label}`,
+      style: buttonStyle,
+      onClick: action,
+      onMouseOver: (e) => {
+        e.target.classList.add('hovered');
+      },
+      onMouseOut: (e) => {
+        e.target.classList.remove('hovered');
+      },
+      'data-action': label
+    }, label);
+  };
+  
+  const gridButtons = keypadLayout.map((item, index) => {
+    // Handle null/empty cells - create empty placeholder div to maintain grid structure
+    if (item === null || item === undefined) {
+      return React.createElement('div', {
+        key: `empty-${index}`,
+        style: { display: 'block' } // Empty div to maintain grid cell
+      });
+    }
+    
+    // Handle numbers
+    if (typeof item === 'number') {
+      return numberButtons[item];
+    }
+    
+    // Handle operators
+    if (item === '+' || item === '-' || item === '\u00D7' || item === '\u00F7' || item === '.') {
+      return createOperatorButton(item, index);
+    }
+    
+    // Handle Clear button
+    if (item === 'C') {
+      return createActionButton('C', () => {
+        console.log('🔢 [NumberPad] Clear button clicked');
+        
+        // Play click sound (if enabled)
+        if (config.enableClickSound !== false && typeof window !== 'undefined' && window.playCarClickSound) {
+          window.playCarClickSound('numberpad');
+        }
+        
+        if (elementProps?.onClear) {
+          elementProps.onClear();
+        } else {
+          setFeedbackMessage(''); // Clear feedback when clearing input
+          setInputValue('');
+        }
+      }, index);
+    }
+    
+    // Handle Backspace button
+    if (item === '⌫') {
+      return createActionButton('⌫', () => {
+        console.log('🔢 [NumberPad] Backspace button clicked');
+        
+        // Play click sound (if enabled)
+        if (config.enableClickSound !== false && typeof window !== 'undefined' && window.playCarClickSound) {
+          window.playCarClickSound('numberpad');
+        }
+        
+        if (elementProps?.onBackspace) {
+          elementProps.onBackspace();
+        } else {
+          // Remove last character from text area
+          setFeedbackMessage(''); // Clear feedback when backspacing
+          setInputValue(prev => {
+            if (typeof prev === 'string' && prev.length > 0) {
+              return prev.slice(0, -1);
+            }
+            return prev;
+          });
+        }
+      }, index);
+    }
+    
+    // Fallback: return empty div
+    return React.createElement('div', {
+      key: `fallback-${index}`,
+      style: { display: 'block' }
+    });
   });
   
   const rowGapValue = gcToCSS(config.numberButtons?.rowGap || config.numberButtons?.margin || '3gc');
@@ -592,13 +1255,20 @@ const NumberPadPanelComponent = React.memo((props) => {
   
   console.log('🔢 [NumberPad] Full config.numberButtons:', config.numberButtons);
   
+  // Calculate rows for horizontal layout (count non-null items)
+  const nonNullItems = keypadLayout.filter(item => item !== null && item !== undefined).length;
+  const horizontalRows = Math.ceil(nonNullItems / 4);
+  
   const gridStyle = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
+    gridTemplateColumns: layoutType === 'horizontal' ? 'repeat(4, 1fr)' : 'repeat(3, 1fr)',  // 4 cols (horizontal) or 3 cols (vertical)
+    gridTemplateRows: layoutType === 'horizontal' 
+      ? `repeat(${horizontalRows}, 1fr)`  // Calculate rows for horizontal layout
+      : `repeat(${gridRows}, 1fr)`,     // Dynamic rows based on buttonConfig for vertical layout
     rowGap: rowGapValue,
     columnGap: columnGapValue,
     width: '100%',
-    height: '51%',
+    height: buttonGridHeight,
     alignItems: 'center',
     justifyItems: 'center',
     marginBottom: '3%'
@@ -611,14 +1281,15 @@ const NumberPadPanelComponent = React.memo((props) => {
     style: gridStyle
   }, ...gridButtons);
   
-  // 4. Check button (10% of height) - use GridCellFontUtils for consistency
+  // 4. Check button - use configurable height percentage
+  const checkButtonHeight = config.checkButtonHeight || '10%';
   const checkButtonStyle = typeof GridCellFontUtils !== 'undefined' && GridCellFontUtils.processGcStyles
     ? GridCellFontUtils.processGcStyles({
         ...config.checkButton,
         cursor: 'pointer',
         transition: 'all 0.2s ease',
         width: '100%',
-        height: '10%',
+        height: checkButtonHeight,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
@@ -628,7 +1299,7 @@ const NumberPadPanelComponent = React.memo((props) => {
         cursor: 'pointer',
         transition: 'all 0.2s ease',
         width: '100%',
-        height: '10%',
+        height: checkButtonHeight,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
@@ -647,7 +1318,7 @@ const NumberPadPanelComponent = React.memo((props) => {
     },
     'data-action': 'check'
   }, config.checkButton?.text || 
-    (typeof i18n !== 'undefined' ? i18n.t('dialogs.numberPad.check') : 'CHECK'));
+    (typeof i18n !== 'undefined' ? i18n.t('buttons.check') : 'CHECK'));
   
   // Main container with proper grid positioning
   const containerStyle = {
@@ -668,9 +1339,9 @@ const NumberPadPanelComponent = React.memo((props) => {
   
   // Layout order: text area -> number pad -> check button (hint button removed)
   const children = [
-    textArea,      // 35% height (extended from 26% + 9% from removed hint button)
-    numberPadGrid, // 51% height
-    checkButton    // 10% height
+    textArea,      // Configurable height (default: 35%)
+    numberPadGrid, // Configurable height (default: 51%)
+    checkButton    // Configurable height (default: 10%)
   ];
   
   return React.createElement('div', {
@@ -693,6 +1364,18 @@ const NumberPadElement = {
       borderRadius: '15gc',
       border: '4px solid #D2691E',
       padding: '20gc',
+      layout: 'vertical',            // Layout type: 'vertical' (4 rows, 3 cols) or 'horizontal' (3 rows, 4 cols)
+      buttonConfig: 1,               // Button configuration: 1 (numbers only), 2 (numbers + C + ⌫), 3 (numbers + + - . + C + ⌫), 4 (numbers + × ÷ . + C + ⌫)
+      enableClickSound: true,        // Enable click sound for number pad buttons (default: true)
+      inputMode: 'append',           // Input mode: 'replace' (each click replaces text) or 'append' (each click appends to text)
+      maxNumber: null,               // Maximum number allowed in append mode (if exceeded, plays wrong sound and prevents input)
+      feedbackMode: 'feedback',       // Feedback mode: 'instruction' (text doesn't change on check) or 'feedback' (text changes on check)
+      feedbackComponentId: null,     // ID of external feedback component to update when check is pressed (e.g., 'page2-feedback-textbox')
+      destinations: [],              // Array of destination objects: [{destinationId, correctValue, correctFeedback, incorrectFeedback}, ...]
+      destinationIndex: 0,           // Current index in destinations array (starts at 0)
+      feedbackRowHeight: '35%',      // Height percentage for feedback text area
+      buttonGridHeight: '51%',       // Height percentage for number pad grid
+      checkButtonHeight: '10%',      // Height percentage for check button
       
       showButton: {
         backgroundColor: '#FFD700',
@@ -706,7 +1389,9 @@ const NumberPadElement = {
         backgroundColor: '#FFD700',
         color: '#000000',
         fontSize: '45gc',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        buttonWidthPercent: '90%',  // Width percentage of grid cell
+        buttonHeightPercent: '90%'  // Height percentage of grid cell
       },
       
       checkButton: {

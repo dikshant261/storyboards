@@ -796,49 +796,82 @@ const ConceptSummaryComponent = React.memo((props) => {
   // Listen for updateConceptSummary events
   React.useEffect(() => {
     const handleUpdateConceptSummary = (event) => {
-      console.log('🔍 [ConceptSummary] Received updateConceptSummary event:', event.detail);
+      console.log(
+        "🔍 [ConceptSummary] Received updateConceptSummary event:",
+        event.detail
+      );
       const { pageNumber, keyConcepts, impFormulae } = event.detail;
-      
+
       // Append new data to existing arrays instead of replacing
       if (keyConcepts && keyConcepts.length > 0) {
-        const newConcepts = keyConcepts.map(concept => ({ text: concept, color: '#FFD700' }));
-        console.log('🔍 [ConceptSummary] Appending to factsArray:', newConcepts);
-        setDynamicFactsArray(prevArray => {
-          // Check if concept already exists to avoid duplicates
-          const existingTexts = prevArray.map(item => item.text);
-          const uniqueNewConcepts = newConcepts.filter(concept => !existingTexts.includes(concept.text));
-          const updatedArray = [...prevArray, ...uniqueNewConcepts];
-          console.log('🔍 [ConceptSummary] Updated factsArray:', updatedArray);
-          return updatedArray;
-        });
-      }
-      
-      if (impFormulae && impFormulae.length > 0) {
-        // Handle both string arrays and object arrays
-        const newFormulae = impFormulae.map(formula => {
-          if (typeof formula === 'string') {
-            return { text: formula, color: '#70ACC7' }; // Default color for backward compatibility
-          } else if (formula && typeof formula === 'object' && formula.text) {
-            return { text: formula.text, color: formula.color || '#70ACC7' }; // Use provided color or default
+        const newConcepts = keyConcepts.map((concept) => {
+          // Handle both string and object formats
+          if (typeof concept === "string") {
+            return { text: concept, color: "#FFD700" };
+          } else if (concept && typeof concept === "object") {
+            return { 
+              text: typeof concept.text === "string" ? concept.text : String(concept.text || ""), 
+              color: concept.color || "#FFD700" 
+            };
           }
           return null;
         }).filter(Boolean);
-        console.log('🔍 [ConceptSummary] Appending to valueArray:', newFormulae);
-        setDynamicValueArray(prevArray => {
+        console.log(
+          "🔍 [ConceptSummary] Appending to factsArray:",
+          newConcepts
+        );
+        setDynamicFactsArray((prevArray) => {
+          // Ensure prevArray is an array
+          const safePrevArray = Array.isArray(prevArray) ? prevArray : [];
+          // Check if concept already exists to avoid duplicates
+          const existingTexts = safePrevArray.map((item) => item.text);
+          const uniqueNewConcepts = newConcepts.filter(
+            (concept) => !existingTexts.includes(concept.text)
+          );
+          const updatedArray = [...safePrevArray, ...uniqueNewConcepts];
+          console.log("🔍 [ConceptSummary] Updated factsArray:", updatedArray);
+          return updatedArray;
+        });
+      }
+
+      if (impFormulae && impFormulae.length > 0) {
+        // Handle both string arrays and object arrays
+        const newFormulae = impFormulae
+          .map((formula) => {
+            if (typeof formula === "string") {
+              return { text: formula, color: "#70ACC7" }; // Default color for backward compatibility
+            } else if (formula && typeof formula === "object" && formula.text) {
+              return { text: formula.text, color: formula.color || "#70ACC7" }; // Use provided color or default
+            }
+            return null;
+          })
+          .filter(Boolean);
+        console.log(
+          "🔍 [ConceptSummary] Appending to valueArray:",
+          newFormulae
+        );
+        setDynamicValueArray((prevArray) => {
+          // Ensure prevArray is an array
+          const safePrevArray = Array.isArray(prevArray) ? prevArray : [];
           // Check if formula already exists to avoid duplicates
-          const existingTexts = prevArray.map(item => item.text);
-          const uniqueNewFormulae = newFormulae.filter(formula => !existingTexts.includes(formula.text));
-          const updatedArray = [...prevArray, ...uniqueNewFormulae];
-          console.log('🔍 [ConceptSummary] Updated valueArray:', updatedArray);
+          const existingTexts = safePrevArray.map((item) => item.text);
+          const uniqueNewFormulae = newFormulae.filter(
+            (formula) => !existingTexts.includes(formula.text)
+          );
+          const updatedArray = [...safePrevArray, ...uniqueNewFormulae];
+          console.log("🔍 [ConceptSummary] Updated valueArray:", updatedArray);
           return updatedArray;
         });
       }
     };
 
-    window.addEventListener('updateConceptSummary', handleUpdateConceptSummary);
-    
+    window.addEventListener("updateConceptSummary", handleUpdateConceptSummary);
+
     return () => {
-      window.removeEventListener('updateConceptSummary', handleUpdateConceptSummary);
+      window.removeEventListener(
+        "updateConceptSummary",
+        handleUpdateConceptSummary
+      );
     };
   }, []);
 

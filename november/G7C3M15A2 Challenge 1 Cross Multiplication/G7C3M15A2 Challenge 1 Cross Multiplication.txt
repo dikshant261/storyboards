@@ -1,0 +1,3 @@
+1-> indonesian language still in english.
+
+2-> on page 8 need to show 3 option but now 4 option render, last two option is same.

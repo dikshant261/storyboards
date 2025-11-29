@@ -19,7 +19,10 @@ console.log('🔍 Available components:', {
   NumberPadComponent: !!window.NumberPadComponent,
   TableGridComponent: !!window.TableGridComponent,
   FillBlanksComponent: !!window.FillBlanksComponent,
-  FeedbackTextboxComponent: !!window.FeedbackTextboxComponent
+  FeedbackTextboxComponent: !!window.FeedbackTextboxComponent,
+  TileComponent: !!window.TileComponent,
+  HotspotComponent: !!window.HotspotComponent,
+  LineComponent: !!window.LineComponent
 });
 
 // Import all component configurations
@@ -31,6 +34,9 @@ const numberPadElement = window.NumberPadComponent?.NumberPadElement || {};
 const tableGridElement = window.TableGridComponent?.TableGridElement || {};
 const fillBlanksElement = window.FillBlanksComponent?.FillBlanksElement || {};
 const feedbackTextboxElement = window.FeedbackTextboxComponent?.FeedbackTextboxElement || {};
+const tileElement = window.TileComponent?.TileElement || {};
+const hotspotElement = window.HotspotComponent?.HotspotElement || {};
+const lineElement = window.LineComponent?.LineElement || {};
 
 // Create the StandardElements object that the rest of the app expects
 const StandardElements = {
@@ -48,7 +54,10 @@ const StandardElements = {
   ...numberPadElement,
   ...tableGridElement,
   ...fillBlanksElement,
-  ...feedbackTextboxElement
+  ...feedbackTextboxElement,
+  ...tileElement,
+  ...hotspotElement,
+  ...lineElement
 };
 
 // Export StandardElements globally (this is what gridpositions.js and other files expect)
@@ -105,7 +114,7 @@ const ElementsUtils = {
   
   // Custom component creator (used for ProblemSolveHeaderComponent and other custom components)
   createCustomElement: (props) => {
-    const { componentType, processedStyles, ...otherProps } = props;
+    const { componentType, processedStyles, elementName, ...otherProps } = props;
     
     console.log('🔍 createCustomElement called with props:', props);
     console.log('🔍 createCustomElement componentType:', componentType);
@@ -306,7 +315,8 @@ const ElementsUtils = {
         const mergedProps = {
           ...otherProps,
           ...processedStyles, // This contains the processed gc units like fontSize
-          processedStyles: processedStyles // Also pass it separately for the component to use
+          processedStyles: processedStyles, // Also pass it separately for the component to use
+          elementName: elementName // Pass elementName for unique cell IDs
         };
         
         console.log('🔍 createCustomElement creating TableGridComponent with mergedProps:', mergedProps);
@@ -335,6 +345,149 @@ const ElementsUtils = {
         return React.createElement(FillBlanksComponent, mergedProps);
       } else {
         console.log('🔍 createCustomElement: FillBlanksComponent NOT found in window.FillBlanksComponent');
+      }
+    }
+    
+    // Handle HotspotComponent
+    if (componentType === 'HotspotComponent') {
+      console.log('🔍 createCustomElement: Found HotspotComponent!');
+      console.log('🔍 createCustomElement: window.HotspotComponent:', window.HotspotComponent);
+      const HotspotComponent = window.HotspotComponent?.HotspotComponent;
+      if (HotspotComponent) {
+        console.log('🔍 createCustomElement: HotspotComponent exists in window.HotspotComponent');
+        // Extract coordinates from position object (passed from ElementRenderer)
+        const coordinates = otherProps.position?.coordinates;
+        const id = otherProps.id;
+        const zIndex = otherProps.zIndex || otherProps.elementZIndex;
+        
+        // Get current page
+        const currentPage = typeof window !== 'undefined' && window.getCurrentPage ? window.getCurrentPage() : 1;
+        
+        // Get element name from id or name prop
+        const elementName = otherProps.elementName || otherProps.name || id;
+        
+        // Merge processed styles with other props to ensure gc units are applied
+        const mergedProps = {
+          ...otherProps,
+          ...processedStyles,
+          currentPage: currentPage,
+          elementName: elementName,
+          coordinates: coordinates,
+          zIndex: zIndex
+        };
+        console.log('🔍 createCustomElement creating HotspotComponent with mergedProps:', mergedProps);
+        return React.createElement(HotspotComponent, mergedProps);
+      } else {
+        console.log('🔍 createCustomElement: HotspotComponent NOT found in window.HotspotComponent');
+      }
+    }
+    
+    // Handle TileComponent
+    if (componentType === 'TileComponent') {
+      console.log('🔍 createCustomElement: Found TileComponent!');
+      console.log('🔍 createCustomElement: window.TileComponent:', window.TileComponent);
+      const TileComponent = window.TileComponent?.TileComponent;
+      if (TileComponent) {
+        console.log('🔍 createCustomElement: TileComponent exists in window.TileComponent');
+        // Extract coordinates from position object (passed from ElementRenderer)
+        const coordinates = otherProps.position?.coordinates;
+        const id = otherProps.id;
+        const zIndex = otherProps.zIndex || otherProps.elementZIndex;
+        
+        // Get current page
+        const currentPage = typeof window !== 'undefined' && window.getCurrentPage ? window.getCurrentPage() : 1;
+        
+        // Get element name from id or name prop
+        const elementName = otherProps.elementName || otherProps.name || id;
+        
+        // Merge processed styles with other props to ensure gc units are applied
+        const mergedProps = {
+          ...otherProps,
+          ...processedStyles,
+          currentPage: currentPage,
+          elementName: elementName,
+          coordinates: coordinates,
+          zIndex: zIndex
+        };
+        console.log('🔍 createCustomElement creating TileComponent with mergedProps:', mergedProps);
+        return React.createElement(TileComponent, mergedProps);
+      } else {
+        console.log('🔍 createCustomElement: TileComponent NOT found in window.TileComponent');
+      }
+    }
+    
+    // Handle LineComponent
+    if (componentType === 'LineComponent') {
+      console.log('🔍 createCustomElement: Found LineComponent!');
+      console.log('🔍 createCustomElement: window.LineComponent:', window.LineComponent);
+      const LineComponent = window.LineComponent?.LineComponent;
+      if (LineComponent) {
+        console.log('🔍 createCustomElement: LineComponent exists in window.LineComponent');
+        // Extract coordinates from position object (passed from ElementRenderer)
+        const coordinates = otherProps.position?.coordinates;
+        const id = otherProps.id;
+        const zIndex = otherProps.zIndex || otherProps.elementZIndex;
+        
+        // Get current page
+        const currentPage = typeof window !== 'undefined' && window.getCurrentPage ? window.getCurrentPage() : 1;
+        
+        // Get element name from id or name prop
+        const elementName = otherProps.elementName || otherProps.name || id;
+        
+        // Merge processed styles with other props to ensure gc units are applied
+        const mergedProps = {
+          ...otherProps,
+          ...processedStyles,
+          currentPage: currentPage,
+          elementName: elementName,
+          coordinates: coordinates,
+          zIndex: zIndex
+        };
+        console.log('🔍 createCustomElement creating LineComponent with mergedProps:', mergedProps);
+        return React.createElement(LineComponent, mergedProps);
+      } else {
+        console.log('🔍 createCustomElement: LineComponent NOT found in window.LineComponent');
+      }
+    }
+    
+    // Handle NumberPadPanelComponent
+    if (componentType === 'NumberPadPanelComponent') {
+      console.log('🔍 createCustomElement: Found NumberPadPanelComponent!');
+      console.log('🔍 createCustomElement: window.NumberPadComponent:', window.NumberPadComponent);
+      const NumberPadPanelComponent = window.NumberPadComponent?.NumberPadPanelComponent;
+      if (NumberPadPanelComponent) {
+        console.log('🔍 createCustomElement: NumberPadPanelComponent exists in window.NumberPadComponent');
+        
+        // Extract coordinates from position object (passed from ElementRenderer)
+        const coordinates = otherProps.position?.coordinates;
+        
+        // Get current page
+        const currentPage = typeof window !== 'undefined' && window.getCurrentPage ? window.getCurrentPage() : 1;
+        
+        // Get element name from id or name prop
+        const elementName = otherProps.name || otherProps.id || 'number-pad';
+        
+        // Extract elementProps (config) from otherProps, excluding position/processedStyles/componentType
+        const { position, processedStyles, componentType, id, name, elementZIndex, ...elementProps } = otherProps;
+        
+        // Merge processed styles into elementProps for gc unit support
+        const configWithStyles = {
+          ...elementProps,
+          ...processedStyles
+        };
+        
+        const mergedProps = {
+          currentPage,
+          elementName,
+          coordinates,
+          elementProps: configWithStyles,
+          zIndex: elementZIndex || 1000
+        };
+        
+        console.log('🔍 createCustomElement creating NumberPadPanelComponent with mergedProps:', mergedProps);
+        return React.createElement(NumberPadPanelComponent, mergedProps);
+      } else {
+        console.log('🔍 createCustomElement: NumberPadPanelComponent NOT found in window.NumberPadComponent');
       }
     }
     

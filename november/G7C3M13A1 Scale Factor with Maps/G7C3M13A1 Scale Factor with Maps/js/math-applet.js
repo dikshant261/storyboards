@@ -313,6 +313,7 @@ const ElementRenderer = ({ element, currentPage, totalPages, tileStyles, onNavig
             key: element.name,
             ...elementProps,
             id: element.id, // Pass element id to components
+            elementName: element.name, // Pass element name for unique cell IDs (e.g., "page2-map-table")
             position: positionWithCoords,
             processedStyles: processedStyles,
             elementZIndex: element.zIndex || 402

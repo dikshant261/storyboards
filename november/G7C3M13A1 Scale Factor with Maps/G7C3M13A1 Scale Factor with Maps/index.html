@@ -71,18 +71,18 @@
             // Language Settings
             // Set FORCE_LANGUAGE to 'en' or 'id' to force a specific language
             // Set to null to use auto-detection (browser language + saved preference)
-            FORCE_LANGUAGE: 'id', // Options: 'en', 'id', or null
+            FORCE_LANGUAGE: 'en', // Options: 'en', 'id', or null
             
             // Supported languages (only English and Indonesian)
             SUPPORTED_LANGUAGES: ['en', 'id'],
             
             // Default language if no preference is found
-            DEFAULT_LANGUAGE: 'id',
+            DEFAULT_LANGUAGE: 'en',
             
             // Starting Page
             // Set to a specific page number (1, 2, 3, etc.) to start the app on that page
             // Set to null or 1 to start from the first page
-            START_PAGE: 1 // Options: 1, 2, 3, etc., or null for default (page 1)
+            START_PAGE: 2 // Options: 1, 2, 3, etc., or null for default (page 1)
         };
         
         // Set language immediately BEFORE PageConfig.js loads
@@ -131,6 +131,9 @@
     <script src="js/components/partitioned-rectangle-component.js"></script>
     <script src="js/components/number-pad-component.js"></script>
     <script src="js/components/table-grid-component.js"></script>
+    <script src="js/components/tile-component.js"></script>
+    <script src="js/components/hotspot-component.js"></script>
+    <script src="js/components/line-component.js"></script>
     <script src="js/components/fill-blanks-component.js"></script>
     <script src="js/components/feedback-textbox-component.js"></script>
     <script src="js/components/drag-drop-component.js"></script>

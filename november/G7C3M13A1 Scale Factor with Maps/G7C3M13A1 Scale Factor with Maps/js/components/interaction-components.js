@@ -269,6 +269,12 @@ const NextButtonComponent = React.memo((props) => {
     });
   }
   
+  // Process border radius for gc units
+  let processedBorderRadius = borderRadius;
+  if (borderRadius && borderRadius.includes('gc') && window.GridCellFontUtils && window.GridCellFontUtils.processGcProperty) {
+    processedBorderRadius = window.GridCellFontUtils.processGcProperty(borderRadius, 'borderRadius');
+  }
+  
   const handleClick = React.useCallback(() => {
     if (isDisabled) {
       console.log('🔍 [NextButton] Click ignored - button is disabled');
@@ -315,7 +321,7 @@ const NextButtonComponent = React.memo((props) => {
       zIndex: otherProps.elementZIndex || 402,
       // Apply default styles
       backgroundColor: backgroundColor,
-      borderRadius: borderRadius,
+      borderRadius: processedBorderRadius,
       cursor: isDisabled ? 'not-allowed' : cursor,
       display: display,
       alignItems: alignItems,
@@ -400,7 +406,7 @@ const NextButtonComponent = React.memo((props) => {
     color: color,
     fontSize: processedFontSize,
     fontWeight: fontWeight,
-    borderRadius: borderRadius,
+    borderRadius: processedBorderRadius,
     cursor: isDisabled ? 'not-allowed' : cursor,
     textAlign: textAlign,
     display: display,
@@ -470,6 +476,12 @@ const PreviousButtonComponent = React.memo((props) => {
     processedFontSize = window.GridCellFontUtils.processGcProperty(fontSize, 'fontSize');
   }
   
+  // Process border radius for gc units
+  let processedBorderRadius = borderRadius;
+  if (borderRadius && borderRadius.includes('gc') && window.GridCellFontUtils && window.GridCellFontUtils.processGcProperty) {
+    processedBorderRadius = window.GridCellFontUtils.processGcProperty(borderRadius, 'borderRadius');
+  }
+  
   const handleClick = React.useCallback(() => {
     startTransition(() => {
       otherProps.onClick?.();
@@ -512,7 +524,7 @@ const PreviousButtonComponent = React.memo((props) => {
         zIndex: otherProps.elementZIndex || 402,
         // Apply default styles
         backgroundColor: backgroundColor,
-        borderRadius: borderRadius,
+        borderRadius: processedBorderRadius,
         cursor: isDisabled ? 'not-allowed' : cursor,
         display: display,
         alignItems: alignItems,
@@ -572,7 +584,7 @@ const PreviousButtonComponent = React.memo((props) => {
     color: color,
     fontSize: processedFontSize,
     fontWeight: fontWeight,
-    borderRadius: borderRadius,
+    borderRadius: processedBorderRadius,
     cursor: isDisabled ? 'not-allowed' : cursor,
     textAlign: textAlign,
     display: display,
