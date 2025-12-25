@@ -1,0 +1,372 @@
+/**
+ * Long Division Grid Component Styles
+ * 
+ * Styles for the long division visualization component
+ * with support for multiple interactive modes.
+ */
+
+/* ===== BASE CONTAINER ===== */
+
+.long-division-grid {
+  position: relative;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* ===== ROW STYLES ===== */
+
+.div-row {
+  display: flex;
+  align-items: center;
+}
+
+.div-quotient-row {
+  margin-bottom: 4px;
+}
+
+.div-bracket-row {
+  align-items: stretch;
+}
+
+.div-subtract-row {
+  margin-top: 4px;
+}
+
+.div-difference-row {
+  margin-top: 2px;
+}
+
+.div-remainder-row {
+  margin-top: 10px;
+}
+
+/* ===== CELL STYLES ===== */
+
+.div-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.div-cell-quotient {
+  color: #E91E63;
+  background-color: rgba(233, 30, 99, 0.1);
+}
+
+.div-cell-dividend {
+  color: #4ECDC4;
+  background-color: rgba(78, 205, 196, 0.1);
+}
+
+.div-cell-divisor {
+  color: #FF6B6B;
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.div-cell-working {
+  color: #9C27B0;
+  background-color: rgba(156, 39, 176, 0.1);
+}
+
+.div-cell-remainder {
+  color: #FF9800;
+  background-color: rgba(255, 152, 0, 0.1);
+}
+
+/* ===== BRACKET STYLES ===== */
+
+.div-bracket {
+  position: relative;
+}
+
+.div-divisor-container {
+  display: flex;
+  align-items: center;
+}
+
+.div-dividend-container {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== LINE STYLES ===== */
+
+.div-line {
+  background-color: #333;
+}
+
+/* ===== INPUT STYLES ===== */
+
+.div-cell-input,
+.div-cell-practice,
+.div-cell-guided-active {
+  outline: none;
+  text-align: center;
+  font-family: inherit;
+}
+
+.div-cell-input:focus,
+.div-cell-practice:focus,
+.div-cell-guided-active:focus {
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.3);
+}
+
+/* ===== SPOTINCORRECT MODE ===== */
+
+.long-division-grid[data-mode="spotIncorrect"] .div-cell {
+  cursor: pointer;
+}
+
+.long-division-grid[data-mode="spotIncorrect"] .div-cell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== PRACTICE MODE ===== */
+
+.long-division-grid[data-mode="practice"] {
+  border: 2px solid #2196F3;
+}
+
+.div-cell-practice {
+  background-color: #F5F5F5;
+  border: 2px dashed #9E9E9E;
+}
+
+.div-cell-practice:focus {
+  border-color: #2196F3;
+  background-color: white;
+}
+
+/* ===== GUIDED MODE ===== */
+
+.long-division-grid[data-mode="guided"] {
+  border: 2px solid #FFC107;
+}
+
+.div-cell-guided-active {
+  background-color: #FFF9C4 !important;
+  border: 3px solid #FFC107 !important;
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+  animation: guidedPulse 1.5s ease-in-out infinite;
+}
+
+.div-cell-hidden {
+  background-color: transparent !important;
+  border: 2px dashed #E0E0E0 !important;
+  color: transparent !important;
+}
+
+.div-guided-hint {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes guidedPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 193, 7, 0.8);
+  }
+}
+
+/* ===== ANIMATION MODE ===== */
+
+.long-division-grid[data-mode="animation"] {
+  border: 2px solid #673AB7;
+}
+
+.div-cell-animation-hidden {
+  background-color: transparent !important;
+  border: 2px dashed #E0E0E0 !important;
+  color: transparent !important;
+}
+
+.div-animation-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.div-animation-controls button {
+  transition: all 0.2s ease;
+}
+
+.div-animation-controls button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.div-animation-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.div-animation-info {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes digitAppear {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes digitFade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ===== DRAGDROP MODE ===== */
+
+.long-division-grid[data-mode="dragDrop"] {
+  border: 2px solid #9C27B0;
+}
+
+.div-cell-dragdrop {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.div-cell-dragdrop:hover {
+  background-color: #E1F5FE !important;
+  border-color: #0288D1 !important;
+}
+
+.div-digit-tile {
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.div-digit-tile:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(33, 150, 243, 0.4);
+  background-color: #BBDEFB !important;
+}
+
+.div-digit-tile:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.div-dragdrop-digit-bank {
+  animation: fadeIn 0.3s ease;
+}
+
+.div-dragdrop-controls {
+  margin-top: 15px;
+}
+
+.div-dragdrop-controls button {
+  transition: all 0.2s ease;
+}
+
+.div-dragdrop-controls button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== INPUT MODE ===== */
+
+.long-division-grid[data-mode="input"] {
+  border: 2px solid #4CAF50;
+}
+
+/* ===== COMMON ANIMATIONS ===== */
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== VALIDATION STATES ===== */
+
+.div-cell-correct {
+  background-color: #C8E6C9 !important;
+  border-color: #4CAF50 !important;
+}
+
+.div-cell-incorrect {
+  background-color: #FFCDD2 !important;
+  border-color: #F44336 !important;
+}
+
+.div-cell-missed {
+  background-color: #FFF9C4 !important;
+  border-color: #FFC107 !important;
+}
+
+/* ===== COMPLETION MESSAGES ===== */
+
+.div-complete-message {
+  animation: fadeInUp 0.5s ease;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+
+@media (max-width: 768px) {
+  .long-division-grid {
+    padding: 10px;
+  }
+  
+  .div-animation-controls {
+    flex-wrap: wrap;
+  }
+  
+  .div-dragdrop-digit-bank {
+    padding: 10px;
+  }
+}
+
+/* ===== THEME OVERRIDES ===== */
+
+.long-division-grid.white-theme .div-cell {
+  background-color: white;
+  color: #333;
+}
+
+.long-division-grid.minimal-mode .div-cell {
+  background-color: transparent;
+  border: none;
+}
+
+.long-division-grid.minimal-mode .div-bracket {
+  border-color: #333;
+}
+
+.long-division-grid.minimal-mode .div-line {
+  background-color: #333;
+}
+

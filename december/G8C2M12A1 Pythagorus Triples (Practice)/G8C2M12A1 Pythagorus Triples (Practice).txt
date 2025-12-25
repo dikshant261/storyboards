@@ -1,0 +1,4 @@
+1-> indonesian language left.
+
+2-> in page 3,6,and 9 are dnd, when drag in wrong box then feedback text is still "Awesome",
+    need to change other wrong text

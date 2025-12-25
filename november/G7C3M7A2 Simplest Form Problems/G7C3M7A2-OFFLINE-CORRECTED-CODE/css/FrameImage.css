@@ -1,0 +1,192 @@
+.frame-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 33vw;
+    height: 75vh;
+    flex-direction: column;
+    position: relative;
+}
+
+.frame-container .length-line {
+    width: 34.6vw;
+    transform: rotate(90deg);
+    position: absolute;
+    top: 47.6%;
+    left: -37%;
+}
+
+.frame-container .width-line {
+    width: 26.6vw;
+    transform: rotate(0deg);
+    position: absolute;
+    bottom: 2%;
+    left: 20.3%;
+}
+
+.frame-container .length {
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    top: 46%;
+    left: -6%;
+}
+
+.frame-container .width {
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    bottom: -2%;
+    left: 55%;
+}
+
+.frame-container .red-circle {
+    width: 20vw;
+    height: 22vh;
+    background-color: #ff2d28;
+}
+
+/* Wrapper that keeps both frames aligned */
+.frame-wrapper {
+    position: relative;
+    width: 100%;
+    /* same width as your prop */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* Main frame */
+.frame-base {
+    width: 80%;
+    display: block;
+    background-color: #ffffffc4;
+}
+
+/* Overlay frame */
+.frame-overlay {
+    position: absolute;
+    top: 0;
+    left: 10%;
+    opacity: 0.9;
+    transition: width 0.6s ease;
+    background-color: #ffffffc4;
+}
+
+/* Label stays fixed to frame */
+.frame-label {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5vw;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1vh 2vh;
+    font-weight: 600;
+    border-radius: 0.6vh;
+    width: 64%;
+    text-align: center;
+}
+
+.frame-label-two {
+    position: absolute;
+    top: 19%;
+    left: 22.4%;
+    transform: translateX(-50%);
+    font-size: 1.3vw;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 0.5vh 0.5vh;
+    font-weight: 600;
+    border-radius: 0.6vh;
+    width: 25%;
+    text-align: center;
+    height: 4vh;
+}
+
+/* ...existing code... */
+.frame-slider {
+    width: 75%;
+    margin-top: 3vh;
+    accent-color: #ffae00;
+    /* orange color for thumb */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    /* remove native styling */
+    -moz-appearance: none;
+    appearance: none;
+    height: 1.2rem;
+    /* base input height (keeps layout stable) */
+    background: transparent;
+    /* render our custom track instead */
+    padding: 0;
+    /* avoid extra side padding changing layout */
+    display: block;
+    /* better control for centering */
+    box-sizing: border-box;
+}
+
+/* WebKit track + thumb */
+.frame-slider::-webkit-slider-runnable-track {
+    height: 1.5vh;
+    /* track thickness — increase to make slider visually taller */
+    background: white;
+    border-radius: 0.8vw;
+    border: none;
+}
+
+.frame-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 2.2vw;
+    /* thumb width */
+    height: 3.2vh;
+    /* thumb height -> increases visual slider height */
+    margin-top: -0.6vh;
+    /* centers thumb vertically on the track (half of extra) */
+    background: #2D6FE2;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.4vw rgba(255, 174, 0, 0.12);
+    border: none;
+    cursor: pointer;
+}
+
+/* Firefox track + thumb */
+.frame-slider::-moz-range-track {
+    height: 1.5vh;
+    background: white;
+    border-radius: 0.8vw;
+    border: none;
+}
+
+.frame-slider::-moz-range-thumb {
+    width: 2.2vh;
+    height: 3.2vh;
+    background: #2D6FE2;
+    border-radius: 50%;
+    border: none;
+}
+
+/* IE / Edge Legacy (optional) */
+.frame-slider::-ms-track {
+    height: 1vh;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+.frame-slider::-ms-fill-lower,
+.frame-slider::-ms-fill-upper {
+    background: linear-gradient(90deg, #ffd49e, #ffae00);
+    border-radius: 0.8vw;
+}
+
+.frame-slider::-ms-thumb {
+    width: 2.2vw;
+    height: 2.2vh;
+    background: #2D6FE2;
+    border-radius: 50%;
+    border: none;
+}
+
+/* ...existing code... */

@@ -1,0 +1,341 @@
+/* ============================================================================
+ * SLIDER COMPONENT STYLES
+ * Custom slider and check button styling
+ * ============================================================================ */
+
+/* ========================================
+ * SLIDER COMPONENT
+ * ======================================== */
+
+.slider-component-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+}
+
+/* Slider Input - Custom Styling */
+.slider-input {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* Slider Track - WebKit (Chrome, Safari, Edge) */
+.slider-input::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 4px;
+}
+
+/* Slider Thumb - WebKit */
+.slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #FFB84D 0%, #FF9900 100%);
+    cursor: pointer;
+    margin-top: -10px;
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.15s ease;
+}
+
+.slider-input::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 3px 8px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.slider-input::-webkit-slider-thumb:active {
+    transform: scale(0.95);
+    background: linear-gradient(180deg, #FF9900 0%, #E68A00 100%);
+}
+
+/* Slider Track - Firefox */
+.slider-input::-moz-range-track {
+    height: 8px;
+    border-radius: 4px;
+    background: #4a5568;
+}
+
+/* Slider Thumb - Firefox */
+.slider-input::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #FFB84D 0%, #FF9900 100%);
+    cursor: pointer;
+    box-shadow: 
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.15s ease;
+}
+
+.slider-input::-moz-range-thumb:hover {
+    transform: scale(1.1);
+}
+
+/* Slider Progress - Firefox */
+.slider-input::-moz-range-progress {
+    background: #FF9900;
+    height: 8px;
+    border-radius: 4px 0 0 4px;
+}
+
+/* Slider Label */
+.slider-label {
+    font-family: var(--font-family-display, 'Segoe UI', sans-serif);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Disabled Slider State */
+.slider-input.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.slider-input.disabled::-webkit-slider-thumb {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.slider-input.disabled::-moz-range-thumb {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ========================================
+ * CHECK BUTTON COMPONENT
+ * ======================================== */
+
+.check-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: all 0.2s ease;
+    background-color: #FF9900 !important;
+}
+
+.check-button-container:hover:not(.disabled) {
+    background-color: #FFB84D !important;
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.check-button-container:active:not(.disabled) {
+    transform: scale(0.97);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.check-button-container.disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.check-button-container.checking {
+    animation: checkPulse 0.3s ease;
+    background-color: #FF9900 !important;
+}
+
+@keyframes checkPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+.check-button-content {
+    font-family: var(--font-family-display, 'Segoe UI', sans-serif);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+ * FEEDBACK STATES
+ * ======================================== */
+
+/* Note: Check button color does not change on correct/incorrect */
+
+/* ========================================
+ * DIVIDED RECTANGLE - KATEX FRACTION STYLING
+ * ======================================== */
+.divided-rectangle-section .katex-fraction {
+    display: inline-block;
+}
+
+.divided-rectangle-section .katex-fraction .katex {
+    color: inherit !important;
+    font-size: inherit !important;
+}
+
+.divided-rectangle-section .katex-fraction .katex * {
+    color: inherit !important;
+}
+
+/* Apply color from data attribute if KaTeX doesn't inherit */
+.divided-rectangle-section .katex-fraction[data-text-color] .katex,
+.divided-rectangle-section .katex-fraction[data-text-color] .katex * {
+    color: var(--text-color, inherit) !important;
+}
+
+/* ========================================
+ * DIVIDED RECTANGLE COMPONENT
+ * ======================================== */
+
+.divided-rectangle-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.divided-rectangle-section {
+    flex: 1 1 auto;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    transition: all 0.5s ease;
+}
+
+/* Separated section state - when sections animate apart */
+.divided-rectangle-section.section-separated {
+    flex: 0 0 auto;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.divided-rectangle-divider {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #ffffff;
+    z-index: 1;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* ========================================
+ * GROUPED SECTIONS OVERLAY
+ * ======================================== */
+
+.grouped-sections-overlay {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    pointer-events: none;
+}
+
+.group-row-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    padding: 10px 15px;
+    border: 2px dashed #FFD700;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    min-height: 60px;
+    box-sizing: border-box;
+}
+
+.group-label {
+    color: #ffffff;
+    font-weight: bold;
+    min-width: 100px;
+    text-align: left;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.group-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.group-section.section-orange {
+    background-color: #FF9900;
+}
+
+.group-section.section-teal {
+    background-color: #1ABC9C;
+}
+
+.group-section .katex-fraction {
+    color: #ffffff;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.group-section .katex-fraction .katex,
+.group-section .katex-fraction .katex * {
+    color: inherit !important;
+}
+
+/* Animation keyframes for group row appearance */
+@keyframes groupRowFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes sectionScale {
+    0% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+ * RESPONSIVE ADJUSTMENTS
+ * ======================================== */
+
+@media (max-width: 768px) {
+    .slider-input::-webkit-slider-thumb {
+        width: 24px;
+        height: 24px;
+        margin-top: -8px;
+    }
+    
+    .slider-input::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+    }
+}
+

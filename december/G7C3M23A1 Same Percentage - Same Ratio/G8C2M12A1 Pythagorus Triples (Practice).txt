@@ -1,0 +1,7 @@
+
+-left pointer is:
+ -> in this page left when last two button press then 60% and 40% part of image should be green, and when  
+    1st button is pressed then all "3 : 2" column turn green,  
+ -> in blink box wrong update, and instruction text update when option is correct.
+ 
+ -> indonesian conversion is left.

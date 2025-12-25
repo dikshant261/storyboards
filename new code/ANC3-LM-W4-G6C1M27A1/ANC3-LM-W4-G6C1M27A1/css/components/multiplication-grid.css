@@ -1,0 +1,387 @@
+/**
+ * Multiplication Grid Component Styles
+ * 
+ * Basic, customizable styling for the multiplication grid component.
+ * Users can override these styles as needed.
+ */
+
+/* ===== MAIN CONTAINER ===== */
+
+.multiplication-grid {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  user-select: none;
+}
+
+.mult-grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ===== ROWS ===== */
+
+.mult-row {
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: center;
+  align-items: center;
+}
+
+.mult-carry-row {
+  /* Opacity removed - let theme system control carry row appearance */
+}
+
+/* ===== CELLS ===== */
+
+.mult-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 600;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.mult-cell-empty {
+  border: none;
+  background: transparent;
+}
+
+/* Carry cells - styling now handled by theme system */
+.mult-carry {
+  /* Font size is now dynamically set in JavaScript (10% smaller than other cells) */
+  /* Text is top-aligned via JavaScript inline styles */
+  align-items: flex-start !important; /* Override center alignment for top alignment */
+  justify-content: center !important; /* Keep horizontal centering */
+  line-height: 1 !important; /* Tight line height to prevent extra space at bottom */
+  /* Color, border, and background now controlled by theme */
+}
+
+/* Ensure carry cells are top-aligned even with button theme */
+.mult-carry.mult-cell-button-theme {
+  align-items: flex-start !important;
+  justify-content: center !important;
+  line-height: 1 !important;
+}
+
+/* Operator cell */
+.mult-operator {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  border: none;
+  background: transparent;
+}
+
+/* ===== INTERACTIVE STATES ===== */
+
+/* Editable cells */
+.mult-cell-editable {
+  cursor: text;
+  border-color: #4CAF50;
+  background: #f0f8ff;
+}
+
+.mult-cell-editable:hover {
+  border-color: #45a049;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.mult-cell-editable:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 8px rgba(33, 150, 243, 0.5);
+  background: white;
+}
+
+/* Correct input */
+.mult-cell-correct {
+  border-color: #4CAF50;
+  background: #e8f5e9;
+  color: #2e7d32;
+  animation: correctPulse 0.5s ease;
+}
+
+/* Incorrect input */
+.mult-cell-incorrect {
+  border-color: #f44336;
+  background: #ffebee;
+  color: #c62828;
+  animation: shake 0.3s ease;
+}
+
+/* Active/focused cell */
+.mult-cell-active {
+  border-color: #FF9800;
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.5);
+}
+
+/* ===== LINES ===== */
+
+.mult-line {
+  height: 2px;
+  background: #333;
+  margin: 8px 0;
+  border-radius: 1px;
+}
+
+/* ===== CONTROLS ===== */
+
+.mult-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.mult-control-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 2px solid #2196F3;
+  background: white;
+  color: #2196F3;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mult-control-btn:hover {
+  background: #2196F3;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(33, 150, 243, 0.3);
+}
+
+.mult-control-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.mult-answer {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  padding: 8px 16px;
+  background: #fff3cd;
+  border-radius: 4px;
+  border: 2px solid #ffc107;
+}
+
+/* ===== ANIMATIONS ===== */
+
+@keyframes correctPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+}
+
+.mult-cell-wiggle {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+/* 3D Button Theme Styling */
+.mult-cell-button-theme {
+  background: linear-gradient(145deg, #FFD700, #E6C200);
+  border: 2px solid #B8860B;
+  border-radius: 8px;
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.4),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.1s ease;
+  position: relative;
+  transform: translateY(0);
+}
+
+.mult-cell-button-theme:hover {
+  background: linear-gradient(145deg, #FFE55C, #FFD700);
+  box-shadow: 
+    6px 6px 12px rgba(0, 0, 0, 0.4),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.5),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.mult-cell-button-theme:active {
+  background: linear-gradient(145deg, #E6C200, #CCB000);
+  box-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.3),
+    inset 2px 2px 4px rgba(0, 0, 0, 0.2),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.1);
+  transform: translateY(1px);
+}
+
+.mult-cell-button-theme.selected {
+  background: linear-gradient(145deg, #2196F3, #1976D2);
+  color: black;
+  box-shadow: 
+    0 0 0 2px rgba(33, 150, 243, 0.8),
+    4px 4px 8px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.4),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.mult-cell-button-theme.correct {
+  background: linear-gradient(145deg, #4CAF50, #45A049);
+  border-color: #2E7D32;
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.mult-cell-button-theme.incorrect {
+  background: linear-gradient(145deg, #FF6B6B, #E53E3E);
+  border-color: #D32F2F;
+  box-shadow: 
+    4px 4px 8px rgba(0, 0, 0, 0.3),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.2);
+  animation: wiggle 0.5s ease-in-out;
+}
+
+.mult-cell-button-theme.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  /* Keep original button theme appearance, just disable interaction */
+}
+
+.mult-cell-button-theme.disabled:hover {
+  /* No hover effects for disabled cells */
+}
+
+.mult-cell-button-theme.disabled:active {
+  /* No active effects for disabled cells */
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .mult-cell {
+    font-size: 20px;
+  }
+  
+  .mult-operator {
+    font-size: 24px;
+  }
+  
+  .mult-carry {
+    /* Font size is now dynamically set in JavaScript (10% smaller than other cells) */
+  }
+  
+  .mult-controls {
+    flex-direction: column;
+  }
+}
+
+/* ===== INPUT FIELD OVERRIDES ===== */
+
+input.mult-cell {
+  text-align: center;
+  font-family: monospace;
+  padding: 0;
+  outline: none;
+}
+
+input.mult-cell::placeholder {
+  color: #bbb;
+}
+
+/* Remove spinner buttons from number inputs */
+input.mult-cell::-webkit-outer-spin-button,
+input.mult-cell::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ===== INPUT FOCUS ANIMATION ===== */
+
+@keyframes inputFocus {
+  0% {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #32CD32, 0 0 25px #32CD32;
+  }
+  50% {
+    transform: scale(1.15);
+    box-shadow: 0 0 20px #32CD32, 0 0 30px #32CD32;
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #32CD32, 0 0 25px #32CD32;
+  }
+}
+
+/* ===== INPUT BLINK ANIMATION ===== */
+
+@keyframes inputBlink {
+  0%, 100% {
+    background-color: #FFEB3B; /* Yellow */
+    opacity: 1;
+  }
+  50% {
+    background-color: #FFF59D; /* Lighter yellow */
+    opacity: 0.8;
+  }
+}
+
+/* ===== BORDER BLINK ANIMATION FOR RELATED CELLS ===== */
+
+@keyframes borderBlink {
+  0%, 100% {
+    box-shadow: 0 0 0 3px #FFAB40, inset 0 0 0 3px transparent !important; /* Orange border via box-shadow */
+  }
+  50% {
+    box-shadow: 0 0 0 4px #FFC107, inset 0 0 0 2px transparent !important; /* Amber border via box-shadow */
+  }
+}
+
+.mult-cell.mult-cell-border-blink {
+  position: relative !important;
+  /* Override any inline border - use box-shadow for border effect that can be animated */
+  border: none !important;
+  box-shadow: 0 0 0 3px #FFAB40, inset 0 0 0 3px transparent !important; /* Initial orange border */
+  transition: none !important; /* Disable all transitions */
+  animation: borderBlink 1s ease-in-out infinite !important;
+  -webkit-animation: borderBlink 1s ease-in-out infinite !important;
+  -moz-animation: borderBlink 1s ease-in-out infinite !important;
+  -o-animation: borderBlink 1s ease-in-out infinite !important;
+}
+
+input.mult-cell[type="text"] {
+  -moz-appearance: textfield;
+}
+

@@ -1,0 +1,11 @@
+1-> indonesian language left.
+
+2-> quiz panel component button width, and height props add.
+
+3-> quiz panel copmonent instruction font size, button fontsize, and feedback text size separate prop add.
+
+4-> update table grid with new updated code, in which add bg-color of separate cells,and other.
+
+5-> steps arrange component does not working.
+
+6-> next button sometime not disabled in some pages and also in fill blanks component.

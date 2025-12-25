@@ -238,9 +238,9 @@ const QuestionComponent = React.memo((props) => {
     ...(processedIconMarginLeft ? { marginLeft: processedIconMarginLeft } : {}),
     ...(processedIconSize
       ? {
-          width: processedIconSize,
-          height: processedIconSize,
-        }
+        width: processedIconSize,
+        height: processedIconSize,
+      }
       : {}),
   };
 
@@ -248,8 +248,8 @@ const QuestionComponent = React.memo((props) => {
   const separatorStyle = {
     ...(processedIconSize
       ? {
-          height: processedIconSize,
-        }
+        height: processedIconSize,
+      }
       : {}),
   };
 
@@ -415,45 +415,45 @@ const QuestionComponent = React.memo((props) => {
       },
       Array.isArray(parsedText)
         ? parsedText.map((part, index) => {
-            if (part.type === "highlight") {
-              let highlightStyle = {
-                fontSize: part.fontSize,
-                fontWeight: part.bold ? "bold" : "normal",
-                textDecoration: part.underline ? "underline" : "none",
-              };
+          if (part.type === "highlight") {
+            let highlightStyle = {
+              fontSize: part.fontSize,
+              fontWeight: part.bold ? "bold" : "normal",
+              textDecoration: part.underline ? "underline" : "none",
+            };
 
-              // Apply highlight color as background and font color
-              if (part.highlightColor) {
-                highlightStyle.backgroundColor = part.highlightColor;
-                highlightStyle.padding = "2px 4px";
-                highlightStyle.borderRadius = "4px";
-              }
-
-              // Apply font color
-              if (part.fontColor) {
-                highlightStyle.color = part.fontColor;
-              }
-
-              return React.createElement(
-                "span",
-                {
-                  key: index,
-                  style: highlightStyle,
-                },
-                part.text
-              );
-            } else {
-              // Handle HTML content like <br> tags
-              if (part.text && part.text.includes("<br>")) {
-                return React.createElement("span", {
-                  key: index,
-                  dangerouslySetInnerHTML: { __html: part.text },
-                });
-              } else {
-                return part.text;
-              }
+            // Apply highlight color as background and font color
+            if (part.highlightColor) {
+              highlightStyle.backgroundColor = part.highlightColor;
+              highlightStyle.padding = "2px 4px";
+              highlightStyle.borderRadius = "4px";
             }
-          })
+
+            // Apply font color
+            if (part.fontColor) {
+              highlightStyle.color = part.fontColor;
+            }
+
+            return React.createElement(
+              "span",
+              {
+                key: index,
+                style: highlightStyle,
+              },
+              part.text
+            );
+          } else {
+            // Handle HTML content like <br> tags
+            if (part.text && part.text.includes("<br>")) {
+              return React.createElement("span", {
+                key: index,
+                dangerouslySetInnerHTML: { __html: part.text },
+              });
+            } else {
+              return part.text;
+            }
+          }
+        })
         : parsedText
     )
   );
@@ -948,9 +948,9 @@ const InformationAnalysisComponent = React.memo((props) => {
     borderRadius: processedBorderRadius,
     ...(processedSectionLeftBorderRadius
       ? {
-          borderTopLeftRadius: processedSectionLeftBorderRadius,
-          borderBottomLeftRadius: processedSectionLeftBorderRadius,
-        }
+        borderTopLeftRadius: processedSectionLeftBorderRadius,
+        borderBottomLeftRadius: processedSectionLeftBorderRadius,
+      }
       : {}),
     padding: processedCardPadding,
     marginBottom: processedCardSpacing,
@@ -977,17 +977,15 @@ const InformationAnalysisComponent = React.memo((props) => {
     fontWeight: "600",
     marginBottom: processedSectionMarginBottom || "8px",
     marginLeft: processedAccentBarWidth
-      ? `calc(${processedAccentBarWidth} + ${
-          processedSectionMarginLeft || "12px"
-        })`
+      ? `calc(${processedAccentBarWidth} + ${processedSectionMarginLeft || "12px"
+      })`
       : processedSectionMarginLeft || "12px",
   });
 
   const listStyle = {
     marginLeft: processedAccentBarWidth
-      ? `calc(${processedAccentBarWidth} + ${
-          processedListMarginLeft || "12px"
-        })`
+      ? `calc(${processedAccentBarWidth} + ${processedListMarginLeft || "12px"
+      })`
       : processedListMarginLeft || "12px",
     padding: 0,
     listStyle: "none",
@@ -1342,26 +1340,26 @@ const ConceptSummaryComponent = React.memo((props) => {
     Array.isArray(dynamicGivenArray) && dynamicGivenArray.length > 0
       ? dynamicGivenArray
       : Array.isArray(givenArray)
-      ? givenArray
-      : [];
+        ? givenArray
+        : [];
   const currentToFindArray =
     Array.isArray(dynamicToFindArray) && dynamicToFindArray.length > 0
       ? dynamicToFindArray
       : Array.isArray(toFindArray)
-      ? toFindArray
-      : [];
+        ? toFindArray
+        : [];
   const currentFactsArray =
     Array.isArray(dynamicFactsArray) && dynamicFactsArray.length > 0
       ? dynamicFactsArray
       : Array.isArray(factsArray)
-      ? factsArray
-      : [];
+        ? factsArray
+        : [];
   const currentValueArray =
     Array.isArray(dynamicValueArray) && dynamicValueArray.length > 0
       ? dynamicValueArray
       : Array.isArray(valueArray)
-      ? valueArray
-      : [];
+        ? valueArray
+        : [];
 
   console.log("🔍 ConceptSummaryComponent RENDERED!");
   console.log("🔍 ConceptSummaryComponent props:", props);
@@ -1631,9 +1629,9 @@ const ConceptSummaryComponent = React.memo((props) => {
     borderRadius: processedBorderRadius,
     ...(processedSectionLeftBorderRadius
       ? {
-          borderTopLeftRadius: processedSectionLeftBorderRadius,
-          borderBottomLeftRadius: processedSectionLeftBorderRadius,
-        }
+        borderTopLeftRadius: processedSectionLeftBorderRadius,
+        borderBottomLeftRadius: processedSectionLeftBorderRadius,
+      }
       : {}),
     padding: processedCardPadding,
     marginBottom: processedCardSpacing,
@@ -1660,17 +1658,15 @@ const ConceptSummaryComponent = React.memo((props) => {
     fontWeight: "600",
     marginBottom: processedSectionMarginBottom || "8px",
     marginLeft: processedAccentBarWidth
-      ? `calc(${processedAccentBarWidth} + ${
-          processedSectionMarginLeft || "12px"
-        })`
+      ? `calc(${processedAccentBarWidth} + ${processedSectionMarginLeft || "12px"
+      })`
       : processedSectionMarginLeft || "12px",
   });
 
   const listStyle = {
     marginLeft: processedAccentBarWidth
-      ? `calc(${processedAccentBarWidth} + ${
-          processedListMarginLeft || "12px"
-        })`
+      ? `calc(${processedAccentBarWidth} + ${processedListMarginLeft || "12px"
+      })`
       : processedListMarginLeft || "12px",
     padding: 0,
     listStyle: "none",
@@ -1767,12 +1763,12 @@ const ConceptSummaryComponent = React.memo((props) => {
 
                     containsHTML
                       ? React.createElement("span", {
-                          key: "text",
-                          style: { color: itemColor },
-                          dangerouslySetInnerHTML: { __html: itemText },
-                        })
+                        key: "text",
+                        style: { color: itemColor },
+                        dangerouslySetInnerHTML: { __html: itemText },
+                      })
                       : containsKatex
-                      ? React.createElement("span", {
+                        ? React.createElement("span", {
                           key: "text",
                           style: { color: itemColor },
                           dangerouslySetInnerHTML: {
@@ -1781,7 +1777,7 @@ const ConceptSummaryComponent = React.memo((props) => {
                             }),
                           },
                         })
-                      : React.createElement(
+                        : React.createElement(
                           "span",
                           { key: "text", style: { color: itemColor } },
                           itemText
@@ -1980,8 +1976,8 @@ const TeacherNoteComponent = React.memo((props) => {
     },
     text && text.includes("<br>")
       ? React.createElement("span", {
-          dangerouslySetInnerHTML: { __html: text },
-        })
+        dangerouslySetInnerHTML: { __html: text },
+      })
       : text
   );
 });
@@ -2133,8 +2129,8 @@ const SectionHeaderComponent = React.memo((props) => {
       textAlign === "center"
         ? "center"
         : textAlign === "right"
-        ? "flex-end"
-        : "flex-start",
+          ? "flex-end"
+          : "flex-start",
     textAlign: textAlign,
     fontFamily: "Arial, sans-serif",
     fontWeight: fontWeight,
@@ -3471,17 +3467,17 @@ const QuizPanelComponent = React.memo((props) => {
       buttonContent.push(
         containsHTML
           ? // 👉 HTML mode using dangerouslySetInnerHTML (for <sup>, <sub>, <b>, etc.)
-            React.createElement("span", {
-              key: "option-text-html",
-              style: textStyle,
-              dangerouslySetInnerHTML: { __html: optionData.text },
-            })
+          React.createElement("span", {
+            key: "option-text-html",
+            style: textStyle,
+            dangerouslySetInnerHTML: { __html: optionData.text },
+          })
           : // 👉 KaTeX / normal text mode
-            React.createElement(
-              "span",
-              { key: "option-text" },
-              renderTextWithKaTeX(optionData.text, textStyle)
-            )
+          React.createElement(
+            "span",
+            { key: "option-text" },
+            renderTextWithKaTeX(optionData.text, textStyle)
+          )
       );
     }
 
@@ -3876,28 +3872,28 @@ const QuizPanelComponent = React.memo((props) => {
       // Row 0: Header Row
       headerText
         ? React.createElement(
-            "div",
-            {
-              key: "header-row",
-              className: "quiz-header-row",
-              style: headerRowStyle,
-            },
-            [
-              headerText,
-              React.createElement("div", {
-                key: "header-underline",
-                style: {
-                  position: "absolute",
-                  bottom: "0",
-                  left: "0",
-                  right: "0",
-                  height: processedHeaderUnderlineThickness,
-                  backgroundColor: headerUnderlineColor,
-                  marginTop: "8px",
-                },
-              }),
-            ]
-          )
+          "div",
+          {
+            key: "header-row",
+            className: "quiz-header-row",
+            style: headerRowStyle,
+          },
+          [
+            headerText,
+            React.createElement("div", {
+              key: "header-underline",
+              style: {
+                position: "absolute",
+                bottom: "0",
+                left: "0",
+                right: "0",
+                height: processedHeaderUnderlineThickness,
+                backgroundColor: headerUnderlineColor,
+                marginTop: "8px",
+              },
+            }),
+          ]
+        )
         : null,
 
       // Row 1: Question Row
@@ -3910,11 +3906,11 @@ const QuizPanelComponent = React.memo((props) => {
         },
         questionText && /<[^>]+>/i.test(questionText)
           ? React.createElement("span", {
-              dangerouslySetInnerHTML: { __html: questionText },
-            })
+            dangerouslySetInnerHTML: { __html: questionText },
+          })
           : questionText
-          ? renderTextWithKaTeX(questionText, {})
-          : ""
+            ? renderTextWithKaTeX(questionText, {})
+            : ""
       ),
 
       // Row 2: Options Row
@@ -3940,53 +3936,53 @@ const QuizPanelComponent = React.memo((props) => {
         [
           // Add inset border for correct and incorrect states
           currentFeedbackState === "correct" ||
-          currentFeedbackState === "incorrect"
+            currentFeedbackState === "incorrect"
             ? React.createElement("div", {
-                key: "inset-border",
-                style: {
-                  position: "absolute",
-                  top: "2.5%",
-                  left: "2.5%",
-                  right: "2.5%",
-                  bottom: "2.5%",
-                  border:
-                    currentFeedbackState === "correct"
-                      ? "2px dashed #00AA55"
-                      : "2px dashed #CC4444",
-                  borderRadius: "4px",
-                  pointerEvents: "none",
-                },
-              })
+              key: "inset-border",
+              style: {
+                position: "absolute",
+                top: "2.5%",
+                left: "2.5%",
+                right: "2.5%",
+                bottom: "2.5%",
+                border:
+                  currentFeedbackState === "correct"
+                    ? "2px dashed #00AA55"
+                    : "2px dashed #CC4444",
+                borderRadius: "4px",
+                pointerEvents: "none",
+              },
+            })
             : null,
           // Add checkmark icon for correct state
           currentFeedbackState === "correct"
             ? React.createElement(
-                "span",
-                {
-                  key: "checkmark-icon",
-                  style: {
-                    fontSize: "1.2em",
-                    marginRight: "10px",
-                    color: "#00FF7F",
-                  },
+              "span",
+              {
+                key: "checkmark-icon",
+                style: {
+                  fontSize: "1.2em",
+                  marginRight: "10px",
+                  color: "#00FF7F",
                 },
-                "✓"
-              )
+              },
+              "✓"
+            )
             : null,
           // Add cross icon for incorrect state
           currentFeedbackState === "incorrect"
             ? React.createElement(
-                "span",
-                {
-                  key: "cross-icon",
-                  style: {
-                    fontSize: "1.2em",
-                    marginRight: "10px",
-                    color: "#FF6B6B",
-                  },
+              "span",
+              {
+                key: "cross-icon",
+                style: {
+                  fontSize: "1.2em",
+                  marginRight: "10px",
+                  color: "#FF6B6B",
                 },
-                "✗"
-              )
+              },
+              "✗"
+            )
             : null,
           // Feedback text with KaTeX support
           React.createElement(
@@ -4473,9 +4469,9 @@ const CalculationsDetailComponent = React.memo((props) => {
     borderRadius: processedBorderRadius,
     ...(processedSectionLeftBorderRadius
       ? {
-          borderTopLeftRadius: processedSectionLeftBorderRadius,
-          borderBottomLeftRadius: processedSectionLeftBorderRadius,
-        }
+        borderTopLeftRadius: processedSectionLeftBorderRadius,
+        borderBottomLeftRadius: processedSectionLeftBorderRadius,
+      }
       : {}),
     padding: processedCardPadding,
     marginBottom: processedCardSpacing,
@@ -4502,17 +4498,15 @@ const CalculationsDetailComponent = React.memo((props) => {
     fontWeight: "600",
     marginBottom: processedSectionMarginBottom || "8px",
     marginLeft: processedAccentBarWidth
-      ? `calc(${processedAccentBarWidth} + ${
-          processedSectionMarginLeft || "12px"
-        })`
+      ? `calc(${processedAccentBarWidth} + ${processedSectionMarginLeft || "12px"
+      })`
       : processedSectionMarginLeft || "12px",
   });
 
   const listStyle = {
     marginLeft: processedAccentBarWidth
-      ? `calc(${processedAccentBarWidth} + ${
-          processedListMarginLeft || "12px"
-        })`
+      ? `calc(${processedAccentBarWidth} + ${processedListMarginLeft || "12px"
+      })`
       : processedListMarginLeft || "12px",
     padding: 0,
     listStyle: "none",
@@ -4604,20 +4598,20 @@ const CalculationsDetailComponent = React.memo((props) => {
                     }),
                     containsHTML
                       ? // HTML mode using dangerouslySetInnerHTML
-                        React.createElement("span", {
+                      React.createElement("span", {
+                        key: "text",
+                        style: { color: itemColor },
+                        dangerouslySetInnerHTML: { __html: itemText },
+                      })
+                      : // Plain text mode
+                      React.createElement(
+                        "span",
+                        {
                           key: "text",
                           style: { color: itemColor },
-                          dangerouslySetInnerHTML: { __html: itemText },
-                        })
-                      : // Plain text mode
-                        React.createElement(
-                          "span",
-                          {
-                            key: "text",
-                            style: { color: itemColor },
-                          },
-                          itemText
-                        ),
+                        },
+                        itemText
+                      ),
                   ]
                 );
               })
@@ -5046,28 +5040,28 @@ const ComputeBoxComponent = React.memo((props) => {
       // Header Row (10% height)
       headerText
         ? React.createElement(
-            "div",
-            {
-              key: "header-row",
-              className: "compute-box-header-row",
-              style: headerRowStyle,
-            },
-            [
-              headerText,
-              React.createElement("div", {
-                key: "header-underline",
-                style: {
-                  position: "absolute",
-                  bottom: "0",
-                  left: "0",
-                  right: "0",
-                  height: processedHeaderRowUnderlineThickness,
-                  backgroundColor: headerRowUnderlineColor,
-                  marginTop: "8px",
-                },
-              }),
-            ]
-          )
+          "div",
+          {
+            key: "header-row",
+            className: "compute-box-header-row",
+            style: headerRowStyle,
+          },
+          [
+            headerText,
+            React.createElement("div", {
+              key: "header-underline",
+              style: {
+                position: "absolute",
+                bottom: "0",
+                left: "0",
+                right: "0",
+                height: processedHeaderRowUnderlineThickness,
+                backgroundColor: headerRowUnderlineColor,
+                marginTop: "8px",
+              },
+            }),
+          ]
+        )
         : null,
 
       // Main Content (90% height)

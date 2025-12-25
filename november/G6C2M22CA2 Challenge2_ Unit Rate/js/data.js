@@ -1,7 +1,7 @@
 // data.js - Internationalization data for the Ratio Learning Applet
 // Contains only the text content that's actually used in the ratio app
 
-const highlight1 = "#ffd966";
+const highlight1 = "#5EBAE7";
 const highlight2 = "#70ACC7";
 const highlight3 = "#f08080";
 const highlight4 = "#ffd966";
@@ -64,7 +64,15 @@ const AppData = {
         page2: {
           highlights: [
             {
-              text: "1 box of pens for Rp36.000,00 which contains 15 pens",
+              text: "△ABC with ∠C = 90°",
+              highlightColor: highlight1,
+              fontColor: "#000000",
+              fontSize: "24gc",
+              bold: true,
+              underline: false,
+            },
+            {
+              text: "",
               highlightColor: highlight1,
               fontColor: "#000000",
               fontSize: "24gc",
