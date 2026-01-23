@@ -1,0 +1,194 @@
+/* ============================================================================
+ * DRAG AND DROP COMPONENT STYLES
+ * Styles for drag-and-drop game interactions
+ * ============================================================================ */
+
+/* ========================================
+ * DRAGGABLE IMAGE
+ * Styles for images that can be dragged
+ * ======================================== */
+
+.draggable-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.draggable-image.dragging {
+    opacity: 0.8;
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    z-index: 999999;
+    cursor: grabbing;
+    position: fixed;
+}
+
+.draggable-image:not(.dragging):hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+}
+
+.draggable-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* ========================================
+ * DROP ZONES
+ * Styles for areas where images can be dropped
+ * ======================================== */
+
+.drop-zone {
+    min-height: 200px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.drop-zone.hovered {
+    border-color: #4A90E2 !important;
+    background-color: rgba(74, 144, 226, 0.15) !important;
+    animation: glow-blue 1s ease-in-out infinite;
+}
+
+.drop-zone-equal {
+    border: 3px dashed rgba(74, 144, 226, 0.5);
+}
+
+.drop-zone-unequal {
+    border: 3px dashed rgba(255, 149, 0, 0.5);
+}
+
+/* ========================================
+ * UNSORTED CONTAINER
+ * Styles for container holding unsorted images
+ * ======================================== */
+
+.unsorted-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 15px;
+    /* background-color is now controlled via inline styles/props */
+    border-radius: 12px;
+    /* border is now controlled via inline styles/props */
+}
+
+.unsorted-container .draggable-image {
+    aspect-ratio: 1;
+}
+
+/* ========================================
+ * DRAG AND DROP GAME CONTAINER
+ * Main container for the entire game
+ * ======================================== */
+
+.drag-drop-game {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* ========================================
+ * ANIMATION STATES
+ * Special states during drag and drop
+ * ======================================== */
+
+.draggable-image.wiggle-animation {
+    animation: wiggle 0.5s ease-in-out 2;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.8) !important;
+    filter: brightness(1.2);
+}
+
+/* ========================================
+ * MOBILE OPTIMIZATIONS
+ * Touch-friendly styles for mobile devices
+ * ======================================== */
+
+@media (max-width: 768px) {
+    .draggable-image {
+        touch-action: none;
+    }
+    
+    .unsorted-container {
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .drop-zone {
+        min-height: 150px;
+    }
+}
+
+/* ========================================
+ * FEEDBACK TEXTBOX
+ * Styles for feedback textbox component
+ * ======================================== */
+
+.feedback-textbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.feedback-textbox-container.feedback-textbox-correct {
+    background-color: var(--color-green, #4CAF50);
+    color: white;
+    border: 4gc dashed var(--color-green-dark, #2E7D32);
+}
+
+.feedback-textbox-container.feedback-textbox-incorrect {
+    background-color: var(--color-salmon, #FF6B6B);
+    color: white;
+    border: 4gc dashed var(--color-salmon-dark, #D32F2F);
+}
+
+.feedback-textbox-container.feedback-textbox-normal {
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.feedback-textbox-container.pending {
+    opacity: 0.7;
+}
+
+/* ========================================
+ * ACCESSIBILITY
+ * Styles for keyboard navigation and screen readers
+ * ======================================== */
+
+.draggable-image:focus {
+    outline: 3px solid #4A90E2;
+    outline-offset: 2px;
+}
+
+.drop-zone:focus-within {
+    border-color: #4A90E2 !important;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .draggable-image,
+    .drop-zone,
+    .wiggle-animation {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+

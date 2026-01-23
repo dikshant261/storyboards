@@ -1,0 +1,1315 @@
+// data.js - Internationalization data for the Ratio Learning Applet
+// Contains only the text content that's actually used in the ratio app
+
+const highlightColor1 = "#FFD700";
+const highlightColor2 = "#70ACC7";
+const highlightColor3 = "#F28283";
+const highlightColor4 = "#00FF7F";
+const highlightColor5 = '#8A2BE2';
+
+const questionTextSize = '34gc';
+const highlightTextSize = "28gc";
+
+const AppData = {
+  // Current language setting
+  currentLanguage: "en",
+
+  // Text content by language
+  translations: {
+    en: {
+      appInfo: {
+        title: "Reading favorite games PD"
+      },
+      messages: {
+        pageStatesCleared: "Page states have been cleared. Reload the page to start fresh?",
+        nextButtonPage2: "Dispatched page change event to page 2",
+        previousButtonPage1: "Dispatched page change event to page 1"
+      },
+
+      buttons: {
+        next: "»",
+        previous: "«",
+        start: "Start",
+        startOver: "Start Over"
+      },
+
+      common: {
+        equationButtonText: "Paper not painted",
+        questionText: "Yohana has a painting assignment on $\\frac{2}{3}$ piece of drawing paper given by her teacher. She has already painted $\\frac{1}{3}$ of the paper. How much paper has Yohana not painted yet?",
+        questionIcon: "Q",
+        headerText: "The picture diagram shows children’s favorite games.",
+        gameLabel: {
+          favoriteGamerPicture: "Favorite Games Picture Diagram",
+          hideAndSeek: "Hide and<br/> Seek",
+          ropeJump: "Rope<br/> Jump",
+          marbles: "Marbles",
+          bentengan: "Bentengan",
+          key: "Key: Each triangle picture = 1 Child",
+        },
+        labels: {
+          dropHere: "Drop here"
+        },
+        informationAnalysis: {
+          header: "INFORMATION ANALYSIS",
+          facts: "Facts",
+          values: "Value",
+          toFind: "To Find"
+        },
+        conceptSummary: {
+          header: "CONCEPT SUMMARY",
+          given: "Given",
+          toFind: "To Find",
+          keyConcepts: "Key Concepts",
+          importantFormulae: "Calculations"
+        },
+        amountBeniGiveToGrandMother: "Amount Beni gave\n to his grandfather.",
+        amountOfBika: "Amount of Bika\n Ambon left with Beni"
+      },
+
+      components: {
+        informationAnalysis: {
+          headerText: "INFORMATION ANALYSIS",
+          factsTitle: "Facts",
+          valueTitle: "Value",
+          toFindTitle: "To Find"
+        },
+        conceptSummary: {
+          headerText: "CONCEPT SUMMARY",
+          givenTitle: "Given",
+          toFindTitle: "To Find",
+          keyConceptsTitle: "Key Concepts",
+          importantFormulaeTitle: "Calculations"
+        }
+      },
+
+      pages: {
+        page1: {
+          introText: "Some children like different games. <br/>We will look at a picture diagram to learn about<br/> their favorite games. <br/>Get ready to read and answer questions!",
+        },
+        page2: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: 'How many children like to play <br/><span style="color:orange">Rope Jump</span>?',
+            options: [
+              {
+                text: "7",
+                iscorrect: false,
+                feedback: "Uh-oh! That’s not correct. Count all Rope Jump triangle pictures.",
+              },
+              {
+                text: "3",
+                iscorrect: false,
+                feedback: "Uh-oh! That’s not correct. Count all Rope Jump triangle pictures.",
+              },
+              {
+                text: "5",
+                iscorrect: false,
+                feedback: "Uh-oh! That’s not correct. Count all Rope Jump triangle pictures.",
+              },
+              {
+                text: "6",
+                iscorrect: true,
+                feedback: "Yay! There are 6 triangle pictures, so 6 children like Rope Jump.",
+              }
+            ],
+          }
+        },
+        page3: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: 'Which game do <span style="color:orange">most children</span> like?',
+            options: [
+              {
+                text: "Hide and Seek",
+                iscorrect: false,
+                feedback: "Oops! There are other games that are liked by most children. Try again.",
+              },
+              {
+                text: "Rope Jump",
+                iscorrect: true,
+                feedback: "Yay! You found it!Rope Jump has the most triangle pictures.",
+              },
+              {
+                text: "Marbles",
+                iscorrect: false,
+                feedback: "Oops! There are other games that are liked by most children. Try again.",
+              },
+              {
+                text: "Bentengan",
+                iscorrect: false,
+                feedback: "Oops! There are other games that are liked by most children. Try again.",
+              }
+            ],
+          }
+        },
+        page4: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: 'Which game do <span style="color:orange">fewer children</span> like?',
+            options: [
+              {
+                text: "Hide and Seek",
+                iscorrect: false,
+                feedback: "Oops! There are other games that are liked by fewer children. Try again.",
+              },
+              {
+                text: "Rope Jump",
+                iscorrect: false,
+                feedback: "Oops! There are other games that are liked by fewer children. Try again.",
+              },
+              {
+                text: "Marbles",
+                iscorrect: true,
+                feedback: "Yay! You got it!Marbles have the fewest triangle pictures..",
+              },
+              {
+                text: "Bentengan",
+                iscorrect: false,
+                feedback: "Oops! There are other games that are liked by fewer children. Try again.",
+              }
+            ],
+          }
+        },
+        page5: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: 'Which game do <span style="color:orange">4 children</span> like to play?',
+            options: [
+              {
+                text: "Hide and Seek",
+                iscorrect: true,
+                feedback: "Yay! Hide and Seek has 4 triangle pictures. So, 4 children like Hide and Seek.",
+              },
+              {
+                text: "Rope Jump",
+                iscorrect: false,
+                feedback: "Uh-oh! That’s not correct.Find the row with exactly 4 triangle pictures.",
+              },
+              {
+                text: "Marbles",
+                iscorrect: false,
+                feedback: "Uh-oh! That’s not correct.Find the row with exactly 4 triangle pictures.",
+              },
+              {
+                text: "Bentengan",
+                iscorrect: false,
+                feedback: "Uh-oh! That’s not correct.Find the row with exactly 4 triangle pictures.",
+              }
+            ],
+          }
+        },
+        page6: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: 'Which game is liked by <span style="color:orange">less than 4</span> children?',
+            options: [
+              {
+                text: "Hide and Seek",
+                iscorrect: false,
+                feedback: "Almost! Look for a game with less than 4 triangle pictures.",
+              },
+              {
+                text: "Rope Jump",
+                iscorrect: false,
+                feedback: "Oops! Not this one. Look for a game with less than 4 triangle pictures.",
+              },
+              {
+                text: "Marbles",
+                iscorrect: true,
+                feedback: "Yay! Marbles has 3 triangle pictures. That is less than 5 children.",
+              },
+              {
+                text: "Bentengan",
+                iscorrect: false,
+                feedback: "Oops! Not this one. Look for a game with less than 4 triangle pictures.",
+              }
+            ],
+          }
+        },
+        page7: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: 'Which games are liked by <span style="color:orange">more than 4 children</span>?',
+            options: [
+              {
+                text: "Hide and Seek",
+                iscorrect: false,
+                feedback: "Almost! Look for games that have more than 4 triangle pictures.",
+              },
+              {
+                text: "Rope Jump",
+                iscorrect: true,
+                feedback: "Good! This game has more than 4 triangle pictures. Let’s find one more. ",
+              },
+              {
+                text: "Marbles",
+                iscorrect: false,
+                feedback: "Oops! Not this one. Look for games that have more than 4 triangle pictures.",
+              },
+              {
+                text: "Bentengan",
+                iscorrect: true,
+                feedback: "Well done! You found both games with more than 4 triangle pictures.",
+              }
+            ],
+          }
+        },
+        page8: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: '<span style="color:orange">How many more</span> children like to play Bentengan than Marbles?</span>',
+            options: [
+              {
+                text: "3",
+                iscorrect: false,
+                feedback: "Try again! Bentengan has more triangles than Marbles.Count the extra triangle pictures.",
+              },
+              {
+                text: "2",
+                iscorrect: true,
+                feedback: "Well done! Bentengan has 2 more triangle pictures than Marbles.",
+              },
+              {
+                text: "4",
+                iscorrect: false,
+                feedback: "Try again! Bentengan has more triangles than Marbles.Count the extra triangle pictures.",
+              },
+              {
+                text: "1",
+                iscorrect: false,
+                feedback: "Try again! Bentengan has more triangles than Marbles.Count the extra triangle pictures.",
+              }
+            ],
+          }
+        },
+        page9: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: '<span style="color:orange">How many more</span> children like Rope Jump than Hide and Seek?',
+            options: [
+              {
+                text: "3",
+                iscorrect: false,
+                feedback: "ry again! Rope Jump has more triangles than Hide and Seek. Count the extra triangle pictures",
+              },
+              {
+                text: "1",
+                iscorrect: false,
+                feedback: "ry again! Rope Jump has more triangles than Hide and Seek. Count the extra triangle pictures",
+              },
+              {
+                text: "4",
+                iscorrect: false,
+                feedback: "ry again! Rope Jump has more triangles than Hide and Seek. Count the extra triangle pictures",
+              },
+              {
+                text: "2",
+                iscorrect: true,
+                feedback: "Well done! Rope Jump has 2 more triangle pictures than Hide and Seek.",
+              }
+            ],
+          }
+        },
+        page10: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: '<span style="color:orange">How many fewer</span> children like to play Marbles than Rope Jump?',
+            options: [
+              {
+                text: "3",
+                iscorrect: true,
+                feedback: "Well done! Marbles has 3 triangle pictures less than Rope Jump.",
+              },
+              {
+                text: "1",
+                iscorrect: false,
+                feedback: "Try again! Marbles has fewer triangles than Rope Jump.Count the extra triangle pictures.",
+              },
+              {
+                text: "4",
+                iscorrect: false,
+                feedback: "Try again! Marbles has fewer triangles than Rope Jump.Count the extra triangle pictures.",
+              },
+              {
+                text: "2",
+                iscorrect: false,
+                feedback: "Try again! Marbles has fewer triangles than Rope Jump.Count the extra triangle pictures.",
+              }
+            ],
+          }
+        },
+        page11: {
+          headerText: "The picture diagram shows children’s favorite games.",
+          footerInstruction: "Tap the correct option.",
+          quizPanel: {
+            questionText: '<span style="color:orange">How many fewer</span> children like to play Bentengan than Hide and Seek?',
+            options: [
+              {
+                text: "3",
+                iscorrect: false,
+                feedback: "Try again! Hide and seek has fewer triangles than Bentengan.Count the extra triangle pictures.",
+              },
+              {
+                text: "2",
+                iscorrect: false,
+                feedback: "Try again! Hide and seek has fewer triangles than Bentengan.Count the extra triangle pictures.",
+              },
+              {
+                text: "4",
+                iscorrect: false,
+                feedback: "Try again! Hide and seek has fewer triangles than Bentengan.Count the extra triangle pictures.",
+              },
+              {
+                text: "1",
+                iscorrect: true,
+                feedback: "Well done! Hide and seek has 1 triangle picture less than Bentengan.",
+              }
+            ],
+          }
+        },
+        page12: {
+          introText: "Well Done!<br/><br/>You read the picture diagram and answered the questions!",
+        },
+      }
+    },
+    id: {
+      appInfo: {
+        title: "Rasio - Perbandingan Jarak Komodo"
+      },
+
+      messages: {
+        pageStatesCleared: "Status halaman sudah dihapus. Muat ulang halaman untuk mulai dari awal?",
+        nextButtonPage2: "Peristiwa pindah halaman telah dikirim ke halaman 2",
+        previousButtonPage1: "Peristiwa pindah halaman telah dikirim ke halaman 1"
+      },
+
+      buttons: {
+        next: "»",
+        previous: "«",
+        startOver: "Mulai Lagi"
+      },
+
+      common: {
+        questionText:
+          "Rumah Komang berada di antara rumah Yohana dan rumah Lukas. Jarak dari rumah Komang ke rumah Yohana adalah $1 \\frac{1}{2}$ km, sedangkan jarak antara rumah Komang dan rumah Lukas adalah $2 \\frac{1}{4}$ km. Jika lebar rumah Komang adalah $\\frac{1}{200}$ km, berapa jarak rumah Yohana ke rumah Lukas?",
+        questionIcon: "Q",
+        labels: {
+          dropHere: "Taruh di sini"
+        },
+        informationAnalysis: {
+          header: "ANALISIS INFORMASI",
+          facts: "Fakta",
+          values: "Nilai",
+          toFind: "Yang Dicari"
+        },
+        conceptSummary: {
+          header: "RINGKASAN KONSEP",
+          given: "Diketahui",
+          toFind: "Yang Dicari",
+          keyConcepts: "Konsep Kunci",
+          importantFormulae: "Perhitungan"
+        }
+      },
+
+      components: {
+        informationAnalysis: {
+          headerText: "ANALISIS INFORMASI",
+          factsTitle: "Fakta",
+          valueTitle: "Nilai",
+          toFindTitle: "Yang Dicari"
+        },
+        conceptSummary: {
+          headerText: "RINGKASAN KONSEP",
+          givenTitle: "Diketahui",
+          toFindTitle: "Yang Dicari",
+          keyConceptsTitle: "Konsep Kunci",
+          importantFormulaeTitle: "Perhitungan"
+        }
+      },
+
+      pages: {
+        page1: {
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          headerText: "Baca soal dan identifikasi ‘diketahui’ dan ‘yang dicari’",
+          footerInstruction: "Tekan » untuk mengidentifikasi informasi ‘diketahui’"
+        },
+
+        page2: {
+          headerText: "Baca soal dan identifikasi ‘diketahui’ dan ‘yang dicari’",
+          footerInstruction: "Tekan » untuk mengidentifikasi informasi ‘diketahui’",
+          highlights: [
+            {
+              text: "Rumah Komang berada di antara rumah Yohana dan rumah Lukas.",
+              highlightColor: highlightColor1,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            }
+          ],
+          informationAnalysis: {
+            facts: [{ text: "Rumah Komang berada di tengah.", size: "20gc", color: highlightColor1 }],
+            values: [],
+            toFind: []
+          }
+        },
+
+        page3: {
+          headerText: "Baca soal dan identifikasi ‘diketahui’ dan ‘yang dicari’",
+          footerInstruction: "Tekan » untuk mengidentifikasi informasi ‘diketahui’",
+          highlights: [],
+          informationAnalysis: {
+            facts: [
+              { text: "Rumah Komang berada di tengah.", size: "20gc", color: highlightColor2 },
+              { text: "Komang ke Yohana = $1 \\frac{1}{2}$ km", size: "20gc", color: highlightColor2 }
+            ],
+            values: [],
+            toFind: []
+          }
+        },
+
+        page4: {
+          headerText: "Baca soal dan identifikasi ‘diketahui’ dan ‘yang dicari’",
+          footerInstruction: "Tekan » untuk mengidentifikasi informasi ‘diketahui’",
+          highlights: [
+            {
+              text: "Rumah Komang berada di antara rumah Yohana dan rumah Lukas.",
+              highlightColor: highlightColor1,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "Jarak dari rumah Komang ke rumah Yohana adalah",
+              highlightColor: highlightColor2,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "km, sedangkan",
+              highlightColor: highlightColor2,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "jarak antara rumah Komang dan rumah Lukas adalah",
+              highlightColor: highlightColor3,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "km.",
+              highlightColor: highlightColor3,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            }
+          ],
+          informationAnalysis: {
+            facts: [
+              { text: "Rumah Komang berada di tengah.", size: "20gc", color: highlightColor1 },
+              { text: "Komang ke Yohana = $1 \\frac{1}{2}$ km", size: "20gc", color: highlightColor2 },
+              { text: "Komang ke Lukas = $2 \\frac{1}{4}$ km", size: "20gc", color: highlightColor3 }
+            ],
+            values: [],
+            toFind: []
+          }
+        },
+
+        // Newly added/updated texts for later pages
+        page18: {
+          instructionRevealSum: "Tekan '?' untuk menampilkan hasil penjumlahan",
+          instructionAfterQuiz: "Tekan » untuk Langkah 3"
+        },
+
+        page19: {
+          instructionRevealConversion: "Tekan '?' untuk menampilkan konversi hasil",
+          instructionAfterQuiz: "Tekan » untuk merangkum",
+          headerAfterQuiz: "Kamu sudah menemukan jarak dari rumah Komang ke rumah Lukas!"
+        },
+
+        page24: {
+          instructionRevealConversions: "Tekan '?' untuk menampilkan jawaban tiap konversi",
+          instructionAfterQuiz: "Tekan » untuk Langkah 2.c"
+        },
+
+        page5: {
+          headerText: "Baca soal dan identifikasi ‘diketahui’ dan ‘yang dicari’",
+          footerInstruction: "Tekan » untuk mengidentifikasi informasi ‘diketahui’",
+          highlights: [
+            {
+              text: "Rumah Komang berada di antara rumah Yohana dan rumah Lukas.",
+              highlightColor: highlightColor1,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "Jarak dari rumah Komang ke rumah Yohana adalah",
+              highlightColor: highlightColor2,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "km, sedangkan",
+              highlightColor: highlightColor2,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "jarak antara rumah Komang dan rumah Lukas adalah",
+              highlightColor: highlightColor3,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "km.",
+              highlightColor: highlightColor3,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "lebar rumah Komang adalah",
+              highlightColor: highlightColor4,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "km,",
+              highlightColor: highlightColor4,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            }
+          ],
+          informationAnalysis: {
+            facts: [
+              { text: "Rumah Komang berada di tengah.", size: "20gc", color: highlightColor1 },
+              { text: "Komang ke Yohana = $1 \\frac{1}{2}$ km", size: "20gc", color: highlightColor2 },
+              { text: "Komang ke Lukas = $2 \\frac{1}{4}$ km", size: "20gc", color: highlightColor3 },
+              { text: "lebar rumah Komang adalah $\\frac{1}{200}$ km", size: "20gc", color: highlightColor4 }
+            ],
+            values: [],
+            toFind: []
+          }
+        },
+
+        page6: {
+          headerText: "Baca soal dan identifikasi ‘diketahui’ dan ‘yang dicari’",
+          footerInstruction: "Tekan » untuk mengidentifikasi informasi ‘diketahui’",
+          highlights: [
+            {
+              text: "Rumah Komang berada di antara rumah Yohana dan rumah Lukas.",
+              highlightColor: highlightColor1,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "Jarak dari rumah Komang ke rumah Yohana adalah",
+              highlightColor: highlightColor2,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "km, sedangkan",
+              highlightColor: highlightColor2,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "jarak antara rumah Komang dan rumah Lukas adalah",
+              highlightColor: highlightColor3,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "km.",
+              highlightColor: highlightColor3,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "lebar rumah Komang adalah",
+              highlightColor: highlightColor4,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "km,",
+              highlightColor: highlightColor4,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "berapa jarak rumah Yohana ke rumah Lukas?",
+              highlightColor: highlightColor5,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            }
+          ],
+          informationAnalysis: {
+            facts: [
+              { text: "Rumah Komang berada di tengah.", size: "20gc", color: highlightColor1 },
+              { text: "Komang ke Yohana = $1 \\frac{1}{2}$ km", size: "20gc", color: highlightColor2 },
+              { text: "Komang ke Lukas = $2 \\frac{1}{4}$ km", size: "20gc", color: highlightColor3 },
+              { text: "lebar rumah Komang adalah $\\frac{1}{200}$ km", size: "20gc", color: highlightColor4 }
+            ],
+            values: [],
+            toFind: [
+              { text: "berapa jarak rumah Yohana ke rumah Lukas?", size: "20gc", color: highlightColor5 }
+            ]
+          }
+        },
+
+        page7: {
+          headerText: "Buat kalimat matematika untuk adegan yang diberikan",
+          footerInstruction: "Seret tombol yang benar ke tempat yang benar dalam kalimat",
+          optionOpt1Text: "Rumah Komang<br>ke<br>Rumah Yohana",
+          optionOpt1Feedback: "Benar! Ini adalah jarak dari Komang ke rumah Yohana.",
+          optionOpt2Text: "Rumah Yohana<br>ke<br>Rumah Lukas",
+          optionOpt2Feedback: "Benar! Ini adalah jarak dari Yohana ke rumah Lukas.",
+          optionOpt3Text: "Lebar<br>rumah Komang",
+          optionOpt3Feedback: "Benar! Ini adalah lebar rumah Komang.",
+          optionPlusCorrectFeedback: "Benar!",
+          optionMinusNotNeededFeedback: "Operator ini tidak diperlukan di sini.",
+
+          highlights: [
+            {
+              text: "sebuah tiang antena TV di atap",
+              highlightColor: "#FFD700",
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "tiang antena setinggi 8 meter",
+              highlightColor: "#FFD700",
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "tepat di atas",
+              highlightColor: "#70ACC7",
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "genteng atap",
+              highlightColor: "#70ACC7",
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "ditahan oleh kawat",
+              highlightColor: highlightColor4,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            },
+            {
+              text: "kawat biasanya dipasang di puncak tiang",
+              highlightColor: highlightColor4,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            }
+          ],
+
+          informationAnalysis: {
+            facts: [
+              { text: "Tiang antena setinggi 8 meter", size: "20gc", color: "#FFD700" },
+              { text: "Kawat terpasang pada $\\frac{3}{4}$ tinggi tiang", size: "20gc", color: "#70ACC7" },
+              { text: "Panjang sisi vertikal segitiga = 6 m (8 × $\\frac{3}{4}$)", size: "20gc", color: "#70ACC7" },
+              { text: "Jarak antara kawat dan tiang di tanah = 8 m", size: "20gc", color: "#70ACC7" },
+              { text: "Sisi horizontal adalah jarak dari kaki tiang ke titik ikat kawat", size: "20gc", color: "#F28283" },
+              { text: "Panjang kawat adalah hipotenusa segitiga", size: "20gc", color: "#F28283" },
+              { text: "Sisi vertikal adalah jarak dari kaki tiang ke titik ikat kawat", size: "20gc", color: "#F28283" }
+            ],
+            values: [],
+            toFind: []
+          },
+
+          conceptSummary: {
+            given: [],
+            toFind: [],
+            facts: [
+              { text: "Komodo dewasa dapat berjalan 11,2 km per hari.", size: "20gc", color: highlightColor1 },
+              { text: "Komodo bayi dapat berjalan 2000 m per hari.", size: "20gc", color: highlightColor2 }
+            ],
+            values: [
+              { text: "Rasio membandingkan besaran dengan satuan yang sama.", size: "20gc", color: highlightColor3 },
+              { text: "1 km = 1000 m", size: "20gc", color: highlightColor4 }
+            ]
+          },
+
+          statementText: "Mari ubah jarak tempuh komodo dewasa menjadi meter. 11.2 km = _________",
+
+          fillBlanks: {
+            instructionText: "Ketuk opsi yang benar untuk mengisi bagian kosong yang disorot di kotak biru.",
+            blank10Coordinate: [610, 295, 820, 360],
+            options: [
+              { id: "opt1", text: "11.2 m", feedbackText: "Belum tepat. Kalikan 1000 untuk mengubah km ke m.", blankID: [] },
+              { id: "opt2", text: "112 m", feedbackText: "Belum tepat. Kalikan 1000 untuk mengubah km ke m.", blankID: [] },
+              { id: "opt3", text: "1120 m", feedbackText: "Belum tepat. Kalikan 1000 untuk mengubah km ke m.", blankID: [] },
+              {
+                id: "opt4",
+                text: "11200 m",
+                feedbackText: "Benar! 11.2 × 1000 = 11200 m",
+                blankID: [{ bid: "blank1", text: "11200 m" }]
+              }
+            ],
+            impFormulae: []
+          }
+        },
+
+        page8: {
+          headerText: "Apa urutan langkah yang benar untuk menjumlahkan bilangan campuran?",
+          footerInstruction: "Susun ulang tombol ke urutan langkah yang benar",
+          highlights: [
+            {
+              text: "Rumah Komang berada di antara rumah Yohana dan rumah Lukas.",
+              highlightColor: highlightColor1,
+              fontColor: "#000000",
+              fontSize: questionTextSize,
+              bold: true,
+              underline: false
+            }
+          ],
+          informationAnalysis: {
+            facts: [{ text: "Rumah Komang berada di tengah.", size: "20gc", color: highlightColor1 }],
+            values: [],
+            toFind: []
+          },
+          conceptSummary: {
+            given: [],
+            toFind: [],
+            facts: [
+              { text: "Komodo dewasa dapat berjalan 11,2 km per hari.", size: "20gc", color: highlightColor1 },
+              { text: "Komodo bayi dapat berjalan 2000 m per hari.", size: "20gc", color: highlightColor2 }
+            ],
+            values: [
+              { text: "Rasio membandingkan besaran dengan satuan yang sama.", size: "20gc", color: highlightColor3 },
+              { text: "1 km = 1000 m", size: "20gc", color: highlightColor4 },
+              { text: "11.2 km = 11200 m", size: "20gc", color: highlightColor4 }
+            ]
+          },
+          quizPanel: {
+            questionText: "Berapa rasio jarak yang ditempuh komodo dewasa terhadap komodo bayi?",
+            options: [
+              { text: "$\\frac{1120}{2000}$", feedback: "Belum tepat. Samakan satuan dulu sebelum membuat rasio.", iscorrect: false },
+              { text: "$\\frac{11.2}{2000}$", feedback: "Belum tepat. Samakan satuan dulu sebelum membuat rasio.", iscorrect: false },
+              { text: "$\\frac{11200}{2000}$", feedback: "Benar! Mari sederhanakan rasionya.", iscorrect: true },
+              { text: "$\\frac{11200}{2}$", feedback: "Belum tepat. Samakan satuan dulu sebelum membuat rasio.", iscorrect: false }
+            ]
+          }
+        },
+
+        page9: {
+          headerText: "Apa rumus yang benar untuk mengubah bilangan campuran menjadi pecahan biasa?",
+          footerInstruction: "Seret suku yang benar untuk membentuk pecahan biasa",
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          quizPanel: {
+            questionText: "Hubungan mana yang benar untuk mengubah bilangan campuran menjadi pecahan biasa?",
+            options: [
+              {
+                text: '$\\frac{(<span style="background: linear-gradient(135deg, #FF9999 0%, #FF7F7F 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Pembilang</span> \\times <span style="background: linear-gradient(135deg, #4A7C2A 0%, #3D6B1F 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Bagian Utuh</span>) + <span style="background: linear-gradient(135deg, #D2B48C 0%, #C9A961 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Penyebut</span>}{<span style="background: linear-gradient(135deg, #D2B48C 0%, #C9A961 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Penyebut</span>}$',
+                feedback:
+                  "Salah. Di sini pembilang dikalikan dengan bagian utuh, padahal yang benar: penyebut dikalikan dengan bagian utuh dulu, lalu ditambah pembilang.",
+                iscorrect: false
+              },
+              {
+                text: '$\\frac{(<span style="background: linear-gradient(135deg, #D2B48C 0%, #C9A961 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Penyebut</span> \\times <span style="background: linear-gradient(135deg, #4A7C2A 0%, #3D6B1F 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Bagian Utuh</span>) + <span style="background: linear-gradient(135deg, #FF9999 0%, #FF7F7F 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Pembilang</span>}{<span style="background: linear-gradient(135deg, #FF9999 0%, #FF7F7F 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Pembilang</span>}$',
+                feedback:
+                  "Salah. Perhitungan pembilangnya benar, tetapi penyebutnya harus tetap penyebut asli dari bilangan campuran, bukan pembilang.",
+                iscorrect: false
+              },
+              {
+                text: '$\\frac{(<span style="background: linear-gradient(135deg, #D2B48C 0%, #C9A961 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Penyebut</span> \\times <span style="background: linear-gradient(135deg, #4A7C2A 0%, #3D6B1F 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Bagian Utuh</span>) + <span style="background: linear-gradient(135deg, #FF9999 0%, #FF7F7F 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Pembilang</span>}{<span style="background: linear-gradient(135deg, #D2B48C 0%, #C9A961 100%); color: white; padding: 4px 8px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: bold;">Penyebut</span>}$',
+                feedback:
+                  "Benar! Untuk mengubah bilangan campuran menjadi pecahan biasa, kalikan penyebut dengan bagian utuh, lalu tambahkan pembilang untuk mendapatkan pembilang baru, dan pertahankan penyebut asli.",
+                iscorrect: true
+              }
+            ]
+          }
+        },
+
+        page10: {
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          quizPanel: {
+            questionText: "Ketuk opsi yang benar untuk menemukan KPK dari bilangan yang diberikan.",
+            options: [
+              {
+                text: "Pengurangan bilangan prima yang membantu membagi bilangan hingga menjadi 1.",
+                feedback:
+                  "Salah. Pengurangan tidak digunakan untuk mencari KPK. KPK didapat dari perkalian faktor prima, bukan pengurangan.",
+                iscorrect: false
+              },
+              {
+                text: "Penjumlahan bilangan prima yang membantu membagi bilangan hingga menjadi 1.",
+                feedback:
+                  "Salah. Penjumlahan tidak digunakan untuk mencari KPK. KPK memerlukan perkalian faktor prima, bukan penjumlahan.",
+                iscorrect: false
+              },
+              {
+                text: "Hasil kali bilangan prima yang membantu membagi bilangan hingga menjadi 1.",
+                feedback:
+                  "Benar! KPK ditemukan dengan mengambil hasil kali (perkalian) semua faktor prima dengan pangkat tertinggi yang muncul pada bilangan-bilangan tersebut.",
+                iscorrect: true
+              },
+              {
+                text: "Pembagian bilangan prima yang membantu membagi bilangan hingga menjadi 1.",
+                feedback:
+                  "Salah. Pembagian dipakai untuk menemukan faktor prima, tetapi KPK adalah hasil kali faktor-faktor prima itu, bukan pembagiannya.",
+                iscorrect: false
+              }
+            ]
+          }
+        },
+
+        page11: {
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          quizPanel: {
+            questionText: "Ketuk opsi yang benar untuk menemukan KPK dari bilangan yang diberikan.",
+            options: [
+              {
+                text: "Pengurangan bilangan prima yang membantu membagi bilangan hingga menjadi 1.",
+                feedback:
+                  "Salah. Pengurangan tidak digunakan untuk mencari KPK. KPK didapat dari perkalian faktor prima, bukan pengurangan.",
+                iscorrect: false
+              },
+              {
+                text: "Penjumlahan bilangan prima yang membantu membagi bilangan hingga menjadi 1.",
+                feedback:
+                  "Salah. Penjumlahan tidak digunakan untuk mencari KPK. KPK memerlukan perkalian faktor prima, bukan penjumlahan.",
+                iscorrect: false
+              },
+              {
+                text: "Hasil kali bilangan prima yang membantu membagi bilangan hingga menjadi 1.",
+                feedback:
+                  "Benar! KPK ditemukan dengan mengambil hasil kali (perkalian) semua faktor prima dengan pangkat tertinggi yang muncul pada bilangan-bilangan tersebut.",
+                iscorrect: true
+              },
+              {
+                text: "Pembagian bilangan prima yang membantu membagi bilangan hingga menjadi 1.",
+                feedback:
+                  "Salah. Pembagian dipakai untuk menemukan faktor prima, tetapi KPK adalah hasil kali faktor-faktor prima itu, bukan pembagiannya.",
+                iscorrect: false
+              }
+            ]
+          }
+        },
+
+        page12: {
+          footerInstruction: "Susun ulang tombol ke urutan langkah yang benar",
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          quizPanel: {
+            questionText: "Ketuk opsi yang benar untuk mengubah pecahan tidak sejenis menjadi pecahan sejenis.",
+            options: [
+              {
+                text: "Cari pecahan senilai dengan KPK sebagai penyebut.",
+                feedback:
+                  "Benar! Untuk mengubah pecahan tidak sejenis menjadi sejenis, kita mencari pecahan senilai dengan menggunakan KPK (Kelipatan Persekutuan Terkecil) dari penyebut sebagai penyebut bersama.",
+                iscorrect: true
+              },
+              {
+                text: "Cari pecahan senilai dengan FPB sebagai penyebut.",
+                feedback:
+                  "Salah. FPB digunakan untuk menyederhanakan pecahan, bukan untuk menyamakan penyebut. Kita menggunakan KPK sebagai penyebut bersama.",
+                iscorrect: false
+              },
+              {
+                text: "Cari pecahan senilai dengan KPK sebagai pembilang.",
+                feedback:
+                  "Salah. KPK digunakan sebagai penyebut (bukan pembilang) untuk menyamakan penyebut. Pembilang disesuaikan agar pecahannya senilai.",
+                iscorrect: false
+              },
+              {
+                text: "Cari pecahan senilai dengan FPB sebagai pembilang.",
+                feedback:
+                  "Salah. FPB tidak digunakan untuk menyamakan penyebut. Kita menggunakan KPK sebagai penyebut bersama, dan pembilang disesuaikan.",
+                iscorrect: false
+              }
+            ]
+          }
+        },
+
+        page13: {
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          quizPanel: {
+            questionText: "Ketuk opsi yang benar untuk menjumlahkan pecahan sejenis.",
+            options: [
+              {
+                text: "Jumlahkan pembilang dan penyebut.",
+                feedback:
+                  "Salah. Saat menjumlahkan pecahan sejenis, kita hanya menjumlahkan pembilang. Penyebut tetap sama.",
+                iscorrect: false
+              },
+              {
+                text: "Jumlahkan pembilang dan pertahankan penyebut.",
+                feedback:
+                  "Benar! Saat menjumlahkan pecahan sejenis, kita menjumlahkan pembilang dan penyebut tetap sama.",
+                iscorrect: true
+              },
+              {
+                text: "Jumlahkan penyebut dan pertahankan pembilang.",
+                feedback:
+                  "Salah. Yang dijumlahkan adalah pembilang (bukan penyebut) dan penyebut tetap sama.",
+                iscorrect: false
+              },
+              {
+                text: "Tidak ada yang benar.",
+                feedback:
+                  "Salah. Cara yang benar adalah menjumlahkan pembilang dan mempertahankan penyebut saat menjumlahkan pecahan sejenis.",
+                iscorrect: false
+              }
+            ]
+          }
+        },
+
+        page14: {
+          headerText: "Apa rumus yang benar untuk mengubah pecahan biasa menjadi bilangan campuran?",
+          footerInstruction: "Seret suku yang benar untuk membentuk pecahan campuran",
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          quizPanel: {
+            questionText: "Ketuk hubungan yang benar untuk mengubah pecahan biasa menjadi bilangan campuran.",
+            options: [
+              {
+                text:
+                  'Bilangan Campuran = <span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Hasil Bagi</span> $\\frac{<span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Sisa</span>}{<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}$',
+                feedback:
+                  "Benar! Untuk mengubah pecahan biasa menjadi bilangan campuran, bagi pembilang dengan penyebut. Hasil bagi menjadi bagian utuh, sisa menjadi pembilang pecahan, dan penyebut tetap sama.",
+                iscorrect: true
+              },
+              {
+                text:
+                  'Bilangan Campuran = <span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Hasil Bagi</span> $\\frac{<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}{<span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Sisa</span>}$',
+                feedback:
+                  "Salah. Hasil bagi sebagai bagian utuh sudah benar, tetapi sisa harus menjadi pembilang dan penyebut harus tetap sama. Kamu menukarnya.",
+                iscorrect: false
+              },
+              {
+                text:
+                  'Bilangan Campuran = <span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span> $\\frac{<span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Hasil Bagi</span>}{<span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Sisa</span>}$',
+                feedback:
+                  "Salah. Hasil bagi (hasil pembagian) harus menjadi bagian utuh, bukan penyebut. Penyebut tetap sama, dan sisa menjadi pembilang.",
+                iscorrect: false
+              }
+            ]
+          }
+        },
+
+        page15: {
+          highlights: [
+            { text: "sebuah tiang antena TV di atap", highlightColor: "#FFD700", fontColor: "#000000", fontSize: "24gc" }
+          ]
+        },
+
+        page16: {
+          headerText: "Kerjakan langkahnya di buku catatan dan sebutkan jawabannya.",
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          quizPanel: {
+            questionText: "Ketuk hubungan yang benar untuk mengubah bilangan campuran menjadi pecahan biasa.",
+            options: [
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}{<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}$',
+                feedback:
+                  "Salah. Di sini pembilang dikalikan dengan bagian utuh, padahal yang benar: penyebut dikalikan dengan bagian utuh dulu, lalu ditambah pembilang.",
+                iscorrect: false
+              },
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}{<span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}$',
+                feedback:
+                  "Salah. Perhitungan pembilangnya benar, tetapi penyebutnya harus tetap penyebut asli, bukan pembilang.",
+                iscorrect: false
+              },
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}{<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}$',
+                feedback:
+                  "Benar! Kalikan penyebut dengan bagian utuh, tambahkan pembilang untuk mendapatkan pembilang baru, dan pertahankan penyebut asli.",
+                iscorrect: true
+              }
+            ]
+          }
+        },
+
+        page17: {
+          headerText: "Kerjakan langkahnya di buku catatan dan sebutkan jawabannya.",
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          quizPanel: {
+            questionText: "Ketuk hubungan yang benar untuk mengubah bilangan campuran menjadi pecahan biasa.",
+            options: [
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}{<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}$',
+                feedback:
+                  "Salah. Yang benar: penyebut dikalikan dengan bagian utuh dulu, lalu ditambah pembilang.",
+                iscorrect: false
+              },
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}{<span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}$',
+                feedback:
+                  "Salah. Penyebutnya harus tetap penyebut asli, bukan pembilang.",
+                iscorrect: false
+              },
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}{<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}$',
+                feedback:
+                  "Benar! Kalikan penyebut dengan bagian utuh, tambahkan pembilang, dan pertahankan penyebut asli.",
+                iscorrect: true
+              }
+            ]
+          }
+        },
+
+        page18: {
+          headerText: "Kerjakan langkahnya di buku catatan dan sebutkan jawabannya.",
+          highlights: [],
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan.",
+          instructionRevealSum: "Tekan '?' untuk menampilkan hasil penjumlahan",
+          instructionAfterQuiz: "Tekan » untuk Langkah 3",
+          quizPanel: {
+            questionText: "Ketuk hubungan yang benar untuk mengubah bilangan campuran menjadi pecahan biasa.",
+            options: [
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}{<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}$',
+                feedback:
+                  "Salah. Yang benar: penyebut dikalikan dengan bagian utuh dulu, lalu ditambah pembilang.",
+                iscorrect: false
+              },
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}{<span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}$',
+                feedback:
+                  "Salah. Penyebutnya harus tetap penyebut asli, bukan pembilang.",
+                iscorrect: false
+              },
+              {
+                text:
+                  'Pecahan Biasa = $\\frac{(<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span> \\times <span style="background-color: #9370DB; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Bagian Utuh</span>) + <span style="background-color: #20B2AA; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Pembilang</span>}{<span style="background-color: #FF69B4; color: white; padding: 2px 6px; border-radius: 4px; display: inline-block;">Penyebut</span>}$',
+                feedback:
+                  "Benar! Kalikan penyebut dengan bagian utuh, tambahkan pembilang, dan pertahankan penyebut asli.",
+                iscorrect: true
+              }
+            ]
+          }
+        },
+
+        page19: {
+          headerText: "Kerjakan langkahnya di buku catatan dan sebutkan jawabannya.",
+          instructionRevealConversion: "Tekan '?' untuk menampilkan konversi hasil",
+          instructionAfterQuiz: "Tekan » untuk merangkum",
+          headerAfterQuiz: "Kamu sudah menemukan jarak dari rumah Komang ke rumah Lukas!"
+        },
+
+        page20: {
+          headerText: "Identifikasi adegan – Buat Persamaan – Selesaikan nilai yang belum diketahui",
+          instructionText:
+            "Mari cari jarak dari rumah Yohana ke rumah Lukas dengan menjumlahkan bilangan campuran dan pecahan."
+        },
+
+        page21: {
+          headerText: "Buat kalimat matematika untuk adegan yang diberikan",
+          footerInstruction: "Seret tombol yang benar ke tempat yang benar dalam kalimat"
+        },
+
+        page22: {
+          headerText: "Buat kalimat matematika untuk adegan yang diberikan",
+          footerInstruction: "Tekan » untuk mengidentifikasi semua langkah yang diperlukan untuk penjumlahan"
+        },
+
+        page23: {
+          footerInstruction: "Tekan » untuk menjumlahkan bilangan campuran menggunakan langkah-langkah ini"
+        },
+
+        page24: {
+          instructionRevealConversions: "Tekan '?' untuk menampilkan jawaban tiap konversi",
+          instructionAfterQuiz: "Tekan » untuk Langkah 2.c"
+        }
+      }
+    }
+
+  },
+};
+
+// Indonesian ('id') translations are defined explicitly above.
+
+// Simple i18n utility functions
+const i18n = {
+  // Get translated text
+  t: (key, params = {}) => {
+    const lang = AppData.currentLanguage;
+    const translation = AppData.translations[lang];
+
+    // Navigate through nested object using dot notation
+    const keys = key.split(".");
+    let value = translation;
+    let found = true;
+
+    for (const k of keys) {
+      if (value && typeof value === "object" && k in value) {
+        value = value[k];
+      } else {
+        found = false;
+        break;
+      }
+    }
+
+    // If not found in current language, try English fallback
+    if (!found) {
+      value = AppData.translations.en;
+      for (const fallbackKey of keys) {
+        if (value && typeof value === "object" && fallbackKey in value) {
+          value = value[fallbackKey];
+        } else {
+          return `[Missing: ${key}]`;
+        }
+      }
+    }
+
+    // If value is undefined or null, return missing message
+    if (value === undefined || value === null) {
+      return `[Missing: ${key}]`;
+    }
+
+    // Replace parameters in string
+    if (typeof value === "string") {
+      return value.replace(/\{(\w+)\}/g, (match, param) => {
+        return params.hasOwnProperty(param) ? params[param] : match;
+      });
+    }
+
+    // Return value as-is (could be array, object, number, boolean, etc.)
+    return value;
+  },
+
+  // Set the current language
+  setLanguage: (langCode) => {
+    console.log(`🌐 Attempting to set language to: ${langCode}`);
+    console.log(`🌐 Available languages:`, Object.keys(AppData.translations));
+    console.log(`🌐 Current language before change:`, AppData.currentLanguage);
+
+    if (AppData.translations[langCode]) {
+      AppData.currentLanguage = langCode;
+      console.log(`✅ Language successfully set to: ${langCode}`);
+      console.log(`🌐 Current language after change:`, AppData.currentLanguage);
+      return true;
+    } else {
+      console.warn(
+        `❌ Language '${langCode}' not supported. Available languages:`,
+        Object.keys(AppData.translations)
+      );
+      return false;
+    }
+  },
+
+  // Get the current language
+  getCurrentLanguage: () => {
+    return AppData.currentLanguage;
+  },
+
+  // Initialize language system (placeholder for compatibility)
+  initLanguage: () => {
+    console.log("🌐 i18n system initialized");
+    return true;
+  },
+
+  // Helper function to get page data
+  getPageData: (pageNumber) => {
+    const lang = AppData.currentLanguage;
+    const translation = AppData.translations[lang];
+
+    if (translation.pages && translation.pages[`page${pageNumber}`]) {
+      return translation.pages[`page${pageNumber}`];
+    }
+
+    // Fallback to English
+    const enTranslation = AppData.translations.en;
+    if (enTranslation.pages && enTranslation.pages[`page${pageNumber}`]) {
+      return enTranslation.pages[`page${pageNumber}`];
+    }
+
+    return null;
+  },
+};
+
+// Make i18n globally available
+window.i18n = i18n;

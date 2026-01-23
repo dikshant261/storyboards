@@ -380,7 +380,6 @@ const createOptimizedGridPositionPages = () => {
       },
 
     ],
-
     2: [
 
       // Header Text - "Read the question and identify 'given' and 'to find'"
@@ -621,7 +620,6 @@ const createOptimizedGridPositionPages = () => {
       },
 
     ],
-
     3: [
 
       // Header Text - "Read the question and identify 'given' and 'to find'"
@@ -958,7 +956,6 @@ const createOptimizedGridPositionPages = () => {
       },
 
     ],
-
     4: [
 
       // Header Text - "Read the question and identify 'given' and 'to find'"
@@ -1367,7 +1364,6 @@ const createOptimizedGridPositionPages = () => {
       },
 
     ],
-
     5: [
 
       // Header Text - "Build a mathematical sentence for the given scene"
@@ -3844,7 +3840,6 @@ const createOptimizedGridPositionPages = () => {
         }
       }
     ],
-
     10: [
 
       // Equation Background
@@ -4194,7 +4189,6 @@ const createOptimizedGridPositionPages = () => {
         }
       }
     ],
-
     11: [
 
       // Header Text - "What is the correct order of steps for adding Improper Fractions?"
@@ -5883,7 +5877,7 @@ const createOptimizedGridPositionPages = () => {
         props: {
           componentType: 'TeacherNoteComponent',
           text: '÷',
-          backgroundColor: 'rgba(255, 215, 0, 0.45)',
+          backgroundColor: 'none',
           border: 'none',
           borderRadius: '12gc',
           textColor: '#ffffff',
@@ -5914,29 +5908,6 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-
-
-
-      // // Unit: kg
-      // {
-      //   id: 'page14-unit-km',
-      //   name: 'unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 125, 973, 225], // Reduced gap - moved 60gc left
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
       // Equation Background
       {
         id: 'page14-equation2-background',
@@ -6000,12 +5971,112 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
+
+      {
+        id: 'page14-divide-sign-2',
+        name: 'page14-divide-sign-2',
+        type: 'custom',
+        coordinates: [703, 275, 763, 375], // Reduced gap - moved 20gc left
+        zIndex: 60,
+        props: {
+          componentType: 'TeacherNoteComponent',
+          text: '÷',
+          backgroundColor: 'rgba(255, 215, 0, 0.45)',
+          border: 'none',
+          borderRadius: '12gc',
+          textColor: '#ffffff',
+          fontSize: '36gc',
+          padding: '0gc',
+          textAlign: 'center',
+          lineHeight: '1.0'
+        }
+      },
+      //page14-number-box-4
+      {
+        id: 'page14-number-box-4',
+        name: 'number-box-4',
+        type: 'custom',
+        coordinates: [803, 275, 968, 375], // Reduced gap - moved 10gc left
+        zIndex: 60,
+        props: {
+          componentType: 'TeacherNoteComponent',
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">7</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
+          border: 'none',
+          borderRadius: '12gc', // Rounded corners
+          textColor: '#ffffff',
+          fontSize: '36gc',
+          padding: '15gc',
+          textAlign: 'center',
+          lineHeight: '1.5'
+        }
+      },
+      // Equation Background 3
+      {
+        id: 'page14-equation3-background',
+        name: 'equation3-background',
+        type: 'custom',
+        coordinates: [5, 400, 1175, 545], // Covers all equation components with padding, shifted further left by 100gc
+        zIndex: 55, // Behind equation components but above other content
+        props: {
+          componentType: 'TeacherNoteComponent',
+          text: '',
+          backgroundColor: 'rgba(0, 0, 0, 0.4)', // Black with 40% opacity
+          border: 'none',
+          borderRadius: '12gc',
+          textColor: '#ffffff',
+          fontSize: '36gc',
+          padding: '0gc',
+          textAlign: 'center',
+          lineHeight: '1.0'
+        }
+      },
+      // Equals sign
+      {
+        id: 'page14-working-equals-3',
+        name: 'working-equals-3',
+        type: 'custom',
+        coordinates: [453, 425, 503, 525], // Width: 50, Height: 100, moved down 25gc
+        zIndex: 60,
+        props: {
+          componentType: 'TeacherNoteComponent',
+          text: '=',
+          backgroundColor: 'transparent',
+          border: 'none',
+          borderRadius: '0gc',
+          textColor: '#ffffff',
+          fontSize: '36gc',
+          padding: '0gc',
+          textAlign: 'center',
+          lineHeight: '1.0'
+        }
+      },
+      //page14-number-box-5
+      {
+        id: 'page14-number-box-5',
+        name: 'number-box-5',
+        type: 'custom',
+        coordinates: [508, 420, 658, 525], // Reduced gap - moved 10gc left
+        zIndex: 60,
+        props: {
+          componentType: 'TeacherNoteComponent',
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
+          border: 'none',
+          borderRadius: '12gc', // Rounded corners
+          textColor: '#ffffff',
+          fontSize: '36gc',
+          padding: '15gc',
+          textAlign: 'center',
+          lineHeight: '1.5'
+        }
+      },
       // First placeholder box (flip tile with question mark that blinks, reveals 3/2 fraction)
       {
         id: 'page14-working-box-1',
         name: 'working-box-1',
         type: 'custom',
-        coordinates: [703, 275, 763, 375], // X coordinates match page14-number-box-1, Width: 150, Height: 100, moved down 25gc
+        coordinates: [703, 425, 763, 525], // X coordinates match page14-number-box-1, Width: 150, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'FlipTileComponent',
@@ -6029,7 +6100,7 @@ const createOptimizedGridPositionPages = () => {
           backColor: '#ffffff',
           backFontSize: '36gc',
           backFontWeight: 'normal',
-          onFlipChangeTargetId: 'page14-divide-sign-1',
+          onFlipChangeTargetId: 'page14-divide-sign-2',
           onFlipHideTargetId: 'page14-tap-animation-working-box-2'
         }
       },
@@ -6038,7 +6109,7 @@ const createOptimizedGridPositionPages = () => {
         id: 'page14-tap-animation-working-box-2',
         name: 'tap-animation-working-box-2',
         type: 'custom',
-        coordinates: [703, 330, 663, 375], // Centered on top of working-box-2, moved down 25gc and left 20gc
+        coordinates: [703, 475, 663, 525], // Centered on top of working-box-2, moved down 25gc and left 20gc
         zIndex: 70,
         props: {
           componentType: 'TapGifComponent',
@@ -6050,10 +6121,10 @@ const createOptimizedGridPositionPages = () => {
       },
       //page14-number-box-4
       {
-        id: 'page14-number-box-4',
-        name: 'number-box-4',
+        id: 'page14-number-box-6',
+        name: 'number-box-6',
         type: 'custom',
-        coordinates: [803, 275, 968, 375], // Reduced gap - moved 10gc left
+        coordinates: [803, 425, 968, 525], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -6068,7 +6139,6 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-
       // Solution Steps Component
       {
         id: 'page14-solution-steps',
@@ -6247,7 +6317,6 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-
       // Equation Background
       {
         id: 'page15-equation-background',
@@ -6268,6 +6337,7 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
+
       // Distance equation: Komang to Lucas = 1 1/2 + 1/200 + 2 1/4 km
       // Centered between 0 and 1600
       {
@@ -6290,6 +6360,7 @@ const createOptimizedGridPositionPages = () => {
           // whiteSpace: 'nowrap'
         }
       },
+
       // Equals sign
       {
         id: 'page15-equals-sign',
@@ -6334,17 +6405,17 @@ const createOptimizedGridPositionPages = () => {
 
       // Plus sign 1
       {
-        id: 'page15-divide-sign-1',
-        name: 'plus-divide-sign-1',
+        id: 'page15-divide-sign-2',
+        name: 'page15-divide-sign-2',
         type: 'custom',
-        coordinates: [663, 125, 713, 225], // Reduced gap - moved 20gc left
+        coordinates: [675, 125, 745, 225], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
           text: '÷',
-          backgroundColor: 'transparent',
+          backgroundColor: 'none',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -6358,7 +6429,7 @@ const createOptimizedGridPositionPages = () => {
         id: 'page15-number-box-2',
         name: 'number-box-2',
         type: 'custom',
-        coordinates: [718, 125, 868, 225], // Reduced gap - moved 30gc left
+        coordinates: [760, 125, 910, 225], // Reduced gap - moved 30gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -6373,31 +6444,6 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-
-
-
-      // // Unit: kg
-      // {
-      //   id: 'page15-unit-km',
-      //   name: 'unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 125, 973, 225], // Reduced gap - moved 60gc left
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-
-
       // Equation Background
       {
         id: 'page15-equation2-background',
@@ -6418,6 +6464,7 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
+
       // Working Area Equation Display (below main equation)
       // All elements aligned at Y=275 to Y=375 (height: 100), moved down by 25gc
       // Equals sign
@@ -6440,17 +6487,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // First placeholder box: 3/2
+      //page15-number-box-3
       {
         id: 'page15-number-box-3',
-        name: 'page15-number-box-3',
+        name: 'number-box-3',
         type: 'custom',
-        coordinates: [508, 275, 658, 375], // X coordinates match page15-number-box-1, Width: 150, Height: 100, moved down 25gc
+        coordinates: [508, 275, 658, 375], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff">4</span></span>',
-          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Dark grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -6460,19 +6507,19 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Plus sign 1
+      //divide sign 2
       {
-        id: 'page15-multiply-sign-1',
-        name: 'page15-multiply-sign-1',
+        id: 'page15-divide-sign-2',
+        name: 'page15-divide-sign-2',
         type: 'custom',
-        coordinates: [663, 275, 713, 375], // X coordinates match page15-plus-sign-1, Width: 50, Height: 100, moved down 25gc
+        coordinates: [675, 275, 745, 375], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '×',
-          backgroundColor: 'transparent',
+          text: '÷',
+          backgroundColor: '',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -6480,18 +6527,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-
-      // Fraction box: 1/200
+      //page15-number-box-4
       {
         id: 'page15-number-box-4',
-        name: 'page15-number-box-4',
+        name: 'number-box-4',
         type: 'custom',
-        coordinates: [718, 275, 868, 375], // X coordinates match page15-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [760, 275, 910, 375], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">7</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
-          backgroundColor: 'rgba(255, 215, 0, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">7</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(255, 215, 0, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -6501,33 +6547,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Unit: kg
-      // {
-      //   id: 'page15-working-unit-km',
-      //   name: 'working-unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 275, 973, 375], // X coordinates match page15-unit-km, Width: 70, Height: 100, moved down 25gc
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-
-      // Third Equation Background
+      // Equation Background 3
       {
         id: 'page15-equation3-background',
         name: 'equation3-background',
         type: 'custom',
-        coordinates: [5, 400, 1175, 545], // Covers all third equation components with padding
+        coordinates: [5, 400, 1175, 545], // Covers all equation components with padding, shifted further left by 100gc
         zIndex: 55, // Behind equation components but above other content
         props: {
           componentType: 'TeacherNoteComponent',
@@ -6542,13 +6567,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Third Equation Display
       // Equals sign
       {
-        id: 'page15-third-equals',
-        name: 'third-equals',
+        id: 'page15-working-equals-3',
+        name: 'working-equals-3',
         type: 'custom',
-        coordinates: [453, 425, 503, 525], // Width: 50, Height: 100
+        coordinates: [453, 425, 503, 525], // Width: 50, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -6563,17 +6587,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Fraction box: 1/200
+      //page15-number-box-5
       {
         id: 'page15-number-box-5',
-        name: 'page15-number-box-5',
+        name: 'number-box-5',
         type: 'custom',
-        coordinates: [508, 425, 658, 525], // X coordinates match page15-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [508, 420, 658, 525], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
-          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -6583,19 +6607,19 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Equals sign
+      //divide sign 2
       {
-        id: 'page15-multiply-sign-2',
-        name: 'page15-multiply-sign-2',
+        id: 'page15-divide-sign-2',
+        name: 'page15-divide-sign-2',
         type: 'custom',
-        coordinates: [663, 425, 713, 525], // Width: 50, Height: 100
+        coordinates: [675, 425, 745, 525], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
           text: '×',
-          backgroundColor: 'transparent',
+          backgroundColor: '',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -6603,12 +6627,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // First fraction box: ?/200 (flip tile)
+      // First placeholder box (flip tile with question mark that blinks, reveals 3/2 fraction)
       {
-        id: 'page15-first-box-1',
-        name: 'page15-first-box-1',
+        id: 'page15-working-box-1',
+        name: 'working-box-1',
         type: 'custom',
-        coordinates: [718, 425, 868, 525], // Width: 150, Height: 100
+        coordinates: [760, 425, 910, 525], // X coordinates match page15-number-box-1, Width: 150, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'FlipTileComponent',
@@ -6622,7 +6646,8 @@ const createOptimizedGridPositionPages = () => {
           frontFontSize: '48gc',
           frontFontWeight: 'bold',
           blinkText: true,
-          backHtml: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid currentColor; padding: 0 2px; color: #ffffff;">4</span><span style="display: block; padding: 0 2px; color: #ffff;">7</span></span>',
+          backHtml: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">4</span><span style="display: block; padding: 0 4px; color: #ffffff;">7</span></span>',
+
           flipMode: 'correct',
           backBackgroundColor: 'rgba(74, 85, 104, 0.45)', // Not used when flipMode is 'correct', but kept for reference
           backBorderColor: '#ffffff',
@@ -6633,49 +6658,24 @@ const createOptimizedGridPositionPages = () => {
           backFontSize: '36gc',
           backFontWeight: 'normal',
           onFlipChangeTargetId: 'page15-number-box-4',
-          onFlipHideTargetId: 'page15-tap-animation-third-box-1',
-          flipBack: false
+          onFlipHideTargetId: 'page15-tap-animation-working-box-2'
         }
       },
-
-      // Tap Animation on third-box-1
+      // Tap Animation on working-box-2
       {
-        id: 'page15-tap-animation-third-box-1',
-        name: 'tap-animation-third-box-1',
+        id: 'page15-tap-animation-working-box-2',
+        name: 'tap-animation-working-box-2',
         type: 'custom',
-        coordinates: [718, 475, 868, 525], // Centered on top of third-box-1, moved down 25gc and left 20gc
+        coordinates: [760, 475, 910, 525], // Centered on top of working-box-2, moved down 25gc and left 20gc
         zIndex: 70,
         props: {
           componentType: 'TapGifComponent',
           imageSrc: 'assets/tap.gif',
           imageAlt: 'Tap',
           alwaysShow: true,
-          opacity: 0.3 // 30% opacity
+          opacity: 0.55 // 30% opacity
         }
       },
-
-
-      // Unit: km
-      // {
-      //   id: 'page15-third-unit-km',
-      //   name: 'third-unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 425, 973, 525], // Width: 70, Height: 100
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-
 
       // Solution Steps Component
       {
@@ -6873,6 +6873,7 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
+
       // Distance equation: Komang to Lucas = 1 1/2 + 1/200 + 2 1/4 km
       // Centered between 0 and 1600
       {
@@ -6895,6 +6896,7 @@ const createOptimizedGridPositionPages = () => {
           // whiteSpace: 'nowrap'
         }
       },
+
       // Equals sign
       {
         id: 'page16-equals-sign',
@@ -6940,16 +6942,16 @@ const createOptimizedGridPositionPages = () => {
       // Plus sign 1
       {
         id: 'page16-divide-sign-1',
-        name: 'plus-divide-sign-1',
+        name: 'page16-divide-sign-1',
         type: 'custom',
-        coordinates: [663, 125, 713, 225], // Reduced gap - moved 20gc left
+        coordinates: [675, 125, 745, 225], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
           text: '÷',
-          backgroundColor: 'transparent',
+          backgroundColor: 'none',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -6963,7 +6965,7 @@ const createOptimizedGridPositionPages = () => {
         id: 'page16-number-box-2',
         name: 'number-box-2',
         type: 'custom',
-        coordinates: [718, 125, 868, 225], // Reduced gap - moved 30gc left
+        coordinates: [760, 125, 910, 225], // Reduced gap - moved 30gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -6978,31 +6980,6 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-
-
-
-      // // Unit: kg
-      // {
-      //   id: 'page16-unit-km',
-      //   name: 'unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 125, 973, 225], // Reduced gap - moved 60gc left
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-
-
       // Equation Background
       {
         id: 'page16-equation2-background',
@@ -7023,6 +7000,7 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
+
       // Working Area Equation Display (below main equation)
       // All elements aligned at Y=275 to Y=375 (height: 100), moved down by 25gc
       // Equals sign
@@ -7045,17 +7023,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // First placeholder box: 3/2
+      //page16-number-box-3
       {
         id: 'page16-number-box-3',
-        name: 'page16-number-box-3',
+        name: 'number-box-3',
         type: 'custom',
-        coordinates: [508, 275, 658, 375], // X coordinates match page16-number-box-1, Width: 150, Height: 100, moved down 25gc
+        coordinates: [508, 275, 658, 375], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff">4</span></span>',
-          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Dark grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7065,19 +7043,19 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Plus sign 1
+      //divide sign 2
       {
-        id: 'page16-multiply-sign-1',
-        name: 'page16-multiply-sign-1',
+        id: 'page16-divide-sign-2',
+        name: 'page16-divide-sign-2',
         type: 'custom',
-        coordinates: [663, 275, 713, 375], // X coordinates match page16-plus-sign-1, Width: 50, Height: 100, moved down 25gc
+        coordinates: [675, 275, 745, 375], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '×',
-          backgroundColor: 'transparent',
+          text: '÷',
+          backgroundColor: '',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -7085,18 +7063,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-
-      // Fraction box: 1/200
+      //page16-number-box-4
       {
         id: 'page16-number-box-4',
-        name: 'page16-number-box-4',
+        name: 'number-box-4',
         type: 'custom',
-        coordinates: [718, 275, 868, 375], // X coordinates match page16-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [760, 275, 910, 375], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">7</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
-          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">7</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7106,33 +7083,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Unit: kg
-      // {
-      //   id: 'page16-working-unit-km',
-      //   name: 'working-unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 275, 973, 375], // X coordinates match page16-unit-km, Width: 70, Height: 100, moved down 25gc
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-
-      // Third Equation Background
+      // Equation Background 3
       {
         id: 'page16-equation3-background',
         name: 'equation3-background',
         type: 'custom',
-        coordinates: [5, 400, 1175, 545], // Covers all third equation components with padding
+        coordinates: [5, 400, 1175, 545], // Covers all equation components with padding, shifted further left by 100gc
         zIndex: 55, // Behind equation components but above other content
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7147,12 +7103,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Third equals
+      // Equals sign
       {
-        id: 'page16-third-equals',
-        name: 'third-equals',
+        id: 'page16-working-equals-3',
+        name: 'working-equals-3',
         type: 'custom',
-        coordinates: [453, 425, 503, 525], // Width: 50, Height: 100
+        coordinates: [453, 425, 503, 525], // Width: 50, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7167,17 +7123,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Fraction box: 1/200
+      //page16-number-box-5
       {
         id: 'page16-number-box-5',
-        name: 'page16-number-box-5',
+        name: 'number-box-5',
         type: 'custom',
-        coordinates: [508, 425, 658, 525], // X coordinates match page16-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [508, 420, 658, 525], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
-          backgroundColor: 'rgba(255, 215, 0, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(255, 215, 0, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7187,19 +7143,19 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // multiply sign
+      //divide sign 2
       {
-        id: 'page16-multiply-sign-2',
-        name: 'page16-multiply-sign-2',
+        id: 'page16-divide-sign-2',
+        name: 'page16-divide-sign-2',
         type: 'custom',
-        coordinates: [663, 425, 713, 525], // Width: 50, Height: 100
+        coordinates: [675, 425, 745, 525], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
           text: '×',
-          backgroundColor: 'transparent',
+          backgroundColor: '',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -7207,17 +7163,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Fraction box: 1/200
+      //page16-number-box-6
       {
         id: 'page16-number-box-6',
-        name: 'page16-number-box-6',
+        name: 'number-box-6',
         type: 'custom',
-        coordinates: [718, 425, 868, 525], // X coordinates match page16-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [760, 425, 910, 525], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">4</span><span style="display: block; padding: 0 4px; color: #ffffff;">7</span></span>',
-          backgroundColor: 'rgba(255, 215, 0, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">4</span><span style="display: block; padding: 0 4px; color: #ffffff;">7</span></span>',
+          backgroundColor: 'rgba(255, 215, 0, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7227,32 +7183,14 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Unit: km
-      // {
-      //   id: 'page16-third-unit-km',
-      //   name: 'third-unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 425, 973, 525], // Width: 70, Height: 100
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-      // fourth Equation Background
+
+
+      // Equation Background 4
       {
         id: 'page16-equation4-background',
         name: 'equation4-background',
         type: 'custom',
-        coordinates: [5, 550, 1175, 695], // Covers all third equation components with padding
+        coordinates: [5, 550, 1175, 695], // Covers all equation components with padding, shifted further left by 100gc
         zIndex: 55, // Behind equation components but above other content
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7267,12 +7205,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // fourth equals
+      // Equals sign 4
       {
-        id: 'page16-fourth-equals',
-        name: 'fourth-equals',
+        id: 'page16-working-equals-4',
+        name: 'working-equals-4',
         type: 'custom',
-        coordinates: [453, 575, 503, 675], // Width: 50, Height: 100
+        coordinates: [453, 575, 503, 675], // Width: 50, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7287,12 +7225,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // First fraction box: ?/200 (flip tile)
+      // First placeholder box (flip tile with question mark that blinks, reveals 3/2 fraction)
       {
-        id: 'page16-first-box-1',
-        name: 'page16-first-box-1',
+        id: 'page16-working-box-1',
+        name: 'working-box-1',
         type: 'custom',
-        coordinates: [508, 575, 658, 675], // Width: 150, Height: 100
+        coordinates: [508, 575, 658, 675], // X coordinates match page16-number-box-1, Width: 150, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'FlipTileComponent',
@@ -7306,7 +7244,8 @@ const createOptimizedGridPositionPages = () => {
           frontFontSize: '48gc',
           frontFontWeight: 'bold',
           blinkText: true,
-          backHtml: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid currentColor; padding: 0 2px; color: #ffffff;">21 × 4</span><span style="display: block; padding: 0 2px; color: #ffff;">4 × 7</span></span>',
+          backHtml: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21 × 4</span><span style="display: block; padding: 0 4px; color: #ffffff;">4 × 7</span></span>',
+
           flipMode: 'correct',
           backBackgroundColor: 'rgba(74, 85, 104, 0.45)', // Not used when flipMode is 'correct', but kept for reference
           backBorderColor: '#ffffff',
@@ -7318,34 +7257,28 @@ const createOptimizedGridPositionPages = () => {
           backFontWeight: 'normal',
           onClick: (e, isFlipped) => {
             if (isFlipped) {
-              const box1 = document.getElementById("page16-number-box-5");
-              const box2 = document.getElementById("page16-number-box-6");
-              if (box1) {
-                box1.style.backgroundColor = "rgba(74, 85, 104, 0.45)"
-              }
-              if (box2) {
-                box2.style.backgroundColor = "rgba(74, 85, 104, 0.45)"
-              }
+              const box1 = document.getElementById('page16-number-box-6');
+              const box2 = document.getElementById('page16-number-box-5');
+              if (box1) box1.style.backgroundColor = 'rgba(74, 85, 104, 0.45)';
+              if (box2) box2.style.backgroundColor = 'rgba(74, 85, 104, 0.45)';
             }
           },
-          onFlipHideTargetId: 'page16-tap-animation-third-box-1',
-          flipBack: false
+          onFlipHideTargetId: 'page16-tap-animation-working-box-2'
         }
       },
-
-      // Tap Animation on third-box-1
+      // Tap Animation on working-box-2
       {
-        id: 'page16-tap-animation-third-box-1',
-        name: 'tap-animation-third-box-1',
+        id: 'page16-tap-animation-working-box-2',
+        name: 'tap-animation-working-box-2',
         type: 'custom',
-        coordinates: [600, 600, 658, 675], // Centered on top of third-box-1, moved down 25gc and left 20gc
+        coordinates: [508, 625, 658, 675], // Centered on top of working-box-2, moved down 25gc and left 20gc
         zIndex: 70,
         props: {
           componentType: 'TapGifComponent',
           imageSrc: 'assets/tap.gif',
           imageAlt: 'Tap',
           alwaysShow: true,
-          opacity: 0.3 // 30% opacity
+          opacity: 0.55 // 30% opacity
         }
       },
       // Solution Steps Component
@@ -7544,6 +7477,7 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
+
       // Distance equation: Komang to Lucas = 1 1/2 + 1/200 + 2 1/4 km
       // Centered between 0 and 1600
       {
@@ -7566,6 +7500,7 @@ const createOptimizedGridPositionPages = () => {
           // whiteSpace: 'nowrap'
         }
       },
+
       // Equals sign
       {
         id: 'page17-equals-sign',
@@ -7611,16 +7546,16 @@ const createOptimizedGridPositionPages = () => {
       // Plus sign 1
       {
         id: 'page17-divide-sign-1',
-        name: 'plus-divide-sign-1',
+        name: 'page17-divide-sign-1',
         type: 'custom',
-        coordinates: [663, 125, 713, 225], // Reduced gap - moved 20gc left
+        coordinates: [675, 125, 745, 225], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
           text: '÷',
-          backgroundColor: 'transparent',
+          backgroundColor: 'none',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -7634,7 +7569,7 @@ const createOptimizedGridPositionPages = () => {
         id: 'page17-number-box-2',
         name: 'number-box-2',
         type: 'custom',
-        coordinates: [718, 125, 868, 225], // Reduced gap - moved 30gc left
+        coordinates: [760, 125, 910, 225], // Reduced gap - moved 30gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7649,31 +7584,6 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-
-
-
-      // // Unit: kg
-      // {
-      //   id: 'page17-unit-km',
-      //   name: 'unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 125, 973, 225], // Reduced gap - moved 60gc left
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-
-
       // Equation Background
       {
         id: 'page17-equation2-background',
@@ -7694,6 +7604,7 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
+
       // Working Area Equation Display (below main equation)
       // All elements aligned at Y=275 to Y=375 (height: 100), moved down by 25gc
       // Equals sign
@@ -7716,17 +7627,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // First placeholder box: 3/2
+      //page17-number-box-3
       {
         id: 'page17-number-box-3',
-        name: 'page17-number-box-3',
+        name: 'number-box-3',
         type: 'custom',
-        coordinates: [508, 275, 658, 375], // X coordinates match page17-number-box-1, Width: 150, Height: 100, moved down 25gc
+        coordinates: [508, 275, 658, 375], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff">4</span></span>',
-          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Dark grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7736,19 +7647,19 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Plus sign 1
+      //divide sign 2
       {
-        id: 'page17-multiply-sign-1',
-        name: 'page17-multiply-sign-1',
+        id: 'page17-divide-sign-2',
+        name: 'page17-divide-sign-2',
         type: 'custom',
-        coordinates: [663, 275, 713, 375], // X coordinates match page17-plus-sign-1, Width: 50, Height: 100, moved down 25gc
+        coordinates: [675, 275, 745, 375], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '×',
-          backgroundColor: 'transparent',
+          text: '÷',
+          backgroundColor: '',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -7756,18 +7667,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-
-      // Fraction box: 1/200
+      //page17-number-box-4
       {
         id: 'page17-number-box-4',
-        name: 'page17-number-box-4',
+        name: 'number-box-4',
         type: 'custom',
-        coordinates: [718, 275, 868, 375], // X coordinates match page17-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [760, 275, 910, 375], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">7</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
-          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">7</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7777,33 +7687,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Unit: kg
-      // {
-      //   id: 'page17-working-unit-km',
-      //   name: 'working-unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 275, 973, 375], // X coordinates match page17-unit-km, Width: 70, Height: 100, moved down 25gc
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-
-      // Third Equation Background
+      // Equation Background 3
       {
         id: 'page17-equation3-background',
         name: 'equation3-background',
         type: 'custom',
-        coordinates: [5, 400, 1175, 545], // Covers all third equation components with padding
+        coordinates: [5, 400, 1175, 545], // Covers all equation components with padding, shifted further left by 100gc
         zIndex: 55, // Behind equation components but above other content
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7818,12 +7707,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Third equals
+      // Equals sign
       {
-        id: 'page17-third-equals',
-        name: 'third-equals',
+        id: 'page17-working-equals-3',
+        name: 'working-equals-3',
         type: 'custom',
-        coordinates: [453, 425, 503, 525], // Width: 50, Height: 100
+        coordinates: [453, 425, 503, 525], // Width: 50, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7838,17 +7727,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Fraction box: 1/200
+      //page17-number-box-5
       {
         id: 'page17-number-box-5',
-        name: 'page17-number-box-5',
+        name: 'number-box-5',
         type: 'custom',
-        coordinates: [508, 425, 658, 525], // X coordinates match page17-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [508, 420, 658, 525], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
-          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21</span><span style="display: block; padding: 0 4px; color: #ffffff;">4</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7858,19 +7747,19 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // multiply sign
+      //multiply sign 2
       {
         id: 'page17-multiply-sign-2',
         name: 'page17-multiply-sign-2',
         type: 'custom',
-        coordinates: [663, 425, 713, 525], // Width: 50, Height: 100
+        coordinates: [675, 425, 745, 525], // Reduced gap - moved 20gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
           text: '×',
-          backgroundColor: 'transparent',
+          backgroundColor: '',
           border: 'none',
-          borderRadius: '0gc',
+          borderRadius: '12gc',
           textColor: '#ffffff',
           fontSize: '36gc',
           padding: '0gc',
@@ -7878,17 +7767,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Fraction box: 1/200
+      //page17-number-box-6
       {
         id: 'page17-number-box-6',
-        name: 'page17-number-box-6',
+        name: 'number-box-6',
         type: 'custom',
-        coordinates: [718, 425, 868, 525], // X coordinates match page17-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [760, 425, 910, 525], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">4</span><span style="display: block; padding: 0 4px; color: #ffffff;">7</span></span>',
-          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">4</span><span style="display: block; padding: 0 4px; color: #ffffff;">7</span></span>',
+          backgroundColor: 'rgba(74, 85, 104, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7898,32 +7787,14 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // Unit: km
-      // {
-      //   id: 'page17-third-unit-km',
-      //   name: 'third-unit-km',
-      //   type: 'custom',
-      //   coordinates: [903, 425, 973, 525], // Width: 70, Height: 100
-      //   zIndex: 60,
-      //   props: {
-      //     componentType: 'TeacherNoteComponent',
-      //     text: 'kg',
-      //     backgroundColor: 'transparent',
-      //     border: 'none',
-      //     borderRadius: '0gc',
-      //     textColor: '#ffffff',
-      //     fontSize: '36gc',
-      //     padding: '10gc',
-      //     textAlign: 'left',
-      //     lineHeight: '1.5'
-      //   }
-      // },
-      // fourth Equation Background
+
+
+      // Equation Background 4
       {
         id: 'page17-equation4-background',
         name: 'equation4-background',
         type: 'custom',
-        coordinates: [5, 550, 1175, 695], // Covers all third equation components with padding
+        coordinates: [5, 550, 1175, 695], // Covers all equation components with padding, shifted further left by 100gc
         zIndex: 55, // Behind equation components but above other content
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7938,12 +7809,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // fourth equals
+      // Equals sign 4
       {
-        id: 'page17-fourth-equals',
-        name: 'fourth-equals',
+        id: 'page17-working-equals-4',
+        name: 'working-equals-4',
         type: 'custom',
-        coordinates: [663, 575, 713, 675], // Width: 50, Height: 100
+        coordinates: [453, 575, 503, 675], // Width: 50, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7958,17 +7829,17 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // Fraction box: 1/200
+      //page17-number-box-7
       {
         id: 'page17-number-box-7',
-        name: 'page17-number-box-7',
+        name: 'number-box-7',
         type: 'custom',
-        coordinates: [508, 575, 658, 675], // X coordinates match page17-number-box-2, Width: 130, Height: 100, moved down 25gc
+        coordinates: [508, 575, 658, 675], // Reduced gap - moved 10gc left
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
-          text: '<span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21 × 4</span><span style="display: block; padding: 0 4px; color: #ffffff;">4 × 7</span></span>',
-          backgroundColor: 'rgba(255, 215, 0, 0.45)', // Dark blue/grey background
+          text: '<span style="color: #ffffff;"></span> <span style="display: inline-block; vertical-align: middle; text-align: center; line-height: 1.2;"><span style="display: block; border-bottom: 1px solid #ffffff; padding: 0 4px; color: #ffffff;">21 × 4</span><span style="display: block; padding: 0 4px; color: #ffffff;">4 × 7</span></span>',
+          backgroundColor: 'rgba(255, 215, 0, 0.45)', // Highlight color 1 (Gold) with 45% opacity
           border: 'none',
           borderRadius: '12gc', // Rounded corners
           textColor: '#ffffff',
@@ -7978,12 +7849,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.5'
         }
       },
-      // fifth equals
+      // Equals sign 5
       {
-        id: 'page17-fifth-equals',
-        name: 'fifth-equals',
+        id: 'page17-working-equals-5',
+        name: 'working-equals-5',
         type: 'custom',
-        coordinates: [453, 575, 503, 675], // Width: 50, Height: 100
+        coordinates: [675, 575, 745, 675], // Width: 50, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'TeacherNoteComponent',
@@ -7998,12 +7869,12 @@ const createOptimizedGridPositionPages = () => {
           lineHeight: '1.0'
         }
       },
-      // First fraction box: ?/200 (flip tile)
+      // First placeholder box (flip tile with question mark that blinks, reveals 3/2 fraction)
       {
-        id: 'page17-first-box-1',
-        name: 'page17-first-box-1',
+        id: 'page17-working-box-1',
+        name: 'working-box-1',
         type: 'custom',
-        coordinates: [718, 575, 868, 675], // Width: 150, Height: 100
+        coordinates: [760, 575, 910, 675], // X coordinates match page17-number-box-1, Width: 150, Height: 100, moved down 25gc
         zIndex: 60,
         props: {
           componentType: 'FlipTileComponent',
@@ -8025,35 +7896,34 @@ const createOptimizedGridPositionPages = () => {
           backBorderStyle: 'none',
           backBorderRadius: '12gc',
           backColor: '#ffffff',
-          backFontSize: '40gc',
+          backFontSize: '36gc',
           backFontWeight: 'normal',
           onClick: (e, isFlipped) => {
             if (isFlipped) {
-              const box1 = document.getElementById("page17-number-box-7");
-              if (box1) {
-                box1.style.backgroundColor = "rgba(74, 85, 104, 0.45)"
-              }
+              const box1 = document.getElementById('page17-number-box-7');
+
+              if (box1) box1.style.backgroundColor = 'rgba(74, 85, 104, 0.45)';
             }
           },
-          onFlipHideTargetId: 'page17-tap-animation-third-box-1',
-          flipBack: false
+          onFlipHideTargetId: 'page17-tap-animation-working-box-2'
         }
       },
-      // Tap Animation on third-box-1
+      // Tap Animation on working-box-2
       {
-        id: 'page17-tap-animation-third-box-1',
-        name: 'tap-animation-third-box-1',
+        id: 'page17-tap-animation-working-box-2',
+        name: 'tap-animation-working-box-2',
         type: 'custom',
-        coordinates: [718, 600, 868, 675], // Centered on top of third-box-1, moved down 25gc and left 20gc
+        coordinates: [760, 625, 910, 675], // Centered on top of working-box-2, moved down 25gc and left 20gc
         zIndex: 70,
         props: {
           componentType: 'TapGifComponent',
           imageSrc: 'assets/tap.gif',
           imageAlt: 'Tap',
           alwaysShow: true,
-          opacity: 0.3 // 30% opacity
+          opacity: 0.55 // 30% opacity
         }
       },
+
       // Solution Steps Component
       {
         id: 'page17-solution-steps',
