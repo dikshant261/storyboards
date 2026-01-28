@@ -2445,7 +2445,7 @@ const createOptimizedGridPositionPages = () => {
             ? window.getCurrentDivisionQuestion
             : getCurrentDivisionQuestion;
           const question = getQuestion();
-          const multiplier = 4; // Use quotient as multiplicand
+          const multiplier = question?.divisor || 4; // Use quotient as multiplicand
           return {
             mode: 'normal',
             text: String(multiplier), // Pre-filled with quotient
@@ -2496,7 +2496,7 @@ const createOptimizedGridPositionPages = () => {
             ? window.getCurrentDivisionQuestion
             : getCurrentDivisionQuestion;
           const question = getQuestion();
-          const divisor = 6; // Use divisor as multiplier
+          const divisor = question?.quotient || 6; // Use divisor as multiplier
           return {
             mode: 'normal',
             text: String(divisor), // Pre-filled with divisor
@@ -3261,7 +3261,7 @@ const createOptimizedGridPositionPages = () => {
             frameClassName: 'applet-button-frame',
             contentClassName: 'applet-button-content',
             frameGap: '6.25gc',
-            text: isLastQuestion 
+            text: isLastQuestion
               ? getI18nText('pages.page4.startOverButton', 'Start Over')
               : getI18nText('pages.page4.nextButton', 'Next'),
             backgroundColor: 'var(--color-gold)', // Gold background
@@ -3293,7 +3293,7 @@ const createOptimizedGridPositionPages = () => {
               if (isLastQuestion) {
                 // Last question - reset activity and go back to page 1
                 console.log('🔄 [Page4] Last question completed. Restarting activity from page 1.');
-                
+
                 // Reset question index to 0
                 if (typeof window !== 'undefined') {
                   window.currentQuestionIndex = 0;
@@ -3340,7 +3340,7 @@ const createOptimizedGridPositionPages = () => {
               } else {
                 // Not the last question - increment index and go to page 2
                 console.log('➡️ [Page4] Moving to next question. Current index:', currentIndex, 'Next index:', currentIndex + 1);
-                
+
                 // Increment question index
                 if (typeof window !== 'undefined') {
                   window.currentQuestionIndex = currentIndex + 1;
@@ -5853,7 +5853,7 @@ const createOptimizedGridPositionPages = () => {
     //             destinationId: 'page7-tile-3', // Quotient tile
     //             destinationType: 'tile',
     //             correctValue: () => {
-                  
+
     //               return 8;
     //             },
     //             // Dynamic feedback messages

@@ -8,7 +8,7 @@
  * - Performance optimizations
  */
 
-const { 
+const {
   useState, useEffect, useCallback, useMemo, useContext, createContext,
   useId, useDeferredValue, useTransition, startTransition
 } = React;
@@ -63,11 +63,11 @@ const useAppState = () => {
  */
 const validateDependencies = () => {
   const missing = [];
-  
+
   if (typeof gridPositions === 'undefined') missing.push('gridPositions');
   if (typeof GridPositionPages === 'undefined') missing.push('GridPositionPages');
   if (typeof ElementsUtils === 'undefined') missing.push('ElementsUtils');
-  
+
   return {
     isValid: missing.length === 0,
     missing
@@ -129,17 +129,17 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, errorInfo) {
     // Check if this is a React removeChild error (common during page transitions)
     // These are usually harmless cleanup issues and shouldn't reset the page
-    const isRemoveChildError = error?.message?.includes('removeChild') || 
-                              error?.name === 'NotFoundError' ||
-                              error?.stack?.includes('removeChild');
-    
+    const isRemoveChildError = error?.message?.includes('removeChild') ||
+      error?.name === 'NotFoundError' ||
+      error?.stack?.includes('removeChild');
+
     if (isRemoveChildError) {
       // Log but don't reset the page for removeChild errors
       console.warn('⚠️ [ErrorBoundary] Caught removeChild error (likely harmless cleanup issue):', error.message);
       // Don't set error state, allowing the app to continue
       return;
     }
-    
+
     this.setState({
       error: error,
       errorInfo: errorInfo
@@ -149,16 +149,16 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-        return React.createElement('div', { 
+      return React.createElement('div', {
         className: 'error-boundary'
       }, [
         React.createElement('h1', { key: 'title' }, '⚠️ Something went wrong'),
         React.createElement('p', { key: 'message' }, this.state.error?.message || 'An unexpected error occurred'),
-        React.createElement('details', { 
+        React.createElement('details', {
           key: 'details'
         }, [
           React.createElement('summary', { key: 'summary' }, 'Error Details'),
-          React.createElement('pre', { 
+          React.createElement('pre', {
             key: 'stack'
           }, this.state.error?.stack || 'No stack trace available')
         ])
@@ -182,9 +182,9 @@ class ErrorBoundary extends React.Component {
 const FeedbackTextComponent = ({ feedbackText }) => {
   const feedbackId = useId();
   const deferredFeedback = useDeferredValue(feedbackText);
-  
+
   if (!deferredFeedback?.visible) return null;
-  
+
   return React.createElement('div', {
     id: feedbackId,
     'data-element-name': 'container21-textbox',
@@ -209,14 +209,14 @@ const FeedbackTextComponent = ({ feedbackText }) => {
  */
 const PageIndicatorComponent = ({ currentPage, totalPages }) => {
   const pageIndicatorId = useId();
-  
+
   // Check if page progress indicator should be shown based on APP_CONFIG
   if (typeof window.APP_CONFIG !== 'undefined' && !window.APP_CONFIG.SHOW_PAGE_PROGRESS) {
     return null;
   }
-  
+
   console.log('📄 PageIndicatorComponent rendered');
-  
+
   return React.createElement('div', {
     id: pageIndicatorId,
     className: 'page-indicator math-app-page-indicator',
@@ -256,13 +256,13 @@ const ElementRenderer = ({ element, currentPage, totalPages, tileStyles, onNavig
       // Calculate coordinates and position
       let coordinates = element.coordinates?.length === 4
         ? element.coordinates
-        : [element.coordinates?.[0] || 0, element.coordinates?.[1] || 0, 
-           element.coordinates?.[0] || 0, element.coordinates?.[1] || 0];
+        : [element.coordinates?.[0] || 0, element.coordinates?.[1] || 0,
+        element.coordinates?.[0] || 0, element.coordinates?.[1] || 0];
 
       // Check if gridPositions is available
       if (typeof gridPositions === 'undefined') {
         console.error('❌ gridPositions not available for element:', element.name);
-        return React.createElement('div', { 
+        return React.createElement('div', {
           className: 'element-error'
         }, `Error: gridPositions not available for ${element.name}`);
       }
@@ -289,7 +289,7 @@ const ElementRenderer = ({ element, currentPage, totalPages, tileStyles, onNavig
           });
         }
       }
-      
+
       // Separate data attributes from regular props (React doesn't like them in props)
       Object.keys(elementProps).forEach(key => {
         if (key.startsWith('data-')) {
@@ -297,12 +297,12 @@ const ElementRenderer = ({ element, currentPage, totalPages, tileStyles, onNavig
           delete elementProps[key];
         }
       });
-      
+
       // Add onClick handler from element level to elementProps
       if (element.onClick && typeof element.onClick === 'function') {
         elementProps.onClick = element.onClick;
       }
-      
+
       // Debug log for next button props
       if (element.name === 'next-button' && element.id && element.id.includes('page8')) {
         console.log('🔍 [ElementRenderer] Page 8 Next Button Props:', {
@@ -312,9 +312,9 @@ const ElementRenderer = ({ element, currentPage, totalPages, tileStyles, onNavig
           allProps: Object.keys(elementProps)
         });
       }
-      
+
       // Process styles from gridpositions.js
-      const processedStyles = typeof GridCellFontUtils !== 'undefined' ? 
+      const processedStyles = typeof GridCellFontUtils !== 'undefined' ?
         GridCellFontUtils.processGcStyles(elementProps) : elementProps;
 
       // Handle different element types
@@ -337,22 +337,22 @@ const ElementRenderer = ({ element, currentPage, totalPages, tileStyles, onNavig
           }));
 
         case ELEMENT_TYPES.TABLE:
-        return ElementsUtils.createTableElement(currentPage);
-      
+          return ElementsUtils.createTableElement(currentPage);
+
         case ELEMENT_TYPES.LINE:
-        return ElementsUtils.createLineElement(currentPage, element.name, coordinates, elementProps, element.zIndex);
-      
+          return ElementsUtils.createLineElement(currentPage, element.name, coordinates, elementProps, element.zIndex);
+
         case ELEMENT_TYPES.PARTITIONED_RECTANGLE:
-        return ElementsUtils.createPartitionedRectangleElement(currentPage, element.name, coordinates, elementProps, element.zIndex);
+          return ElementsUtils.createPartitionedRectangleElement(currentPage, element.name, coordinates, elementProps, element.zIndex);
 
         case ELEMENT_TYPES.NUMBER_PAD_PANEL:
-        return React.createElement(ElementsUtils.createNumberPadPanelElement, {
-          currentPage,
-          elementName: element.name,
-          coordinates,
-          elementProps,
-          zIndex: element.zIndex
-        });
+          return React.createElement(ElementsUtils.createNumberPadPanelElement, {
+            currentPage,
+            elementName: element.name,
+            coordinates,
+            elementProps,
+            zIndex: element.zIndex
+          });
 
         case ELEMENT_TYPES.TILE:
           // Use TileComponent for tiles
@@ -452,7 +452,7 @@ const renderGenericElement = (element, position, processedStyles, elementProps, 
   let htmlContent = null;
   if ((element.type === ELEMENT_TYPES.TEXTBOX || element.type === ELEMENT_TYPES.BUTTON || element.type === ELEMENT_TYPES.CONTAINER) && elementProps?.text) {
     const text = typeof elementProps.text === 'function' ? elementProps.text() : elementProps.text;
-    
+
     // Check if HTML rendering is allowed and content contains HTML tags
     if (elementProps.allowHTML && text && text.includes('<')) {
       htmlContent = { __html: text };
@@ -465,34 +465,34 @@ const renderGenericElement = (element, position, processedStyles, elementProps, 
   let tileContent = null;
   if (element.type === ELEMENT_TYPES.TILE && elementProps) {
     const tileText = typeof elementProps.text === 'function' ? elementProps.text() : (elementProps.text !== undefined ? elementProps.text : '');
-        const borderAnimation = elementProps.borderAnimation || 'none';
-        
-        let animationStyles = {};
+    const borderAnimation = elementProps.borderAnimation || 'none';
+
+    let animationStyles = {};
     if (borderAnimation === ANIMATION_TYPES.GLOW) {
-          animationStyles = {
-            animation: 'glow 2s ease-in-out infinite alternate',
-            boxShadow: '0 0 10px currentColor'
-          };
+      animationStyles = {
+        animation: 'glow 2s ease-in-out infinite alternate',
+        boxShadow: '0 0 10px currentColor'
+      };
     } else if (borderAnimation === ANIMATION_TYPES.PULSATE) {
-          animationStyles = {
-            animation: 'pulsate 1.5s ease-in-out infinite'
-          };
+      animationStyles = {
+        animation: 'pulsate 1.5s ease-in-out infinite'
+      };
     } else if (borderAnimation === ANIMATION_TYPES.PULSATE_GLOW) {
-          animationStyles = {
-            animation: 'pulsateGlow 2s ease-in-out infinite'
-          };
-        }
-        
-        tileContent = React.createElement('div', {
+      animationStyles = {
+        animation: 'pulsateGlow 2s ease-in-out infinite'
+      };
+    }
+
+    tileContent = React.createElement('div', {
       className: `tile-content ${borderAnimation === ANIMATION_TYPES.GLOW ? 'glow' : ''} ${borderAnimation === ANIMATION_TYPES.PULSATE ? 'pulsate' : ''} ${borderAnimation === ANIMATION_TYPES.PULSATE_GLOW ? 'pulsate-glow' : ''}`,
-          style: animationStyles
-        }, tileText);
-      }
-      
+      style: animationStyles
+    }, tileText);
+  }
+
   // Handle button properties
-      const buttonProps = {};
+  const buttonProps = {};
   if (element.type === ELEMENT_TYPES.BUTTON && elementProps) {
-        if (elementProps.disabled !== undefined) {
+    if (elementProps.disabled !== undefined) {
       buttonProps.disabled = elementProps.disabled === true;
     }
   }
@@ -501,17 +501,17 @@ const renderGenericElement = (element, position, processedStyles, elementProps, 
   const dynamicTileStyle = tileStyles?.get(element.name) || {};
 
   // Check if this is an applet button (3-layer system)
-  const isAppletButton = element.type === ELEMENT_TYPES.BUTTON && 
-    (elementProps?.className === 'applet-button' || 
-     elementProps?.frameClassName === 'applet-button-frame' || 
-     elementProps?.contentClassName === 'applet-button-content');
+  const isAppletButton = element.type === ELEMENT_TYPES.BUTTON &&
+    (elementProps?.className === 'applet-button' ||
+      elementProps?.frameClassName === 'applet-button-frame' ||
+      elementProps?.contentClassName === 'applet-button-content');
 
   if (isAppletButton) {
     // Three-layer button structure
-    const frameGapPx = elementProps.frameGap ? 
-      (typeof elementProps.frameGap === 'string' && elementProps.frameGap.includes('gc') ? 
+    const frameGapPx = elementProps.frameGap ?
+      (typeof elementProps.frameGap === 'string' && elementProps.frameGap.includes('gc') ?
         elementProps.frameGap : '5px') : '5px';
-    
+
     return React.createElement('div', {
       key: element.name,
       className: `applet-button-container ${element.name}-container${elementProps?.pulsate ? ' pulsate' : ''}${elementProps?.disabled === true ? ' disabled' : ''}`,
@@ -558,93 +558,93 @@ const renderGenericElement = (element, position, processedStyles, elementProps, 
   // Create element for non-applet buttons
   const elementType = element.type === ELEMENT_TYPES.BUTTON ? 'button' : 'div';
 
-      // Debug logging for onClick handlers
-      if (element.name && (element.name.includes('tile-page2') || element.name.includes('minuend') || element.name.includes('subtrahend') || element.name.includes('answer'))) {
-        console.log(`🔍 [ElementRenderer] Rendering ${element.name}:`, {
-          type: element.type,
-          hasOnClick: typeof elementProps?.onClick === 'function',
-          elementProps: elementProps ? Object.keys(elementProps) : 'none',
-          cursor: elementProps?.cursor
-        });
-      }
+  // Debug logging for onClick handlers
+  if (element.name && (element.name.includes('tile-page2') || element.name.includes('minuend') || element.name.includes('subtrahend') || element.name.includes('answer'))) {
+    console.log(`🔍 [ElementRenderer] Rendering ${element.name}:`, {
+      type: element.type,
+      hasOnClick: typeof elementProps?.onClick === 'function',
+      elementProps: elementProps ? Object.keys(elementProps) : 'none',
+      cursor: elementProps?.cursor
+    });
+  }
 
-      // Handle container with image
-      let imageContent = null;
-      if (element.type === ELEMENT_TYPES.CONTAINER && elementProps?.imageSrc) {
-        const imageStyle = {
-          width: '100%',
-          height: '100%',
-          objectFit: elementProps.objectFit || 'contain', // Use objectFit prop if provided, default to 'contain'
-          display: 'block'
-        };
-        
-        // Add scale transform if provided
-        if (elementProps.scale !== undefined && elementProps.scale !== 1) {
-          imageStyle.transform = `scale(${elementProps.scale})`;
-          imageStyle.transformOrigin = 'center center';
-        }
-        
-        imageContent = React.createElement('img', {
-          key: 'container-image',
-          src: elementProps.imageSrc,
-          alt: elementProps.imageAlt || '',
-          style: imageStyle
-        });
-      }
+  // Handle container with image
+  let imageContent = null;
+  if (element.type === ELEMENT_TYPES.CONTAINER && elementProps?.imageSrc) {
+    const imageStyle = {
+      width: '100%',
+      height: '100%',
+      objectFit: elementProps.objectFit || 'contain', // Use objectFit prop if provided, default to 'contain'
+      display: 'block'
+    };
 
-      // Prepare element properties
-      // Check if container needs flex layout (for images or explicit flex props)
-      const hasImageSrc = elementProps?.imageSrc;
-      const hasFlexDisplay = elementProps?.display === 'flex' || processedStyles?.display === 'flex';
-      const needsFlexLayout = hasImageSrc || 
-        (element.type === ELEMENT_TYPES.CONTAINER && hasFlexDisplay);
-      
-      const elementReactProps = {
-        key: element.name,
-        id: element.id || undefined, // Add element ID if available
-        className: `${element.type}-element ${element.type}-element-${element.name}${processedStyles.className ? ' ' + processedStyles.className : ''}${elementProps?.pulsate ? ' pulsate' : ''}${elementProps?.disabled === true ? ' disabled' : ''}`,
-        style: {
-          ...position.css,
-          ...processedStyles,
-          ...dynamicTileStyle,
-          zIndex: element.zIndex || 402,
-          // Apply flex layout if needed (for images or explicit flex props)
-          // Ensure flex properties are applied even if processedStyles has them
-          ...(needsFlexLayout ? {
-            display: 'flex',
-            alignItems: processedStyles?.alignItems || elementProps?.alignItems || 'center',
-            justifyContent: processedStyles?.justifyContent || elementProps?.justifyContent || 'center'
-          } : {}),
-          // Allow overflow if specified (for container elements with images that need to overflow)
-          ...(element.type === ELEMENT_TYPES.CONTAINER && elementProps?.overflow ? {
-            overflow: elementProps.overflow
-          } : {}),
-          // Add cursor pointer for clickable elements
-          ...(elementProps?.onClick ? { cursor: 'pointer' } : {})
-        },
-        'data-element-name': element.name,
-        'data-grid-position': element.name,
-        onClick: elementProps?.onClick || null,
-        ...buttonProps,
-        ...dataAttributes // Add data attributes properly (React accepts them as-is)
-      };
+    // Add scale transform if provided
+    if (elementProps.scale !== undefined && elementProps.scale !== 1) {
+      imageStyle.transform = `scale(${elementProps.scale})`;
+      imageStyle.transformOrigin = 'center center';
+    }
 
-      // Add HTML content if available
-      if (htmlContent) {
-        elementReactProps.dangerouslySetInnerHTML = htmlContent;
-      }
+    imageContent = React.createElement('img', {
+      key: 'container-image',
+      src: elementProps.imageSrc,
+      alt: elementProps.imageAlt || '',
+      style: imageStyle
+    });
+  }
 
-      // Determine children content
-      let childrenContent = null;
-      if (htmlContent) {
-        childrenContent = null; // HTML content uses dangerouslySetInnerHTML
-      } else if (imageContent) {
-        childrenContent = imageContent;
-      } else {
-        childrenContent = tileContent || textContent;
-      }
+  // Prepare element properties
+  // Check if container needs flex layout (for images or explicit flex props)
+  const hasImageSrc = elementProps?.imageSrc;
+  const hasFlexDisplay = elementProps?.display === 'flex' || processedStyles?.display === 'flex';
+  const needsFlexLayout = hasImageSrc ||
+    (element.type === ELEMENT_TYPES.CONTAINER && hasFlexDisplay);
 
-      return React.createElement(elementType, elementReactProps, childrenContent);
+  const elementReactProps = {
+    key: element.name,
+    id: element.id || undefined, // Add element ID if available
+    className: `${element.type}-element ${element.type}-element-${element.name}${processedStyles.className ? ' ' + processedStyles.className : ''}${elementProps?.pulsate ? ' pulsate' : ''}${elementProps?.disabled === true ? ' disabled' : ''}`,
+    style: {
+      ...position.css,
+      ...processedStyles,
+      ...dynamicTileStyle,
+      zIndex: element.zIndex || 402,
+      // Apply flex layout if needed (for images or explicit flex props)
+      // Ensure flex properties are applied even if processedStyles has them
+      ...(needsFlexLayout ? {
+        display: 'flex',
+        alignItems: processedStyles?.alignItems || elementProps?.alignItems || 'center',
+        justifyContent: processedStyles?.justifyContent || elementProps?.justifyContent || 'center'
+      } : {}),
+      // Allow overflow if specified (for container elements with images that need to overflow)
+      ...(element.type === ELEMENT_TYPES.CONTAINER && elementProps?.overflow ? {
+        overflow: elementProps.overflow
+      } : {}),
+      // Add cursor pointer for clickable elements
+      ...(elementProps?.onClick ? { cursor: 'pointer' } : {})
+    },
+    'data-element-name': element.name,
+    'data-grid-position': element.name,
+    onClick: elementProps?.onClick || null,
+    ...buttonProps,
+    ...dataAttributes // Add data attributes properly (React accepts them as-is)
+  };
+
+  // Add HTML content if available
+  if (htmlContent) {
+    elementReactProps.dangerouslySetInnerHTML = htmlContent;
+  }
+
+  // Determine children content
+  let childrenContent = null;
+  if (htmlContent) {
+    childrenContent = null; // HTML content uses dangerouslySetInnerHTML
+  } else if (imageContent) {
+    childrenContent = imageContent;
+  } else {
+    childrenContent = tileContent || textContent;
+  }
+
+  return React.createElement(elementType, elementReactProps, childrenContent);
 };
 
 /**
@@ -653,7 +653,7 @@ const renderGenericElement = (element, position, processedStyles, elementProps, 
  */
 const CustomElementsContainer = ({ currentPage, totalPages, appUpdateTrigger, feedbackText, tileStyles }) => {
   const { navigateToPage } = useAppState();
-  
+
   const elements = useMemo(() => {
     const pageElements = GridPositionPages?.[currentPage];
     if (!pageElements) {
@@ -668,7 +668,7 @@ const CustomElementsContainer = ({ currentPage, totalPages, appUpdateTrigger, fe
   if (elements.length === 0) return null;
 
   return React.createElement(React.Fragment, {}, [
-    ...elements.map(element => 
+    ...elements.map(element =>
       React.createElement(ElementRenderer, {
         key: `page${currentPage}-${element.id || element.name}`,
         element,
@@ -707,16 +707,16 @@ const AppStateProvider = ({ children }) => {
     }
     return 1;
   };
-  
+
   const [currentPage, setCurrentPage] = useState(getInitialPage());
   const [appUpdateTrigger, setAppUpdateTrigger] = useState(0);
-  
+
   // Page-specific state removed - simplified to basic page navigation only
-  
+
   // UI state
-  const [screenSize, setScreenSize] = useState({ 
-    width: window.innerWidth, 
-    height: window.innerHeight 
+  const [screenSize, setScreenSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight
   });
   // Simplified interaction model
   const [feedbackText, setFeedbackText] = useState({
@@ -774,7 +774,7 @@ const AppStateProvider = ({ children }) => {
     if (pageNumber === 1 && typeof window !== 'undefined') {
       const clearFunctions = ['clearCheckOverlays', 'clearIncrementBorders', 'clearColumnNumbers'];
       clearFunctions.forEach(fn => window[fn]?.());
-      
+
       // Clear all component state stores on reset
       if (window.fillBlanksStateStore) {
         window.fillBlanksStateStore = {};
@@ -792,7 +792,7 @@ const AppStateProvider = ({ children }) => {
         window.quizPanelStateStore = {};
         console.log('🔄 [Navigate] Cleared quizPanelStateStore on reset');
       }
-      
+
       // Clear page completion states
       if (window.PageCompletionManager) {
         window.PageCompletionManager.init();
@@ -803,7 +803,7 @@ const AppStateProvider = ({ children }) => {
           console.log('🔄 [Navigate] Cleared all page completion states on reset');
         }
       }
-      
+
       // Clear any page-specific feedback states
       Object.keys(window).forEach(key => {
         if (key.includes('FillBlanksState') || key.includes('FeedbackState')) {
@@ -812,7 +812,7 @@ const AppStateProvider = ({ children }) => {
       });
       console.log('🔄 [Navigate] Cleared page-specific feedback states on reset');
     }
-    
+
     // Reset number pad disabled flags when navigating to a new page
     if (typeof window !== 'undefined') {
       // Only reset if navigating to a page that uses number pads
@@ -822,7 +822,7 @@ const AppStateProvider = ({ children }) => {
         console.log(`🔄 [Navigate] Reset number pad disabled flags for page ${pageNumber}`);
       }
     }
-    
+
     setCurrentPage(pageNumber);
     forceUpdate();
 
@@ -838,7 +838,7 @@ const AppStateProvider = ({ children }) => {
     if (typeof window !== 'undefined') {
       window.dispatchEvent(new CustomEvent('pageChanged', { detail: { page: pageNumber } }));
     }
-    
+
     console.log(`📄 Navigated to page ${pageNumber}`);
   }, [availablePages, forceUpdate]);
 
@@ -969,7 +969,7 @@ const useWindowIntegration = () => {
         window.PageCompletionManager.markPageCompleted(pageNumber);
       }
     };
-    
+
     window.addEventListener('quizCompleted', handleQuizCompleted);
 
     // Initialize completion state for current page
@@ -993,13 +993,13 @@ const useWindowIntegration = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('quizCompleted', handleQuizCompleted);
-      
+
       // Clean up window functions
       const functionsToClean = [
         'getCurrentPage', 'getAvailablePages', 'getTotalPages', 'navigateToPage', 'changePageAndNotify',
         'forceAppUpdate', 'updateTileStyle', 'clearTileStyle'
       ];
-      
+
       functionsToClean.forEach(fn => delete window[fn]);
     };
   }, [
@@ -1018,33 +1018,33 @@ const useKeyboardNavigation = () => {
     const handleKeyPress = (event) => {
       const keyCode = event.keyCode || event.which;
       const keyString = String.fromCharCode(keyCode);
-      
+
       if (/^[1-9]$/.test(keyString)) {
         // Check if we're on a page with an active numberpad that should handle the key
         const currentPage = typeof window !== 'undefined' ? window.getCurrentPage?.() : 1;
         const hasActiveNumberPad = currentPage === 2;
-        
+
         if (hasActiveNumberPad) {
           // Don't handle navigation on pages with active numberpads
           // Let the numberpad handle the key press instead
           console.log(`⌨️ Keyboard navigation: Key ${keyString} ignored on page ${currentPage} (active numberpad)`);
           return;
         }
-        
+
         const pageNumber = parseInt(keyString);
-        
+
         if (window.GridPositionPages && window.GridPositionPages[pageNumber]) {
           navigateToPage(pageNumber);
           console.log(`⌨️ Navigated to page ${pageNumber} via keyboard`);
-          } else {
+        } else {
           console.warn(`⌨️ Page ${pageNumber} does not exist`);
         }
       }
     };
-    
+
     document.addEventListener('keypress', handleKeyPress);
     console.log('⌨️ Keyboard navigation enabled');
-    
+
     return () => {
       document.removeEventListener('keypress', handleKeyPress);
       console.log('⌨️ Keyboard navigation disabled');
@@ -1059,22 +1059,22 @@ const useKeyboardNavigation = () => {
 const MathLearningApp = () => {
   // Validate dependencies
   const dependencyCheck = useMemo(() => validateDependencies(), []);
-  
+
   if (!dependencyCheck.isValid) {
     return React.createElement('div', {
       className: 'dependency-error'
     }, [
       React.createElement('h1', { key: 'title' }, '⚠️ Missing Dependencies'),
       React.createElement('p', { key: 'message' }, 'The following required dependencies are missing:'),
-      React.createElement('ul', { key: 'list' }, 
-        dependencyCheck.missing.map(dep => 
+      React.createElement('ul', { key: 'list' },
+        dependencyCheck.missing.map(dep =>
           React.createElement('li', { key: dep }, dep)
         )
       )
     ]);
   }
 
-  return React.createElement(AppStateProvider, {}, 
+  return React.createElement(AppStateProvider, {},
     React.createElement(MathLearningAppContent, {})
   );
 };
@@ -1094,23 +1094,23 @@ const MathLearningAppContent = () => {
   // Initialize hooks
   useWindowIntegration();
   useKeyboardNavigation();
-  
+
   // PageConfig is automatically initialized when the script loads
 
   // Create components
   const components = useMemo(() => {
     const componentList = [];
-    
+
     try {
       componentList.push(React.createElement(PageIndicatorComponent, {
         key: 'page-indicator',
         currentPage,
         totalPages
       }));
-  } catch (error) {
+    } catch (error) {
       console.error('❌ PageIndicatorComponent failed:', error);
     }
-    
+
     try {
       componentList.push(React.createElement(CustomElementsContainer, {
         key: 'custom-elements',
@@ -1120,18 +1120,18 @@ const MathLearningAppContent = () => {
         feedbackText,
         tileStyles
       }));
-  } catch (error) {
+    } catch (error) {
       console.error('❌ CustomElementsContainer failed:', error);
-  }
+    }
 
     return componentList;
   }, [currentPage, totalPages, appUpdateTrigger, feedbackText, tileStyles]);
-  
-    return React.createElement('div', {
-      className: 'main-container math-app-container'
-    }, [
-      ...components
-    ]);
+
+  return React.createElement('div', {
+    className: 'main-container math-app-container'
+  }, [
+    ...components
+  ]);
 };
 
 // ===== APP INITIALIZATION =====
@@ -1140,7 +1140,7 @@ const MathLearningAppContent = () => {
  */
 const initializeMathApp = () => {
   const root = document.getElementById('react-root');
-  
+
   if (!root) {
     console.error('❌ React root element not found');
     return;
@@ -1153,24 +1153,24 @@ const initializeMathApp = () => {
 
   try {
     const reactRoot = ReactDOM.createRoot(root);
-    
+
     // Render app with error boundary
     reactRoot.render(
       React.createElement(ErrorBoundary, {},
         React.createElement(MathLearningApp, {})
       )
     );
-    
+
     console.log('✅ Math Learning App initialized successfully');
-    } catch (error) {
+  } catch (error) {
     console.error('❌ Error during React initialization:', error);
-    }
+  }
 };
 
 // Enhanced initialization with React 18 features
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeMathApp);
-  } else {
+} else {
   // Use React 18's automatic batching for initialization
   if (typeof startTransition !== 'undefined') {
     startTransition(() => {
@@ -1190,4 +1190,11 @@ if (typeof window !== 'undefined') {
     useId: typeof useId !== 'undefined' ? useId : null
   };
 }
-  
+
+function setDefaultTileID() {
+  window.focusedTileId = "page2-tile-dividend";
+  window.focusedTilePage = 2;
+  // Set flag to indicate this tile was just focused - next input should reset it
+  window.tileJustFocused = true;
+}
+setDefaultTileID();

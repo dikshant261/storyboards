@@ -166,9 +166,9 @@ const getPageNavigation = (pageNumber) => {
  */
 const resetAllStates = () => {
   console.log('🔄 [Reset All States] Starting comprehensive state reset...');
-  
+
   if (typeof window === 'undefined') return;
-  
+
   try {
     // Clear all component state stores
     const stateStores = [
@@ -177,14 +177,14 @@ const resetAllStates = () => {
       'calculationStepsStateStore',
       'quizPanelStateStore'
     ];
-    
+
     stateStores.forEach(storeName => {
       if (window[storeName]) {
         window[storeName] = {};
         console.log(`🔄 [Reset All States] Cleared ${storeName}`);
       }
     });
-    
+
     // Clear page completion states
     if (window.PageCompletionManager) {
       window.PageCompletionManager.init();
@@ -195,23 +195,23 @@ const resetAllStates = () => {
         console.log('🔄 [Reset All States] Cleared all page completion states');
       }
     }
-    
+
     // Clear any page-specific feedback states and component states
     Object.keys(window).forEach(key => {
-      if (key.includes('FillBlanksState') || 
-          key.includes('FeedbackState') ||
-          key.includes('QuizState') ||
-          key.includes('PageState') ||
-          key.match(/^page\d+complete$/i) ||
-          key.match(/^page\d+State$/i) ||
-          key.match(/^page\d+FillBlanksState$/i) ||
-          key.match(/^page\d+FeedbackState$/i) ||
-          key.match(/^page\d+QuizState$/i)) {
+      if (key.includes('FillBlanksState') ||
+        key.includes('FeedbackState') ||
+        key.includes('QuizState') ||
+        key.includes('PageState') ||
+        key.match(/^page\d+complete$/i) ||
+        key.match(/^page\d+State$/i) ||
+        key.match(/^page\d+FillBlanksState$/i) ||
+        key.match(/^page\d+FeedbackState$/i) ||
+        key.match(/^page\d+QuizState$/i)) {
         delete window[key];
         console.log(`🔄 [Reset All States] Cleared ${key}`);
       }
     });
-    
+
     // Clear visual elements
     const clearFunctions = ['clearCheckOverlays', 'clearIncrementBorders', 'clearColumnNumbers'];
     clearFunctions.forEach(fn => {
@@ -220,7 +220,7 @@ const resetAllStates = () => {
         console.log(`🔄 [Reset All States] Called ${fn}`);
       }
     });
-    
+
     // Reset global variables
     if (window.page1complete !== undefined) {
       window.page1complete = false;
@@ -231,7 +231,7 @@ const resetAllStates = () => {
     if (window.currentQuestionIndex !== undefined) {
       window.currentQuestionIndex = 0;
     }
-    
+
     // Clear localStorage and sessionStorage (optional - uncomment if needed)
     // try {
     //   localStorage.clear();
@@ -240,20 +240,20 @@ const resetAllStates = () => {
     // } catch (e) {
     //   console.warn('🔄 [Reset All States] Could not clear storage:', e);
     // }
-    
+
     // Note: We don't manually remove DOM elements here because React manages them.
     // The React key fix (page${currentPage}-${element.id}) ensures proper unmounting.
     // Manual DOM manipulation would conflict with React's lifecycle.
-    
+
     // Reset any component-specific state
     // Force re-render of all components by dispatching a reset event
     if (window.dispatchEvent) {
-      window.dispatchEvent(new CustomEvent('appStateReset', { 
-        detail: { timestamp: Date.now() } 
+      window.dispatchEvent(new CustomEvent('appStateReset', {
+        detail: { timestamp: Date.now() }
       }));
       console.log('🔄 [Reset All States] Dispatched appStateReset event');
     }
-    
+
     console.log('✅ [Reset All States] State reset completed');
   } catch (error) {
     console.error('❌ [Reset All States] Error during state reset:', error);
@@ -294,22 +294,22 @@ const createOptimizedGridPositionPages = () => {
       typeof window !== "undefined" && window.currentQuestionIndex !== undefined
         ? window.currentQuestionIndex
         : 0;
-    
+
     // Get division questions array
     const divisionQuestions = getI18nText('common.divisionQuestions', []);
-    
+
     // Default to first question if array is empty or index is out of bounds
     if (!Array.isArray(divisionQuestions) || divisionQuestions.length === 0) {
       return { dividend: 16, divisor: 8, quotient: 2, sequence: ['quotient', 'dividend', 'divisor'] };
     }
-    
+
     // Wrap around if index exceeds array length
     const safeIndex = currentIndex % divisionQuestions.length;
     const question = divisionQuestions[safeIndex];
-    
+
     return question || { dividend: 16, divisor: 8, quotient: 2, sequence: ['quotient', 'dividend', 'divisor'] };
   };
-  
+
   // Expose getCurrentDivisionQuestion on window for use by other components
   if (typeof window !== 'undefined') {
     window.getCurrentDivisionQuestion = getCurrentDivisionQuestion;
@@ -319,7 +319,7 @@ const createOptimizedGridPositionPages = () => {
   const getCorrectTileForPage = (pageNumber) => {
     const question = getCurrentDivisionQuestion();
     const sequence = question.sequence || ['quotient', 'dividend', 'divisor'];
-    
+
     // Page 2 = sequence[0], Page 3 = sequence[1], Page 4 = sequence[2]
     const sequenceIndex = pageNumber - 2;
     if (sequenceIndex >= 0 && sequenceIndex < sequence.length) {
@@ -332,25 +332,25 @@ const createOptimizedGridPositionPages = () => {
   const isTileClickableForPage = (tileType, pageNumber) => {
     const question = getCurrentDivisionQuestion();
     const sequence = question.sequence || ['quotient', 'dividend', 'divisor'];
-    
+
     // Find the index of this tile type in the sequence
     const tileIndexInSequence = sequence.indexOf(tileType);
-    
+
     // If tile not found in sequence, default behavior
     if (tileIndexInSequence === -1) {
       return pageNumber !== 4; // All clickable except on page 4
     }
-    
+
     // On page 4, no tiles are clickable
     if (pageNumber === 4) {
       return false;
     }
-    
+
     // On page 2, all tiles are clickable (no previous answers)
     if (pageNumber === 2) {
       return true;
     }
-    
+
     // For page 3: sequence[pageNumber-3] = sequence[0] should be disabled
     // (it was answered on page 2)
     // All other tiles should be clickable (correct answer shows green, wrong answers show red/wiggle)
@@ -362,7 +362,7 @@ const createOptimizedGridPositionPages = () => {
       // All other tiles are clickable (correct answer will be handled by createTileClickHandler)
       return true;
     }
-    
+
     return false;
   };
 
@@ -370,20 +370,20 @@ const createOptimizedGridPositionPages = () => {
   const isBadgeVisibleForPage = (tileType, pageNumber) => {
     const question = getCurrentDivisionQuestion();
     const sequence = question.sequence || ['quotient', 'dividend', 'divisor'];
-    
+
     // Find the index of this tile type in the sequence
     const tileIndexInSequence = sequence.indexOf(tileType);
-    
+
     // If tile not found in sequence, default behavior
     if (tileIndexInSequence === -1) {
       return pageNumber === 4; // Only visible on page 4 if not in sequence
     }
-    
+
     // On page 4, all badges are visible
     if (pageNumber === 4) {
       return true;
     }
-    
+
     // For page 3: sequence[pageNumber-3] = sequence[0] badge should be visible
     // (it was answered on page 2)
     if (pageNumber === 3) {
@@ -392,14 +392,14 @@ const createOptimizedGridPositionPages = () => {
         return true; // This tile was answered on previous page, show its badge
       }
     }
-    
+
     // Badge is visible if it appears before the current sequence index
     // (i.e., it was already answered on a previous page)
     const currentSequenceIndex = pageNumber - 2;
     if (tileIndexInSequence < currentSequenceIndex) {
       return true;
     }
-    
+
     return false;
   };
 
@@ -412,28 +412,28 @@ const createOptimizedGridPositionPages = () => {
   const createTileClickHandler = (tileType, pageNumber) => {
     return (e) => {
       e.stopPropagation();
-      
+
       // Check if tiles are disabled (all correct on page 2)
       if (pageNumber === 2 && typeof window !== 'undefined' && window.page2QuizCompleted) {
         console.log(`🔒 [Tile] Tiles are disabled - quiz completed`);
         return;
       }
-      
+
       const tileId = `page${pageNumber}-tile-${tileType}`;
       let tileElement = document.getElementById(tileId);
-      
+
       // Fallback: try to find by data attribute
       if (!tileElement) {
         tileElement = document.querySelector(`[data-element-name="tile-${tileType}"]`);
       }
-      
+
       console.log(`🎯 ${capitalizeFirstLetter(tileType)} tile clicked on page ${pageNumber}, element:`, tileElement);
-      
+
       if (!tileElement) {
         console.error(`❌ Could not find ${tileType} tile element`);
         return;
       }
-      
+
       // Set all tiles on this page to out-of-focus or filled mode, then set clicked tile to focus
       const allTileTypes = ['dividend', 'divisor', 'quotient', 'divide', 'equals'];
       allTileTypes.forEach((type) => {
@@ -444,7 +444,7 @@ const createOptimizedGridPositionPages = () => {
           const tileText = otherTileElement.textContent || otherTileElement.innerText || '';
           const hasValue = tileText.trim().length > 0;
           const newMode = hasValue ? 'filled' : 'out-of-focus';
-          
+
           const updateEvent = new CustomEvent('tileModeUpdated', {
             detail: { mode: newMode, destinationId: otherTileId },
             bubbles: true
@@ -454,7 +454,7 @@ const createOptimizedGridPositionPages = () => {
           console.log(`🔘 [Tile] Set ${otherTileId} to ${newMode} mode (hasValue: ${hasValue})`);
         }
       });
-      
+
       // Set clicked tile to focus mode
       const focusEvent = new CustomEvent('tileModeUpdated', {
         detail: { mode: 'focus', destinationId: tileId },
@@ -462,7 +462,7 @@ const createOptimizedGridPositionPages = () => {
       });
       window.dispatchEvent(focusEvent);
       tileElement.setAttribute('data-tile-mode', 'focus');
-      
+
       // Store the focused tile ID globally for number pad
       if (typeof window !== 'undefined') {
         window.focusedTileId = tileId;
@@ -471,7 +471,7 @@ const createOptimizedGridPositionPages = () => {
         window.tileJustFocused = true;
         console.log(`✅ [Tile] Set ${tileId} to focus mode and stored as focused tile (will reset on first input)`);
       }
-      
+
       // Note: Removed answer checking and wiggle animation - tiles now only handle focus mode
     };
   };
@@ -505,6 +505,7 @@ const createOptimizedGridPositionPages = () => {
     }
     return fallback;
   };
+
 
   // Return optimized GridPositionPages
   return {
@@ -595,7 +596,7 @@ const createOptimizedGridPositionPages = () => {
           onClick: () => {
             // Handle START button click - navigate to page 2 with visual feedback
             const buttonElement = document.getElementById('page1-start-button');
-            
+
             // Visual feedback: scale animation
             if (buttonElement) {
               buttonElement.style.transform = 'scale(0.95)';
@@ -607,7 +608,7 @@ const createOptimizedGridPositionPages = () => {
                 }, 100);
               }, 100);
             }
-            
+
             // Play click sound
             if (typeof window !== 'undefined') {
               if (window.playCarClickSound) {
@@ -616,7 +617,7 @@ const createOptimizedGridPositionPages = () => {
                 window.SoundManager.play('click');
               }
             }
-            
+
             // Navigate to page 2
             setTimeout(() => {
               if (typeof window !== 'undefined') {
@@ -746,7 +747,7 @@ const createOptimizedGridPositionPages = () => {
           }
         }
       },
-        
+
     ],
 
     2: [
@@ -881,7 +882,7 @@ const createOptimizedGridPositionPages = () => {
               const divisionQuestions = getI18nText('common.divisionQuestions', []);
               const totalQuestions = Array.isArray(divisionQuestions) ? divisionQuestions.length : 0;
               const isLastQuestion = totalQuestions > 0 && currentIndex === totalQuestions - 1;
-              
+
               if (isLastQuestion) {
                 return getI18nText('pages.page2.footerInstructionLast', "Tap » to start over again");
               } else {
@@ -1049,7 +1050,7 @@ const createOptimizedGridPositionPages = () => {
               const divisionQuestions = getI18nText('common.divisionQuestions', []);
               const totalQuestions = Array.isArray(divisionQuestions) ? divisionQuestions.length : 0;
               const isLastQuestion = totalQuestions > 0 && currentIndex === totalQuestions - 1;
-              
+
               if (isLastQuestion) {
                 return getI18nText('pages.page2.instructionAfterCorrectLast', "Tap Start Over to restart this activity again.");
               } else {
@@ -1086,12 +1087,12 @@ const createOptimizedGridPositionPages = () => {
               : 0;
             const divisionQuestions = getI18nText('common.divisionQuestions', []);
             const totalQuestions = Array.isArray(divisionQuestions) ? divisionQuestions.length : 0;
-            
+
             // If no questions, show default 4 dots with first one active
             if (totalQuestions === 0) {
               return '<div style="display: flex; align-items: center; justify-content: center; gap: 15px;"><div style="width: 12px; height: 12px; border-radius: 50%; background-color: #FF6600; border: 2px solid #ffffff;"></div><div style="width: 12px; height: 12px; border-radius: 50%; background-color: #555555; border: 2px solid #ffffff;"></div><div style="width: 12px; height: 12px; border-radius: 50%; background-color: #555555; border: 2px solid #ffffff;"></div><div style="width: 12px; height: 12px; border-radius: 50%; background-color: #555555; border: 2px solid #ffffff;"></div></div>';
             }
-            
+
             // Generate dots dynamically - one per question
             const dots = [];
             for (let i = 0; i < totalQuestions; i++) {
@@ -1099,7 +1100,7 @@ const createOptimizedGridPositionPages = () => {
               const bgColor = isActive ? '#FF6600' : '#555555';
               dots.push(`<div style="width: 12px; height: 12px; border-radius: 50%; background-color: ${bgColor}; border: 2px solid #ffffff;"></div>`);
             }
-            
+
             return `<div style="display: flex; align-items: center; justify-content: center; gap: 15px;">${dots.join('')}</div>`;
           },
           backgroundColor: 'transparent',
@@ -1185,7 +1186,7 @@ const createOptimizedGridPositionPages = () => {
             if (typeof window !== 'undefined' && window.playCarClickSound) {
               window.playCarClickSound('next');
             }
-            
+
             // Get current question index and check if it's the last question
             const currentIndex = typeof window !== 'undefined' && window.currentQuestionIndex !== undefined
               ? window.currentQuestionIndex
@@ -1193,18 +1194,18 @@ const createOptimizedGridPositionPages = () => {
             const divisionQuestions = getI18nText('common.divisionQuestions', []);
             const totalQuestions = Array.isArray(divisionQuestions) ? divisionQuestions.length : 0;
             const isLastQuestion = totalQuestions > 0 && currentIndex === totalQuestions - 1;
-            
+
             // Reset all page 2 states
             const resetPage2States = () => {
               if (typeof window !== 'undefined') {
                 // Reset quiz completion flag
                 window.page2QuizCompleted = false;
-                
+
                 // Reset focused tile
                 window.focusedTileId = null;
                 window.focusedTilePage = null;
                 window.tileJustFocused = false;
-                
+
                 // Clear all tile borders and reset modes
                 const allTileIds = ['page2-tile-dividend', 'page2-tile-divisor', 'page2-tile-quotient', 'page2-tile-divide', 'page2-tile-equals'];
                 allTileIds.forEach((tileId) => {
@@ -1217,15 +1218,19 @@ const createOptimizedGridPositionPages = () => {
                     tileElement.style.animation = '';
                     tileElement.style.pointerEvents = '';
                     tileElement.style.cursor = '';
-                    
+
                     // Reset tile text
                     tileElement.textContent = '';
                     tileElement.innerText = '';
-                    
+
                     // Reset mode to out-of-focus
-                    tileElement.setAttribute('data-tile-mode', 'out-of-focus');
-                    tileElement.classList.remove('table-cell-focus-blink');
-                    
+                    if (tileId === "page2-tile-dividend") {
+                      tileElement.setAttribute('data-tile-mode', 'focus');
+                    }
+                    else {
+                      tileElement.setAttribute('data-tile-mode', 'out-of-focus');
+                      tileElement.classList.remove('table-cell-focus-blink');
+                    }
                     // Dispatch reset events
                     const borderResetEvent = new CustomEvent('tileBorderReset', {
                       detail: { elementId: tileId },
@@ -1233,25 +1238,26 @@ const createOptimizedGridPositionPages = () => {
                     });
                     window.dispatchEvent(borderResetEvent);
                     tileElement.dispatchEvent(borderResetEvent);
-                    
+
                     const modeUpdateEvent = new CustomEvent('tileModeUpdated', {
                       detail: { mode: 'out-of-focus', destinationId: tileId },
                       bubbles: true
                     });
                     window.dispatchEvent(modeUpdateEvent);
                     tileElement.dispatchEvent(modeUpdateEvent);
+                    setDefaultTileID();
                   }
                 });
-                
+
                 // Re-enable number pad
                 const numberPadId = `numberpad-2`;
-                const numberPadElement = document.getElementById(numberPadId) || 
-                                        document.querySelector(`[data-element-name="${numberPadId}"]`) ||
-                                        document.querySelector(`[id*="${numberPadId}"]`);
+                const numberPadElement = document.getElementById(numberPadId) ||
+                  document.querySelector(`[data-element-name="${numberPadId}"]`) ||
+                  document.querySelector(`[id*="${numberPadId}"]`);
                 if (numberPadElement) {
                   numberPadElement.style.pointerEvents = '';
                   numberPadElement.style.opacity = '';
-                  
+
                   // Re-enable all buttons
                   const allButtons = document.querySelectorAll(`#${numberPadId} .number-pad-button, #${numberPadId} .applet-button-container`);
                   allButtons.forEach((button) => {
@@ -1260,12 +1266,12 @@ const createOptimizedGridPositionPages = () => {
                     button.style.cursor = '';
                   });
                 }
-                
+
                 // Clear number pad feedback message using the window function
                 if (typeof window !== 'undefined' && window.clearNumberPadFeedback) {
                   window.clearNumberPadFeedback();
                 }
-                
+
                 // Reset instruction text to original by dispatching an event
                 const instructionTextElement = document.getElementById('page2-instruction-text');
                 if (instructionTextElement) {
@@ -1278,23 +1284,23 @@ const createOptimizedGridPositionPages = () => {
                   instructionTextElement.dispatchEvent(resetInstructionEvent);
                   console.log('🔄 [Page2 Next] Dispatched instruction text reset event');
                 }
-                
+
                 console.log('🔄 [Page2 Next] Reset all page 2 states');
               }
             };
-            
+
             if (isLastQuestion) {
               // Last question: go to page 1 and reset to first question
               console.log('🔄 [Page2 Next] Last question - Going to page 1 and resetting to first question');
-              
+
               // Reset question index to 0
               if (typeof window !== 'undefined') {
                 window.currentQuestionIndex = 0;
               }
-              
+
               // Reset all states
               resetPage2States();
-              
+
               // Navigate to page 1
               if (typeof window !== 'undefined') {
                 if (window.changePageAndNotify) {
@@ -1309,17 +1315,17 @@ const createOptimizedGridPositionPages = () => {
             } else {
               // Not last question: increment question index and reload page 2
               console.log('🔄 [Page2 Next] Not last question - Incrementing question index and reloading page 2');
-              
+
               // Increment question index
               const nextIndex = currentIndex + 1;
               if (typeof window !== 'undefined') {
                 window.currentQuestionIndex = nextIndex;
                 console.log(`🔄 [Page2 Next] Advanced to question ${nextIndex + 1} of ${totalQuestions}`);
               }
-              
+
               // Reset all states
               resetPage2States();
-              
+
               // Reload page 2 (navigate to page 2 again)
               if (typeof window !== 'undefined') {
                 if (window.changePageAndNotify) {
@@ -1335,7 +1341,7 @@ const createOptimizedGridPositionPages = () => {
           }
         }
       },
-        
+
     ],
 
   };
@@ -1412,25 +1418,25 @@ const initializePageConfig = () => {
               window.fillBlanksStateStore = {};
               console.log('🔄 [Reset] Cleared fillBlanksStateStore');
             }
-            
+
             // Clear ArrangeStepsComponent state
             if (window.arrangeStepsStateStore) {
               window.arrangeStepsStateStore = {};
               console.log('🔄 [Reset] Cleared arrangeStepsStateStore');
             }
-            
+
             // Clear CalculationStepsComponent state
             if (window.calculationStepsStateStore) {
               window.calculationStepsStateStore = {};
               console.log('🔄 [Reset] Cleared calculationStepsStateStore');
             }
-            
+
             // Clear QuizPanelComponent state
             if (window.quizPanelStateStore) {
               window.quizPanelStateStore = {};
               console.log('🔄 [Reset] Cleared quizPanelStateStore');
             }
-            
+
             // Clear page completion states
             if (window.PageCompletionManager) {
               window.PageCompletionManager.init();
@@ -1442,7 +1448,7 @@ const initializePageConfig = () => {
                 console.log('🔄 [Reset] Cleared all page completion states');
               }
             }
-            
+
             // Clear any page-specific feedback states (e.g., page7FillBlanksState)
             Object.keys(window).forEach(key => {
               if (key.includes('FillBlanksState') || key.includes('FeedbackState')) {
@@ -1541,21 +1547,21 @@ const initializePageConfig = () => {
       try {
         const maxRetries = 5;
         const retryDelay = 200;
-        
+
         const attemptUpdate = () => {
           const sourceElement = document.getElementById(sourceId);
-          
+
           if (sourceElement) {
             const sourceText = sourceElement.textContent?.trim() || sourceElement.innerText?.trim() || '';
             console.log(`🎯 [PageConfig] Reading text from source ${sourceId}:`, sourceText);
-            
+
             // Try to update number pad target first (if destination is a number pad)
             if (window.numberPadCallbacks && window.numberPadCallbacks[destinationId]) {
               window.numberPadCallbacks[destinationId].updateTarget(sourceText);
               console.log(`✅ [PageConfig] Updated number pad ${destinationId} target to:`, sourceText);
               return;
             }
-            
+
             // Otherwise, update destination element's text content
             const destinationElement = document.getElementById(destinationId);
             if (destinationElement) {
@@ -1585,7 +1591,7 @@ const initializePageConfig = () => {
             }
           }
         };
-        
+
         // Initial delay to ensure DOM is ready
         if (retryCount === 0) {
           setTimeout(attemptUpdate, retryDelay);
@@ -1619,46 +1625,46 @@ const initializePageConfig = () => {
         console.log('📊 [PageConfig] page9UpdateTable event received', event.detail);
         const currentPage = window.getCurrentPage?.();
         console.log('📊 [PageConfig] Current page:', currentPage);
-        
+
         if (currentPage === 9) {
           console.log('📊 [Page 9] Updating table after correct answer');
-          
+
           // Function to update table with retry mechanism
           const updateTable = (retryCount = 0) => {
             console.log(`📊 [Page 9] Attempting to update table (attempt ${retryCount + 1})`);
             console.log('📊 [Page 9] Available callbacks:', Object.keys(window.tableGridCallbacks || {}));
-            
+
             // The table component name is 'side-table', not 'page9-side-table'
             const tableCallback = window.tableGridCallbacks?.['side-table'];
             if (tableCallback) {
               console.log('✅ [Page 9] Table callback found, updating cells');
-              
+
               // Update row 2, col 1: Change background to green (stop blinking)
-              tableCallback('1-0', { 
-                backgroundColor: '#00FF00', 
-                color: '#000000' 
+              tableCallback('1-0', {
+                backgroundColor: '#00FF00',
+                color: '#000000'
               });
               console.log('✅ [Page 9] Updated cell 1-0 (row 2, col 1)');
-              
+
               // Update row 2, col 2: AD = 8 (keep existing)
               // Update row 2, col 3: CD = 8√3
-              tableCallback('1-2', { 
-                text: '<span style="color: #00FF7F;">CD = 8√3</span>' 
+              tableCallback('1-2', {
+                text: '<span style="color: #00FF7F;">CD = 8√3</span>'
               });
               console.log('✅ [Page 9] Updated cell 1-2 (row 2, col 3)');
-              
+
               // Update row 2, col 4: AC = 16
-              tableCallback('1-3', { 
-                text: '<span style="color: #4A90E2;">AC = 16</span>' 
+              tableCallback('1-3', {
+                text: '<span style="color: #4A90E2;">AC = 16</span>'
               });
               console.log('✅ [Page 9] Updated cell 1-3 (row 2, col 4)');
-              
+
               // Update row 3, col 2: AC = 16
-              tableCallback('2-1', { 
-                text: '<span style="color: #FF6600;">AC = 16</span>' 
+              tableCallback('2-1', {
+                text: '<span style="color: #FF6600;">AC = 16</span>'
               });
               console.log('✅ [Page 9] Updated cell 2-1 (row 3, col 2)');
-              
+
               // Update triangle side label for AC (side1, index 1) to "16 cm"
               if (typeof window !== 'undefined') {
                 const updateSideLabelEvent = new CustomEvent('updateTriangleSideLabel', {
@@ -1671,7 +1677,7 @@ const initializePageConfig = () => {
                 window.dispatchEvent(updateSideLabelEvent);
                 console.log('✅ [Page 9] Dispatched updateTriangleSideLabel event for AC');
               }
-              
+
               console.log('✅ [Page 9] All table cells updated successfully');
             } else {
               if (retryCount < 10) {
@@ -1683,68 +1689,68 @@ const initializePageConfig = () => {
               }
             }
           };
-          
+
           // Try to update immediately, with retry if needed
           updateTable();
         } else {
           console.log('⚠️ [PageConfig] page9UpdateTable event received but current page is not 9:', currentPage);
         }
       };
-      
+
       window.addEventListener('page9UpdateTable', handlePage9TableUpdate);
       console.log('✅ [PageConfig] Registered page9UpdateTable event listener');
-      
+
       // Listen for page10UpdateTable event to update table when correct answer is given
       const handlePage10TableUpdate = (event) => {
         console.log('📊 [PageConfig] page10UpdateTable event received', event.detail);
         const currentPage = window.getCurrentPage?.();
         console.log('📊 [PageConfig] Current page:', currentPage);
-        
+
         if (currentPage === 10) {
           console.log('📊 [Page 10] Updating table after correct answer');
-          
+
           // Function to update table with retry mechanism
           const updateTable = (retryCount = 0) => {
             console.log(`📊 [Page 10] Attempting to update table (attempt ${retryCount + 1})`);
             console.log('📊 [Page 10] Available callbacks:', Object.keys(window.tableGridCallbacks || {}));
-            
+
             // The table component name is 'side-table', not 'page10-side-table'
             const tableCallback = window.tableGridCallbacks?.['side-table'];
             if (tableCallback) {
               console.log('✅ [Page 10] Table callback found, updating cells');
-              
+
               // Update row 2, col 1: Keep dark green background with dark blue/purple text (no change needed, already correct)
               // Update row 2, col 2: AD = 8 (keep existing)
               // Update row 2, col 3: CD = 8√3
-              tableCallback('1-2', { 
-                text: '<span style="color: #00FF7F;">CD = 8√3</span>' 
+              tableCallback('1-2', {
+                text: '<span style="color: #00FF7F;">CD = 8√3</span>'
               });
               console.log('✅ [Page 10] Updated cell 1-2 (row 2, col 3)');
-              
+
               // Update row 2, col 4: AC = 16
-              tableCallback('1-3', { 
-                text: '<span style="color: #4A90E2;">AC = 16</span>' 
+              tableCallback('1-3', {
+                text: '<span style="color: #4A90E2;">AC = 16</span>'
               });
               console.log('✅ [Page 10] Updated cell 1-3 (row 2, col 4)');
-              
+
               // Update row 3, col 3: BC = 16√3
-              tableCallback('2-2', { 
-                text: '<span style="color: #00FF7F;">BC = 16√3</span>' 
+              tableCallback('2-2', {
+                text: '<span style="color: #00FF7F;">BC = 16√3</span>'
               });
               console.log('✅ [Page 10] Updated cell 2-2 (row 3, col 3)');
-              
+
               // Update row 3, col 4: AB = 32
-              tableCallback('2-3', { 
-                text: '<span style="color: #4A90E2;">AB = 32</span>' 
+              tableCallback('2-3', {
+                text: '<span style="color: #4A90E2;">AB = 32</span>'
               });
               console.log('✅ [Page 10] Updated cell 2-3 (row 3, col 4)');
-              
+
               // Update row 3, col 1: Change background to green
-              tableCallback('2-0', { 
+              tableCallback('2-0', {
                 backgroundColor: '#228B22' // Dark green background
               });
               console.log('✅ [Page 10] Updated cell 2-0 (row 3, col 1) background to green');
-              
+
               // Update triangle side labels: AB = 32, AC = 16 cm (already set), BC = 16√3
               if (typeof window !== 'undefined') {
                 // Update side AB (side0, index 0) to "32 cm"
@@ -1757,7 +1763,7 @@ const initializePageConfig = () => {
                 });
                 window.dispatchEvent(updateSideABEvent);
                 console.log('✅ [Page 10] Dispatched updateTriangleSideLabel event for AB');
-                
+
                 // Update side BC (side2, index 2) to "16√3 cm"
                 const updateSideBCEvent = new CustomEvent('updateTriangleSideLabel', {
                   detail: {
@@ -1769,7 +1775,7 @@ const initializePageConfig = () => {
                 window.dispatchEvent(updateSideBCEvent);
                 console.log('✅ [Page 10] Dispatched updateTriangleSideLabel event for BC');
               }
-              
+
               console.log('✅ [Page 10] All table cells updated successfully');
             } else {
               if (retryCount < 10) {
@@ -1781,14 +1787,14 @@ const initializePageConfig = () => {
               }
             }
           };
-          
+
           // Try to update immediately, with retry if needed
           updateTable();
         } else {
           console.log('⚠️ [PageConfig] page10UpdateTable event received but current page is not 10:', currentPage);
         }
       };
-      
+
       window.addEventListener('page10UpdateTable', handlePage10TableUpdate);
       console.log('✅ [PageConfig] Registered page10UpdateTable event listener');
     }
