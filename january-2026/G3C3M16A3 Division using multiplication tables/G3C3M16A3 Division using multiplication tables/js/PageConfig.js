@@ -2009,7 +2009,7 @@ const createOptimizedGridPositionPages = () => {
         coordinates: [575, 380, 725, 530], // Centered horizontally in left panel (gap reduced to 10gc)
         zIndex: 52,
         props: {
-          mode: 'out-of-focus', // Start as out-of-focus, will change to focus when clicked
+          mode: 'focus', // Start as focus mode (as per the edit diff history)
           text: '', // Empty blank tile - will be filled by number pad
           backgroundColor: '#C8C8C8', // Light grey background (will be white when in focus mode)
           borderColor: '#969696', // Darker grey border

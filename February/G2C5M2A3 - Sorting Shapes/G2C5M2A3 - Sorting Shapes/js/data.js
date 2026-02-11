@@ -40,7 +40,8 @@ const AppData = {
                     image7: { imagePath: "Slide 1/plate.png", category: "curve" },
                     image8: { imagePath: "Slide 1/stop.png", category: "polygon" },
                     image9: { imagePath: "Slide 1/Tile.png", category: "polygon" },
-                    image10: { imagePath: "Slide 1/Window.png", category: "polygon" },                },
+                    image10: { imagePath: "Slide 1/Window.png", category: "polygon" },
+                },
             ],
 
             pages: {
@@ -61,7 +62,7 @@ const AppData = {
                     incorrectPolygonFeedback: "This is actually not a polygon.",
                     incorrectCurvedFeedback: "This is not a curved shape."
                 },
-                
+
                 page3: {
                     header: "Activity Completed",
                     greatText: "Great!",
@@ -73,13 +74,13 @@ const AppData = {
 
         id: {
             appInfo: {
-                title: "Pembelajaran Pengurutan"
+                title: "Pembelajaran Mengelompokkan"
             },
 
             buttons: {
                 next: "»",
                 previous: "«",
-                startOver: "Mulai Lagi"
+                startOver: "Mulai Ulang"
             },
 
             dropZone: {
@@ -87,78 +88,57 @@ const AppData = {
             },
 
             feedback: {
-                questionCompleteFeedback: "Kerja bagus! Anda telah menyelesaikan pertanyaan."
+                questionCompleteFeedback: "Bagus sekali! Kamu telah menyelesaikan soal ini."
             },
 
             debug: {
                 pageStatesCleared: "Status halaman telah dihapus. Muat ulang halaman untuk memulai dari awal?"
             },
+
             Questions: [
                 {
-                    image1: { imagePath: "Slide 1/roof of house.png", category: "triangle" },
-                    image2: { imagePath: "Slide 1/Tent.png", category: "triangle" },
-                    image3: { imagePath: "Slide 1/Pizza slice.png", category: "triangle" },
-                    image4: { imagePath: "Slide 1/sailboat.png", category: "triangle" },
-                    image5: { imagePath: "Slide 1/pyramid.png", category: "triangle" },
-                    image6: { imagePath: "Slide 1/Nacos.png", category: "triangle" },
-                    image7: { imagePath: "Slide 1/Sandwich.png", category: "triangle" },
-                    image8: { imagePath: "Slide 1/bicycle wheel.png", category: "not-triangle" },
-                    image9: { imagePath: "Slide 1/Book.png", category: "not-triangle" },
-                    image10: { imagePath: "Slide 1/Button.png", category: "not-triangle" },
-                    image11: { imagePath: "Slide 1/cake.png", category: "triangle" },
-                    image12: { imagePath: "Slide 1/Cheez.png", category: "not-triangle" },
-                    image13: { imagePath: "Slide 1/clock.png", category: "not-triangle" },
-                    image14: { imagePath: "Slide 1/coin.png", category: "not-triangle" },
-                    image15: { imagePath: "Slide 1/Door.png", category: "not-triangle" },
-                    image16: { imagePath: "Slide 1/Envelope.png", category: "not-triangle" },
-                    image17: { imagePath: "Slide 1/Napkin.png", category: "not-triangle" },
-                    image18: { imagePath: "Slide 1/pizza.png", category: "not-triangle" },
-                    image19: { imagePath: "Slide 1/Plate.png", category: "not-triangle" },
-                    image20: { imagePath: "Slide 1/Tile.png", category: "not-triangle" },
-                    image21: { imagePath: "Slide 1/TV.png", category: "not-triangle" },
-                    image22: { imagePath: "Slide 1/Window.png", category: "not-triangle" }
+                    image1: { imagePath: "Slide 1/bangle.png", category: "curve" },
+                    image2: { imagePath: "Slide 1/bicycle wheel.png", category: "curve" },
+                    image3: { imagePath: "Slide 1/bookCover.png", category: "polygon" },
+                    image4: { imagePath: "Slide 1/clock.png", category: "curve" },
+                    image5: { imagePath: "Slide 1/coin.png", category: "curve" },
+                    image6: { imagePath: "Slide 1/kite.png", category: "polygon" },
+                    image7: { imagePath: "Slide 1/plate.png", category: "curve" },
+                    image8: { imagePath: "Slide 1/stop.png", category: "polygon" },
+                    image9: { imagePath: "Slide 1/Tile.png", category: "polygon" },
+                    image10: { imagePath: "Slide 1/Window.png", category: "polygon" },
                 },
             ],
 
             pages: {
                 page1: {
-                    header: "Bagian yang sama dan tidak sama.",
-                    mainText: "Siap untuk lebih banyak kesenangan?<br>Mari kita mengurutkan bentuk — mana yang dipotong menjadi bagian yang sama dan mana yang menjadi bagian yang tidak sama?",
+                    header: "Mengelompokkan Bentuk",
+                    mainText: "Mari kita mengelompokkan bentuk menjadi POLIGON<br/>dan BENTUK LENGKUNG<br/><br/><br/>Ketuk ‘Mulai’ untuk memulai pelajaran.",
                     startButton: "Mulai"
                 },
+
                 page2: {
-                    header: "Apakah bentuk yang diberikan adalah Segitiga atau bukan?",
+                    header: "Mengelompokkan Bentuk",
                     instructionText: "Sebutkan jawabannya dan seret bentuk ke kotak yang benar...",
                     continueText: "Ketuk » untuk melanjutkan",
-                    dropZone1Label: "Segitiga",
-                    dropZone2Label: "Bukan Segitiga",
-                    unsortedEmptyMessage: "Kerja bagus! Semua item sudah diurutkan!",
-                    correctTriangleFeedback: "Benar! Ini adalah segitiga. Segitiga memiliki tiga sisi dan tiga sudut.",
-                    correctNotTriangleFeedback: "Benar! Ini bukan segitiga. Bentuknya memiliki jumlah sisi yang berbeda.",
-                    incorrectTriangleFeedback: "Ini sebenarnya adalah segitiga. Segitiga memiliki tiga sisi dan tiga sudut. Coba kotak Segitiga!",
-                    incorrectNotTriangleFeedback: "Ini sebenarnya bukan segitiga. Bentuknya memiliki jumlah sisi yang berbeda. Coba kotak Bukan Segitiga!"
+                    dropZone1Label: "Poligon",
+                    dropZone2Label: "Bentuk Lengkung",
+                    unsortedEmptyMessage: "Kerja bagus! Semua item sudah dikelompokkan!",
+                    correctPolygonFeedback: "Benar! Ini adalah poligon. Bentuk ini memiliki jumlah sisi tertentu.",
+                    correctCurvedFeedback: "Benar! Ini adalah bentuk lengkung.",
+                    incorrectPolygonFeedback: "Sebenarnya ini bukan poligon.",
+                    incorrectCurvedFeedback: "Ini bukan bentuk lengkung."
                 },
+
                 page3: {
-                    header: '<span style="color: #F1C40F;">Urutkan bentuk-bentuk ini berdasarkan\u00A0</span> <span style="color: #ffffff;">bentuk...</span>',
-                    instructionText: "Seret setiap objek ke kotak bentuk yang benar…",
-                    continueText: "Ketuk » untuk melanjutkan",
-                    dropZone1Label: "Segitiga",
-                    dropZone2Label: "Lingkaran atau Oval",
-                    dropZone3Label: "Persegi atau Persegi Panjang",
-                    unsortedEmptyMessage: "Kerja bagus! Semua item sudah diurutkan berdasarkan bentuk!",
-                    correctTriangleFeedback: "Benar! Objek ini memiliki bentuk segitiga.",
-                    correctCircleFeedback: "Benar! Objek ini memiliki bentuk lingkaran.",
-                    correctRectangleFeedback: "Benar! Objek ini memiliki bentuk persegi panjang.",
-                    incorrectShapeFeedback: "Lihat bentuk objek ini dengan lebih teliti. Apa bentuk garis luarnya? Coba lagi!"
-                },
-                page8: {
                     header: "Aktivitas Selesai",
-                    greatText: "Bagus!",
-                    mainText: "Anda belajar mengidentifikasi segitiga!<br>Segitiga memiliki tiga sisi dan tiga sudut.<br>Bentuk dengan jumlah sisi yang berbeda bukanlah segitiga.",
-                    startOverButton: "Mulai Lagi"
+                    greatText: "Hebat!",
+                    mainText: "Kamu telah belajar mengidentifikasi poligon dan bentuk lengkung!",
+                    startOverButton: "Mulai Ulang"
                 }
             }
-        },
+        }
+
     }
 };
 

@@ -128,7 +128,7 @@ const NumberPadPanelComponent = React.memo((props) => {
   // State to track if last check was incorrect (used to set focus mode on next number click)
   const [lastCheckWasIncorrect, setLastCheckWasIncorrect] = React.useState(false);
   
-  // Helper function to update table cell mode (shared between handleNumberClick and handleCheckClick)
+  // Helper function to update destination visual mode (table cells or tiles)
   const updateDestinationCellMode = React.useCallback((destinationId, mode) => {
     if (!destinationId) {
       console.warn(`⚠️ [NumberPad] No destinationId provided for cell mode update`);
@@ -136,26 +136,68 @@ const NumberPadPanelComponent = React.memo((props) => {
     }
     
     try {
+      // 0) Try treating destinationId as a tile id/name first, using window.updateTileStyle
+      //    This supports tiles like 'page2-tile-1' without any special destinationType.
+      if (typeof window !== 'undefined' && typeof window.updateTileStyle === 'function') {
+        const tileElementById = document.getElementById(destinationId);
+        const tileElementByName = tileElementById || document.querySelector(`[data-element-name="${destinationId}"]`);
+
+        if (tileElementByName) {
+          let tileStyles = {};
+          switch (mode) {
+            case 'focus':
+              tileStyles = {
+                backgroundColor: '#FFEB3B', // same as TileComponent focus
+                borderColor: '#FFFFFF',
+                color: '#000000'
+              };
+              break;
+            case 'correct':
+              tileStyles = {
+                backgroundColor: '#4CAF50',
+                borderColor: '#45a049',
+                color: '#FFFFFF'
+              };
+              break;
+            case 'incorrect':
+              tileStyles = {
+                backgroundColor: '#FA8072',
+                borderColor: '#E9967A',
+                color: '#FFFFFF'
+              };
+              break;
+            default:
+              tileStyles = {};
+          }
+
+          if (Object.keys(tileStyles).length > 0) {
+            window.updateTileStyle(destinationId, tileStyles);
+            console.log(`✅ [NumberPad] Updated tile styles for ${destinationId} to mode "${mode}"`, tileStyles);
+          }
+        }
+      }
+
+      // 1) Existing behaviour for table cells (IDs like page2-map-table-R1C1)
       // Extract table component ID from destinationId (e.g., 'page2-map-table-R1C1' -> 'page2-map-table')
       const cellIdMatch = destinationId.match(/^(.+?)-R\d+C\d+$/);
       if (!cellIdMatch) {
-        console.warn(`⚠️ [NumberPad] Could not extract table component ID from destinationId: ${destinationId}`);
-        return;
-      }
-      
-      const tableComponentId = cellIdMatch[1];
-      console.log(`🔍 [NumberPad] Extracted table component ID: ${tableComponentId} from destinationId: ${destinationId}`);
-      
-      // Get the cell mode update callback for this table component
-      if (typeof window !== 'undefined' && window.tableGridModeCallbacks && window.tableGridModeCallbacks[tableComponentId]) {
-        window.tableGridModeCallbacks[tableComponentId](destinationId, mode);
-        console.log(`✅ [NumberPad] Updated cell mode for ${destinationId} to ${mode}`);
+        console.warn(`⚠️ [NumberPad] Could not extract table component ID from destinationId (may be a tile): ${destinationId}`);
+        // For non-table IDs we still updated styles above (if possible), so just continue to DOM attribute update below.
       } else {
-        console.warn(`⚠️ [NumberPad] No cell mode callback found for table component: ${tableComponentId}`);
-        console.log(`🔍 [NumberPad] Available table mode callbacks:`, Object.keys(window.tableGridModeCallbacks || {}));
+        const tableComponentId = cellIdMatch[1];
+        console.log(`🔍 [NumberPad] Extracted table component ID: ${tableComponentId} from destinationId: ${destinationId}`);
+
+        // Get the cell mode update callback for this table component
+        if (typeof window !== 'undefined' && window.tableGridModeCallbacks && window.tableGridModeCallbacks[tableComponentId]) {
+          window.tableGridModeCallbacks[tableComponentId](destinationId, mode);
+          console.log(`✅ [NumberPad] Updated cell mode for ${destinationId} to ${mode}`);
+        } else {
+          console.warn(`⚠️ [NumberPad] No cell mode callback found for table component: ${tableComponentId}`);
+          console.log(`🔍 [NumberPad] Available table mode callbacks:`, Object.keys(window.tableGridModeCallbacks || {}));
+        }
       }
-      
-      // Also update the destination element directly with data attribute
+
+      // 2) Also update the destination element directly with data attribute
       try {
         const destinationElement = document.getElementById(destinationId);
         if (destinationElement) {
@@ -367,6 +409,32 @@ const NumberPadPanelComponent = React.memo((props) => {
          }
       }
     }
+  };
+  const handleClearAll = () => {
+    console.log('🧹 [NumberPad] Clear All clicked');
+  
+    if (config.enableClickSound !== false && window.playCarClickSound) {
+      window.playCarClickSound('numberpad');
+    }
+  
+    setFeedbackMessage('');
+    setInputValue('');
+  
+    // Reset destination text
+    updateDestinationText('');
+  };
+  
+  const handleBackspace = () => {
+    console.log('⬅️ [NumberPad] Backspace clicked');
+  
+    if (config.enableClickSound !== false && window.playCarClickSound) {
+      window.playCarClickSound('numberpad');
+    }
+  
+    setFeedbackMessage('');
+    setInputValue(prev =>
+      typeof prev === 'string' && prev.length > 0 ? prev.slice(0, -1) : prev
+    );
   };
   
   // Handle check button click - Compare entered value with correctValue prop
@@ -759,90 +827,119 @@ const NumberPadPanelComponent = React.memo((props) => {
       console.warn(`⚠️ [NumberPad] No destinations configured`);
       return;
     }
-    
+
     const currentDestination = destinations[currentDestinationIndex];
     if (!currentDestination) {
       console.warn(`⚠️ [NumberPad] No destination at index ${currentDestinationIndex}`);
       return;
     }
-    
+
     const destId = currentDestination.destinationId;
-    console.log(`🔍 [NumberPad] updateDestinationText called:`, { 
-      text, 
+    const destType = currentDestination.destinationType || 'table-cell';
+
+    console.log(`🔍 [NumberPad] updateDestinationText called:`, {
+      text,
       destinationIndex: currentDestinationIndex,
       destinationId: destId,
+      destinationType: destType,
       totalDestinations: destinations.length
     });
-    
-    if (destId) {
+
+    if (!destId) {
+      console.warn(`⚠️ [NumberPad] No destinationId in destination at index ${currentDestinationIndex}`);
+      return;
+    }
+
+    // 1) Tile destinations – used by polygon pages (e.g., page2-tile-1)
+    if (destType === 'tile') {
       try {
-        // Extract table component ID and cell key from destinationId
-        // Format: 'page2-map-table-R1C1' -> componentId: 'page2-map-table', cellKey: '0-0' (row 1 = index 0, col 1 = index 0)
-        const cellIdMatch = destId.match(/^(.+?)-R(\d+)C(\d+)$/);
-        if (cellIdMatch) {
-          const tableComponentId = cellIdMatch[1];
-          const rowNum = parseInt(cellIdMatch[2], 10);
-          const colNum = parseInt(cellIdMatch[3], 10);
-          
-          // Convert cell ID format to cellKey format (R1C1 -> '0-0' for data rows, R0C0 -> 'header-0' for headers)
-          let cellKey;
-          if (rowNum === 0) {
-            // Header row
-            cellKey = `header-${colNum}`;
-          } else {
-            // Data row (rowNum is 1-indexed, cellKey is 0-indexed)
-            cellKey = `${rowNum - 1}-${colNum}`;
-          }
-          
-          console.log(`🔍 [NumberPad] Extracted table info:`, { 
-            tableComponentId, 
-            rowNum, 
-            colNum, 
-            cellKey 
-          });
-          
-          // Use table component's callback to update cell text via React state
-          // Add retry mechanism in case callback isn't ready yet
-          const maxRetries = 10;
-          const retryDelay = 50; // ms
-          
-          const tryUpdateCell = (attempt = 0) => {
-            if (typeof window !== 'undefined' && window.tableGridCallbacks && window.tableGridCallbacks[tableComponentId]) {
-              try {
-                window.tableGridCallbacks[tableComponentId](cellKey, { text });
-                console.log(`✅ [NumberPad] Updated cell text via table callback: ${cellKey} -> "${text}"`);
-                return true; // Success
-              } catch (error) {
-                console.error(`❌ [NumberPad] Error calling table callback:`, error);
-                return false; // Failed
-              }
-            }
-            return false; // Callback not available
-          };
-          
-          // Try immediate update
-          if (!tryUpdateCell(0)) {
-            // Callback not ready - retry with delay
-            console.warn(`⚠️ [NumberPad] Table callback not ready for ${tableComponentId}, retrying...`);
-            let retryCount = 0;
-            const retryInterval = setInterval(() => {
-              retryCount++;
-              if (tryUpdateCell(retryCount)) {
-                clearInterval(retryInterval);
-              } else if (retryCount >= maxRetries) {
-                clearInterval(retryInterval);
-                console.error(`❌ [NumberPad] Max retries reached. Table callback for ${tableComponentId} not available.`);
-              }
-            }, retryDelay);
-          }
+        // Try by id first (ElementRenderer sets id from element.id or element.name)
+        let tileElement = document.getElementById(destId);
+
+        // Fallback: search by data-element-name (ElementRenderer always sets this)
+        if (!tileElement) {
+          tileElement = document.querySelector(`[data-element-name="${destId}"]`);
+        }
+
+        if (tileElement) {
+          tileElement.textContent = text;
+          tileElement.innerText = text;
+          console.log(`✅ [NumberPad] Updated tile ${destId} text to: "${text}"`);
         } else {
-          console.warn(`⚠️ [NumberPad] Could not parse destinationId format: ${destId}. Expected format: 'componentId-R<row>C<col>'`);
+          console.warn(`⚠️ [NumberPad] Tile destination element not found (id or data-element-name): ${destId}`);
         }
       } catch (error) {
-        console.error(`❌ [NumberPad] Error updating destination ${destId}:`, error);
+        console.error(`❌ [NumberPad] Error updating tile destination ${destId}:`, error);
       }
-    } else {
-      console.warn(`⚠️ [NumberPad] No destinationId in destination at index ${currentDestinationIndex}`);
+      return;
+    }
+
+    // 2) Default behaviour – table cell destinations (existing behaviour)
+    try {
+      // Extract table component ID and cell key from destinationId
+      // Format: 'page2-map-table-R1C1' -> componentId: 'page2-map-table', cellKey: '0-0' (row 1 = index 0, col 1 = index 0)
+      const cellIdMatch = destId.match(/^(.+?)-R(\d+)C(\d+)$/);
+      if (cellIdMatch) {
+        const tableComponentId = cellIdMatch[1];
+        const rowNum = parseInt(cellIdMatch[2], 10);
+        const colNum = parseInt(cellIdMatch[3], 10);
+
+        // Convert cell ID format to cellKey format (R1C1 -> '0-0' for data rows, R0C0 -> 'header-0' for headers)
+        let cellKey;
+        if (rowNum === 0) {
+          // Header row
+          cellKey = `header-${colNum}`;
+        } else {
+          // Data row (rowNum is 1-indexed, cellKey is 0-indexed)
+          cellKey = `${rowNum - 1}-${colNum}`;
+        }
+
+        console.log(`🔍 [NumberPad] Extracted table info:`, {
+          tableComponentId,
+          rowNum,
+          colNum,
+          cellKey
+        });
+
+        // Use table component's callback to update cell text via React state
+        // Add retry mechanism in case callback isn't ready yet
+        const maxRetries = 10;
+        const retryDelay = 50; // ms
+
+        const tryUpdateCell = (attempt = 0) => {
+          if (typeof window !== 'undefined' && window.tableGridCallbacks && window.tableGridCallbacks[tableComponentId]) {
+            try {
+              window.tableGridCallbacks[tableComponentId](cellKey, { text });
+              console.log(`✅ [NumberPad] Updated cell text via table callback: ${cellKey} -> "${text}"`);
+              return true; // Success
+            } catch (error) {
+              console.error(`❌ [NumberPad] Error calling table callback:`, error);
+              return false; // Failed
+            }
+          }
+          return false; // Callback not available
+        };
+
+        // Try immediate update
+        if (!tryUpdateCell(0)) {
+          // Callback not ready - retry with delay
+          console.warn(`⚠️ [NumberPad] Table callback not ready for ${tableComponentId}, retrying...`);
+          let retryCount = 0;
+          const retryInterval = setInterval(() => {
+            retryCount++;
+            if (tryUpdateCell(retryCount)) {
+              clearInterval(retryInterval);
+            } else if (retryCount >= maxRetries) {
+              clearInterval(retryInterval);
+              console.error(`❌ [NumberPad] Max retries reached. Table callback for ${tableComponentId} not available.`);
+            }
+          }, retryDelay);
+        }
+      } else {
+        console.warn(`⚠️ [NumberPad] Could not parse destinationId format: ${destId}. Expected format: 'componentId-R<row>C<col>'`);
+      }
+    } catch (error) {
+      console.error(`❌ [NumberPad] Error updating destination ${destId}:`, error);
     }
   }, [config.destinations, currentDestinationIndex]);
   
@@ -1275,7 +1372,64 @@ const NumberPadPanelComponent = React.memo((props) => {
   };
   
   console.log('🔢 [NumberPad] Grid style object:', gridStyle);
+  const actionRowStyle = {
+    display: 'flex',
+    gap: '5%',
+    width: '100%',
+    height: '10%',
+    marginBottom: '2%',
+    justifyContent: 'space-between'
+  };
   
+  const actionButtonStyle = typeof GridCellFontUtils !== 'undefined'
+    ? GridCellFontUtils.processGcStyles({
+        backgroundColor: '#FF7043',
+        color: '#000',
+        fontSize: '22gc',
+        fontWeight: 'bold',
+        borderRadius: '8gc',
+        border: '3px solid #FF5722',
+        cursor: 'pointer',
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      })
+    : {
+        backgroundColor: '#FF7043',
+        color: '#000',
+        fontSize: '22px',
+        fontWeight: 'bold',
+        borderRadius: '8px',
+        border: '3px solid #FF5722',
+        cursor: 'pointer',
+        flex: 1
+      };
+      const actionButtonsRow = React.createElement(
+        'div',
+        { style: actionRowStyle },
+      
+        React.createElement(
+          'button',
+          {
+            style: actionButtonStyle,
+            onClick: handleClearAll,
+            'data-action': 'clear-all'
+          },
+          'C'
+        ),
+      
+        React.createElement(
+          'button',
+          {
+            style: actionButtonStyle,
+            onClick: handleBackspace,
+            'data-action': 'backspace'
+          },
+          '⌫'
+        )
+      );
+      
   const numberPadGrid = React.createElement('div', {
     className: 'number-pad-grid',
     style: gridStyle
@@ -1339,10 +1493,12 @@ const NumberPadPanelComponent = React.memo((props) => {
   
   // Layout order: text area -> number pad -> check button (hint button removed)
   const children = [
-    textArea,      // Configurable height (default: 35%)
-    numberPadGrid, // Configurable height (default: 51%)
-    checkButton    // Configurable height (default: 10%)
+    textArea,
+    numberPadGrid,
+    actionButtonsRow, // 👈 NEW
+    checkButton
   ];
+  
   
   return React.createElement('div', {
     id: `${elementName}-${currentPage}`,
