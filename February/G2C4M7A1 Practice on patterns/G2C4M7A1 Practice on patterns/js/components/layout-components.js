@@ -1573,7 +1573,7 @@ const SectionHeaderComponent = React.memo((props) => {
     underlineFirstWord = true,
     fontWeight = 'bold',
     textAlign = 'left',
-    
+    allowHtml = false
   } = props;
 
   console.log('🔍 SectionHeaderComponent RENDERED!');
@@ -1587,14 +1587,14 @@ const SectionHeaderComponent = React.memo((props) => {
     setCurrentText(textProp);
   }, [textProp]);
 
-  // Listen for quizCompleted event for page 9 to update instruction text
+  //change header text after quiz
   React.useEffect(() => {
-    if (componentId === 'page2-instruction-text') {
+    if (componentId === 'page6-header-text') {
       const handleQuizCompleted = (event) => {
         const eventPageNumber = event.detail?.pageNumber;
-        if (eventPageNumber === 2) {
-          console.log('🔍 [SectionHeader] Quiz completed for page 2, updating instruction text');
-          setCurrentText(getI18nText('pages.page2.instructionAfter', 'Tap » to explore step 2 in more detail') || 'Tap » to explore step 2 in more detail');
+        if (eventPageNumber === 6) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 5, updating instruction text');
+          setCurrentText(getI18nText("pages.page6.headerAfterQuiz"));
         }
       };
 
@@ -1605,7 +1605,288 @@ const SectionHeaderComponent = React.memo((props) => {
       };
     }
   }, [componentId]);
- 
+  // Listen for quizCompleted event for page 5 to update instruction text
+  React.useEffect(() => {
+    if (componentId === 'page5-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 5) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 5, updating instruction text');
+          setCurrentText(getI18nText("pages.page5.instructionAfter"));
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+  }, [componentId]);
+
+  // Listen for quizCompleted event for page 8 to update instruction text
+  React.useEffect(() => {
+    if (componentId === 'page10-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 10) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 8, updating instruction text');
+          setCurrentText(getI18nText("pages.page10.instructionAfterQuiz"));
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+  }, [componentId]);
+
+  // Listen for quizCompleted event for page 9 to update instruction text
+  React.useEffect(() => {
+    if (componentId === 'page9-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 9) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 9, updating instruction text');
+          setCurrentText(getI18nText("pages.page9.instructionAfterQuiz"));
+
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+  }, [componentId]);
+
+  // Listen for quizCompleted event for page 11 to update instruction text
+  React.useEffect(() => {
+    if (componentId === 'page11-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 11) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 11, updating instruction text');
+          setCurrentText(getI18nText('pages.page11.instructionAfterQuiz', 'Tap » to compute the result.'));
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+  }, [componentId]);
+
+  // Listen for quizCompleted event for page 12 to update instruction text
+  React.useEffect(() => {
+    if (componentId === 'page12-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 12) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 12, updating instruction text');
+          setCurrentText(getI18nText('pages.page12.instructionAfterQuiz', 'Tap » to summarize'));
+
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+    if (componentId === 'page13-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 13) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 12, updating instruction text');
+          setCurrentText(getI18nText('pages.page13.instructionAfterQuiz', 'Tap » to summarize'));
+
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+  }, [componentId]);
+
+  // Listen for quizCompleted event for page 10 to update instruction text
+  React.useEffect(() => {
+    if (componentId === 'page14-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 14) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 10, updating instruction text');
+          setCurrentText(getI18nText('pages.page14.instructionAfterQuiz', 'Tap » to summarize'));
+
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+  }, [componentId]);
+
+  // Listen for quizCompleted event for page 15 to update instruction text
+  React.useEffect(() => {
+    if (componentId === 'page15-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 15) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 15, updating instruction text');
+
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+    if (componentId === 'page16-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 16) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 16, updating instruction text');
+          setCurrentText(getI18nText('pages.page16.instructionAfterQuiz', 'Tap » to summarize'));
+
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+    if (componentId === 'page17-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 17) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 17, updating instruction text');
+          setCurrentText('Tap » to find the sum of like fractions');
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+    if (componentId === 'page18-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 18) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 18, updating instruction text');
+          setCurrentText(getI18nText('pages.page18.instructionAfterQuiz', 'Tap » for Step 3'));
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+    if (componentId === 'page19-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 19) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 19, updating instruction text');
+          setCurrentText(getI18nText('pages.page19.instructionAfterQuiz', 'Tap » to summarise'));
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+    if (componentId === 'page7-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 7) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 7, updating instruction text');
+          setCurrentText(getI18nText('pages.page7.instructionAfterQuiz', 'Tap » to substitute values into the equation'));
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+    if (componentId === 'page8-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 8) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 8, updating instruction text');
+          setCurrentText(getI18nText('pages.page8.instructionAfterQuiz', 'Tap » to explore the first step in more detail'));
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+    if (componentId === 'page19-header-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 19) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 19, updating header text');
+          setCurrentText("You have found the distance from Komang’s to Lucas’ house!");
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+    if (componentId === 'page24-instruction-text') {
+      const handleQuizCompleted = (event) => {
+        const eventPageNumber = event.detail?.pageNumber;
+        if (eventPageNumber === 24) {
+          console.log('🔍 [SectionHeader] Quiz completed for page 24, updating instruction text');
+          setCurrentText(getI18nText('pages.page24.instructionAfterQuiz', 'Tap » for Step 2.c'));
+        }
+      };
+
+      window.addEventListener('quizCompleted', handleQuizCompleted);
+
+      return () => {
+        window.removeEventListener('quizCompleted', handleQuizCompleted);
+      };
+    }
+
+
+  }, [componentId]);
 
   // Process gc properties
   let processedUnderlineThickness = underlineThickness;
@@ -1686,6 +1967,7 @@ const SectionHeaderComponent = React.memo((props) => {
     fontWeight: fontWeight,
     boxSizing: 'border-box',
     lineHeight: 'normal',
+    ...(allowHtml ? { whiteSpace: 'pre-wrap', wordWrap: 'break-word' } : {}),
     // Apply processedStyles last to ensure coordinate system takes precedence
     ...(processedStyles || {})
   };
@@ -1695,8 +1977,9 @@ const SectionHeaderComponent = React.memo((props) => {
     className: 'section-header',
     style: finalStyles,
     'data-element-type': 'section-header',
-    'data-grid-position': position?.gridPosition
-  }, parseTextWithUnderline(currentText, underlineColor, processedUnderlineThickness, underlineFirstWord));
+    'data-grid-position': position?.gridPosition,
+    ...(allowHtml ? { dangerouslySetInnerHTML: { __html: currentText } } : {})
+  }, allowHtml ? undefined : parseTextWithUnderline(currentText, underlineColor, processedUnderlineThickness, underlineFirstWord));
 });
 
 /**

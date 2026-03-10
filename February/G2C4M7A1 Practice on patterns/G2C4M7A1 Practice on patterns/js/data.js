@@ -206,7 +206,7 @@ const AppData = {
         },
         page5: {
           instruction: "Drag shapes to complete the pattern.",
-          instructionAfter: "Tap » to continue.",
+          instructionAfter: "Tap » to re-do this activity.",
           numberOfVertices: "Number of vertices",
           dayText: "Day",
           nightText: "Night",

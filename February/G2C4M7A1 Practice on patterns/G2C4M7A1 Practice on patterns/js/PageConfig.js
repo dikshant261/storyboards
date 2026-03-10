@@ -480,10 +480,12 @@ const createOptimizedGridPositionPages = () => {
         zIndex: 55,
         props: {
           componentType: 'SectionHeaderComponent',
-          text: getI18nText(
-            'pages.page2.instruction',
-            'Drag the correct terms to make the improper fraction'
-          ),
+          get text() {
+            return window.patternProps.instructionChange ? getI18nText("pages.page2.instructionAfter") : getI18nText(
+              'pages.page2.instruction',
+              'Drag the correct terms to make the improper fraction'
+            );
+          },
           // backgroundColor: 'rgba(66, 73, 88, 0.9)',
           borderRadius: '0gc',
           textColor: '#ffffff',
@@ -1356,18 +1358,22 @@ const createOptimizedGridPositionPages = () => {
           boxSizing: "border-box",
         },
       },
+      //instruction text
       {
         id: 'page5-instruction-text',
-        name: 'instruction-text',
+        name: 'page5-instruction-text',
         type: 'custom',
-        coordinates: [155, 820, 1445, 895], // Footer bar at bottom (same as page 7)
+        coordinates: [155, 820, 1445, 895], // Footer bar at bottom
         zIndex: 55,
         props: {
           componentType: 'SectionHeaderComponent',
-          text: getI18nText(
-            'pages.page5.instruction',
-            'Drag the correct terms to make the improper fraction'
-          ),
+          id: 'page5-instruction-text',
+          get text() {
+            return getI18nText(
+              'pages.page5.instruction',
+              'Drag the correct terms to make the improper fraction'
+            );
+          },
           // backgroundColor: 'rgba(66, 73, 88, 0.9)',
           borderRadius: '0gc',
           textColor: '#ffffff',
@@ -1375,8 +1381,7 @@ const createOptimizedGridPositionPages = () => {
           padding: '15gc',
           fontWeight: 'normal',
           underlineFirstWord: false,
-          textAlign: 'center',
-          pageNumber: 2, // Pass page number for event filtering
+          textAlign: 'center'
         }
       },
 

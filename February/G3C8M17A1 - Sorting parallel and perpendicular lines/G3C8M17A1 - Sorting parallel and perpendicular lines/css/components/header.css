@@ -1,0 +1,89 @@
+/* ============================================================================
+ * HEADER COMPONENT STYLES
+ * Navigation, branding, and page information
+ * ============================================================================ */
+
+/* ========================================
+ * HEADER CONTAINER
+ * Main header layout and positioning
+ * ======================================== */
+
+.header-container {
+    position: absolute;
+    z-index: var(--z-header);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.math-app-header {
+    justify-content: space-between;
+}
+
+.math-app-header-left {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1vw, 16px);
+    width: clamp(100px, 12vw, 200px);
+}
+
+.math-app-header-center {
+    flex: 1;
+    text-align: center;
+}
+
+.math-app-header-right {
+    width: clamp(100px, 12vw, 200px);
+}
+
+/* ========================================
+ * HEADER DROPDOWN COMPONENTS
+ * Dropdown menus and selectors
+ * ======================================== */
+
+.math-app-header-dropdown-label {
+    font-size: clamp(12px, 2vw, 16px);
+    font-weight: normal;
+    color: white;
+}
+
+.math-app-header-dropdown {
+    font-size: clamp(12px, 2vw, 16px);
+    padding: clamp(4px, 0.5vw, 8px) clamp(8px, 1vw, 16px);
+    border-radius: clamp(4px, 0.5vw, 8px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.9);
+    color: black;
+    min-width: clamp(80px, 10vw, 120px);
+}
+
+/* ========================================
+ * PAGE INDICATOR
+ * Page navigation and status display
+ * ======================================== */
+
+.math-app-page-indicator,
+.page-indicator {
+    position: absolute;
+    z-index: var(--z-header);
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-select: none;
+    top: clamp(8px, 1vw, 16px);
+    right: clamp(16px, 2vw, 32px);
+    background-color: var(--color-overlay-dark);
+    color: var(--color-white);
+    padding: clamp(8px, 1vw, 16px) clamp(16px, 2vw, 32px);
+    border-radius: clamp(16px, 2vw, 32px);
+    font-size: clamp(12px, 2vw, 16px);
+    font-weight: bold;
+    border: 2px solid var(--color-overlay-light);
+    box-shadow: var(--shadow-lg);
+}
+
+.page-indicator {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}

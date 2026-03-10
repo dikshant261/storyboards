@@ -1022,7 +1022,6 @@ if (typeof window !== 'undefined') {
 }
 
 const patternProps = {
-  wrongDisabled: false,
-  correctDisabled: false,
+  instructionChange: false
 }
 window.patternProps = patternProps;

@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Component Showcase</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕐</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .section h2 {
+            color: #00d2ff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, #00d2ff, #3a7bd5);
+            border-radius: 2px;
+        }
+        
+        .clock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        
+        .clock-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .clock-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 210, 255, 0.2);
+        }
+        
+        .clock-card h3 {
+            color: #fff;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+        
+        .clock-card .description {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+        
+        .clock-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 15px;
+        }
+        
+        .clock-container.large {
+            width: 250px;
+            height: 250px;
+        }
+        
+        .props-list {
+            text-align: left;
+            font-size: 0.75rem;
+            color: #aaa;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        
+        .props-list code {
+            color: #00d2ff;
+        }
+        
+        .controls-panel {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .control-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .control-group label {
+            font-size: 0.85rem;
+            color: #888;
+        }
+        
+        .control-group select,
+        .control-group input[type="range"],
+        .control-group input[type="color"] {
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            min-width: 120px;
+        }
+        
+        .control-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 210, 255, 0.4);
+        }
+        
+        .interactive-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        .demo-clock {
+            flex: 0 0 300px;
+        }
+        
+        .demo-controls {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .time-display {
+            font-size: 2rem;
+            text-align: center;
+            margin-top: 10px;
+            font-family: 'Consolas', monospace;
+            color: #00d2ff;
+        }
+        
+        .feature-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin: 2px;
+            background: rgba(0, 210, 255, 0.2);
+            color: #00d2ff;
+        }
+        
+        .api-section {
+            margin-top: 20px;
+        }
+        
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+        
+        .api-table th,
+        .api-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .api-table th {
+            background: rgba(0, 210, 255, 0.1);
+            color: #00d2ff;
+        }
+        
+        .api-table code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #ff9800;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+        }
+        
+        .tab:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .clock-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .interactive-demo {
+                flex-direction: column;
+            }
+            
+            .demo-clock {
+                flex: 1;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🕐 Enhanced Clock Component</h1>
+    <p class="subtitle">A fully customizable analog clock with 50+ configurable properties</p>
+    
+    <!-- Tabs Navigation -->
+    <div class="tabs">
+        <div class="tab active" onclick="showTab('showcase')">Showcase</div>
+        <div class="tab" onclick="showTab('interactive')">Interactive Demo</div>
+        <div class="tab" onclick="showTab('api')">API Reference</div>
+    </div>
+    
+    <!-- Showcase Tab -->
+    <div id="showcase" class="tab-content active">
+        <!-- Face Textures & Shapes -->
+        <div class="section">
+            <h2>Face Textures & Shapes</h2>
+            <div class="clock-grid">
+                <div class="clock-card">
+                    <h3>Wood Texture</h3>
+                    <p class="description">Realistic wood grain pattern</p>
+                    <div class="clock-container" id="clock-wood"></div>
+                    <div class="props-list"><code>faceTexture: 'wood'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Marble Texture</h3>
+                    <p class="description">Elegant marble veining</p>
+                    <div class="clock-container" id="clock-marble"></div>
+                    <div class="props-list"><code>faceTexture: 'marble'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Metallic Texture</h3>
+                    <p class="description">Brushed metal gradient</p>
+                    <div class="clock-container" id="clock-metallic"></div>
+                    <div class="props-list"><code>faceTexture: 'metallic'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Octagon Shape</h3>
+                    <p class="description">Eight-sided clock face</p>
+                    <div class="clock-container" id="clock-octagon"></div>
+                    <div class="props-list"><code>clockShape: 'octagon'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Rounded Rectangle</h3>
+                    <p class="description">Modern rounded square</p>
+                    <div class="clock-container" id="clock-rounded"></div>
+                    <div class="props-list"><code>clockShape: 'rounded-rectangle'</code></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Frame Styles -->
+        <div class="section">
+            <h2>Frame Styles & Borders</h2>
+            <div class="clock-grid">
+                <div class="clock-card">
+                    <h3>Vintage Frame</h3>
+                    <p class="description">Classic ornamental decorations</p>
+                    <div class="clock-container" id="clock-vintage"></div>
+                    <div class="props-list"><code>frameStyle: 'vintage'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Ornate Frame</h3>
+                    <p class="description">Gold decorative elements</p>
+                    <div class="clock-container" id="clock-ornate"></div>
+                    <div class="props-list"><code>frameStyle: 'ornate'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Dotted Border</h3>
+                    <p class="description">Dotted border pattern</p>
+                    <div class="clock-container" id="clock-dotted"></div>
+                    <div class="props-list"><code>borderPattern: 'dotted'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Dashed Border</h3>
+                    <p class="description">Dashed border pattern</p>
+                    <div class="clock-container" id="clock-dashed"></div>
+                    <div class="props-list"><code>borderPattern: 'dashed'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>3D Border with Glow</h3>
+                    <p class="description">Gradient rings with glow effect</p>
+                    <div class="clock-container" id="clock-3d-glow"></div>
+                    <div class="props-list"><code>use3DBorder: true, showClockGlow: true</code></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hand Styles -->
+        <div class="section">
+            <h2>Hand Styles</h2>
+            <div class="clock-grid">
+                <div class="clock-card">
+                    <h3>Arrow Hands</h3>
+                    <p class="description">Pointed arrow tips</p>
+                    <div class="clock-container" id="clock-arrow"></div>
+                    <div class="props-list"><code>hourHandStyle: 'arrow', minuteHandStyle: 'arrow'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Spade Hands</h3>
+                    <p class="description">Classic spade shape</p>
+                    <div class="clock-container" id="clock-spade"></div>
+                    <div class="props-list"><code>hourHandStyle: 'spade', minuteHandStyle: 'spade'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Sword Hands</h3>
+                    <p class="description">Elegant sword design</p>
+                    <div class="clock-container" id="clock-sword"></div>
+                    <div class="props-list"><code>hourHandStyle: 'sword', minuteHandStyle: 'sword'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Modern Hands</h3>
+                    <p class="description">Simple line style</p>
+                    <div class="clock-container" id="clock-modern"></div>
+                    <div class="props-list"><code>hourHandStyle: 'modern', minuteHandStyle: 'modern'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Glowing Hands</h3>
+                    <p class="description">Luminous glow effect</p>
+                    <div class="clock-container" id="clock-glow"></div>
+                    <div class="props-list"><code>showHandGlow: true, handGlowColor: '#FFD700'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Hands with Tails</h3>
+                    <p class="description">Counterweight tails</p>
+                    <div class="clock-container" id="clock-tails"></div>
+                    <div class="props-list"><code>showHandTails: true</code></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Number Styles -->
+        <div class="section">
+            <h2>Number Styles & Markers</h2>
+            <div class="clock-grid">
+                <div class="clock-card">
+                    <h3>Roman Numerals</h3>
+                    <p class="description">Classic Roman numbers</p>
+                    <div class="clock-container" id="clock-roman"></div>
+                    <div class="props-list"><code>useRomanNumerals: true</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Quarter Markers Only</h3>
+                    <p class="description">12, 3, 6, 9 only</p>
+                    <div class="clock-container" id="clock-quarters"></div>
+                    <div class="props-list"><code>quarterMarkersOnly: true</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Dots Instead of Numbers</h3>
+                    <p class="description">Minimalist dot markers</p>
+                    <div class="clock-container" id="clock-dots"></div>
+                    <div class="props-list"><code>useDotsInsteadOfNumbers: true</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Outlined Numbers</h3>
+                    <p class="description">Outlined number style</p>
+                    <div class="clock-container" id="clock-outlined"></div>
+                    <div class="props-list"><code>numberStyle: 'outlined'</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Colorful Numbers</h3>
+                    <p class="description">Each number a different color</p>
+                    <div class="clock-container" id="clock-colorful"></div>
+                    <div class="props-list"><code>numberColors: [array of 12 colors]</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Minute Tick Marks</h3>
+                    <p class="description">60 minute markers</p>
+                    <div class="clock-container" id="clock-minute-ticks"></div>
+                    <div class="props-list"><code>showMinuteTicks: true</code></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Learning Aids -->
+        <div class="section">
+            <h2>Learning Aids & Visual Guides</h2>
+            <div class="clock-grid">
+                <div class="clock-card">
+                    <h3>Quarter Highlights</h3>
+                    <p class="description">Highlighted quarter sections</p>
+                    <div class="clock-container" id="clock-quarter-highlight"></div>
+                    <div class="props-list"><code>showQuarterHighlights: true</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Time Hints</h3>
+                    <p class="description">Shows time in words</p>
+                    <div class="clock-container" id="clock-hints"></div>
+                    <div class="props-list"><code>showHints: true</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Ghost Hands (Target Time)</h3>
+                    <p class="description">Shows target time to reach</p>
+                    <div class="clock-container" id="clock-ghost"></div>
+                    <div class="props-list"><code>showGhostHands: true, targetTime: {hour: 3, minute: 30}</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Elapsed Time Arc</h3>
+                    <p class="description">Shows time passed</p>
+                    <div class="clock-container" id="clock-elapsed"></div>
+                    <div class="props-list"><code>showElapsedArc: true</code></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animation Features -->
+        <div class="section">
+            <h2>Animation Features</h2>
+            <div class="clock-grid">
+                <div class="clock-card">
+                    <h3>Real-Time with Smooth Seconds</h3>
+                    <p class="description">Continuous sweep motion</p>
+                    <div class="clock-container" id="clock-smooth"></div>
+                    <div class="props-list"><code>realTime: true, smoothSeconds: true</code></div>
+                </div>
+                <div class="clock-card">
+                    <h3>Pulsing Center Dot</h3>
+                    <p class="description">Beats with each tick</p>
+                    <div class="clock-container" id="clock-pulse"></div>
+                    <div class="props-list"><code>realTime: true, pulsingCenterDot: true</code></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Interactive Demo Tab -->
+    <div id="interactive" class="tab-content">
+        <div class="section">
+            <h2>Interactive Playground</h2>
+            <p style="color: #888; margin-bottom: 20px;">Try dragging the hands, clicking numbers, or using scroll wheel to change time!</p>
+            
+            <div class="interactive-demo">
+                <div class="demo-clock">
+                    <div class="clock-container large" id="clock-interactive"></div>
+                    <div class="time-display" id="time-display">12:00:00</div>
+                </div>
+                
+                <div class="demo-controls">
+                    <div class="controls-panel">
+                        <h3 style="margin-bottom: 15px; color: #00d2ff;">Configuration</h3>
+                        
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label>Shape</label>
+                                <select id="ctrl-shape" onchange="updateInteractiveClock()">
+                                    <option value="circle">Circle</option>
+                                    <option value="square">Square</option>
+                                    <option value="octagon">Octagon</option>
+                                    <option value="rounded-rectangle">Rounded Rectangle</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Texture</label>
+                                <select id="ctrl-texture" onchange="updateInteractiveClock()">
+                                    <option value="">None</option>
+                                    <option value="wood">Wood</option>
+                                    <option value="marble">Marble</option>
+                                    <option value="metallic">Metallic</option>
+                                    <option value="leather">Leather</option>
+                                    <option value="paper">Paper</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Frame Style</label>
+                                <select id="ctrl-frame" onchange="updateInteractiveClock()">
+                                    <option value="default">Default</option>
+                                    <option value="vintage">Vintage</option>
+                                    <option value="ornate">Ornate</option>
+                                    <option value="modern">Modern</option>
+                                    <option value="minimalist">Minimalist</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label>Hour Hand Style</label>
+                                <select id="ctrl-hour-style" onchange="updateInteractiveClock()">
+                                    <option value="default">Default</option>
+                                    <option value="arrow">Arrow</option>
+                                    <option value="spade">Spade</option>
+                                    <option value="sword">Sword</option>
+                                    <option value="modern">Modern</option>
+                                    <option value="vintage">Vintage</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Minute Hand Style</label>
+                                <select id="ctrl-minute-style" onchange="updateInteractiveClock()">
+                                    <option value="default">Default</option>
+                                    <option value="arrow">Arrow</option>
+                                    <option value="spade">Spade</option>
+                                    <option value="sword">Sword</option>
+                                    <option value="modern">Modern</option>
+                                    <option value="vintage">Vintage</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Border Pattern</label>
+                                <select id="ctrl-border" onchange="updateInteractiveClock()">
+                                    <option value="solid">Solid</option>
+                                    <option value="dotted">Dotted</option>
+                                    <option value="dashed">Dashed</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-row">
+                            <div class="control-group">
+                                <label>Face Color</label>
+                                <input type="color" id="ctrl-face-color" value="#FFFFFF" onchange="updateInteractiveClock()">
+                            </div>
+                            <div class="control-group">
+                                <label>Border Color</label>
+                                <input type="color" id="ctrl-border-color" value="#2E86DE" onchange="updateInteractiveClock()">
+                            </div>
+                            <div class="control-group">
+                                <label>Hand Color</label>
+                                <input type="color" id="ctrl-hand-color" value="#333333" onchange="updateInteractiveClock()">
+                            </div>
+                        </div>
+                        
+                        <div class="control-row">
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-draggable" onchange="updateInteractiveClock()"> Draggable Hands
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-click-hour" onchange="updateInteractiveClock()"> Click to Set Hour
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-scroll" onchange="updateInteractiveClock()"> Scroll to Adjust
+                            </label>
+                        </div>
+                        
+                        <div class="control-row">
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-3d" onchange="updateInteractiveClock()"> 3D Border
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-glow" onchange="updateInteractiveClock()"> Hand Glow
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-tails" onchange="updateInteractiveClock()"> Hand Tails
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-hints" onchange="updateInteractiveClock()"> Show Hints
+                            </label>
+                        </div>
+                        
+                        <div class="control-row">
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-roman" onchange="updateInteractiveClock()"> Roman Numerals
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-quarters" onchange="updateInteractiveClock()"> Quarter Only
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px;">
+                                <input type="checkbox" id="ctrl-minute-ticks" onchange="updateInteractiveClock()"> Minute Ticks
+                            </label>
+                        </div>
+                        
+                        <div class="control-row" style="margin-top: 20px;">
+                            <button onclick="setInteractiveTime(12, 0)">12:00</button>
+                            <button onclick="setInteractiveTime(3, 15)">3:15</button>
+                            <button onclick="setInteractiveTime(6, 30)">6:30</button>
+                            <button onclick="setInteractiveTime(9, 45)">9:45</button>
+                            <button onclick="startRealTime()">Real Time</button>
+                            <button onclick="playChime()">Play Chime</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- API Reference Tab -->
+    <div id="api" class="tab-content">
+        <div class="section">
+            <h2>Props Reference</h2>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Face & Background</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>clockShape</code></td><td>string</td><td>'circle'</td><td>'circle', 'square', 'octagon', 'rounded-rectangle'</td></tr>
+                <tr><td><code>faceTexture</code></td><td>string</td><td>null</td><td>'wood', 'marble', 'metallic', 'leather', 'paper'</td></tr>
+                <tr><td><code>faceColor</code></td><td>string</td><td>'#FFFFFF'</td><td>Background color of clock face</td></tr>
+                <tr><td><code>useFaceGradient</code></td><td>boolean</td><td>false</td><td>Enable radial gradient on face</td></tr>
+                <tr><td><code>showFaceShimmer</code></td><td>boolean</td><td>false</td><td>Add shimmer/shine effect</td></tr>
+                <tr><td><code>showClockShadow</code></td><td>boolean</td><td>false</td><td>Drop shadow around clock</td></tr>
+                <tr><td><code>showClockGlow</code></td><td>boolean</td><td>false</td><td>Glow effect around clock</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Border & Frame</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>borderColor</code></td><td>string</td><td>'#333333'</td><td>Border color</td></tr>
+                <tr><td><code>borderWidth</code></td><td>string</td><td>'4gc'</td><td>Border thickness</td></tr>
+                <tr><td><code>borderPattern</code></td><td>string</td><td>'solid'</td><td>'solid', 'dotted', 'dashed'</td></tr>
+                <tr><td><code>frameStyle</code></td><td>string</td><td>'default'</td><td>'default', 'vintage', 'modern', 'minimalist', 'ornate'</td></tr>
+                <tr><td><code>use3DBorder</code></td><td>boolean</td><td>false</td><td>Enable 3D gradient border</td></tr>
+                <tr><td><code>embossed</code></td><td>boolean</td><td>false</td><td>Embossed border effect</td></tr>
+                <tr><td><code>outerRingColor</code></td><td>string</td><td>null</td><td>Custom outer ring color</td></tr>
+                <tr><td><code>innerRingColor</code></td><td>string</td><td>null</td><td>Custom inner ring color</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Hands</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>hourHandStyle</code></td><td>string</td><td>'default'</td><td>'default', 'arrow', 'spade', 'sword', 'modern', 'vintage'</td></tr>
+                <tr><td><code>minuteHandStyle</code></td><td>string</td><td>'default'</td><td>Same options as hourHandStyle</td></tr>
+                <tr><td><code>secondHandStyle</code></td><td>string</td><td>'modern'</td><td>Same options as hourHandStyle</td></tr>
+                <tr><td><code>showHandShadows</code></td><td>boolean</td><td>true</td><td>Shadow under hands</td></tr>
+                <tr><td><code>showHandGlow</code></td><td>boolean</td><td>false</td><td>Luminous glow effect</td></tr>
+                <tr><td><code>handGlowColor</code></td><td>string</td><td>'#FFD700'</td><td>Glow color</td></tr>
+                <tr><td><code>showHandTails</code></td><td>boolean</td><td>false</td><td>Counterweight tails</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Numbers & Markers</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>showNumbers</code></td><td>boolean</td><td>true</td><td>Show hour numbers</td></tr>
+                <tr><td><code>useRomanNumerals</code></td><td>boolean</td><td>false</td><td>Use Roman numerals</td></tr>
+                <tr><td><code>numberStyle</code></td><td>string</td><td>'normal'</td><td>'normal', 'outlined', 'shadowed', 'embossed'</td></tr>
+                <tr><td><code>numberColors</code></td><td>array</td><td>null</td><td>Array of 12 colors for each number</td></tr>
+                <tr><td><code>quarterMarkersOnly</code></td><td>boolean</td><td>false</td><td>Show only 12, 3, 6, 9</td></tr>
+                <tr><td><code>useDotsInsteadOfNumbers</code></td><td>boolean</td><td>false</td><td>Dots instead of numbers</td></tr>
+                <tr><td><code>showMinuteTicks</code></td><td>boolean</td><td>false</td><td>Show 60 minute markers</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Interaction</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>draggableHands</code></td><td>boolean</td><td>false</td><td>Allow dragging hands to set time</td></tr>
+                <tr><td><code>clickToSetHour</code></td><td>boolean</td><td>false</td><td>Click numbers to set hour</td></tr>
+                <tr><td><code>scrollToAdjust</code></td><td>boolean</td><td>false</td><td>Scroll wheel changes time</td></tr>
+                <tr><td><code>interactive</code></td><td>boolean</td><td>false</td><td>Enable click events</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Animation</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>realTime</code></td><td>boolean</td><td>false</td><td>Show current system time</td></tr>
+                <tr><td><code>smoothSeconds</code></td><td>boolean</td><td>false</td><td>Smooth second hand sweep</td></tr>
+                <tr><td><code>bounceEffect</code></td><td>boolean</td><td>false</td><td>Bounce when hands reach position</td></tr>
+                <tr><td><code>pulsingCenterDot</code></td><td>boolean</td><td>false</td><td>Center dot pulses on tick</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Learning Aids</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>showQuarterHighlights</code></td><td>boolean</td><td>false</td><td>Highlight 15-min sections</td></tr>
+                <tr><td><code>showHourZones</code></td><td>boolean</td><td>false</td><td>Color-coded time periods</td></tr>
+                <tr><td><code>hourZoneColors</code></td><td>object</td><td>null</td><td>{morning, afternoon, evening, night}</td></tr>
+                <tr><td><code>showFractionOverlay</code></td><td>boolean</td><td>false</td><td>Show fraction of hour</td></tr>
+                <tr><td><code>showHints</code></td><td>boolean</td><td>false</td><td>Display time in words</td></tr>
+                <tr><td><code>quizMode</code></td><td>boolean</td><td>false</td><td>Enable quiz mode</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Visual Guides</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>showTrail</code></td><td>boolean</td><td>false</td><td>Show minute hand trail</td></tr>
+                <tr><td><code>showGhostHands</code></td><td>boolean</td><td>false</td><td>Show target time hands</td></tr>
+                <tr><td><code>targetTime</code></td><td>object</td><td>null</td><td>{hour, minute} for ghost hands</td></tr>
+                <tr><td><code>showElapsedArc</code></td><td>boolean</td><td>false</td><td>Show elapsed time arc</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Audio</h3>
+            <table class="api-table">
+                <tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                <tr><td><code>enableTickSound</code></td><td>boolean</td><td>false</td><td>Play tick sound</td></tr>
+                <tr><td><code>enableHourlyChime</code></td><td>boolean</td><td>false</td><td>Chime on the hour</td></tr>
+                <tr><td><code>enableVoiceAnnounce</code></td><td>boolean</td><td>false</td><td>Speak the time</td></tr>
+            </table>
+            
+            <h3 style="color: #00d2ff; margin: 20px 0 10px;">Methods (via ref)</h3>
+            <table class="api-table">
+                <tr><th>Method</th><th>Parameters</th><th>Description</th></tr>
+                <tr><td><code>setTime()</code></td><td>hour, minute, second, animate</td><td>Set clock time</td></tr>
+                <tr><td><code>getTime()</code></td><td>-</td><td>Get current time object</td></tr>
+                <tr><td><code>animateToTime()</code></td><td>hour, minute, second, duration</td><td>Animate to time</td></tr>
+                <tr><td><code>startRealTime()</code></td><td>-</td><td>Start real-time mode</td></tr>
+                <tr><td><code>stopRealTime()</code></td><td>-</td><td>Stop real-time mode</td></tr>
+                <tr><td><code>playChime()</code></td><td>count</td><td>Play chime sound</td></tr>
+                <tr><td><code>speak()</code></td><td>text</td><td>Speak text</td></tr>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/anime.min.js"></script>
+    <script src="js/GridPrecisionConfig.js"></script>
+    <script src="js/components/clock-component.js"></script>
+    
+    <script>
+        // Tab switching
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // React 18 root helpers
+        function getRoot(container) {
+            if (!container._clockRoot) container._clockRoot = ReactDOM.createRoot(container);
+            return container._clockRoot;
+        }
+        
+        // Create clock helper
+        function createClock(containerId, props) {
+            const container = document.getElementById(containerId);
+            if (!container) return null;
+            
+            const defaultProps = {
+                size: 180,
+                showSecondHand: false,
+                time: { hour: 10, minute: 10, second: 0 },
+                borderWidth: 8,
+                showNumbers: true,
+                showTickMarks: true
+            };
+            
+            const mergedProps = { ...defaultProps, ...props };
+            const element = React.createElement(ClockComponent, mergedProps);
+            getRoot(container).render(element);
+            return element;
+        }
+        
+        // Initialize showcase clocks
+        function initShowcase() {
+            // Face textures
+            createClock('clock-wood', { faceTexture: 'wood', borderColor: '#8B4513' });
+            createClock('clock-marble', { faceTexture: 'marble', borderColor: '#666' });
+            createClock('clock-metallic', { faceTexture: 'metallic', borderColor: '#444', use3DBorder: true });
+            createClock('clock-octagon', { clockShape: 'octagon', borderColor: '#2E86DE' });
+            createClock('clock-rounded', { clockShape: 'rounded-rectangle', borderColor: '#E74C3C' });
+            
+            // Frame styles
+            createClock('clock-vintage', { frameStyle: 'vintage', borderColor: '#8B7355', borderWidth: 15, faceColor: '#FFF8E7' });
+            createClock('clock-ornate', { frameStyle: 'ornate', borderColor: '#D4AF37', borderWidth: 15, faceColor: '#FFFFF0' });
+            createClock('clock-dotted', { borderPattern: 'dotted', borderColor: '#2E86DE', borderWidth: 6 });
+            createClock('clock-dashed', { borderPattern: 'dashed', borderColor: '#27AE60', borderWidth: 6 });
+            createClock('clock-3d-glow', { use3DBorder: true, showClockGlow: true, clockGlowColor: '#00d2ff', borderWidth: 20 });
+            
+            // Hand styles
+            createClock('clock-arrow', { hourHandStyle: 'arrow', minuteHandStyle: 'arrow', hourHandColor: '#E74C3C', minuteHandColor: '#3498DB' });
+            createClock('clock-spade', { hourHandStyle: 'spade', minuteHandStyle: 'spade', hourHandColor: '#2C3E50', minuteHandColor: '#2C3E50' });
+            createClock('clock-sword', { hourHandStyle: 'sword', minuteHandStyle: 'sword', hourHandColor: '#8E44AD', minuteHandColor: '#8E44AD' });
+            createClock('clock-modern', { hourHandStyle: 'modern', minuteHandStyle: 'modern', hourHandWidth: 6, minuteHandWidth: 4, hourHandColor: '#E74C3C', minuteHandColor: '#333' });
+            createClock('clock-glow', { showHandGlow: true, handGlowColor: '#FFD700', hourHandColor: '#FFD700', minuteHandColor: '#FFD700', faceColor: '#1a1a2e' });
+            createClock('clock-tails', { showHandTails: true, handTailLength: 25, hourHandColor: '#E74C3C', minuteHandColor: '#3498DB' });
+            
+            // Number styles
+            createClock('clock-roman', { useRomanNumerals: true, numberFontSize: 14, borderColor: '#8B4513' });
+            createClock('clock-quarters', { quarterMarkersOnly: true, numberFontSize: 20, showMinuteTicks: true });
+            createClock('clock-dots', { useDotsInsteadOfNumbers: true, dotSize: 6, showMinuteTicks: true });
+            createClock('clock-outlined', { numberStyle: 'outlined', numberColor: '#2E86DE', numberFontSize: 18 });
+            createClock('clock-colorful', { 
+                numberColors: ['#E74C3C', '#E67E22', '#F1C40F', '#2ECC71', '#1ABC9C', '#3498DB', '#9B59B6', '#E91E63', '#00BCD4', '#8BC34A', '#FF5722', '#795548'],
+                numberFontSize: 16
+            });
+            createClock('clock-minute-ticks', { showMinuteTicks: true, minuteTickColor: '#999' });
+            
+            // Learning aids
+            createClock('clock-quarter-highlight', { showQuarterHighlights: true, quarterHighlightColor: 'rgba(46, 134, 222, 0.2)' });
+            createClock('clock-hints', { showHints: true, hintColor: '#666', time: { hour: 3, minute: 30, second: 0 } });
+            createClock('clock-ghost', { showGhostHands: true, targetTime: { hour: 3, minute: 30 }, ghostColor: 'rgba(46, 134, 222, 0.4)', time: { hour: 12, minute: 0, second: 0 } });
+            createClock('clock-elapsed', { showElapsedArc: true, elapsedStartTime: { hour: 12, minute: 0 }, elapsedColor: 'rgba(39, 174, 96, 0.3)', time: { hour: 12, minute: 25, second: 0 } });
+            
+            // Animation
+            createClock('clock-smooth', { realTime: true, smoothSeconds: true, showSecondHand: true, secondHandColor: '#E74C3C' });
+            createClock('clock-pulse', { realTime: true, pulsingCenterDot: true, showSecondHand: true, centerDotColor: '#E74C3C', centerDotSize: 12 });
+        }
+        
+        // Interactive clock
+        let interactiveClockRef = null;
+        let interactiveProps = {
+            size: 240,
+            time: { hour: 12, minute: 0, second: 0 },
+            borderWidth: 15,
+            borderColor: '#2E86DE',
+            showSecondHand: true,
+            onTimeChange: (time) => {
+                const h = String(time.hour).padStart(2, '0');
+                const m = String(time.minute).padStart(2, '0');
+                const s = String(time.second).padStart(2, '0');
+                document.getElementById('time-display').textContent = `${h}:${m}:${s}`;
+            }
+        };
+        
+        function updateInteractiveClock() {
+            const props = {
+                ...interactiveProps,
+                clockShape: document.getElementById('ctrl-shape').value,
+                faceTexture: document.getElementById('ctrl-texture').value || null,
+                frameStyle: document.getElementById('ctrl-frame').value,
+                hourHandStyle: document.getElementById('ctrl-hour-style').value,
+                minuteHandStyle: document.getElementById('ctrl-minute-style').value,
+                borderPattern: document.getElementById('ctrl-border').value,
+                faceColor: document.getElementById('ctrl-face-color').value,
+                borderColor: document.getElementById('ctrl-border-color').value,
+                hourHandColor: document.getElementById('ctrl-hand-color').value,
+                minuteHandColor: document.getElementById('ctrl-hand-color').value,
+                draggableHands: document.getElementById('ctrl-draggable').checked,
+                clickToSetHour: document.getElementById('ctrl-click-hour').checked,
+                scrollToAdjust: document.getElementById('ctrl-scroll').checked,
+                use3DBorder: document.getElementById('ctrl-3d').checked,
+                showHandGlow: document.getElementById('ctrl-glow').checked,
+                showHandTails: document.getElementById('ctrl-tails').checked,
+                showHints: document.getElementById('ctrl-hints').checked,
+                useRomanNumerals: document.getElementById('ctrl-roman').checked,
+                quarterMarkersOnly: document.getElementById('ctrl-quarters').checked,
+                showMinuteTicks: document.getElementById('ctrl-minute-ticks').checked,
+                interactive: true,
+                id: 'interactive-clock'
+            };
+            
+            interactiveProps = props;
+            const container = document.getElementById('clock-interactive');
+            const element = React.createElement(ClockComponent, props);
+            getRoot(container).render(element);
+        }
+        
+        function setInteractiveTime(hour, minute) {
+            interactiveProps.time = { hour, minute, second: 0 };
+            updateInteractiveClock();
+        }
+        
+        function startRealTime() {
+            interactiveProps.realTime = true;
+            interactiveProps.smoothSeconds = true;
+            updateInteractiveClock();
+        }
+        
+        function playChime() {
+            if (window.ClockAudioManager) {
+                ClockAudioManager.init();
+                ClockAudioManager.playChime(3);
+            }
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                initShowcase();
+                updateInteractiveClock();
+            }, 100);
+        });
+    </script>
+</body>
+</html>

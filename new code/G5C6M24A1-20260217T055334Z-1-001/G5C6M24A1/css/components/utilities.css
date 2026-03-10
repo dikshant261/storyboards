@@ -1,0 +1,1007 @@
+/* ============================================================================
+ * UTILITY COMPONENT STYLES
+ * Common utilities, error boundaries, loading states, and helper components
+ * ============================================================================ */
+
+/* ========================================
+ * ERROR BOUNDARY STYLES
+ * Error handling and fallback components
+ * ======================================== */
+
+.error-boundary {
+    width: 100vw;
+    height: 100vh;
+    background: #ffebee;
+    color: #c62828;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.error-boundary details {
+    margin-top: 20px;
+    max-width: 80%;
+}
+
+.error-boundary pre {
+    font-size: 12px;
+    margin-top: 10px;
+    overflow: auto;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.dependency-error {
+    width: 100vw;
+    height: 100vh;
+    background: #fff3e0;
+    color: #e65100;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.element-error {
+    color: red;
+    padding: 10px;
+    border: 1px solid red;
+}
+
+.element-render-error {
+    color: red;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.element-error-boundary {
+    padding: 10px;
+    border: 2px solid #ff6b6b;
+    border-radius: 8px;
+    background-color: rgba(255, 107, 107, 0.1);
+    color: #d63031;
+    font-size: 14px;
+    text-align: center;
+}
+
+.element-error-boundary button {
+    margin-top: 8px;
+    padding: 4px 8px;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ========================================
+ * LOADING AND SUSPENSE STYLES
+ * Loading states and fallback components
+ * ======================================== */
+
+.element-loading-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #666;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+}
+
+.element-loading-fallback .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #1976d2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+.element-suspense-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #666;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.element-suspense-fallback .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid #1976d2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+.table-loading-fallback {
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+}
+
+/* ========================================
+ * FEEDBACK AND TEXT COMPONENTS
+ * User feedback and text display components
+ * ======================================== */
+
+.feedback-text-component {
+    position: absolute;
+    left: 37.5%;
+    top: 34.38%;
+    width: 31.25%;
+    height: 31.25%;
+    padding: 12px;
+    box-sizing: border-box;
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    z-index: var(--z-content, 1000);
+    transition: all 0.3s ease;
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* ========================================
+ * TILE AND ANIMATION COMPONENTS
+ * Interactive tiles and animation effects
+ * ======================================== */
+
+.tile-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.tile-content.glow {
+    animation: glow 2s ease-in-out infinite alternate;
+    box-shadow: 0 0 10px currentColor;
+}
+
+.tile-content.pulsate {
+    animation: pulsate 1.5s ease-in-out infinite;
+}
+
+.tile-content.pulsate-glow {
+    animation: pulsateGlow 2s ease-in-out infinite;
+}
+
+/* ========================================
+ * UTILITY CLASSES
+ * Common utility classes for JavaScript interactions
+ * ======================================== */
+
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: flex !important;
+    visibility: visible !important;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pulsate {
+    animation: pulsate 1.5s ease-in-out infinite;
+}
+
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* ========================================
+ * TEXT AREA STYLING CLASSES
+ * Universal text area styles for all pages
+ * ======================================== */
+
+.text-area,
+.feedback-text-area,
+textarea.feedback,
+.hint-text,
+.instruction-text {
+    padding: 15px;
+    border-radius: var(--border-radius-md);
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    transition: all var(--transition-normal);
+    border: 2px solid;
+    box-sizing: border-box;
+    line-height: 1.4;
+}
+
+.text-area-incorrect,
+.feedback-text-area.incorrect,
+textarea.feedback.incorrect,
+.feedback-incorrect {
+    color: var(--textarea-incorrect-color);
+    background-color: var(--textarea-incorrect-bg);
+    border-color: var(--textarea-incorrect-border);
+    border-style: dashed;
+}
+
+.text-area-correct,
+.feedback-text-area.correct,
+textarea.feedback.correct,
+.feedback-correct {
+    color: var(--textarea-correct-color);
+    background-color: var(--textarea-correct-bg);
+    border-color: var(--textarea-correct-border);
+    border-style: dashed;
+}
+
+.text-area-hint,
+.feedback-text-area.hint,
+textarea.feedback.hint,
+.feedback-hint,
+.hint-text {
+    color: var(--textarea-hint-color);
+    background-color: var(--textarea-hint-bg);
+    border-color: var(--textarea-hint-border);
+}
+
+.feedback-container {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.feedback-container .text-area {
+    width: 100%;
+    margin: 0;
+}
+
+/* ========================================
+ * RESPONSIVE UTILITIES
+ * Responsive utility classes
+ * ======================================== */
+
+@media (max-width: 768px) {
+    .error-boundary,
+    .dependency-error {
+        padding: 15px;
+    }
+    
+    .element-loading-fallback,
+    .element-suspense-fallback {
+        padding: 15px;
+        font-size: 12px;
+    }
+    
+    .feedback-text-component {
+        left: 25%;
+        top: 30%;
+        width: 50%;
+        height: 40%;
+        font-size: 14px;
+    }
+}
+
+/* ========================================
+ * DRAG AND DROP GAME STYLES
+ * Visual feedback for step ordering game
+ * ======================================== */
+
+/* Step overlay - hides step image initially with glassy effect */
+.step-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 50;
+    overflow: hidden;
+    border-radius: 8px;
+    backdrop-filter: blur(2px);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+        0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Text displayed on overlay */
+.step-overlay-text {
+    position: relative;
+    z-index: 60;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.5),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* Ensure KaTeX rendering in overlay text */
+.step-overlay-text .katex {
+    font-size: inherit;
+    color: inherit;
+    text-shadow: inherit;
+}
+
+.step-overlay-text .katex-display {
+    margin: 0;
+}
+
+/* Different gradient for each step - Step 1 (blue-ish) */
+[data-step-name="step1-image-text"] .step-overlay {
+    background: linear-gradient(135deg, rgba(25, 35, 65, 1.0) 0%, rgba(45, 55, 85, 1.0) 50%, rgba(35, 45, 75, 1.0) 100%);
+}
+
+/* Different gradient for Step 2 (purple-ish) */
+[data-step-name="step2-image-text"] .step-overlay {
+    background: linear-gradient(135deg, rgba(45, 25, 65, 1.0) 0%, rgba(65, 45, 85, 1.0) 50%, rgba(55, 35, 75, 1.0) 100%);
+}
+
+/* Different gradient for Step 3 (teal-ish) */
+[data-step-name="step3-image-text"] .step-overlay {
+    background: linear-gradient(135deg, rgba(25, 50, 60, 1.0) 0%, rgba(35, 70, 80, 1.0) 50%, rgba(30, 60, 70, 1.0) 100%);
+}
+
+/* Ensure text content stays above overlay */
+.draggable-step .image-text-container > div {
+    position: relative;
+    z-index: 100;
+}
+
+/* Glassy shine effect on overlay */
+.step-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg);
+    pointer-events: none;
+}
+
+/* Subtle pattern for glass texture */
+.step-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.03) 10px,
+            rgba(255, 255, 255, 0.03) 20px
+        );
+    pointer-events: none;
+}
+
+/* Shatter animation trigger */
+.step-overlay.step-overlay-shatter {
+    animation: glassShatter 1.5s ease-out forwards;
+}
+
+/* Glass fragments - created as pseudo-elements */
+.step-overlay.step-overlay-shatter::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    opacity: 0;
+}
+
+/* Individual fragment animations - inherit parent gradient */
+.step-overlay-fragment {
+    position: absolute;
+    pointer-events: none;
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Step 1 fragments (blue-ish) */
+[data-step-name="step1-image-text"] .step-overlay-fragment {
+    background: linear-gradient(135deg, rgba(25, 35, 65, 1.0) 0%, rgba(45, 55, 85, 1.0) 50%, rgba(35, 45, 75, 1.0) 100%);
+}
+
+/* Step 2 fragments (purple-ish) */
+[data-step-name="step2-image-text"] .step-overlay-fragment {
+    background: linear-gradient(135deg, rgba(45, 25, 65, 1.0) 0%, rgba(65, 45, 85, 1.0) 50%, rgba(55, 35, 75, 1.0) 100%);
+}
+
+/* Step 3 fragments (teal-ish) */
+[data-step-name="step3-image-text"] .step-overlay-fragment {
+    background: linear-gradient(135deg, rgba(25, 50, 60, 1.0) 0%, rgba(35, 70, 80, 1.0) 50%, rgba(30, 60, 70, 1.0) 100%);
+}
+
+.step-overlay-fragment-1 {
+    top: 0;
+    left: 0;
+    width: 33.33%;
+    height: 33.33%;
+    animation: shatterFragment1 1.5s ease-out forwards;
+}
+
+.step-overlay-fragment-2 {
+    top: 0;
+    left: 33.33%;
+    width: 33.33%;
+    height: 33.33%;
+    animation: shatterFragment2 1.5s ease-out forwards;
+}
+
+.step-overlay-fragment-3 {
+    top: 0;
+    right: 0;
+    width: 33.33%;
+    height: 33.33%;
+    animation: shatterFragment3 1.5s ease-out forwards;
+}
+
+.step-overlay-fragment-4 {
+    top: 33.33%;
+    left: 0;
+    width: 33.33%;
+    height: 33.33%;
+    animation: shatterFragment4 1.5s ease-out forwards;
+}
+
+.step-overlay-fragment-5 {
+    top: 33.33%;
+    left: 33.33%;
+    width: 33.33%;
+    height: 33.33%;
+    animation: shatterFragment5 1.5s ease-out forwards;
+}
+
+.step-overlay-fragment-6 {
+    top: 33.33%;
+    right: 0;
+    width: 33.33%;
+    height: 33.33%;
+    animation: shatterFragment6 1.5s ease-out forwards;
+}
+
+.step-overlay-fragment-7 {
+    bottom: 0;
+    left: 0;
+    width: 33.33%;
+    height: 33.33%;
+    animation: shatterFragment7 1.5s ease-out forwards;
+}
+
+.step-overlay-fragment-8 {
+    bottom: 0;
+    left: 33.33%;
+    width: 33.33%;
+    height: 33.33%;
+    animation: shatterFragment8 1.5s ease-out forwards;
+}
+
+/* Draggable step container */
+.draggable-step {
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+/* Disabled draggable step (when game is complete) */
+.draggable-step.step-disabled {
+    cursor: default;
+    opacity: 0.9;
+}
+
+/* While dragging */
+.draggable-step.step-dragging {
+    cursor: grabbing;
+    opacity: 0.8;
+    transform: scale(1.05) rotate(2deg);
+    z-index: 9999 !important;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Correct position feedback - green glow only on the image */
+.draggable-step.step-correct-position .image-text-container {
+    position: relative;
+}
+
+.draggable-step.step-correct-position .image-text-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: drop-shadow(0 0 25px rgba(76, 175, 80, 0.8));
+    pointer-events: none;
+    z-index: -1;
+    animation: correctPulse 1s ease-in-out;
+}
+
+/* Hover target feedback for drag and drop - only on image */
+.droppable-steps-container.drag-over .draggable-step:not(.step-dragging):hover .image-text-container {
+    position: relative;
+}
+
+.droppable-steps-container.drag-over .draggable-step:not(.step-dragging):hover .image-text-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 0, 0.8)) drop-shadow(0 0 40px rgba(0, 255, 0, 0.6));
+    pointer-events: none;
+    z-index: -1;
+    transition: all 0.2s ease;
+}
+
+/* Animation phase classes - using pseudo-elements for image-only glow */
+.image-text-container.success-animation-phase1 {
+    position: relative;
+}
+
+.image-text-container.success-animation-phase1::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: drop-shadow(0 0 30px rgba(76, 175, 80, 0.8));
+    pointer-events: none;
+    z-index: -1;
+    animation: correctPulse 1s ease-in-out;
+}
+
+.image-text-container.success-animation-phase2 {
+    position: relative;
+}
+
+.image-text-container.success-animation-phase2::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: drop-shadow(0 0 40px rgba(76, 175, 80, 0.9));
+    pointer-events: none;
+    z-index: -1;
+    animation: correctPulse 0.5s ease-in-out;
+}
+
+.image-text-container.success-animation-phase3 {
+    position: relative;
+}
+
+.image-text-container.success-animation-phase3::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: drop-shadow(0 0 60px rgba(76, 175, 80, 1));
+    pointer-events: none;
+    z-index: -1;
+    animation: correctPulse 0.8s ease-in-out;
+}
+
+/* Permanent success glow after animation completes - blinking glow */
+.image-text-container.permanent-success-glow {
+    position: relative;
+}
+
+.image-text-container.permanent-success-glow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: inherit;
+    background-size: inherit;
+    background-position: inherit;
+    background-repeat: inherit;
+    filter: drop-shadow(0 0 25px rgba(76, 175, 80, 0.8));
+    pointer-events: none;
+    z-index: -1;
+    animation: glowBlink 1.5s ease-in-out infinite;
+}
+
+/* Droppable container */
+.droppable-steps-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+/* Success particles */
+.success-particle {
+    position: absolute;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+/* ========================================
+ * DRAG AND DROP ANIMATIONS
+ * Keyframe animations for game feedback
+ * ======================================== */
+
+@keyframes correctPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(76, 175, 80, 0);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(76, 175, 80, 0.8);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(76, 175, 80, 0.6);
+    }
+}
+
+/* Removed incorrectShake animation - no red feedback needed */
+
+@keyframes successPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes successFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+}
+
+/* Hover effects for draggable items */
+.draggable-step:not(.step-dragging):hover .image-text-container {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Prevent text selection during drag */
+.droppable-steps-container * {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Character jumping animation */
+.character-jumping {
+    position: absolute;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 9999;
+    transform-origin: center center;
+    /* Prevent flickering during sprite changes */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Smooth transitions for background changes */
+    transition: background-image 0.1s ease;
+}
+
+/* Floating hover animation for RightHover image */
+@keyframes floatingHover {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(5px, -8px) rotate(1deg);
+    }
+    50% {
+        transform: translate(-3px, -12px) rotate(-0.5deg);
+    }
+    75% {
+        transform: translate(8px, -6px) rotate(0.8deg);
+    }
+}
+
+/* Blinking glow animation for success state */
+@keyframes glowBlink {
+    0%, 100% {
+        filter: drop-shadow(0 0 25px rgba(76, 175, 80, 0.8));
+        opacity: 1;
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(76, 175, 80, 0.4));
+        opacity: 0.6;
+    }
+}
+
+/* Dazzling gradient animation for success message */
+@keyframes dazzlingGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Overlay gradient shift animation */
+@keyframes overlayGradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Jazzy overlay with animated patterns */
+.jazzy-overlay {
+    position: relative;
+    overflow: hidden;
+}
+
+.jazzy-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 50px,
+            rgba(100, 100, 150, 0.03) 50px,
+            rgba(100, 100, 150, 0.03) 100px
+        );
+    animation: overlayPatternMove 20s linear infinite;
+    pointer-events: none;
+}
+
+.jazzy-overlay::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at center,
+        rgba(80, 80, 120, 0.1) 0%,
+        transparent 50%
+    );
+    animation: overlayPulse 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes overlayPatternMove {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    100% {
+        transform: translateX(100px) translateY(100px);
+    }
+}
+
+@keyframes overlayPulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1) rotate(180deg);
+    }
+}
+
+/* Sparkle glow animation */
+@keyframes sparkleGlow {
+    0%, 100% {
+        box-shadow: 
+            0 0 30px rgba(255, 255, 255, 0.5), 
+            0 0 60px rgba(102, 126, 234, 0.4), 
+            0 10px 50px rgba(0, 0, 0, 0.3), 
+            inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 0 50px rgba(255, 255, 255, 0.8), 
+            0 0 100px rgba(240, 147, 251, 0.6), 
+            0 0 150px rgba(79, 172, 254, 0.5),
+            0 10px 50px rgba(0, 0, 0, 0.3), 
+            inset 0 2px 8px rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Dazzling message container */
+.success-message-dazzling {
+    position: relative;
+    overflow: hidden;
+}
+
+.success-message-dazzling::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    animation: rotateSparkle 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotateSparkle {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Success message overlay */
+.success-message-overlay,
+.success-message-container {
+    text-align: center;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-message-content {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.95) 0%, rgba(56, 142, 60, 0.95) 100%);
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    display: inline-block;
+}
+
+.success-message-content h1 {
+    font-size: 72px;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+    font-weight: bold;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
+}
+
+.success-message-content p {
+    font-size: 48px;
+    color: #ffffff;
+    margin: 0;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+}
+
+/* Character floating animation - smaller movements for the character */
+@keyframes characterFloat {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(5px, -8px) rotate(1deg);
+    }
+    50% {
+        transform: translate(-3px, -12px) rotate(-0.5deg);
+    }
+    75% {
+        transform: translate(8px, -6px) rotate(0.8deg);
+    }
+}
+
+/* Left hover floating animation - proportional movements for the background */
+@keyframes leftHoverFloat {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(2px, -3px) rotate(0.3deg);
+    }
+    50% {
+        transform: translate(-1px, -5px) rotate(-0.2deg);
+    }
+    75% {
+        transform: translate(3px, -2px) rotate(0.3deg);
+    }
+}
