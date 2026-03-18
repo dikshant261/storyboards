@@ -1,0 +1,43 @@
+**G3C7M4A2 – More About Clock Left Pointers**
+
+1. **Page 1 → Page 2**
+   These pages remain unchanged; nothing is missing.
+   On **Page 3**, a **circle showing “0 minutes”** appears at the top of the clock. This circle is part of the clock component used in this applet.
+
+2. **Page 4 → Page 8**
+   The full UI has been implemented, and the **NumberPad component** is integrated.
+
+   * When numbers are entered using the NumberPad, the value appears in the **clock circle**.
+   * After entering the correct value, the user can **click the clock numbers**, and the interaction continues.
+   * This interaction pattern works consistently from **Page 4 to Page 8**.
+   * An **`imageChange` event** is used to update the **left-side image and text**.
+
+     * The **image** is updated using the **ImageStack component**.
+     * The **text** is updated using the **SectionHeader component**.
+   * These changes occur according to the **NumberPad input and Check button validation**.
+
+3. **Page 9 → Page 14**
+   The **clock component image updates dynamically** based on the final image state from **Page 8**.
+
+4. **Page 10 & Page 11**
+   Only the **clock image changes** on these pages.
+
+5. **Page 11 Quiz Completion**
+   The quiz flow is fully implemented:
+
+   * Images update correctly.
+   * Left-side text updates correctly.
+   * Buttons enable/disable correctly.
+     The only remaining update needed here is the **clock image change**.
+
+6. **Page 12**
+
+   * The **NumberPad works correctly** and fills values into the **Tile component**.
+   * The **left-side image and text update correctly**.
+   * After entering the correct value, the user must **click the clock numbers to change the time**.
+
+7. **Page 13**
+   Only the **clock image needs to be changed**.
+
+8. **Page 14**
+   Everything works correctly; **no further changes are required**.

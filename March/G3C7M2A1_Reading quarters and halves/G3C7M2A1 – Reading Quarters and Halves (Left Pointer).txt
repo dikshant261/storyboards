@@ -1,0 +1,7 @@
+**G3C7M2A1 – Reading Quarters and Halves (Left Pointer)**
+
+The activity consists of three pages. Page 1 and Page 3 have been completed successfully.
+
+On Page 2, the remaining task is to implement the interaction for the clock numbers. When a user clicks on the clock numbers, the long hand (minute hand) should rotate accordingly and update based on the selected value (quarters and halves).
+
+This is the only part left to complete.

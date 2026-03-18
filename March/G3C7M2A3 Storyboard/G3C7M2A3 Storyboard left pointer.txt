@@ -1,0 +1,5 @@
+G3C7M2A3 – Storyboard Update
+
+On Page 5, the remaining task is to implement the functionality where the user can rotate the clock needle to set the time.
+
+After setting the time, the user should be able to click the “Check” button to verify whether the selected time is correct or not.

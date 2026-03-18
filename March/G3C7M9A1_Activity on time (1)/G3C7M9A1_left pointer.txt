@@ -1,0 +1,12 @@
+**G3C7M9A1 – Activity on Time (1) – Pending Work**
+
+1. The quiz and number pad have been implemented successfully on all pages where they are used. The button enable/disable functionality and
+ instruction text changes are also working correctly.
+
+2. I have created all assets according to the storyboard and placed them in their correct positions in the applet. However,
+ the clock component images appear different from those in the storyboard. These need to be updated to match the storyboard. I attempted to create 
+the clock images, but they are not perfectly aligned with the storyboard design.
+
+3. Some pages require clock animations, especially on the quiz and number pad pages.
+
+These are the remaining items in the applet. Apart from these points, everything else has been created and implemented successfully.
