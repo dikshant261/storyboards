@@ -17,7 +17,7 @@ const AppData = {
   translations: {
     en: {
       appInfo: {
-        title: "Reading Minutes",
+        title: "Writing Time",
       },
 
 
@@ -74,8 +74,8 @@ const AppData = {
 
       pages: {
         page1: {
-          title: "Activity on Time",
-          mainText: "Let’s explore Andi’s daily routine using our skills with clocks and time.<br/><br/>Tap “Start” to begin!"
+          title: "Writing Time",
+          mainText: "Let’s try reading and writing time shown in the <br/>clock.<br/><br/>Tap “Start” to begin!"
         },
         page2: {
           instructionText: "Tap » to explore Andi’s daily routine.",

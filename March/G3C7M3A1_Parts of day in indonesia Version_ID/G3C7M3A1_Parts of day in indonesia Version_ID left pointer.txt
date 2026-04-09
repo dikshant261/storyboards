@@ -1,0 +1,11 @@
+G3C7M3A1 – Parts of Day (Indonesia Version_ID) – Pending Work
+
+On Page 3, the replay button activity is still pending.
+On Page 4:
+Implement interaction on clock numbers (1 to 12).
+On clicking each number:
+The activity image on the right side should change accordingly.
+The text on the left side should also update.
+Each clock number (1–12) must have a unique image and corresponding text.
+
+All other parts are completed. Only the above items are pending.

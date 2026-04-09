@@ -1,0 +1,19 @@
+G3C7M6A1 – Reading Clock (Left Pointer)
+
+All pages have been completed. The remaining task involves implementing the question flow using a loop.
+
+Currently, after completing question[0], navigation from page 4 to page 2 does not load question[1]. The expected behavior is:
+
+After completing a question on page 4, the app should navigate back to page 2
+
+page 2 should load the next question from the array (question[index + 1])
+
+This loop should continue seamlessly from page 2 → page 4 until all questions are completed
+
+The question array is already defined in data.js, so the task is to correctly handle:
+
+Index increment
+
+State update
+
+Proper re-rendering of the next question

@@ -1,0 +1,4566 @@
+/**
+ * Page Configuration
+ *
+ * - Grid positioning and element generation
+ * - Page-specific UI element configurations
+ * - Question-dependent element updates
+ */
+
+// ===== PAGE CONFIGURATION =====
+// Page configuration with grid positioning and element generation
+
+// ===== PAGE NAVIGATION CONFIGURATION =====
+/**
+ * Page Navigation Configuration
+ * Maps each page number to its previous and next page numbers
+ * - prev: previous page number (null for first page)
+ * - next: next page number (null for last page)
+ */
+const pageNavigation = {
+  1: { prev: null, next: 2 },
+  2: { prev: 1, next: 3 },
+  3: { prev: 2, next: 4 },
+  4: { prev: 3, next: 5 },
+  5: { prev: 4, next: 6 },
+  6: { prev: 5, next: 7 },
+  7: { prev: 6, next: null },
+  8: { prev: 7, next: 9 },
+  9: { prev: 8, next: 10 },
+  10: { prev: 9, next: 11 },
+  11: { prev: 10, next: 12 },
+  12: { prev: 11, next: 13 },
+  13: { prev: 12, next: 14 },
+  14: { prev: 13, next: null },
+};
+
+/**
+ * Get all page numbers in navigation order
+ * @returns {number[]} Array of page numbers in order
+ */
+const getPageNumbers = () => {
+  const pages = [];
+  let currentPage = 1;
+
+  // Find the first page (where prev is null)
+  while (currentPage && pageNavigation[currentPage]) {
+    pages.push(currentPage);
+    currentPage = pageNavigation[currentPage].next;
+  }
+
+  return pages;
+};
+
+/**
+ * Calculate total number of pages from pageNavigation
+ * @returns {number} Total number of pages
+ */
+const getTotalPages = () => {
+  return getPageNumbers().length;
+};
+
+/**
+ * Get page number from dot position (1-based)
+ * @param {number} dotPosition - Dot position (1 to totalPages)
+ * @returns {number} Actual page number
+ */
+const getPageFromDotPosition = (dotPosition) => {
+  const pages = getPageNumbers();
+  return pages[dotPosition - 1] || pages[0];
+};
+
+/**
+ * Get dot position from page number (1-based)
+ * @param {number} pageNumber - Actual page number
+ * @returns {number} Dot position (1 to totalPages)
+ */
+const getDotPositionFromPage = (pageNumber) => {
+  const pages = getPageNumbers();
+  const index = pages.indexOf(pageNumber);
+  return index >= 0 ? index + 1 : 1;
+};
+
+/**
+ * Extract page number from element ID
+ * @param {string} id - Element ID (e.g., 'page1-next-button', 'page2-previous-button')
+ * @returns {number} Extracted page number (defaults to 1 if not found)
+ */
+const extractPageNumberFromId = (id) => {
+  if (!id) return 1;
+  const match = id.match(/page(\d+)/);
+  return match ? parseInt(match[1], 10) : 1;
+};
+
+/**
+ * Helper function to navigate to a page
+ * @param {number} targetPage - The page number to navigate to
+ * @param {string} direction - 'next' or 'previous' (for logging)
+ */
+const navigateToPage = (targetPage, direction = "unknown") => {
+  if (typeof window !== "undefined") {
+    if (window.changePageAndNotify) {
+      window.changePageAndNotify(targetPage);
+    } else if (window.navigateToPage) {
+      window.navigateToPage(targetPage);
+    } else {
+      // Fallback: dispatch page change event
+      window.dispatchEvent(
+        new CustomEvent("pageChanged", { detail: { page: targetPage } }),
+      );
+      console.log(
+        `📄 [Navigation] ${direction} - Dispatched page change event to page ${targetPage}`,
+      );
+    }
+  }
+};
+
+// ===== HELPER FUNCTIONS =====
+
+/**
+ * Helper function for i18n text (accessible globally within this module)
+ * @param {string} key - Translation key
+ * @param {string} fallback - Fallback text if translation not found
+ * @param {Object} params - Parameters for interpolation
+ * @returns {string} Translated or fallback text
+ */
+const getI18nText = (key, fallback, params = {}) => {
+  return typeof i18n !== "undefined" ? i18n.t(key, params) : fallback;
+};
+
+/**
+ * Get page navigation info (previous and next pages)
+ * @param {number} pageNumber - Current page number
+ * @returns {Object|null} Navigation object with prevPage and nextPage, or null if not found
+ */
+const getPageNavigation = (pageNumber) => {
+  return pageNavigation[pageNumber] || null;
+};
+
+/**
+ * Check if previous button should be disabled
+ * @param {number} pageNumber - Current page number
+ * @returns {boolean} True if previous button should be disabled
+ */
+const isPrevButtonDisabled = (pageNumber) => {
+  const nav = getPageNavigation(pageNumber);
+  return !nav || nav.prev === null;
+};
+
+/**
+ * Get next button text based on page number
+ * @param {number} pageNumber - Current page number
+ * @returns {string} Text to display on next button
+ */
+const getNextButtonText = (pageNumber) => {
+  const nav = getPageNavigation(pageNumber);
+  // If there's no next page, show "Start Over" or similar
+  if (!nav || nav.next === null) {
+    return getI18nText("buttons.startOver", "");
+  }
+  // Otherwise show the standard next button text
+  return getI18nText("buttons.next", "");
+};
+
+// ===== PAGE SEQUENCE STATE (for lift-bag / lift-eraser style flows) =====
+// Reusable for any page that has step-by-step actions before enabling Next/TapGif.
+// Config: { [pageNumber]: { steps: ['step1','step2'], enableOnComplete: ['next-button-id','tap-id'], stepToButtonId: { step1: 'btn-id', step2: 'btn-id' } } }
+// Store: { [pageNumber]: { step1: boolean, step2: boolean } }
+
+const getPageSequenceConfig = (pageNumber) => {
+  if (typeof window === "undefined" || !window.pageSequenceConfig) return null;
+  return window.pageSequenceConfig[pageNumber] || null;
+};
+
+const getPageSequenceStepDone = (pageNumber, stepKey) => {
+  if (typeof window === "undefined" || !window.pageSequenceStateStore)
+    return false;
+  const state = window.pageSequenceStateStore[pageNumber];
+  return state && state[stepKey] === true;
+};
+
+const setPageSequenceStepDone = (pageNumber, stepKey, value = true) => {
+  if (typeof window === "undefined") return;
+  if (!window.pageSequenceStateStore) window.pageSequenceStateStore = {};
+  if (!window.pageSequenceStateStore[pageNumber])
+    window.pageSequenceStateStore[pageNumber] = {};
+  window.pageSequenceStateStore[pageNumber][stepKey] = value;
+};
+
+const initPageSequenceState = (pageNumber) => {
+  const config = getPageSequenceConfig(pageNumber);
+  if (!config || !config.steps) return;
+  if (typeof window === "undefined") return;
+  if (!window.pageSequenceStateStore) window.pageSequenceStateStore = {};
+  window.pageSequenceStateStore[pageNumber] = {};
+  config.steps.forEach((step) => {
+    window.pageSequenceStateStore[pageNumber][step] = false;
+  });
+  console.log(
+    "📄 [PageSequence] Initialized state for page",
+    pageNumber,
+    window.pageSequenceStateStore[pageNumber],
+  );
+};
+
+const isPageSequenceComplete = (pageNumber) => {
+  const config = getPageSequenceConfig(pageNumber);
+  if (!config || !config.steps || !config.steps.length) return true;
+  return config.steps.every((step) =>
+    getPageSequenceStepDone(pageNumber, step),
+  );
+};
+
+/** Lift-bag button: disabled after step is done. */
+const isPageSequenceStepButtonDisabled = (pageNumber, stepKey) => {
+  return getPageSequenceStepDone(pageNumber, stepKey);
+};
+
+/** Lift-eraser button: disabled until previous step is done; disabled after own step is done. */
+const isPageSequenceStepButtonDisabledByOrder = (pageNumber, stepKey) => {
+  const config = getPageSequenceConfig(pageNumber);
+  if (!config || !config.steps) return false;
+  const idx = config.steps.indexOf(stepKey);
+  if (idx < 0) return false;
+  if (idx === 0) return getPageSequenceStepDone(pageNumber, stepKey);
+  const prevStep = config.steps[idx - 1];
+  if (!getPageSequenceStepDone(pageNumber, prevStep)) return true;
+  return getPageSequenceStepDone(pageNumber, stepKey);
+};
+
+/** Next button / tap gif: disabled until sequence is complete. */
+const isNextDisabledByPageSequence = (pageNumber) => {
+  const config = getPageSequenceConfig(pageNumber);
+  if (!config) return false;
+  return !isPageSequenceComplete(pageNumber);
+};
+
+// ===== GRID POSITION PAGES =====
+
+const createOptimizedGridPositionPages = () => {
+  // Helper function to get current question data (optimized)
+  const getCurrentQuestionData = () => {
+    const currentIndex =
+      typeof window !== "undefined" && window.currentQuestionIndex !== undefined
+        ? window.currentQuestionIndex
+        : 0;
+    const currentQuestion = {
+      minuend: 5,
+      subtrahend: 3,
+      missing: "subtrahend",
+    };
+    return { currentIndex, currentQuestion };
+  };
+  const handleQuizCompleted = (event, pageNumber) => {
+    const eventPageNumber = event.detail?.pageNumber;
+    console.log(
+      `🔍 [DynamicImage] Quiz completed event received for page ${eventPageNumber}, current page: ${pageNumber}`,
+    );
+    if (eventPageNumber === eventPageNumber) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const questionBottom_Y = 150;
+  const questionTextSize = "28gc";
+
+  // Pages 2–4 heavy/light image stacks: crossfade (2s) then 100ms pause before stepped sprite
+  const IMAGE_STACK_FADE_TRIGGER_DELAY_MS = 50;
+  const IMAGE_STACK_CROSSFADE_DURATION_MS = 2000;
+  const IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE = 100;
+  const IMAGE_STACK_TIME_TO_CROSSFADE_END_MS =
+    IMAGE_STACK_FADE_TRIGGER_DELAY_MS + IMAGE_STACK_CROSSFADE_DURATION_MS;
+
+  // Page 2 dynamic images from questionArray[page2CurrentIndex]
+  const getPage2Image1Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray : [];
+    const idx = Math.min(
+      Math.max(0, (window.page2CurrentIndex ?? 0)),
+      (qa && qa.length) ? qa.length - 1 : 0
+    );
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item1 && q.item1.image) || "assets/G2C6M1A1/Bag.png";
+    const spriteImages = (q && q.item1 && q.item1.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page2Image1TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page2Image1FadeTrigger;
+
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(
+        Math.max(0, (window.page2Image1SpriteFrame ?? 0)),
+        spriteImages.length ? spriteImages.length - 1 : 0
+      );
+      const frameSrc = spriteImages[frame] || sprite00;
+      return [{ src: frameSrc, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    // Crossfade: static fades out and sprite fades in over 2s at the same time
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [
+      {
+        src: staticSrc,
+        blink: false,
+        glow: false,
+        hidden: false,
+        opacity: 1,
+        onClick: () => {
+          if (typeof window !== "undefined") {
+            window.page2Tap2Hidden = true;
+            window.page2Image1Clicked = true;
+            const clickedItem = q && q.item1;
+            const clickedType = clickedItem && clickedItem.type;
+            const clickedIsCorrect =
+              clickedItem && typeof clickedItem.correct === "boolean"
+                ? clickedItem.correct
+                : null;
+            window.page2DeeTeeMood =
+              clickedIsCorrect === true
+                ? "happy"
+                : clickedIsCorrect === false
+                  ? "sad"
+                  : clickedType === "heavy"
+                    ? "happy"
+                    : clickedType === "light"
+                      ? "sad"
+                      : "normal";
+            window.page2Image1TransitionState = "fading";
+            window.page2Image1FadeTrigger = false;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              window.page2Image1FadeTrigger = true;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+            setTimeout(() => {
+              window.page2Image1TransitionState = "complete";
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              // After crossfade ends: IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE, then 8-frame sprite
+              setTimeout(() => {
+                const qa2 = window.questionArray || [];
+                const idx2 = Math.min(Math.max(0, (window.page2CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+                const q2 = qa2 && qa2[idx2];
+                const item = q2 && q2.item1;
+                const sprites = (item && item.spriteImages) || [];
+                if (sprites.length === 0) return;
+                const totalFrames = 8;
+                const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+                const frameMs = durationMs / totalFrames;
+                const lastArrayIndex = sprites.length - 1;
+                if (window.page2Image1SpriteIntervalId) clearInterval(window.page2Image1SpriteIntervalId);
+                window.page2Image1TransitionState = "spriteAnimating";
+                window.page2Image1SpriteFrame = 0;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                let step = 0;
+                window.page2Image1SpriteIntervalId = setInterval(() => {
+                  step += 1;
+                  const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                  window.page2Image1SpriteFrame = nextFrame;
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                  if (step >= totalFrames) {
+                    clearInterval(window.page2Image1SpriteIntervalId);
+                    window.page2Image1SpriteIntervalId = null;
+                    window.page2Image1TransitionState = "spriteComplete";
+                    if (typeof window !== "undefined") {
+                      if (!window.page2TextboxVisibility) window.page2TextboxVisibility = {};
+                      window.page2TextboxVisibility.textbox1 = true;
+                      window.page2TextboxVisibility.textbox3 = true;
+                      if (item) window.page2TalkBoxItem = { type: item.type, item_name: item.item_name };
+                      if (window.page2Image2Clicked) window.page2SecondAnimationComplete = true;
+                      dispatchPage2QuizCompletedIfLabelsDone();
+                    }
+                    if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                  }
+                }, frameMs);
+              }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+            }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+          }
+        },
+      },
+    ];
+  };
+  const getPage2Image2Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray : [];
+    const idx = Math.min(
+      Math.max(0, (window.page2CurrentIndex ?? 0)),
+      (qa && qa.length) ? qa.length - 1 : 0
+    );
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item2 && q.item2.image) || "assets/G2C6M1A1/Eraser.png";
+    const spriteImages = (q && q.item2 && q.item2.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page2Image2TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page2Image2FadeTrigger;
+
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(
+        Math.max(0, (window.page2Image2SpriteFrame ?? 0)),
+        spriteImages.length ? spriteImages.length - 1 : 0
+      );
+      const frameSrc = spriteImages[frame] || sprite00;
+      return [{ src: frameSrc, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [
+      {
+        src: staticSrc,
+        blink: false,
+        glow: false,
+        hidden: false,
+        opacity: 1,
+        onClick: () => {
+          if (typeof window !== "undefined") {
+            window.page2Tap3Hidden = true;
+            window.page2Image2Clicked = true;
+            const clickedItem = q && q.item2;
+            const clickedType = clickedItem && clickedItem.type;
+            const clickedIsCorrect =
+              clickedItem && typeof clickedItem.correct === "boolean"
+                ? clickedItem.correct
+                : null;
+            window.page2DeeTeeMood =
+              clickedIsCorrect === true
+                ? "happy"
+                : clickedIsCorrect === false
+                  ? "sad"
+                  : clickedType === "heavy"
+                    ? "happy"
+                    : clickedType === "light"
+                      ? "sad"
+                      : "normal";
+            window.page2Image2TransitionState = "fading";
+            window.page2Image2FadeTrigger = false;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              window.page2Image2FadeTrigger = true;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+            setTimeout(() => {
+              window.page2Image2TransitionState = "complete";
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              setTimeout(() => {
+                const qa2 = window.questionArray || [];
+                const idx2 = Math.min(Math.max(0, (window.page2CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+                const q2 = qa2 && qa2[idx2];
+                const item = q2 && q2.item2;
+                const sprites = (item && item.spriteImages) || [];
+                if (sprites.length === 0) return;
+                const totalFrames = 8;
+                const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+                const frameMs = durationMs / totalFrames;
+                const lastArrayIndex = sprites.length - 1;
+                if (window.page2Image2SpriteIntervalId) clearInterval(window.page2Image2SpriteIntervalId);
+                window.page2Image2TransitionState = "spriteAnimating";
+                window.page2Image2SpriteFrame = 0;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                let step = 0;
+                window.page2Image2SpriteIntervalId = setInterval(() => {
+                  step += 1;
+                  const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                  window.page2Image2SpriteFrame = nextFrame;
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                  if (step >= totalFrames) {
+                    clearInterval(window.page2Image2SpriteIntervalId);
+                    window.page2Image2SpriteIntervalId = null;
+                    window.page2Image2TransitionState = "spriteComplete";
+                    if (typeof window !== "undefined") {
+                      if (!window.page2TextboxVisibility) window.page2TextboxVisibility = {};
+                      window.page2TextboxVisibility.textbox2 = true;
+                      window.page2TextboxVisibility.textbox4 = true;
+                      if (item) window.page2TalkBoxItem = { type: item.type, item_name: item.item_name };
+                      if (window.page2Image1Clicked) window.page2SecondAnimationComplete = true;
+                      dispatchPage2QuizCompletedIfLabelsDone();
+                    }
+                    if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                  }
+                }, frameMs);
+              }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+            }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+          }
+        },
+      },
+    ];
+  };
+  const page2Image1Props = {
+    componentType: "ImageStackComponent",
+    id: "page2-school-bag-image",
+    elementName: "page2-school-bag-image",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page2Image1Props, "images", {
+    get: getPage2Image1Images,
+    enumerable: true,
+    configurable: true,
+  });
+  const page2Image2Props = {
+    componentType: "ImageStackComponent",
+    id: "page2-eraser-image",
+    elementName: "page2-eraser-image",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page2Image2Props, "images", {
+    get: getPage2Image2Images,
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page2DeeTeeProps = {
+    componentType: "ImageStackComponent",
+    id: "page2-dee-tee-image",
+    elementName: "page2-dee-tee-image",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page2DeeTeeProps, "images", {
+    get: () => {
+      const mood = typeof window !== "undefined"
+        ? (window.page2DeeTeeMood || "normal")
+        : "normal";
+      const src =
+        mood === "happy"
+          ? "assets/deeTeeHappy.png"
+          : mood === "sad"
+            ? "assets/deeTeeSad.png"
+            : "assets/deeTee.png";
+
+      return [
+        {
+          src,
+          blink: false,
+          glow: false,
+          hidden: false,
+          opacity: 1,
+        },
+      ];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 3 image getters (use questionArray2 and page3* state)
+  const getPage3Image1Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray2 : [];
+    const idx = Math.min(Math.max(0, (window.page3CurrentIndex ?? 0)), (qa && qa.length) ? qa.length - 1 : 0);
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item1 && q.item1.image) || "assets/G2C6M1A1/Bag.png";
+    const spriteImages = (q && q.item1 && q.item1.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page3Image1TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page3Image1FadeTrigger;
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(Math.max(0, (window.page3Image1SpriteFrame ?? 0)), spriteImages.length ? spriteImages.length - 1 : 0);
+      return [{ src: spriteImages[frame] || sprite00, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [{
+      src: staticSrc,
+      blink: false,
+      glow: false,
+      hidden: false,
+      opacity: 1,
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.page3Tap2Hidden = true;
+          window.page3Image1Clicked = true;
+          const clickedItem = q && q.item1;
+          const clickedType = clickedItem && clickedItem.type;
+          const clickedIsCorrect =
+            clickedItem && typeof clickedItem.correct === "boolean"
+              ? clickedItem.correct
+              : null;
+          window.page3DeeTeeMood =
+            clickedIsCorrect === true
+              ? "happy"
+              : clickedIsCorrect === false
+                ? "sad"
+                : clickedType === "heavy"
+                  ? "happy"
+                  : clickedType === "light"
+                    ? "sad"
+                    : "normal";
+          window.page3Image1TransitionState = "fading";
+          window.page3Image1FadeTrigger = false;
+          if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          setTimeout(() => {
+            window.page3Image1FadeTrigger = true;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+          setTimeout(() => {
+            window.page3Image1TransitionState = "complete";
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              const qa2 = window.questionArray2 || [];
+              const idx2 = Math.min(Math.max(0, (window.page3CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+              const q2 = qa2 && qa2[idx2];
+              const item = q2 && q2.item1;
+              const sprites = (item && item.spriteImages) || [];
+              if (sprites.length === 0) return;
+              const totalFrames = 8;
+              const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+              const frameMs = durationMs / totalFrames;
+              const lastArrayIndex = sprites.length - 1;
+              if (window.page3Image1SpriteIntervalId) clearInterval(window.page3Image1SpriteIntervalId);
+              window.page3Image1TransitionState = "spriteAnimating";
+              window.page3Image1SpriteFrame = 0;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              let step = 0;
+              window.page3Image1SpriteIntervalId = setInterval(() => {
+                step += 1;
+                const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                window.page3Image1SpriteFrame = nextFrame;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                if (step >= totalFrames) {
+                  clearInterval(window.page3Image1SpriteIntervalId);
+                  window.page3Image1SpriteIntervalId = null;
+                  window.page3Image1TransitionState = "spriteComplete";
+                  if (typeof window !== "undefined") {
+                    if (!window.page3TextboxVisibility) window.page3TextboxVisibility = {};
+                    window.page3TextboxVisibility.textbox1 = true;
+                    window.page3TextboxVisibility.textbox3 = true;
+                    if (item) window.page3TalkBoxItem = { type: item.type, item_name: item.item_name };
+                    if (window.page3Image2Clicked) window.page3SecondAnimationComplete = true;
+                    if (window.PageCompletionManager) {
+                      window.PageCompletionManager.setPageCompleted(3, !!window.page3SecondAnimationComplete);
+                    }
+                  }
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                }
+              }, frameMs);
+            }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+          }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+        }
+      },
+    }];
+  };
+  const getPage3Image2Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray2 : [];
+    const idx = Math.min(Math.max(0, (window.page3CurrentIndex ?? 0)), (qa && qa.length) ? qa.length - 1 : 0);
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item2 && q.item2.image) || "assets/G2C6M1A1/Eraser.png";
+    const spriteImages = (q && q.item2 && q.item2.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page3Image2TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page3Image2FadeTrigger;
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(Math.max(0, (window.page3Image2SpriteFrame ?? 0)), spriteImages.length ? spriteImages.length - 1 : 0);
+      return [{ src: spriteImages[frame] || sprite00, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [{
+      src: staticSrc,
+      blink: false,
+      glow: false,
+      hidden: false,
+      opacity: 1,
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.page3Tap3Hidden = true;
+          window.page3Image2Clicked = true;
+          const clickedItem = q && q.item2;
+          const clickedType = clickedItem && clickedItem.type;
+          const clickedIsCorrect =
+            clickedItem && typeof clickedItem.correct === "boolean"
+              ? clickedItem.correct
+              : null;
+          window.page3DeeTeeMood =
+            clickedIsCorrect === true
+              ? "happy"
+              : clickedIsCorrect === false
+                ? "sad"
+                : clickedType === "heavy"
+                  ? "happy"
+                  : clickedType === "light"
+                    ? "sad"
+                    : "normal";
+          window.page3Image2TransitionState = "fading";
+          window.page3Image2FadeTrigger = false;
+          if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          setTimeout(() => {
+            window.page3Image2FadeTrigger = true;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+          setTimeout(() => {
+            window.page3Image2TransitionState = "complete";
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              const qa2 = window.questionArray2 || [];
+              const idx2 = Math.min(Math.max(0, (window.page3CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+              const q2 = qa2 && qa2[idx2];
+              const item = q2 && q2.item2;
+              const sprites = (item && item.spriteImages) || [];
+              if (sprites.length === 0) return;
+              const totalFrames = 8;
+              const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+              const frameMs = durationMs / totalFrames;
+              const lastArrayIndex = sprites.length - 1;
+              if (window.page3Image2SpriteIntervalId) clearInterval(window.page3Image2SpriteIntervalId);
+              window.page3Image2TransitionState = "spriteAnimating";
+              window.page3Image2SpriteFrame = 0;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              let step = 0;
+              window.page3Image2SpriteIntervalId = setInterval(() => {
+                step += 1;
+                const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                window.page3Image2SpriteFrame = nextFrame;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                if (step >= totalFrames) {
+                  clearInterval(window.page3Image2SpriteIntervalId);
+                  window.page3Image2SpriteIntervalId = null;
+                  window.page3Image2TransitionState = "spriteComplete";
+                  if (typeof window !== "undefined") {
+                    if (!window.page3TextboxVisibility) window.page3TextboxVisibility = {};
+                    window.page3TextboxVisibility.textbox2 = true;
+                    window.page3TextboxVisibility.textbox4 = true;
+                    if (item) window.page3TalkBoxItem = { type: item.type, item_name: item.item_name };
+                    if (window.page3Image1Clicked) window.page3SecondAnimationComplete = true;
+                    if (window.PageCompletionManager) {
+                      window.PageCompletionManager.setPageCompleted(3, !!window.page3SecondAnimationComplete);
+                    }
+                  }
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                }
+              }, frameMs);
+            }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+          }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+        }
+      },
+    }];
+  };
+  const page3Image1Props = {
+    componentType: "ImageStackComponent",
+    id: "page3-image-1",
+    elementName: "page3-image-1",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page3Image1Props, "images", {
+    get: getPage3Image1Images,
+    enumerable: true,
+    configurable: true,
+  });
+  const page3Image2Props = {
+    componentType: "ImageStackComponent",
+    id: "page3-image-2",
+    elementName: "page3-image-2",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page3Image2Props, "images", {
+    get: getPage3Image2Images,
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page3DeeTeeProps = {
+    componentType: "ImageStackComponent",
+    id: "page3-dee-tee-image",
+    elementName: "page3-dee-tee-image",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page3DeeTeeProps, "images", {
+    get: () => {
+      const mood = typeof window !== "undefined"
+        ? (window.page3DeeTeeMood || "normal")
+        : "normal";
+      const src =
+        mood === "happy"
+          ? "assets/deeTeeHappy.png"
+          : mood === "sad"
+            ? "assets/deeTeeSad.png"
+            : "assets/deeTee.png";
+
+      return [
+        {
+          src,
+          blink: false,
+          glow: false,
+          hidden: false,
+          opacity: 1,
+        },
+      ];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 4 image getters and props (mirrors page 3, uses questionArray3 and page4* state)
+  const getPage4Image1Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray3 : [];
+    const idx = Math.min(Math.max(0, (window.page4CurrentIndex ?? 0)), (qa && qa.length) ? qa.length - 1 : 0);
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item1 && q.item1.image) || "assets/G2C6M1A1/Bag.png";
+    const spriteImages = (q && q.item1 && q.item1.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page4Image1TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page4Image1FadeTrigger;
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(Math.max(0, (window.page4Image1SpriteFrame ?? 0)), spriteImages.length ? spriteImages.length - 1 : 0);
+      return [{ src: spriteImages[frame] || sprite00, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [{
+      src: staticSrc,
+      blink: false,
+      glow: false,
+      hidden: false,
+      opacity: 1,
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.page4Tap2Hidden = true;
+          window.page4Image1Clicked = true;
+          const clickedItem = q && q.item1;
+          const clickedType = clickedItem && clickedItem.type;
+          const clickedIsCorrect =
+            clickedItem && typeof clickedItem.correct === "boolean"
+              ? clickedItem.correct
+              : null;
+          window.page4DeeTeeMood =
+            clickedIsCorrect === true
+              ? "happy"
+              : clickedIsCorrect === false
+                ? "sad"
+                : clickedType === "heavy"
+                  ? "happy"
+                  : clickedType === "light"
+                    ? "sad"
+                    : "normal";
+          window.page4Image1TransitionState = "fading";
+          window.page4Image1FadeTrigger = false;
+          if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          setTimeout(() => {
+            window.page4Image1FadeTrigger = true;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+          setTimeout(() => {
+            window.page4Image1TransitionState = "complete";
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              const qa2 = window.questionArray3 || [];
+              const idx2 = Math.min(Math.max(0, (window.page4CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+              const q2 = qa2 && qa2[idx2];
+              const item = q2 && q2.item1;
+              const sprites = (item && item.spriteImages) || [];
+              if (sprites.length === 0) return;
+              const totalFrames = 8;
+              const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+              const frameMs = durationMs / totalFrames;
+              const lastArrayIndex = sprites.length - 1;
+              if (window.page4Image1SpriteIntervalId) clearInterval(window.page4Image1SpriteIntervalId);
+              window.page4Image1TransitionState = "spriteAnimating";
+              window.page4Image1SpriteFrame = 0;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              let step = 0;
+              window.page4Image1SpriteIntervalId = setInterval(() => {
+                step += 1;
+                const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                window.page4Image1SpriteFrame = nextFrame;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                if (step >= totalFrames) {
+                  clearInterval(window.page4Image1SpriteIntervalId);
+                  window.page4Image1SpriteIntervalId = null;
+                  window.page4Image1TransitionState = "spriteComplete";
+                  if (typeof window !== "undefined") {
+                    if (!window.page4TextboxVisibility) window.page4TextboxVisibility = {};
+                    window.page4TextboxVisibility.textbox1 = true;
+                    window.page4TextboxVisibility.textbox3 = true;
+                    if (item) window.page4TalkBoxItem = { type: item.type, item_name: item.item_name };
+                    window.page4SecondAnimationComplete =
+                      window.page4Image1TransitionState === "spriteComplete"
+                      && window.page4Image2TransitionState === "spriteComplete";
+                    if (window.PageCompletionManager) {
+                      window.PageCompletionManager.setPageCompleted(4, !!window.page4SecondAnimationComplete);
+                    }
+                  }
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                }
+              }, frameMs);
+            }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+          }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+        }
+      },
+    }];
+  };
+  const getPage4Image2Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray3 : [];
+    const idx = Math.min(Math.max(0, (window.page4CurrentIndex ?? 0)), (qa && qa.length) ? qa.length - 1 : 0);
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item2 && q.item2.image) || "assets/G2C6M1A1/Eraser.png";
+    const spriteImages = (q && q.item2 && q.item2.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page4Image2TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page4Image2FadeTrigger;
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(Math.max(0, (window.page4Image2SpriteFrame ?? 0)), spriteImages.length ? spriteImages.length - 1 : 0);
+      return [{ src: spriteImages[frame] || sprite00, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [{
+      src: staticSrc,
+      blink: false,
+      glow: false,
+      hidden: false,
+      opacity: 1,
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.page4Tap3Hidden = true;
+          window.page4Image2Clicked = true;
+          const clickedItem = q && q.item2;
+          const clickedType = clickedItem && clickedItem.type;
+          const clickedIsCorrect =
+            clickedItem && typeof clickedItem.correct === "boolean"
+              ? clickedItem.correct
+              : null;
+          window.page4DeeTeeMood =
+            clickedIsCorrect === true
+              ? "happy"
+              : clickedIsCorrect === false
+                ? "sad"
+                : clickedType === "heavy"
+                  ? "happy"
+                  : clickedType === "light"
+                    ? "sad"
+                    : "normal";
+          window.page4Image2TransitionState = "fading";
+          window.page4Image2FadeTrigger = false;
+          if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          setTimeout(() => {
+            window.page4Image2FadeTrigger = true;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+          setTimeout(() => {
+            window.page4Image2TransitionState = "complete";
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              const qa2 = window.questionArray3 || [];
+              const idx2 = Math.min(Math.max(0, (window.page4CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+              const q2 = qa2 && qa2[idx2];
+              const item = q2 && q2.item2;
+              const sprites = (item && item.spriteImages) || [];
+              if (sprites.length === 0) return;
+              const totalFrames = 8;
+              const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+              const frameMs = durationMs / totalFrames;
+              const lastArrayIndex = sprites.length - 1;
+              if (window.page4Image2SpriteIntervalId) clearInterval(window.page4Image2SpriteIntervalId);
+              window.page4Image2TransitionState = "spriteAnimating";
+              window.page4Image2SpriteFrame = 0;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              let step = 0;
+              window.page4Image2SpriteIntervalId = setInterval(() => {
+                step += 1;
+                const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                window.page4Image2SpriteFrame = nextFrame;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                if (step >= totalFrames) {
+                  clearInterval(window.page4Image2SpriteIntervalId);
+                  window.page4Image2SpriteIntervalId = null;
+                  window.page4Image2TransitionState = "spriteComplete";
+                  if (typeof window !== "undefined") {
+                    if (!window.page4TextboxVisibility) window.page4TextboxVisibility = {};
+                    window.page4TextboxVisibility.textbox2 = true;
+                    window.page4TextboxVisibility.textbox4 = true;
+                    if (item) window.page4TalkBoxItem = { type: item.type, item_name: item.item_name };
+                    window.page4SecondAnimationComplete =
+                      window.page4Image1TransitionState === "spriteComplete"
+                      && window.page4Image2TransitionState === "spriteComplete";
+                    if (window.PageCompletionManager) {
+                      window.PageCompletionManager.setPageCompleted(4, !!window.page4SecondAnimationComplete);
+                    }
+                  }
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                }
+              }, frameMs);
+            }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+          }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+        }
+      },
+    }];
+  };
+  const page4Image1Props = {
+    componentType: "ImageStackComponent",
+    id: "page4-image-1",
+    elementName: "page4-image-1",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page4Image1Props, "images", {
+    get: getPage4Image1Images,
+    enumerable: true,
+    configurable: true,
+  });
+  const page4Image2Props = {
+    componentType: "ImageStackComponent",
+    id: "page4-image-2",
+    elementName: "page4-image-2",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page4Image2Props, "images", {
+    get: getPage4Image2Images,
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page4DeeTeeProps = {
+    componentType: "ImageStackComponent",
+    id: "page4-dee-tee-image",
+    elementName: "page4-dee-tee-image",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page4DeeTeeProps, "images", {
+    get: () => {
+      const mood = typeof window !== "undefined"
+        ? (window.page4DeeTeeMood || "normal")
+        : "normal";
+      const src =
+        mood === "happy"
+          ? "assets/deeTeeHappy.png"
+          : mood === "sad"
+            ? "assets/deeTeeSad.png"
+            : "assets/deeTee.png";
+
+      return [
+        {
+          src,
+          blink: false,
+          glow: false,
+          hidden: false,
+          opacity: 1,
+        },
+      ];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  /** When both heavy/light labels are chosen, enable Next (PageCompletionManager + quizCompleted). */
+  const dispatchPage2QuizCompletedIfLabelsDone = () => {
+    if (typeof window === "undefined") return;
+    const v = window.page2TextboxVisibility;
+    if (v && v.textbox3 && v.textbox4) {
+      window.dispatchEvent(
+        new CustomEvent("quizCompleted", { detail: { pageNumber: 2 } }),
+      );
+    }
+  };
+
+  // Page 2 textboxes: hidden by default, show when corresponding image is clicked (via page2TextboxVisibility)
+  // textbox1/3 use item1 type, textbox2/4 use item2 type
+  const page2Textbox1Props = {
+    componentType: "HeavyLightTextboxComponent",
+    variant: "lift",
+    fontSize: "32gc",
+    accentTextByType: true,
+  };
+  Object.defineProperty(page2Textbox1Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray && window.questionArray[window.page2CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page2Textbox1Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page2TextboxVisibility && window.page2TextboxVisibility.textbox1),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page2Textbox1Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray && window.questionArray[window.page2CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page2Textbox3Props = {
+    componentType: "HeavyLightTextboxComponent",
+    variant: "object",
+    fontSize: "32gc",
+    accentTextByType: true,
+  };
+  Object.defineProperty(page2Textbox3Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray && window.questionArray[window.page2CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page2Textbox3Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page2TextboxVisibility && window.page2TextboxVisibility.textbox3),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page2Textbox3Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray && window.questionArray[window.page2CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page2Textbox2Props = {
+    componentType: "HeavyLightTextboxComponent",
+    variant: "lift",
+    fontSize: "32gc",
+    accentTextByType: true,
+  };
+  Object.defineProperty(page2Textbox2Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray && window.questionArray[window.page2CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page2Textbox2Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page2TextboxVisibility && window.page2TextboxVisibility.textbox2),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page2Textbox2Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray && window.questionArray[window.page2CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page2Textbox4Props = {
+    componentType: "HeavyLightTextboxComponent",
+    variant: "object",
+    fontSize: "32gc",
+    accentTextByType: true,
+  };
+  Object.defineProperty(page2Textbox4Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray && window.questionArray[window.page2CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page2Textbox4Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page2TextboxVisibility && window.page2TextboxVisibility.textbox4),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page2Textbox4Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray && window.questionArray[window.page2CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 2 instruction text: when both images clicked / last question, use i18n keys
+  const page2InstructionProps = {
+    componentType: "SectionHeaderComponent",
+    backgroundColor: "transparent",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "42gc",
+    padding: "15gc",
+    textAlign: "center",
+    underlineFirstWord: false,
+    allowHtml: true,
+  };
+  Object.defineProperty(page2InstructionProps, "text", {
+    get: () => {
+      const secondAnimationComplete = typeof window !== "undefined" && window.page2SecondAnimationComplete;
+      return secondAnimationComplete
+        ? getI18nText("pages.page2.instructionTextContinue", "")
+        : getI18nText("pages.page2.instructionText", "");
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 2 talk box: default text until an image is clicked; then "The <item_name> is hard/easy to lift." (hard=gold, easy=aqua)
+  const page2TalkBoxProps = {
+    componentType: "TeacherNoteComponent",
+    backgroundColor: "rgb(0,0,0,0.7)",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "36gc",
+    padding: "15gc",
+    allowHtml: true,
+  };
+  Object.defineProperty(page2TalkBoxProps, "text", {
+    get: () => getI18nText("pages.page2.talkBoxText", ""),
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 2 tap animations 2 & 3: forceHide when corresponding image is clicked
+  const page2Tap2Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    // Page 2 gates Next on quiz completion; image hints must not depend on pageCompleted
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page2Tap2Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page2Tap2HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page2Image1Clicked && window.page2Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page2SecondAnimationComplete;
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page2Tap2Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page2Tap3Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page2Tap3Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page2Tap3HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page2Image1Clicked && window.page2Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page2SecondAnimationComplete;
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page2Tap3Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 2 tap-animation-2: coordinates move to [538, 150, 588, 200] when both images clicked
+  const page2TapAnimation2Element = {
+    id: "page2-tap-animation-2",
+    name: "tap-animation-2",
+    type: "custom",
+    zIndex: "999",
+    props: page2Tap2Props,
+  };
+  Object.defineProperty(page2TapAnimation2Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page2Image1Clicked && window.page2Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page2SecondAnimationComplete;
+      return bothClicked && secondAnimationComplete ? [538, 150, 588, 200] : [678, 453, 728, 503];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 2 tap-animation-3: coordinates move to [1175, 170, 1225, 220] when both images clicked
+  const page2TapAnimation3Element = {
+    id: "page2-tap-animation-3",
+    name: "tap-animation-3",
+    type: "custom",
+    zIndex: "999",
+    props: page2Tap3Props,
+  };
+  Object.defineProperty(page2TapAnimation3Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page2Image1Clicked && window.page2Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page2SecondAnimationComplete;
+      return bothClicked && secondAnimationComplete ? [1175, 170, 1225, 220] : [1175, 513, 1225, 563];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 3 talk box (uses questionArray2 and page3* state)
+  const page3TalkBoxProps = {
+    componentType: "TeacherNoteComponent",
+    backgroundColor: "rgb(0,0,0,0.7)",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "36gc",
+    padding: "15gc",
+    allowHtml: true,
+  };
+  Object.defineProperty(page3TalkBoxProps, "text", {
+    get: () => getI18nText("pages.page3.talkBoxText", ""),
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 3 textboxes (questionArray2, page3* state)
+  const page3Textbox1Props = { componentType: "HeavyLightTextboxComponent", variant: "lift", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page3Textbox1Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray2 && window.questionArray2[window.page3CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page3Textbox1Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page3TextboxVisibility && window.page3TextboxVisibility.textbox1),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page3Textbox1Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray2 && window.questionArray2[window.page3CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page3Textbox3Props = { componentType: "HeavyLightTextboxComponent", variant: "object", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page3Textbox3Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray2 && window.questionArray2[window.page3CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page3Textbox3Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page3TextboxVisibility && window.page3TextboxVisibility.textbox3),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page3Textbox3Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray2 && window.questionArray2[window.page3CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page3Textbox2Props = { componentType: "HeavyLightTextboxComponent", variant: "lift", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page3Textbox2Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray2 && window.questionArray2[window.page3CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page3Textbox2Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page3TextboxVisibility && window.page3TextboxVisibility.textbox2),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page3Textbox2Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray2 && window.questionArray2[window.page3CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page3Textbox4Props = { componentType: "HeavyLightTextboxComponent", variant: "object", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page3Textbox4Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray2 && window.questionArray2[window.page3CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page3Textbox4Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page3TextboxVisibility && window.page3TextboxVisibility.textbox4),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page3Textbox4Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray2 && window.questionArray2[window.page3CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page3Tap2Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page3Tap2Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page3Tap2HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page3Image1Clicked && window.page3Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page3SecondAnimationComplete;
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page3Tap2Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page3Tap3Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page3Tap3Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page3Tap3HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page3Image1Clicked && window.page3Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page3SecondAnimationComplete;
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page3Tap3Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page3TapAnimation2Element = {
+    id: "page3-tap-animation-2",
+    name: "tap-animation-2",
+    type: "custom",
+    zIndex: "999",
+    props: page3Tap2Props,
+  };
+  Object.defineProperty(page3TapAnimation2Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page3Image1Clicked && window.page3Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page3SecondAnimationComplete;
+      return bothClicked && secondAnimationComplete ? [538, 150, 588, 200] : [678, 453, 728, 503];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page3TapAnimation3Element = {
+    id: "page3-tap-animation-3",
+    name: "tap-animation-3",
+    type: "custom",
+    zIndex: "999",
+    props: page3Tap3Props,
+  };
+  Object.defineProperty(page3TapAnimation3Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page3Image1Clicked && window.page3Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page3SecondAnimationComplete;
+      return bothClicked && secondAnimationComplete ? [1175, 170, 1225, 220] : [1175, 513, 1225, 563];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 3 instruction (questionArray2, page3CurrentIndex)
+  const page3InstructionProps = {
+    componentType: "SectionHeaderComponent",
+    backgroundColor: "transparent",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "42gc",
+    padding: "15gc",
+    textAlign: "center",
+    underlineFirstWord: false,
+    allowHtml: true,
+  };
+  Object.defineProperty(page3InstructionProps, "text", {
+    get: () => {
+      const secondAnimationComplete = typeof window !== "undefined" && window.page3SecondAnimationComplete;
+      return secondAnimationComplete
+        ? getI18nText("pages.page3.instructionTextContinue", "")
+        : getI18nText("pages.page3.instructionText", "");
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 4 talk box (uses questionArray3 and page4* state)
+  const page4TalkBoxProps = {
+    componentType: "TeacherNoteComponent",
+    backgroundColor: "rgb(0,0,0,0.7)",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "36gc",
+    padding: "15gc",
+    allowHtml: true,
+  };
+  Object.defineProperty(page4TalkBoxProps, "text", {
+    get: () => getI18nText("pages.page4.talkBoxText", ""),
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 4 textboxes (questionArray3, page4* state)
+  const page4Textbox1Props = { componentType: "HeavyLightTextboxComponent", variant: "lift", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page4Textbox1Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray3 && window.questionArray3[window.page4CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page4Textbox1Props, "hidden", {
+    get: () => !(typeof window !== "undefined"
+      && window.page4TextboxVisibility
+      && window.page4TextboxVisibility.textbox1
+      && window.page4Image1TransitionState === "spriteComplete"),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page4Textbox1Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray3 && window.questionArray3[window.page4CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page4Textbox3Props = { componentType: "HeavyLightTextboxComponent", variant: "object", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page4Textbox3Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray3 && window.questionArray3[window.page4CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page4Textbox3Props, "hidden", {
+    get: () => !(typeof window !== "undefined"
+      && window.page4TextboxVisibility
+      && window.page4TextboxVisibility.textbox3
+      && window.page4Image1TransitionState === "spriteComplete"),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page4Textbox3Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray3 && window.questionArray3[window.page4CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page4Textbox2Props = { componentType: "HeavyLightTextboxComponent", variant: "lift", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page4Textbox2Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray3 && window.questionArray3[window.page4CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page4Textbox2Props, "hidden", {
+    get: () => !(typeof window !== "undefined"
+      && window.page4TextboxVisibility
+      && window.page4TextboxVisibility.textbox2
+      && window.page4Image2TransitionState === "spriteComplete"),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page4Textbox2Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray3 && window.questionArray3[window.page4CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page4Textbox4Props = { componentType: "HeavyLightTextboxComponent", variant: "object", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page4Textbox4Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray3 && window.questionArray3[window.page4CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page4Textbox4Props, "hidden", {
+    get: () => !(typeof window !== "undefined"
+      && window.page4TextboxVisibility
+      && window.page4TextboxVisibility.textbox4
+      && window.page4Image2TransitionState === "spriteComplete"),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page4Textbox4Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray3 && window.questionArray3[window.page4CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  const isPage4AnimationSequenceComplete = () => (
+    typeof window !== "undefined" && (
+      window.page4SecondAnimationComplete
+      || (
+        window.page4Image1TransitionState === "spriteComplete"
+        && window.page4Image2TransitionState === "spriteComplete"
+      )
+    )
+  );
+
+  const page4InstructionProps = {
+    componentType: "SectionHeaderComponent",
+    backgroundColor: "transparent",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "42gc",
+    padding: "15gc",
+    textAlign: "center",
+    underlineFirstWord: false,
+    allowHtml: true,
+  };
+  Object.defineProperty(page4InstructionProps, "text", {
+    get: () => {
+      const secondAnimationComplete = isPage4AnimationSequenceComplete();
+      return secondAnimationComplete
+        ? getI18nText("pages.page4.instructionTextContinue", "")
+        : getI18nText("pages.page4.instructionText", "");
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page4Tap2Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page4Tap2Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page4Tap2HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page4Image1Clicked && window.page4Image2Clicked;
+      const secondAnimationComplete = isPage4AnimationSequenceComplete();
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page4Tap2Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page4Tap3Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page4Tap3Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page4Tap3HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page4Image1Clicked && window.page4Image2Clicked;
+      const secondAnimationComplete = isPage4AnimationSequenceComplete();
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page4Tap3Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page4TapAnimation2Element = {
+    id: "page4-tap-animation-2",
+    name: "tap-animation-2",
+    type: "custom",
+    zIndex: "999",
+    props: page4Tap2Props,
+  };
+  Object.defineProperty(page4TapAnimation2Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page4Image1Clicked && window.page4Image2Clicked;
+      const secondAnimationComplete = isPage4AnimationSequenceComplete();
+      return bothClicked && secondAnimationComplete ? [538, 150, 588, 200] : [678, 453, 728, 503];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page4TapAnimation3Element = {
+    id: "page4-tap-animation-3",
+    name: "tap-animation-3",
+    type: "custom",
+    zIndex: "999",
+    props: page4Tap3Props,
+  };
+  Object.defineProperty(page4TapAnimation3Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page4Image1Clicked && window.page4Image2Clicked;
+      const secondAnimationComplete = isPage4AnimationSequenceComplete();
+      return bothClicked && secondAnimationComplete ? [1175, 170, 1225, 220] : [1175, 513, 1225, 563];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  const resetPage4InteractionState = () => {
+    if (typeof window === "undefined") return;
+    window.page4TextboxVisibility = { left: false, right: false, textbox1: false, textbox2: false, textbox3: false, textbox4: false };
+    window.page4TalkBoxItem = null;
+    window.page4TalkBoxLabelState = null;
+    window.page4DeeTeeMood = "normal";
+    window.page4SecondAnimationComplete = false;
+    window.page4Tap2HiddenAfterLabelClick = false;
+    window.page4Tap3HiddenAfterLabelClick = false;
+    window.page4Tap2Hidden = false;
+    window.page4Tap3Hidden = false;
+    window.page4Image1Clicked = false;
+    window.page4Image2Clicked = false;
+    window.page4Image1TransitionState = "idle";
+    window.page4Image1FadeTrigger = false;
+    window.page4Image1BlinkDone = true;
+    if (window.page4Image1SpriteIntervalId) {
+      clearInterval(window.page4Image1SpriteIntervalId);
+      window.page4Image1SpriteIntervalId = null;
+    }
+    window.page4Image2TransitionState = "idle";
+    window.page4Image2FadeTrigger = false;
+    window.page4Image2BlinkDone = true;
+    if (window.page4Image2SpriteIntervalId) {
+      clearInterval(window.page4Image2SpriteIntervalId);
+      window.page4Image2SpriteIntervalId = null;
+    }
+    if (window.PageCompletionManager) {
+      window.PageCompletionManager.setPageCompleted(4, false);
+    }
+  };
+
+  // Page 5 image getters and props (mirrors page 4, uses questionArray4 and page5* state)
+  const getPage5Image1Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray4 : [];
+    const idx = Math.min(Math.max(0, (window.page5CurrentIndex ?? 0)), (qa && qa.length) ? qa.length - 1 : 0);
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item1 && q.item1.image) || "assets/G2C6M1A1/Bag.png";
+    const spriteImages = (q && q.item1 && q.item1.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page5Image1TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page5Image1FadeTrigger;
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(Math.max(0, (window.page5Image1SpriteFrame ?? 0)), spriteImages.length ? spriteImages.length - 1 : 0);
+      return [{ src: spriteImages[frame] || sprite00, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [{
+      src: staticSrc,
+      blink: false,
+      glow: false,
+      hidden: false,
+      opacity: 1,
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.page5Tap2Hidden = true;
+          window.page5Image1Clicked = true;
+          const clickedItem = q && q.item1;
+          const clickedType = clickedItem && clickedItem.type;
+          const clickedIsCorrect =
+            clickedItem && typeof clickedItem.correct === "boolean"
+              ? clickedItem.correct
+              : null;
+          window.page5DeeTeeMood =
+            clickedIsCorrect === true
+              ? "happy"
+              : clickedIsCorrect === false
+                ? "sad"
+                : clickedType === "heavy"
+                  ? "happy"
+                  : clickedType === "light"
+                    ? "sad"
+                    : "normal";
+          window.page5Image1TransitionState = "fading";
+          window.page5Image1FadeTrigger = false;
+          if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          setTimeout(() => {
+            window.page5Image1FadeTrigger = true;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+          setTimeout(() => {
+            window.page5Image1TransitionState = "complete";
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              const qa2 = window.questionArray4 || [];
+              const idx2 = Math.min(Math.max(0, (window.page5CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+              const q2 = qa2 && qa2[idx2];
+              const item = q2 && q2.item1;
+              const sprites = (item && item.spriteImages) || [];
+              if (sprites.length === 0) return;
+              const totalFrames = 8;
+              const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+              const frameMs = durationMs / totalFrames;
+              const lastArrayIndex = sprites.length - 1;
+              if (window.page5Image1SpriteIntervalId) clearInterval(window.page5Image1SpriteIntervalId);
+              window.page5Image1TransitionState = "spriteAnimating";
+              window.page5Image1SpriteFrame = 0;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              let step = 0;
+              window.page5Image1SpriteIntervalId = setInterval(() => {
+                step += 1;
+                const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                window.page5Image1SpriteFrame = nextFrame;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                if (step >= totalFrames) {
+                  clearInterval(window.page5Image1SpriteIntervalId);
+                  window.page5Image1SpriteIntervalId = null;
+                  window.page5Image1TransitionState = "spriteComplete";
+                  if (typeof window !== "undefined") {
+                    if (!window.page5TextboxVisibility) window.page5TextboxVisibility = {};
+                    window.page5TextboxVisibility.textbox1 = true;
+                    window.page5TextboxVisibility.textbox3 = true;
+                    if (item) window.page5TalkBoxItem = { type: item.type, item_name: item.item_name };
+                    if (window.page5Image2Clicked) window.page5SecondAnimationComplete = true;
+                    if (window.PageCompletionManager) {
+                      window.PageCompletionManager.setPageCompleted(5, !!window.page5SecondAnimationComplete);
+                    }
+                  }
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                }
+              }, frameMs);
+            }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+          }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+        }
+      },
+    }];
+  };
+  const getPage5Image2Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray4 : [];
+    const idx = Math.min(Math.max(0, (window.page5CurrentIndex ?? 0)), (qa && qa.length) ? qa.length - 1 : 0);
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item2 && q.item2.image) || "assets/G2C6M1A1/Eraser.png";
+    const spriteImages = (q && q.item2 && q.item2.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page5Image2TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page5Image2FadeTrigger;
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(Math.max(0, (window.page5Image2SpriteFrame ?? 0)), spriteImages.length ? spriteImages.length - 1 : 0);
+      return [{ src: spriteImages[frame] || sprite00, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [{
+      src: staticSrc,
+      blink: false,
+      glow: false,
+      hidden: false,
+      opacity: 1,
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.page5Tap3Hidden = true;
+          window.page5Image2Clicked = true;
+          const clickedItem = q && q.item2;
+          const clickedType = clickedItem && clickedItem.type;
+          const clickedIsCorrect =
+            clickedItem && typeof clickedItem.correct === "boolean"
+              ? clickedItem.correct
+              : null;
+          window.page5DeeTeeMood =
+            clickedIsCorrect === true
+              ? "happy"
+              : clickedIsCorrect === false
+                ? "sad"
+                : clickedType === "heavy"
+                  ? "happy"
+                  : clickedType === "light"
+                    ? "sad"
+                    : "normal";
+          window.page5Image2TransitionState = "fading";
+          window.page5Image2FadeTrigger = false;
+          if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          setTimeout(() => {
+            window.page5Image2FadeTrigger = true;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+          setTimeout(() => {
+            window.page5Image2TransitionState = "complete";
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              const qa2 = window.questionArray4 || [];
+              const idx2 = Math.min(Math.max(0, (window.page5CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+              const q2 = qa2 && qa2[idx2];
+              const item = q2 && q2.item2;
+              const sprites = (item && item.spriteImages) || [];
+              if (sprites.length === 0) return;
+              const totalFrames = 8;
+              const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+              const frameMs = durationMs / totalFrames;
+              const lastArrayIndex = sprites.length - 1;
+              if (window.page5Image2SpriteIntervalId) clearInterval(window.page5Image2SpriteIntervalId);
+              window.page5Image2TransitionState = "spriteAnimating";
+              window.page5Image2SpriteFrame = 0;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              let step = 0;
+              window.page5Image2SpriteIntervalId = setInterval(() => {
+                step += 1;
+                const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                window.page5Image2SpriteFrame = nextFrame;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                if (step >= totalFrames) {
+                  clearInterval(window.page5Image2SpriteIntervalId);
+                  window.page5Image2SpriteIntervalId = null;
+                  window.page5Image2TransitionState = "spriteComplete";
+                  if (typeof window !== "undefined") {
+                    if (!window.page5TextboxVisibility) window.page5TextboxVisibility = {};
+                    window.page5TextboxVisibility.textbox2 = true;
+                    window.page5TextboxVisibility.textbox4 = true;
+                    if (item) window.page5TalkBoxItem = { type: item.type, item_name: item.item_name };
+                    if (window.page5Image1Clicked) window.page5SecondAnimationComplete = true;
+                    if (window.PageCompletionManager) {
+                      window.PageCompletionManager.setPageCompleted(5, !!window.page5SecondAnimationComplete);
+                    }
+                  }
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                }
+              }, frameMs);
+            }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+          }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+        }
+      },
+    }];
+  };
+  const page5Image1Props = {
+    componentType: "ImageStackComponent",
+    id: "page5-image-1",
+    elementName: "page5-image-1",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page5Image1Props, "images", {
+    get: getPage5Image1Images,
+    enumerable: true,
+    configurable: true,
+  });
+  const page5Image2Props = {
+    componentType: "ImageStackComponent",
+    id: "page5-image-2",
+    elementName: "page5-image-2",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page5Image2Props, "images", {
+    get: getPage5Image2Images,
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page5DeeTeeProps = {
+    componentType: "ImageStackComponent",
+    id: "page5-dee-tee-image",
+    elementName: "page5-dee-tee-image",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page5DeeTeeProps, "images", {
+    get: () => {
+      const mood = typeof window !== "undefined"
+        ? (window.page5DeeTeeMood || "normal")
+        : "normal";
+      const src =
+        mood === "happy"
+          ? "assets/deeTeeHappy.png"
+          : mood === "sad"
+            ? "assets/deeTeeSad.png"
+            : "assets/deeTee.png";
+
+      return [
+        {
+          src,
+          blink: false,
+          glow: false,
+          hidden: false,
+          opacity: 1,
+        },
+      ];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 5 talk box (uses questionArray4 and page5* state)
+  const page5TalkBoxProps = {
+    componentType: "TeacherNoteComponent",
+    backgroundColor: "rgb(0,0,0,0.7)",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "36gc",
+    padding: "15gc",
+    allowHtml: true,
+  };
+  Object.defineProperty(page5TalkBoxProps, "text", {
+    get: () => getI18nText("pages.page5.talkBoxText", ""),
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 5 textboxes (questionArray4, page5* state)
+  const page5Textbox1Props = { componentType: "HeavyLightTextboxComponent", variant: "lift", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page5Textbox1Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray4 && window.questionArray4[window.page5CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page5Textbox1Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page5TextboxVisibility && window.page5TextboxVisibility.textbox1),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page5Textbox1Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray4 && window.questionArray4[window.page5CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page5Textbox3Props = { componentType: "HeavyLightTextboxComponent", variant: "object", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page5Textbox3Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray4 && window.questionArray4[window.page5CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page5Textbox3Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page5TextboxVisibility && window.page5TextboxVisibility.textbox3),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page5Textbox3Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray4 && window.questionArray4[window.page5CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page5Textbox2Props = { componentType: "HeavyLightTextboxComponent", variant: "lift", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page5Textbox2Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray4 && window.questionArray4[window.page5CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page5Textbox2Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page5TextboxVisibility && window.page5TextboxVisibility.textbox2),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page5Textbox2Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray4 && window.questionArray4[window.page5CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page5Textbox4Props = { componentType: "HeavyLightTextboxComponent", variant: "object", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page5Textbox4Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray4 && window.questionArray4[window.page5CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page5Textbox4Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page5TextboxVisibility && window.page5TextboxVisibility.textbox4),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page5Textbox4Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray4 && window.questionArray4[window.page5CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page5InstructionProps = {
+    componentType: "SectionHeaderComponent",
+    backgroundColor: "transparent",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "42gc",
+    padding: "15gc",
+    textAlign: "center",
+    underlineFirstWord: false,
+    allowHtml: true,
+  };
+  Object.defineProperty(page5InstructionProps, "text", {
+    get: () => {
+      const secondAnimationComplete = typeof window !== "undefined" && window.page5SecondAnimationComplete;
+      return secondAnimationComplete
+        ? getI18nText("pages.page5.instructionTextContinue", "")
+        : getI18nText("pages.page5.instructionText", "");
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page5Tap2Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page5Tap2Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page5Tap2HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page5Image1Clicked && window.page5Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page5SecondAnimationComplete;
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page5Tap2Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page5Tap3Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page5Tap3Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page5Tap3HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page5Image1Clicked && window.page5Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page5SecondAnimationComplete;
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page5Tap3Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page5TapAnimation2Element = {
+    id: "page5-tap-animation-2",
+    name: "tap-animation-2",
+    type: "custom",
+    zIndex: "999",
+    props: page5Tap2Props,
+  };
+  Object.defineProperty(page5TapAnimation2Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page5Image1Clicked && window.page5Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page5SecondAnimationComplete;
+      return bothClicked && secondAnimationComplete ? [538, 150, 588, 200] : [678, 453, 728, 503];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page5TapAnimation3Element = {
+    id: "page5-tap-animation-3",
+    name: "tap-animation-3",
+    type: "custom",
+    zIndex: "999",
+    props: page5Tap3Props,
+  };
+  Object.defineProperty(page5TapAnimation3Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page5Image1Clicked && window.page5Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page5SecondAnimationComplete;
+      return bothClicked && secondAnimationComplete ? [1175, 170, 1225, 220] : [1175, 513, 1225, 563];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 6 image getters and props (mirrors page 5, uses questionArray5 and page6* state)
+  const getPage6Image1Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray5 : [];
+    const idx = Math.min(Math.max(0, (window.page6CurrentIndex ?? 0)), (qa && qa.length) ? qa.length - 1 : 0);
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item1 && q.item1.image) || "assets/G2C6M1A1/Bag.png";
+    const spriteImages = (q && q.item1 && q.item1.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page6Image1TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page6Image1FadeTrigger;
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(Math.max(0, (window.page6Image1SpriteFrame ?? 0)), spriteImages.length ? spriteImages.length - 1 : 0);
+      return [{ src: spriteImages[frame] || sprite00, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [{
+      src: staticSrc,
+      blink: false,
+      glow: false,
+      hidden: false,
+      opacity: 1,
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.page6Tap2Hidden = true;
+          window.page6Image1Clicked = true;
+          const clickedItem = q && q.item1;
+          const clickedType = clickedItem && clickedItem.type;
+          const clickedIsCorrect =
+            clickedItem && typeof clickedItem.correct === "boolean"
+              ? clickedItem.correct
+              : null;
+          window.page6DeeTeeMood =
+            clickedIsCorrect === true
+              ? "happy"
+              : clickedIsCorrect === false
+                ? "sad"
+                : clickedType === "heavy"
+                  ? "happy"
+                  : clickedType === "light"
+                    ? "sad"
+                    : "normal";
+          window.page6Image1TransitionState = "fading";
+          window.page6Image1FadeTrigger = false;
+          if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          setTimeout(() => {
+            window.page6Image1FadeTrigger = true;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+          setTimeout(() => {
+            window.page6Image1TransitionState = "complete";
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              const qa2 = window.questionArray5 || [];
+              const idx2 = Math.min(Math.max(0, (window.page6CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+              const q2 = qa2 && qa2[idx2];
+              const item = q2 && q2.item1;
+              const sprites = (item && item.spriteImages) || [];
+              if (sprites.length === 0) return;
+              const totalFrames = 8;
+              const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+              const frameMs = durationMs / totalFrames;
+              const lastArrayIndex = sprites.length - 1;
+              if (window.page6Image1SpriteIntervalId) clearInterval(window.page6Image1SpriteIntervalId);
+              window.page6Image1TransitionState = "spriteAnimating";
+              window.page6Image1SpriteFrame = 0;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              let step = 0;
+              window.page6Image1SpriteIntervalId = setInterval(() => {
+                step += 1;
+                const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                window.page6Image1SpriteFrame = nextFrame;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                if (step >= totalFrames) {
+                  clearInterval(window.page6Image1SpriteIntervalId);
+                  window.page6Image1SpriteIntervalId = null;
+                  window.page6Image1TransitionState = "spriteComplete";
+                  if (typeof window !== "undefined") {
+                    if (!window.page6TextboxVisibility) window.page6TextboxVisibility = {};
+                    window.page6TextboxVisibility.textbox1 = true;
+                    window.page6TextboxVisibility.textbox3 = true;
+                    if (item) window.page6TalkBoxItem = { type: item.type, item_name: item.item_name };
+                    if (window.page6Image2Clicked) window.page6SecondAnimationComplete = true;
+                    if (window.PageCompletionManager) {
+                      window.PageCompletionManager.setPageCompleted(6, !!window.page6SecondAnimationComplete);
+                    }
+                  }
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                }
+              }, frameMs);
+            }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+          }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+        }
+      },
+    }];
+  };
+  const getPage6Image2Images = () => {
+    const qa = typeof window !== "undefined" ? window.questionArray5 : [];
+    const idx = Math.min(Math.max(0, (window.page6CurrentIndex ?? 0)), (qa && qa.length) ? qa.length - 1 : 0);
+    const q = qa && qa[idx];
+    const staticSrc = (q && q.item2 && q.item2.image) || "assets/G2C6M1A1/Eraser.png";
+    const spriteImages = (q && q.item2 && q.item2.spriteImages) || [];
+    const sprite00 = spriteImages[0] || staticSrc;
+    const transitionState = typeof window !== "undefined" ? (window.page6Image2TransitionState || "idle") : "idle";
+    const fadeTrigger = typeof window !== "undefined" && window.page6Image2FadeTrigger;
+    if (transitionState === "spriteAnimating" || transitionState === "spriteComplete") {
+      const frame = Math.min(Math.max(0, (window.page6Image2SpriteFrame ?? 0)), spriteImages.length ? spriteImages.length - 1 : 0);
+      return [{ src: spriteImages[frame] || sprite00, blink: false, glow: false, hidden: false, opacity: 1 }];
+    }
+    if (transitionState === "complete") {
+      return [{ src: sprite00, blink: false, glow: false, hidden: false, opacity: 1, transitionDuration: "0s" }];
+    }
+    if (transitionState === "fading") {
+      return [
+        { src: staticSrc, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 0 : 1, transitionDuration: "2s" },
+        { src: sprite00, blink: false, glow: false, hidden: false, opacity: fadeTrigger ? 1 : 0, transitionDuration: "2s" },
+      ];
+    }
+    return [{
+      src: staticSrc,
+      blink: false,
+      glow: false,
+      hidden: false,
+      opacity: 1,
+      onClick: () => {
+        if (typeof window !== "undefined") {
+          window.page6Tap3Hidden = true;
+          window.page6Image2Clicked = true;
+          const clickedItem = q && q.item2;
+          const clickedType = clickedItem && clickedItem.type;
+          const clickedIsCorrect =
+            clickedItem && typeof clickedItem.correct === "boolean"
+              ? clickedItem.correct
+              : null;
+          window.page6DeeTeeMood =
+            clickedIsCorrect === true
+              ? "happy"
+              : clickedIsCorrect === false
+                ? "sad"
+                : clickedType === "heavy"
+                  ? "happy"
+                  : clickedType === "light"
+                    ? "sad"
+                    : "normal";
+          window.page6Image2TransitionState = "fading";
+          window.page6Image2FadeTrigger = false;
+          if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          setTimeout(() => {
+            window.page6Image2FadeTrigger = true;
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          }, IMAGE_STACK_FADE_TRIGGER_DELAY_MS);
+          setTimeout(() => {
+            window.page6Image2TransitionState = "complete";
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+            setTimeout(() => {
+              const qa2 = window.questionArray5 || [];
+              const idx2 = Math.min(Math.max(0, (window.page6CurrentIndex ?? 0)), (qa2 && qa2.length) ? qa2.length - 1 : 0);
+              const q2 = qa2 && qa2[idx2];
+              const item = q2 && q2.item2;
+              const sprites = (item && item.spriteImages) || [];
+              if (sprites.length === 0) return;
+              const totalFrames = 8;
+              const durationMs = (item && typeof item.spriteDuration === "number") ? item.spriteDuration : 1500;
+              const frameMs = durationMs / totalFrames;
+              const lastArrayIndex = sprites.length - 1;
+              if (window.page6Image2SpriteIntervalId) clearInterval(window.page6Image2SpriteIntervalId);
+              window.page6Image2TransitionState = "spriteAnimating";
+              window.page6Image2SpriteFrame = 0;
+              if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+              let step = 0;
+              window.page6Image2SpriteIntervalId = setInterval(() => {
+                step += 1;
+                const nextFrame = step < totalFrames ? Math.min(step, lastArrayIndex) : lastArrayIndex;
+                window.page6Image2SpriteFrame = nextFrame;
+                if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                if (step >= totalFrames) {
+                  clearInterval(window.page6Image2SpriteIntervalId);
+                  window.page6Image2SpriteIntervalId = null;
+                  window.page6Image2TransitionState = "spriteComplete";
+                  if (typeof window !== "undefined") {
+                    if (!window.page6TextboxVisibility) window.page6TextboxVisibility = {};
+                    window.page6TextboxVisibility.textbox2 = true;
+                    window.page6TextboxVisibility.textbox4 = true;
+                    if (item) window.page6TalkBoxItem = { type: item.type, item_name: item.item_name };
+                    if (window.page6Image1Clicked) window.page6SecondAnimationComplete = true;
+                    if (window.PageCompletionManager) {
+                      window.PageCompletionManager.setPageCompleted(6, !!window.page6SecondAnimationComplete);
+                    }
+                  }
+                  if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+                }
+              }, frameMs);
+            }, IMAGE_STACK_MS_AFTER_FADE_BEFORE_SPRITE);
+          }, IMAGE_STACK_TIME_TO_CROSSFADE_END_MS);
+        }
+      },
+    }];
+  };
+  const page6Image1Props = {
+    componentType: "ImageStackComponent",
+    id: "page6-image-1",
+    elementName: "page6-image-1",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page6Image1Props, "images", {
+    get: getPage6Image1Images,
+    enumerable: true,
+    configurable: true,
+  });
+  const page6Image2Props = {
+    componentType: "ImageStackComponent",
+    id: "page6-image-2",
+    elementName: "page6-image-2",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page6Image2Props, "images", {
+    get: getPage6Image2Images,
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page6DeeTeeProps = {
+    componentType: "ImageStackComponent",
+    id: "page6-dee-tee-image",
+    elementName: "page6-dee-tee-image",
+    currentPage: 13,
+    coordinates: [200, 260, 500, 660],
+    zIndex: 56,
+  };
+  Object.defineProperty(page6DeeTeeProps, "images", {
+    get: () => {
+      const mood = typeof window !== "undefined"
+        ? (window.page6DeeTeeMood || "normal")
+        : "normal";
+      const src =
+        mood === "happy"
+          ? "assets/deeTeeHappy.png"
+          : mood === "sad"
+            ? "assets/deeTeeSad.png"
+            : "assets/deeTee.png";
+
+      return [
+        {
+          src,
+          blink: false,
+          glow: false,
+          hidden: false,
+          opacity: 1,
+        },
+      ];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 6 talk box (uses questionArray5 and page6* state)
+  const page6TalkBoxProps = {
+    componentType: "TeacherNoteComponent",
+    backgroundColor: "rgb(0,0,0,0.7)",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "36gc",
+    padding: "15gc",
+    allowHtml: true,
+  };
+  Object.defineProperty(page6TalkBoxProps, "text", {
+    get: () => getI18nText("pages.page6.talkBoxText", ""),
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Page 6 textboxes (questionArray5, page6* state)
+  const page6Textbox1Props = { componentType: "HeavyLightTextboxComponent", variant: "lift", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page6Textbox1Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray5 && window.questionArray5[window.page6CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page6Textbox1Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page6TextboxVisibility && window.page6TextboxVisibility.textbox1),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page6Textbox1Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray5 && window.questionArray5[window.page6CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page6Textbox3Props = { componentType: "HeavyLightTextboxComponent", variant: "object", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page6Textbox3Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray5 && window.questionArray5[window.page6CurrentIndex ?? 0];
+      const t = q && q.item1 && q.item1.type;
+      return t === "light" || t === "heavy" ? t : "heavy";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page6Textbox3Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page6TextboxVisibility && window.page6TextboxVisibility.textbox3),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page6Textbox3Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray5 && window.questionArray5[window.page6CurrentIndex ?? 0];
+      return !!(q && q.item1 && q.item1.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page6Textbox2Props = { componentType: "HeavyLightTextboxComponent", variant: "lift", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page6Textbox2Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray5 && window.questionArray5[window.page6CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page6Textbox2Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page6TextboxVisibility && window.page6TextboxVisibility.textbox2),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page6Textbox2Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray5 && window.questionArray5[window.page6CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page6Textbox4Props = { componentType: "HeavyLightTextboxComponent", variant: "object", fontSize: "32gc", accentTextByType: true };
+  Object.defineProperty(page6Textbox4Props, "type", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray5 && window.questionArray5[window.page6CurrentIndex ?? 0];
+      const t = q && q.item2 && q.item2.type;
+      return t === "light" || t === "heavy" ? t : "light";
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page6Textbox4Props, "hidden", {
+    get: () => !(typeof window !== "undefined" && window.page6TextboxVisibility && window.page6TextboxVisibility.textbox4),
+    enumerable: true,
+    configurable: true,
+  });
+  Object.defineProperty(page6Textbox4Props, "correct", {
+    get: () => {
+      const q = typeof window !== "undefined" && window.questionArray5 && window.questionArray5[window.page6CurrentIndex ?? 0];
+      return !!(q && q.item2 && q.item2.correct);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page6InstructionProps = {
+    componentType: "SectionHeaderComponent",
+    backgroundColor: "transparent",
+    border: "none",
+    borderRadius: "15gc",
+    textColor: "#ffff",
+    fontSize: "42gc",
+    padding: "15gc",
+    textAlign: "center",
+    underlineFirstWord: false,
+    allowHtml: true,
+  };
+  Object.defineProperty(page6InstructionProps, "text", {
+    get: () => {
+      const secondAnimationComplete = typeof window !== "undefined" && window.page6SecondAnimationComplete;
+      return secondAnimationComplete
+        ? getI18nText("pages.page6.instructionTextContinue", "")
+        : getI18nText("pages.page6.instructionText", "");
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  const page6Tap2Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page6Tap2Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page6Tap2HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page6Image1Clicked && window.page6Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page6SecondAnimationComplete;
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page6Tap2Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page6Tap3Props = {
+    componentType: "TapGifComponent",
+    imageSrc: "assets/tap.gif",
+    imageAlt: getI18nText("common.tapAlt", ""),
+    opacity: 0.95,
+    alwaysVisible: true,
+  };
+  Object.defineProperty(page6Tap3Props, "forceHide", {
+    get: () => {
+      if (typeof window !== "undefined" && window.page6Tap3HiddenAfterLabelClick) return true;
+      const bothClicked = typeof window !== "undefined" && window.page6Image1Clicked && window.page6Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page6SecondAnimationComplete;
+      if (bothClicked && secondAnimationComplete) return true;
+      return !!(typeof window !== "undefined" && window.page6Tap3Hidden);
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page6TapAnimation2Element = {
+    id: "page6-tap-animation-2",
+    name: "tap-animation-2",
+    type: "custom",
+    zIndex: "999",
+    props: page6Tap2Props,
+  };
+  Object.defineProperty(page6TapAnimation2Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page6Image1Clicked && window.page6Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page6SecondAnimationComplete;
+      return bothClicked && secondAnimationComplete ? [538, 150, 588, 200] : [678, 453, 728, 503];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+  const page6TapAnimation3Element = {
+    id: "page6-tap-animation-3",
+    name: "tap-animation-3",
+    type: "custom",
+    zIndex: "999",
+    props: page6Tap3Props,
+  };
+  Object.defineProperty(page6TapAnimation3Element, "coordinates", {
+    get: () => {
+      const bothClicked = typeof window !== "undefined" && window.page6Image1Clicked && window.page6Image2Clicked;
+      const secondAnimationComplete = typeof window !== "undefined" && window.page6SecondAnimationComplete;
+      return bothClicked && secondAnimationComplete ? [1175, 170, 1225, 220] : [1175, 513, 1225, 563];
+    },
+    enumerable: true,
+    configurable: true,
+  });
+
+  // Return optimized GridPositionPages
+  return {
+    1: [
+      // title text
+      {
+        id: "page1-title-text",
+        name: "page1-title-text",
+        type: "custom",
+        coordinates: [200, 25, 1400, 125], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: getI18nText("pages.page1.title", ""),
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "15gc",
+          textColor: "orange",
+          fontSize: "50gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // maintext
+      {
+        id: "page1-main-text",
+        name: "page1-main-text",
+        type: "custom",
+        coordinates: [200, 160, 1400, 600], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: getI18nText("pages.page1.mainText", ""),
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "50gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // Tap Animation GIF
+      {
+        id: "page1-tap-animation",
+        name: "tap-animation",
+        type: "custom",
+        coordinates: [650, 650, 700, 800],
+        zIndex: "999",
+        props: {
+          componentType: "TapGifComponent",
+          imageSrc: "assets/tap.gif",
+          imageAlt: getI18nText("common.tapAlt", ""),
+        },
+      },
+
+      // Optimized Next button - Three Layer Structure
+      {
+        id: "page1-next-button",
+        name: "next-button",
+        type: "button",
+        coordinates: [650, 650, 950, 750],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            return getI18nText("buttons.start", "");
+          },
+          onClick: () => {
+            if (typeof window !== "undefined" && window.playCarClickSound) {
+              window.playCarClickSound("next");
+            }
+            const pageNumber = extractPageNumberFromId("page1-next-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.next !== null && typeof window !== "undefined") {
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.next);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.next);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.next },
+                  }),
+                );
+                console.log(
+                  "📄 [Next Button]",
+                  getI18nText("messages.nextButtonPage2", ""),
+                );
+              }
+            } else if (nav && nav.next === null) {
+              // On last page, "Start Over" functionality
+              console.log(
+                "🔄 [Next Button]",
+                getI18nText(
+                  "messages.lastPageStartingOver",
+                  "Last page - Starting over",
+                ),
+              );
+              if (window.advanceToNextQuestion) {
+                window.advanceToNextQuestion();
+              } else if (window.changePageAndNotify) {
+                window.changePageAndNotify(1);
+              }
+            }
+          },
+        },
+      },
+    ],
+    2: [
+      // page2 talk text box black background - text updates when an image is clicked (The <item_name> is hard/easy to lift.)
+      {
+        id: "page2-talk-text-box-black-background",
+        name: "page2-talk-text-box-black-background",
+        type: "custom",
+        coordinates: [10, 5, 400, 350], // Positioned below question text box
+        zIndex: 55,
+        props: page2TalkBoxProps,
+      },
+      //dee tee image
+      {
+        id: "page2-dee-tee-image",
+        name: "page2-dee-tee-image",
+        type: "custom",
+        coordinates: [50, 370, 400, 800], // Bottom of question background, left position (equal spacing)
+        zIndex: 999,
+        props: page2DeeTeeProps,
+      },
+      // page1 image1 black background
+      {
+        id: "page2-image1-black-background",
+        name: "page2-image1-black-background",
+        type: "custom",
+        coordinates: [405, 5, 1000, 800], // Dark background panel behind left image (no text)
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page2 textbox1 (lift label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page2-textbox1",
+        name: "page2-textbox1",
+        type: "custom",
+        coordinates: [479, 145, 926, 200],
+        zIndex: 56,
+        props: page2Textbox1Props,
+      },
+      // page2 textbox3 (object label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page2-textbox3",
+        name: "page2-textbox3",
+        type: "custom",
+        coordinates: [479, 85, 926, 140],
+        zIndex: 57,
+        props: page2Textbox3Props,
+      },
+      //school bag image (src from questionArray[page2CurrentIndex].item1.image)
+      {
+        id: "page2-image-1",
+        name: "page2-image-1",
+        type: "custom",
+        coordinates: [450, 225, 1000, 725],
+        zIndex: 999,
+        props: page2Image1Props,
+
+      },
+      // page2 image2 black background
+      {
+        id: "page2-image2-black-background",
+        name: "page2-image2-black-background",
+        type: "custom",
+        coordinates: [1005, 5, 1595, 800], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page2 textbox2 (lift label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page2-textbox2",
+        name: "page2-textbox2",
+        type: "custom",
+        coordinates: [1079, 145, 1521, 200],
+        zIndex: 56,
+        props: page2Textbox2Props,
+      },
+      // page2 textbox4 (object label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page2-textbox4",
+        name: "page2-textbox4",
+        type: "custom",
+        coordinates: [1079, 85, 1521, 140],
+        zIndex: 57,
+        props: page2Textbox4Props,
+      },
+      //eraser image (src from questionArray[page2CurrentIndex].item2.image)
+      {
+        id: "page2-image-2",
+        name: "page2-image-2",
+        type: "custom",
+        coordinates: [1045, 225, 1590, 725],
+        zIndex: 999,
+        props: page2Image2Props,
+      },
+      // page2-instruction-text (i18n: instructionTextWhenBothClicked when both images clicked)
+      {
+        id: "page2-instruction-text",
+        name: "page2-instruction-text",
+        type: "custom",
+        coordinates: [150, 820, 1450, 895], // Positioned below question text box
+        zIndex: 55,
+        props: page2InstructionProps,
+      },
+      // Tap Animation GIF
+      {
+        id: "page2-tap-animation",
+        name: "tap-animation",
+        type: "custom",
+        coordinates: [1450, 840, 1500, 890],
+        zIndex: "999",
+        props: {
+          componentType: "TapGifComponent",
+          imageSrc: "assets/tap.gif",
+          imageAlt: getI18nText("common.tapAlt", ""),
+          alwaysVisible: true,
+          get forceHide() {
+            return !(typeof window !== "undefined" && window.page2SecondAnimationComplete);
+          },
+        },
+      },
+      // Tap Animation GIF 2 (55% opacity) - hidden when image-1 is clicked; coordinates move when both images clicked
+      page2TapAnimation2Element,
+      // Tap Animation GIF 3 (55% opacity) - hidden when image-2 is clicked; coordinates move when both images clicked
+      page2TapAnimation3Element,
+
+      // Optimized Next button - Three Layer Structure
+      {
+        id: "page2-next-button",
+        name: "next-button",
+        type: "button",
+        coordinates: [1450, 820, 1595, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            const pageNumber = extractPageNumberFromId("page2-next-button");
+            return getNextButtonText(pageNumber);
+          },
+          get disabled() {
+            return !(typeof window !== "undefined" && window.page2SecondAnimationComplete);
+          },
+          onClick: () => {
+            if (typeof window !== "undefined" && window.playCarClickSound) {
+              window.playCarClickSound("next");
+            }
+            if (typeof window === "undefined") return;
+            const qa = window.questionArray || [];
+            const len = qa.length ? qa.length : 0;
+            const idx = Math.min(Math.max(0, (window.page2CurrentIndex ?? 0)), len ? len - 1 : 0);
+            const isLastQuestion = len > 0 && idx >= len - 1;
+            if (isLastQuestion) {
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(3);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(3);
+              }
+              return;
+            }
+            window.page2CurrentIndex = idx + 1;
+            window.page2TextboxVisibility = { left: false, right: false, textbox1: false, textbox2: false, textbox3: false, textbox4: false };
+            window.page2TalkBoxItem = null;
+            window.page2TalkBoxLabelState = null;
+            window.page2DeeTeeMood = "normal";
+            window.page2SecondAnimationComplete = false;
+            window.page2Tap2HiddenAfterLabelClick = false;
+            window.page2Tap3HiddenAfterLabelClick = false;
+            window.page2Tap2Hidden = false;
+            window.page2Tap3Hidden = false;
+            window.page2Image1Clicked = false;
+            window.page2Image2Clicked = false;
+            window.page2Image1TransitionState = "idle";
+            window.page2Image1FadeTrigger = false;
+            window.page2Image1BlinkDone = true;
+            if (window.page2Image1SpriteIntervalId) { clearInterval(window.page2Image1SpriteIntervalId); window.page2Image1SpriteIntervalId = null; }
+            window.page2Image2TransitionState = "idle";
+            window.page2Image2FadeTrigger = false;
+            window.page2Image2BlinkDone = true;
+            if (window.page2Image2SpriteIntervalId) { clearInterval(window.page2Image2SpriteIntervalId); window.page2Image2SpriteIntervalId = null; }
+            if (window.PageCompletionManager) {
+              window.PageCompletionManager.setPageCompleted(2, false);
+            }
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          },
+        },
+      },
+
+      // Previous button - Three Layer Structure
+      {
+        id: "page2-previous-button",
+        name: "previous-button",
+        type: "button",
+        coordinates: [5, 820, 150, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            return getI18nText("buttons.previous", "");
+          },
+          get disabled() {
+            const pageNumber = extractPageNumberFromId("page2-previous-button");
+            return isPrevButtonDisabled(pageNumber);
+          },
+          onClick: () => {
+            const pageNumber = extractPageNumberFromId("page2-previous-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.prevPage !== null && typeof window !== "undefined") {
+              if (window.playCarClickSound) {
+                window.playCarClickSound("previous");
+              }
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.prev);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.prev);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.prev },
+                  }),
+                );
+                console.log(
+                  "📄 [Previous Button]",
+                  getI18nText("messages.previousButtonPage1", ""),
+                );
+              }
+            }
+          },
+        },
+      },
+    ],
+    3: [
+      // page3 talk text box black background - text updates when an image is clicked (The <item_name> is hard/easy to lift.)
+      {
+        id: "page3-talk-text-box-black-background",
+        name: "page3-talk-text-box-black-background",
+        type: "custom",
+        coordinates: [10, 5, 400, 350], // Positioned below question text box
+        zIndex: 55,
+        props: page3TalkBoxProps,
+      },
+      //dee tee image
+      {
+        id: "page3-dee-tee-image",
+        name: "page3-dee-tee-image",
+        type: "custom",
+        coordinates: [50, 370, 400, 800], // Bottom of question background, left position (equal spacing)
+        zIndex: 999,
+        props: page3DeeTeeProps,
+      },
+      // page1 image1 black background
+      {
+        id: "page3-image1-black-background",
+        name: "page3-image1-black-background",
+        type: "custom",
+        coordinates: [405, 5, 1000, 800], // Dark background panel behind left image (no text)
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page3 textbox1 (lift label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page3-textbox1",
+        name: "page3-textbox1",
+        type: "custom",
+        coordinates: [479, 145, 926, 200],
+        zIndex: 56,
+        props: page3Textbox1Props,
+      },
+      // page3 textbox3 (object label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page3-textbox3",
+        name: "page3-textbox3",
+        type: "custom",
+        coordinates: [479, 85, 926, 140],
+        zIndex: 57,
+        props: page3Textbox3Props,
+      },
+      //school bag image (src from questionArray[page3CurrentIndex].item1.image)
+      {
+        id: "page3-image-1",
+        name: "page3-image-1",
+        type: "custom",
+        coordinates: [450, 225, 1000, 725],
+        zIndex: 999,
+        props: page3Image1Props,
+
+      },
+      // page3 image2 black background
+      {
+        id: "page3-image2-black-background",
+        name: "page3-image2-black-background",
+        type: "custom",
+        coordinates: [1005, 5, 1595, 800], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page3 textbox2 (lift label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page3-textbox2",
+        name: "page3-textbox2",
+        type: "custom",
+        coordinates: [1079, 145, 1521, 200],
+        zIndex: 56,
+        props: page3Textbox2Props,
+      },
+      // page3 textbox4 (object label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page3-textbox4",
+        name: "page3-textbox4",
+        type: "custom",
+        coordinates: [1079, 85, 1521, 140],
+        zIndex: 57,
+        props: page3Textbox4Props,
+      },
+      //eraser image (src from questionArray[page3CurrentIndex].item2.image)
+      {
+        id: "page3-image-2",
+        name: "page3-image-2",
+        type: "custom",
+        coordinates: [1045, 225, 1590, 725],
+        zIndex: 999,
+        props: page3Image2Props,
+      },
+      // page3-instruction-text (i18n: instructionTextWhenBothClicked when both images clicked)
+      {
+        id: "page3-instruction-text",
+        name: "page3-instruction-text",
+        type: "custom",
+        coordinates: [150, 820, 1450, 895], // Positioned below question text box
+        zIndex: 55,
+        props: page3InstructionProps,
+      },
+      // Tap Animation GIF
+      {
+        id: "page3-tap-animation",
+        name: "tap-animation",
+        type: "custom",
+        coordinates: [1450, 840, 1500, 890],
+        zIndex: "999",
+        props: {
+          componentType: "TapGifComponent",
+          imageSrc: "assets/tap.gif",
+          imageAlt: getI18nText("common.tapAlt", ""),
+          alwaysVisible: true,
+          get forceHide() {
+            return !(typeof window !== "undefined" && window.page3SecondAnimationComplete);
+          },
+        },
+      },
+      // Tap Animation GIF 2 (55% opacity) - hidden when image-1 is clicked; coordinates move when both images clicked
+      page3TapAnimation2Element,
+      // Tap Animation GIF 3 (55% opacity) - hidden when image-2 is clicked; coordinates move when both images clicked
+      page3TapAnimation3Element,
+
+      // Optimized Next button - Three Layer Structure
+      {
+        id: "page3-next-button",
+        name: "next-button",
+        type: "button",
+        coordinates: [1450, 820, 1595, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            const pageNumber = extractPageNumberFromId("page3-next-button");
+            return getNextButtonText(pageNumber);
+          },
+          get disabled() {
+            return !(typeof window !== "undefined" && window.page3SecondAnimationComplete);
+          },
+          ignorePageCompletion: true,
+          onClick: () => {
+            if (typeof window !== "undefined" && window.playCarClickSound) {
+              window.playCarClickSound("next");
+            }
+            if (typeof window === "undefined") return;
+            const qa = window.questionArray2 || [];
+            const len = qa.length ? qa.length : 0;
+            const idx = Math.min(Math.max(0, (window.page3CurrentIndex ?? 0)), len ? len - 1 : 0);
+            const isLastQuestion = len > 0 && idx >= len - 1;
+            if (isLastQuestion) {
+              resetPage4InteractionState();
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(4);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(4);
+              }
+              return;
+            }
+            window.page3CurrentIndex = idx + 1;
+            window.page3TextboxVisibility = { left: false, right: false, textbox1: false, textbox2: false, textbox3: false, textbox4: false };
+            window.page3TalkBoxItem = null;
+            window.page3TalkBoxLabelState = null;
+            window.page3DeeTeeMood = "normal";
+            window.page3SecondAnimationComplete = false;
+            window.page3Tap2HiddenAfterLabelClick = false;
+            window.page3Tap3HiddenAfterLabelClick = false;
+            window.page3Tap2Hidden = false;
+            window.page3Tap3Hidden = false;
+            window.page3Tap2Hidden = false;
+            window.page3Tap3Hidden = false;
+            window.page3Image1Clicked = false;
+            window.page3Image2Clicked = false;
+            window.page3Image1TransitionState = "idle";
+            window.page3Image1FadeTrigger = false;
+            window.page3Image1BlinkDone = true;
+            if (window.page3Image1SpriteIntervalId) { clearInterval(window.page3Image1SpriteIntervalId); window.page3Image1SpriteIntervalId = null; }
+            window.page3Image2TransitionState = "idle";
+            window.page3Image2FadeTrigger = false;
+            window.page3Image2BlinkDone = true;
+            if (window.page3Image2SpriteIntervalId) { clearInterval(window.page3Image2SpriteIntervalId); window.page3Image2SpriteIntervalId = null; }
+            if (window.PageCompletionManager) {
+              window.PageCompletionManager.setPageCompleted(3, false);
+            }
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          },
+        },
+      },
+
+      // Previous button - Three Layer Structure
+      {
+        id: "page3-previous-button",
+        name: "previous-button",
+        type: "button",
+        coordinates: [5, 820, 150, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            return getI18nText("buttons.previous", "");
+          },
+          get disabled() {
+            const pageNumber = extractPageNumberFromId("page3-previous-button");
+            return isPrevButtonDisabled(pageNumber);
+          },
+          onClick: () => {
+            const pageNumber = extractPageNumberFromId("page3-previous-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.prevPage !== null && typeof window !== "undefined") {
+              if (window.playCarClickSound) {
+                window.playCarClickSound("previous");
+              }
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.prev);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.prev);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.prev },
+                  }),
+                );
+                console.log(
+                  "📄 [Previous Button]",
+                  getI18nText("messages.previousButtonPage1", ""),
+                );
+              }
+            }
+          },
+        },
+      },
+    ],
+    4: [
+      // page4 talk text box black background - text updates when an image is clicked (The <item_name> is hard/easy to lift.)
+      {
+        id: "page4-talk-text-box-black-background",
+        name: "page4-talk-text-box-black-background",
+        type: "custom",
+        coordinates: [10, 5, 400, 350], // Positioned below question text box
+        zIndex: 55,
+        props: page4TalkBoxProps,
+      },
+      //dee tee image
+      {
+        id: "page4-dee-tee-image",
+        name: "page4-dee-tee-image",
+        type: "custom",
+        coordinates: [50, 370, 400, 800], // Bottom of question background, left position (equal spacing)
+        zIndex: 999,
+        props: page4DeeTeeProps,
+      },
+      // page1 image1 black background
+      {
+        id: "page4-image1-black-background",
+        name: "page4-image1-black-background",
+        type: "custom",
+        coordinates: [405, 5, 1000, 800], // Dark background panel behind left image (no text)
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page4 textbox1 (lift label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page4-textbox1",
+        name: "page4-textbox1",
+        type: "custom",
+        coordinates: [479, 145, 926, 200],
+        zIndex: 56,
+        props: page4Textbox1Props,
+      },
+      // page4 textbox3 (object label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page4-textbox3",
+        name: "page4-textbox3",
+        type: "custom",
+        coordinates: [479, 85, 926, 140],
+        zIndex: 57,
+        props: page4Textbox3Props,
+      },
+      //school bag image (src from questionArray[page4CurrentIndex].item1.image)
+      {
+        id: "page4-image-1",
+        name: "page4-image-1",
+        type: "custom",
+        coordinates: [450, 225, 1000, 725],
+        zIndex: 999,
+        props: page4Image1Props,
+
+      },
+      // page4 image2 black background
+      {
+        id: "page4-image2-black-background",
+        name: "page4-image2-black-background",
+        type: "custom",
+        coordinates: [1005, 5, 1595, 800], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page4 textbox2 (lift label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page4-textbox2",
+        name: "page4-textbox2",
+        type: "custom",
+        coordinates: [1079, 145, 1521, 200],
+        zIndex: 56,
+        props: page4Textbox2Props,
+      },
+      // page4 textbox4 (object label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page4-textbox4",
+        name: "page4-textbox4",
+        type: "custom",
+        coordinates: [1079, 85, 1521, 140],
+        zIndex: 57,
+        props: page4Textbox4Props,
+      },
+      //eraser image (src from questionArray[page4CurrentIndex].item2.image)
+      {
+        id: "page4-image-2",
+        name: "page4-image-2",
+        type: "custom",
+        coordinates: [1045, 225, 1590, 725],
+        zIndex: 999,
+        props: page4Image2Props,
+      },
+      // page4-instruction-text (i18n: instructionTextWhenBothClicked when both images clicked)
+      {
+        id: "page4-instruction-text",
+        name: "page4-instruction-text",
+        type: "custom",
+        coordinates: [150, 820, 1450, 895], // Positioned below question text box
+        zIndex: 55,
+        props: page4InstructionProps,
+      },
+      // Tap Animation GIF
+      {
+        id: "page4-tap-animation",
+        name: "tap-animation",
+        type: "custom",
+        coordinates: [1450, 840, 1500, 890],
+        zIndex: "999",
+        props: {
+          componentType: "TapGifComponent",
+          imageSrc: "assets/tap.gif",
+          imageAlt: getI18nText("common.tapAlt", ""),
+          alwaysVisible: true,
+          get forceHide() {
+            return !isPage4AnimationSequenceComplete();
+          },
+        },
+      },
+      // Tap Animation GIF 2 (55% opacity) - hidden when image-1 is clicked; coordinates move when both images clicked
+      page4TapAnimation2Element,
+      // Tap Animation GIF 3 (55% opacity) - hidden when image-2 is clicked; coordinates move when both images clicked
+      page4TapAnimation3Element,
+
+      // Optimized Next button - Three Layer Structure
+      {
+        id: "page4-next-button",
+        name: "next-button",
+        type: "button",
+        coordinates: [1450, 820, 1595, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            const pageNumber = extractPageNumberFromId("page4-next-button");
+            return getNextButtonText(pageNumber);
+          },
+          get disabled() {
+            return !isPage4AnimationSequenceComplete();
+          },
+          ignorePageCompletion: true,
+          onClick: () => {
+            if (typeof window !== "undefined" && window.playCarClickSound) {
+              window.playCarClickSound("next");
+            }
+            if (typeof window === "undefined") return;
+            const qa = window.questionArray3 || [];
+            const len = qa.length ? qa.length : 0;
+            const idx = Math.min(Math.max(0, (window.page4CurrentIndex ?? 0)), len ? len - 1 : 0);
+            const isLastQuestion = len > 0 && idx >= len - 1;
+            if (isLastQuestion) {
+              resetPage4InteractionState();
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(5);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(5);
+              }
+              return;
+            }
+            window.page4CurrentIndex = idx + 1;
+            resetPage4InteractionState();
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          },
+        },
+      },
+
+      // Previous button - Three Layer Structure
+      {
+        id: "page4-previous-button",
+        name: "previous-button",
+        type: "button",
+        coordinates: [5, 820, 150, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            return getI18nText("buttons.previous", "");
+          },
+          get disabled() {
+            const pageNumber = extractPageNumberFromId("page4-previous-button");
+            return isPrevButtonDisabled(pageNumber);
+          },
+          onClick: () => {
+            const pageNumber = extractPageNumberFromId("page4-previous-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.prevPage !== null && typeof window !== "undefined") {
+              if (window.playCarClickSound) {
+                window.playCarClickSound("previous");
+              }
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.prev);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.prev);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.prev },
+                  }),
+                );
+                console.log(
+                  "📄 [Previous Button]",
+                  getI18nText("messages.previousButtonPage1", ""),
+                );
+              }
+            }
+          },
+        },
+      },
+    ],
+    5: [
+      // page5 talk text box black background - text updates when an image is clicked (The <item_name> is hard/easy to lift.)
+      {
+        id: "page5-talk-text-box-black-background",
+        name: "page5-talk-text-box-black-background",
+        type: "custom",
+        coordinates: [10, 5, 400, 350], // Positioned below question text box
+        zIndex: 55,
+        props: page5TalkBoxProps,
+      },
+      //dee tee image
+      {
+        id: "page5-dee-tee-image",
+        name: "page5-dee-tee-image",
+        type: "custom",
+        coordinates: [50, 370, 400, 800], // Bottom of question background, left position (equal spacing)
+        zIndex: 999,
+        props: page5DeeTeeProps,
+      },
+      // page1 image1 black background
+      {
+        id: "page5-image1-black-background",
+        name: "page5-image1-black-background",
+        type: "custom",
+        coordinates: [405, 5, 1000, 800], // Dark background panel behind left image (no text)
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page5 textbox1 (lift label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page5-textbox1",
+        name: "page5-textbox1",
+        type: "custom",
+        coordinates: [479, 145, 926, 200],
+        zIndex: 56,
+        props: page5Textbox1Props,
+      },
+      // page5 textbox3 (object label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page5-textbox3",
+        name: "page5-textbox3",
+        type: "custom",
+        coordinates: [479, 85, 926, 140],
+        zIndex: 57,
+        props: page5Textbox3Props,
+      },
+      //school bag image (src from questionArray[page5CurrentIndex].item1.image)
+      {
+        id: "page5-image-1",
+        name: "page5-image-1",
+        type: "custom",
+        coordinates: [450, 225, 1000, 725],
+        zIndex: 999,
+        props: page5Image1Props,
+
+      },
+      // page5 image2 black background
+      {
+        id: "page5-image2-black-background",
+        name: "page5-image2-black-background",
+        type: "custom",
+        coordinates: [1005, 5, 1595, 800], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page5 textbox2 (lift label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page5-textbox2",
+        name: "page5-textbox2",
+        type: "custom",
+        coordinates: [1079, 145, 1521, 200],
+        zIndex: 56,
+        props: page5Textbox2Props,
+      },
+      // page5 textbox4 (object label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page5-textbox4",
+        name: "page5-textbox4",
+        type: "custom",
+        coordinates: [1079, 85, 1521, 140],
+        zIndex: 57,
+        props: page5Textbox4Props,
+      },
+      //eraser image (src from questionArray[page5CurrentIndex].item2.image)
+      {
+        id: "page5-image-2",
+        name: "page5-image-2",
+        type: "custom",
+        coordinates: [1045, 225, 1590, 725],
+        zIndex: 999,
+        props: page5Image2Props,
+      },
+      // page5-instruction-text (i18n: instructionTextWhenBothClicked when both images clicked)
+      {
+        id: "page5-instruction-text",
+        name: "page5-instruction-text",
+        type: "custom",
+        coordinates: [150, 820, 1450, 895], // Positioned below question text box
+        zIndex: 55,
+        props: page5InstructionProps,
+      },
+      // Tap Animation GIF
+      {
+        id: "page5-tap-animation",
+        name: "tap-animation",
+        type: "custom",
+        coordinates: [1450, 840, 1500, 890],
+        zIndex: "999",
+        props: {
+          componentType: "TapGifComponent",
+          imageSrc: "assets/tap.gif",
+          imageAlt: getI18nText("common.tapAlt", ""),
+          alwaysVisible: true,
+          get forceHide() {
+            return !(typeof window !== "undefined" && window.page5SecondAnimationComplete);
+          },
+        },
+      },
+      // Tap Animation GIF 2 (55% opacity) - hidden when image-1 is clicked; coordinates move when both images clicked
+      page5TapAnimation2Element,
+      // Tap Animation GIF 3 (55% opacity) - hidden when image-2 is clicked; coordinates move when both images clicked
+      page5TapAnimation3Element,
+
+      // Optimized Next button - Three Layer Structure
+      {
+        id: "page5-next-button",
+        name: "next-button",
+        type: "button",
+        coordinates: [1450, 820, 1595, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            const pageNumber = extractPageNumberFromId("page5-next-button");
+            return getNextButtonText(pageNumber);
+          },
+          get disabled() {
+            return !(typeof window !== "undefined" && window.page5SecondAnimationComplete);
+          },
+          ignorePageCompletion: true,
+          onClick: () => {
+            if (typeof window !== "undefined" && window.playCarClickSound) {
+              window.playCarClickSound("next");
+            }
+            if (typeof window === "undefined") return;
+            const qa = window.questionArray4 || [];
+            const len = qa.length ? qa.length : 0;
+            const idx = Math.min(Math.max(0, (window.page5CurrentIndex ?? 0)), len ? len - 1 : 0);
+            const isLastQuestion = len > 0 && idx >= len - 1;
+            if (isLastQuestion) {
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(6);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(6);
+              }
+              return;
+            }
+            window.page5CurrentIndex = idx + 1;
+            window.page5TextboxVisibility = { left: false, right: false, textbox1: false, textbox2: false, textbox3: false, textbox4: false };
+            window.page5TalkBoxItem = null;
+            window.page5TalkBoxLabelState = null;
+            window.page5DeeTeeMood = "normal";
+            window.page5SecondAnimationComplete = false;
+            window.page5Tap2HiddenAfterLabelClick = false;
+            window.page5Tap3HiddenAfterLabelClick = false;
+            window.page5Tap2Hidden = false;
+            window.page5Tap3Hidden = false;
+            window.page5Tap2Hidden = false;
+            window.page5Tap3Hidden = false;
+            window.page5Image1Clicked = false;
+            window.page5Image2Clicked = false;
+            window.page5Image1TransitionState = "idle";
+            window.page5Image1FadeTrigger = false;
+            window.page5Image1BlinkDone = true;
+            if (window.page5Image1SpriteIntervalId) { clearInterval(window.page5Image1SpriteIntervalId); window.page5Image1SpriteIntervalId = null; }
+            window.page5Image2TransitionState = "idle";
+            window.page5Image2FadeTrigger = false;
+            window.page5Image2BlinkDone = true;
+            if (window.page5Image2SpriteIntervalId) { clearInterval(window.page5Image2SpriteIntervalId); window.page5Image2SpriteIntervalId = null; }
+            if (window.PageCompletionManager) {
+              window.PageCompletionManager.setPageCompleted(5, false);
+            }
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          },
+        },
+      },
+
+      // Previous button - Three Layer Structure
+      {
+        id: "page5-previous-button",
+        name: "previous-button",
+        type: "button",
+        coordinates: [5, 820, 150, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            return getI18nText("buttons.previous", "");
+          },
+          get disabled() {
+            const pageNumber = extractPageNumberFromId("page5-previous-button");
+            return isPrevButtonDisabled(pageNumber);
+          },
+          onClick: () => {
+            const pageNumber = extractPageNumberFromId("page5-previous-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.prevPage !== null && typeof window !== "undefined") {
+              if (window.playCarClickSound) {
+                window.playCarClickSound("previous");
+              }
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.prev);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.prev);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.prev },
+                  }),
+                );
+                console.log(
+                  "📄 [Previous Button]",
+                  getI18nText("messages.previousButtonPage1", ""),
+                );
+              }
+            }
+          },
+        },
+      },
+    ],
+    6: [
+      // page6 talk text box black background - text updates when an image is clicked (The <item_name> is hard/easy to lift.)
+      {
+        id: "page6-talk-text-box-black-background",
+        name: "page6-talk-text-box-black-background",
+        type: "custom",
+        coordinates: [10, 5, 400, 350], // Positioned below question text box
+        zIndex: 55,
+        props: page6TalkBoxProps,
+      },
+      //dee tee image
+      {
+        id: "page6-dee-tee-image",
+        name: "page6-dee-tee-image",
+        type: "custom",
+        coordinates: [50, 370, 400, 800], // Bottom of question background, left position (equal spacing)
+        zIndex: 999,
+        props: page6DeeTeeProps,
+      },
+      // page1 image1 black background
+      {
+        id: "page6-image1-black-background",
+        name: "page6-image1-black-background",
+        type: "custom",
+        coordinates: [405, 5, 1000, 800], // Dark background panel behind left image (no text)
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page6 textbox1 (lift label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page6-textbox1",
+        name: "page6-textbox1",
+        type: "custom",
+        coordinates: [479, 145, 926, 200],
+        zIndex: 56,
+        props: page6Textbox1Props,
+      },
+      // page6 textbox3 (object label) - hidden by default, shown when image-1 is clicked
+      {
+        id: "page6-textbox3",
+        name: "page6-textbox3",
+        type: "custom",
+        coordinates: [479, 85, 926, 140],
+        zIndex: 57,
+        props: page6Textbox3Props,
+      },
+      //school bag image (src from questionArray[page6CurrentIndex].item1.image)
+      {
+        id: "page6-image-1",
+        name: "page6-image-1",
+        type: "custom",
+        coordinates: [450, 225, 1000, 725],
+        zIndex: 999,
+        props: page6Image1Props,
+
+      },
+      // page6 image2 black background
+      {
+        id: "page6-image2-black-background",
+        name: "page6-image2-black-background",
+        type: "custom",
+        coordinates: [1005, 5, 1595, 800], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page6 textbox2 (lift label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page6-textbox2",
+        name: "page6-textbox2",
+        type: "custom",
+        coordinates: [1079, 145, 1521, 200],
+        zIndex: 56,
+        props: page6Textbox2Props,
+      },
+      // page6 textbox4 (object label) - hidden by default, shown when image-2 is clicked
+      {
+        id: "page6-textbox4",
+        name: "page6-textbox4",
+        type: "custom",
+        coordinates: [1079, 85, 1521, 140],
+        zIndex: 57,
+        props: page6Textbox4Props,
+      },
+      //eraser image (src from questionArray[page6CurrentIndex].item2.image)
+      {
+        id: "page6-image-2",
+        name: "page6-image-2",
+        type: "custom",
+        coordinates: [1045, 225, 1590, 725],
+        zIndex: 999,
+        props: page6Image2Props,
+      },
+      // page6-instruction-text (i18n: instructionTextWhenBothClicked when both images clicked)
+      {
+        id: "page6-instruction-text",
+        name: "page6-instruction-text",
+        type: "custom",
+        coordinates: [150, 820, 1450, 895], // Positioned below question text box
+        zIndex: 55,
+        props: page6InstructionProps,
+      },
+      // Tap Animation GIF
+      {
+        id: "page6-tap-animation",
+        name: "tap-animation",
+        type: "custom",
+        coordinates: [1450, 840, 1500, 890],
+        zIndex: "999",
+        props: {
+          componentType: "TapGifComponent",
+          imageSrc: "assets/tap.gif",
+          imageAlt: getI18nText("common.tapAlt", ""),
+          alwaysVisible: true,
+          get forceHide() {
+            return !(typeof window !== "undefined" && window.page6SecondAnimationComplete);
+          },
+        },
+      },
+      // Tap Animation GIF 2 (55% opacity) - hidden when image-1 is clicked; coordinates move when both images clicked
+      page6TapAnimation2Element,
+      // Tap Animation GIF 3 (55% opacity) - hidden when image-2 is clicked; coordinates move when both images clicked
+      page6TapAnimation3Element,
+
+      // Optimized Next button - Three Layer Structure
+      {
+        id: "page6-next-button",
+        name: "next-button",
+        type: "button",
+        coordinates: [1450, 820, 1595, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            const pageNumber = extractPageNumberFromId("page6-next-button");
+            return getNextButtonText(pageNumber);
+          },
+          get disabled() {
+            return !(typeof window !== "undefined" && window.page6SecondAnimationComplete);
+          },
+          ignorePageCompletion: true,
+          onClick: () => {
+            if (typeof window !== "undefined" && window.playCarClickSound) {
+              window.playCarClickSound("next");
+            }
+            if (typeof window === "undefined") return;
+            const qa = window.questionArray5 || [];
+            const len = qa.length ? qa.length : 0;
+            const idx = Math.min(Math.max(0, (window.page6CurrentIndex ?? 0)), len ? len - 1 : 0);
+            const isLastQuestion = len > 0 && idx >= len - 1;
+            if (isLastQuestion) {
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(7);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(7);
+              }
+              return;
+            }
+            window.page6CurrentIndex = idx + 1;
+            window.page6TextboxVisibility = { left: false, right: false, textbox1: false, textbox2: false, textbox3: false, textbox4: false };
+            window.page6TalkBoxItem = null;
+            window.page6TalkBoxLabelState = null;
+            window.page6DeeTeeMood = "normal";
+            window.page6SecondAnimationComplete = false;
+            window.page6Tap2HiddenAfterLabelClick = false;
+            window.page6Tap3HiddenAfterLabelClick = false;
+            window.page6Tap2Hidden = false;
+            window.page6Tap3Hidden = false;
+            window.page6Tap2Hidden = false;
+            window.page6Tap3Hidden = false;
+            window.page6Image1Clicked = false;
+            window.page6Image2Clicked = false;
+            window.page6Image1TransitionState = "idle";
+            window.page6Image1FadeTrigger = false;
+            window.page6Image1BlinkDone = true;
+            if (window.page6Image1SpriteIntervalId) { clearInterval(window.page6Image1SpriteIntervalId); window.page6Image1SpriteIntervalId = null; }
+            window.page6Image2TransitionState = "idle";
+            window.page6Image2FadeTrigger = false;
+            window.page6Image2BlinkDone = true;
+            if (window.page6Image2SpriteIntervalId) { clearInterval(window.page6Image2SpriteIntervalId); window.page6Image2SpriteIntervalId = null; }
+            if (window.PageCompletionManager) {
+              window.PageCompletionManager.setPageCompleted(6, false);
+            }
+            if (typeof window.forceAppUpdate === "function") window.forceAppUpdate();
+          },
+        },
+      },
+
+      // Previous button - Three Layer Structure
+      {
+        id: "page6-previous-button",
+        name: "previous-button",
+        type: "button",
+        coordinates: [5, 820, 150, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            return getI18nText("buttons.previous", "");
+          },
+          get disabled() {
+            const pageNumber = extractPageNumberFromId("page6-previous-button");
+            return isPrevButtonDisabled(pageNumber);
+          },
+          onClick: () => {
+            const pageNumber = extractPageNumberFromId("page6-previous-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.prevPage !== null && typeof window !== "undefined") {
+              if (window.playCarClickSound) {
+                window.playCarClickSound("previous");
+              }
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.prev);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.prev);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.prev },
+                  }),
+                );
+                console.log(
+                  "📄 [Previous Button]",
+                  getI18nText("messages.previousButtonPage1", ""),
+                );
+              }
+            }
+          },
+        },
+      },
+    ],
+    7: [
+      // title text
+      {
+        id: "page7-title-text",
+        name: "page7-title-text",
+        type: "custom",
+        coordinates: [200, 25, 1400, 125], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: getI18nText("pages.page7.title", ""),
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "15gc",
+          textColor: "orange",
+          fontSize: "50gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // maintext
+      {
+        id: "page7-main-text",
+        name: "page7-main-text",
+        type: "custom",
+        coordinates: [200, 160, 1400, 600], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: getI18nText("pages.page7.mainText", ""),
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "50gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // Tap Animation GIF
+      {
+        id: "page7-tap-animation",
+        name: "tap-animation",
+        type: "custom",
+        coordinates: [650, 650, 700, 800],
+        zIndex: "999",
+        props: {
+          componentType: "TapGifComponent",
+          imageSrc: "assets/tap.gif",
+          imageAlt: getI18nText("common.tapAlt", ""),
+        },
+      },
+
+      // Optimized Next button - Three Layer Structure
+      {
+        id: "page7-next-button",
+        name: "next-button",
+        type: "button",
+        coordinates: [650, 650, 950, 750],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            return getI18nText("buttons.startOver", "");
+          },
+          onClick: () => {
+            if (typeof window !== "undefined" && window.playCarClickSound) {
+              window.playCarClickSound("next");
+            }
+            const pageNumber = extractPageNumberFromId("page7-next-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.next !== null && typeof window !== "undefined") {
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.next);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.next);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.next },
+                  }),
+                );
+                console.log(
+                  "📄 [Next Button]",
+                  getI18nText("messages.nextButtonPage2", ""),
+                );
+              }
+            } else if (nav && nav.next === null) {
+              // On last page, "Start Over" functionality
+              console.log(
+                "🔄 [Next Button]",
+                getI18nText(
+                  "messages.lastPageStartingOver",
+                  "Last page - Starting over",
+                ),
+              );
+              if (window.advanceToNextQuestion) {
+                window.advanceToNextQuestion();
+              } else if (window.changePageAndNotify) {
+                window.changePageAndNotify(1);
+              }
+            }
+          },
+        },
+      },
+    ],
+  };
+};
+
+// ===== INITIALIZATION AND EXPORT =====
+
+/**
+ * Initialize Page Config
+ */
+const initializePageConfig = () => {
+  console.log("🚀 Initializing PageConfig");
+
+  // ----- Page sequence state (lift-bag / lift-eraser style flows) -----
+  // For any page with step-by-step actions: set pageSequenceConfig[pageNumber] = { steps: ['step1','step2'], ... }.
+  // Use get disabled() => isPageSequenceStepButtonDisabled(page, 'step1') or isPageSequenceStepButtonDisabledByOrder(page, 'step2'),
+  // and for Next use get disabled() => isNextDisabledByPageSequence(page). On last step onClick, call setPageCompleted(page, true).
+  if (typeof window !== "undefined") {
+    window.pageSequenceStateStore = window.pageSequenceStateStore || {};
+    window.pageSequenceConfig = window.pageSequenceConfig || {};
+    // Page 5 is content-only (replica of page 14) - no sequence; tap always visible via alwaysVisible prop
+    // Page 8: lift feather then lift watermelon; when both done, enable Next and TapGif
+    window.pageSequenceConfig[8] = {
+      steps: ["liftFeather", "liftWatermelon"],
+      enableOnComplete: ["page8-next-button", "page8-tap-animation"],
+      stepToButtonId: {
+        liftFeather: "page8-lift-eraser-button",
+        liftWatermelon: "page8-lift-watermelon-button",
+      },
+    };
+    // Page 11: lift feather then lift watermelon; when both done, enable Next and TapGif
+    window.pageSequenceConfig[11] = {
+      steps: ["liftStone", "liftPencil"],
+      enableOnComplete: ["page11-next-button", "page11-tap-animation"],
+      stepToButtonId: {
+        liftStone: "page11-lift-stone-button",
+        liftPencil: "page11-lift-pencil-button",
+      },
+    };
+    const setPageCompletedForSequence = (pageNumber) => {
+      if (typeof window === "undefined") return;
+      if (typeof window.forceAppUpdate === "function")
+        window.forceAppUpdate();
+    };
+    // When entering a page with a sequence, reset state and hide Next/TapGif until complete
+    const handlePageChanged = (event) => {
+      const page = event.detail?.page ?? event.detail?.pageNumber;
+      if (page == null) return;
+      const config = getPageSequenceConfig(page);
+      if (config && config.steps && config.steps.length) {
+        initPageSequenceState(page);
+        setPageCompletedForSequence(page);
+        if (typeof window.forceAppUpdate === "function")
+          window.forceAppUpdate();
+      }
+    };
+    window.addEventListener("pageChanged", handlePageChanged);
+    // If we load directly on a sequence page, init on next tick
+    setTimeout(() => {
+      const p = window.getCurrentPage?.();
+      if (p != null && getPageSequenceConfig(p)) {
+        initPageSequenceState(p);
+        setPageCompletedForSequence(p);
+        if (typeof window.forceAppUpdate === "function")
+          window.forceAppUpdate();
+      }
+    }, 0);
+  }
+
+  // Create GridPositionPages
+  const optimizedPages = createOptimizedGridPositionPages();
+
+  // Make available globally
+  if (typeof window !== "undefined") {
+    // Store the page configuration globally
+    window.GridPositionPages = optimizedPages;
+    window.gridPositions = window.GridPositionPages;
+
+    // Expose page navigation configuration globally
+    window.pageNavigation = pageNavigation;
+
+    // Expose page mapping functions globally
+    window.getPageNumbers = getPageNumbers;
+    window.getPageFromDotPosition = getPageFromDotPosition;
+    window.getDotPositionFromPage = getDotPositionFromPage;
+
+    // Expose page sequence helpers for pages with step-by-step flows (e.g. lift-bag → lift-eraser)
+    window.getPageSequenceConfig = getPageSequenceConfig;
+    window.getPageSequenceStepDone = getPageSequenceStepDone;
+    window.setPageSequenceStepDone = setPageSequenceStepDone;
+    window.initPageSequenceState = initPageSequenceState;
+    window.isPageSequenceComplete = isPageSequenceComplete;
+    window.isPageSequenceStepButtonDisabled = isPageSequenceStepButtonDisabled;
+    window.isPageSequenceStepButtonDisabledByOrder =
+      isPageSequenceStepButtonDisabledByOrder;
+    window.isNextDisabledByPageSequence = isNextDisabledByPageSequence;
+
+    // Initialize essential window functions
+    console.log("🔄 [PageConfig] Initializing window functions...");
+
+    try {
+      // Create the question manager functions directly
+      const advanceToNextQuestion = () => {
+        return new Promise((resolve) => {
+          console.log(
+            "🔄 [Navigation] advanceToNextQuestion called (DIRECT IMPLEMENTATION)",
+          );
+          console.log(
+            "🔄 [Navigation] Treating as APP RELOAD with next question",
+          );
+
+          // Simplified navigation - always reset to 0
+          const currentIndex =
+            typeof window !== "undefined" &&
+              window.currentQuestionIndex !== undefined
+              ? window.currentQuestionIndex
+              : 0;
+          const newIndex = 0;
+          console.log(
+            "🔄 [Navigation]",
+            getI18nText("messages.navigationReset", ""),
+          );
+
+          // CRITICAL: Update question index FIRST (before any store operations)
+          window.currentQuestionIndex = newIndex;
+          console.log(
+            "✅ [Navigation] Updated window.currentQuestionIndex to:",
+            newIndex,
+          );
+
+          // Reset global window variables
+          window.page1complete = false;
+          window.objectsremoved = 0;
+
+          // Clear all component state stores
+          if (typeof window !== "undefined") {
+            // Clear quiz panel states
+            if (window.quizPanelStateStore) {
+              window.quizPanelStateStore = {};
+              console.log("✅ [Navigation] Cleared quizPanelStateStore");
+            }
+
+            // Clear fill blanks states
+            if (window.fillBlanksStateStore) {
+              window.fillBlanksStateStore = {};
+              console.log("✅ [Navigation] Cleared fillBlanksStateStore");
+            }
+
+            // Clear calculation steps states
+            if (window.calculationStepsStateStore) {
+              window.calculationStepsStateStore = {};
+              console.log("✅ [Navigation] Cleared calculationStepsStateStore");
+            }
+
+            // Clear any other state stores that might exist
+            if (window.stageComponentStateStore) {
+              window.stageComponentStateStore = {};
+              console.log("✅ [Navigation] Cleared stageComponentStateStore");
+            }
+          }
+
+          console.log(
+            "✅ [Navigation]",
+            getI18nText("messages.navigationComplete", ""),
+          );
+
+          // Navigate to page 1
+          if (typeof window !== "undefined") {
+            if (window.changePageAndNotify) {
+              window.changePageAndNotify(1);
+              console.log(
+                "✅ [Navigation] Navigated to page 1 via changePageAndNotify",
+              );
+            } else if (window.navigateToPage) {
+              window.navigateToPage(1);
+              console.log(
+                "✅ [Navigation] Navigated to page 1 via navigateToPage",
+              );
+            } else {
+              // Fallback: dispatch page change event
+              window.dispatchEvent(
+                new CustomEvent("pageChanged", { detail: { page: 1 } }),
+              );
+              console.log(
+                "✅ [Navigation] Dispatched page change event to page 1",
+              );
+            }
+          }
+
+          resolve(newIndex);
+        });
+      };
+
+      const updateQuestionDependentElements = () => {
+        console.log("🔄 [UI] Updating question-dependent elements");
+
+        // Trigger React re-render by forcing app update
+        if (typeof window.forceAppUpdate === "function") {
+          window.forceAppUpdate();
+          console.log("✅ [UI] Triggered React re-render via forceAppUpdate");
+        } else {
+          console.warn(
+            "⚠️ [UI] forceAppUpdate not available, React may not re-render",
+          );
+        }
+
+        // Page 2 removed - no longer needed
+
+        console.log("✅ [UI] updateQuestionDependentElements completed");
+      };
+
+      const getNextButtonText = () => {
+        // Always show "Start Over" since we only have one question now
+        return getI18nText("buttons.startOver", "");
+      };
+
+      // Assign functions to window
+      window.advanceToNextQuestion = advanceToNextQuestion;
+      window.updateQuestionDependentElements = updateQuestionDependentElements;
+      window.getNextButtonText = getNextButtonText;
+
+      console.log("✅ [PageConfig] Direct function assignment completed");
+      console.log(
+        "🔍 [PageConfig] window.advanceToNextQuestion type:",
+        typeof window.advanceToNextQuestion,
+      );
+      console.log(
+        "🔍 [PageConfig] window.updateQuestionDependentElements type:",
+        typeof window.updateQuestionDependentElements,
+      );
+    } catch (error) {
+      console.error(
+        "❌ [PageConfig] Error in direct function assignment:",
+        error,
+      );
+    }
+
+    // Add global function to manually clear page states (for testing)
+    window.clearAllPageStates = () => {
+      console.log("🧹 [PageConfig] Manually clearing page states");
+      try {
+        // Reset global variables
+        window.page1complete = false;
+        window.objectsremoved = 0;
+        window.currentQuestionIndex = 0;
+
+        console.log("✅ [PageConfig] Page states cleared successfully");
+
+        // Reload the page to start fresh
+        if (
+          confirm(
+            getI18nText(
+              "messages.pageStatesCleared",
+              "Page states have been cleared. Reload the page to start fresh?",
+            ),
+          )
+        ) {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("❌ [PageConfig] Error clearing page states:", error);
+      }
+    };
+
+    // Function to copy text from source element to destination element by ID
+    // sourceId: ID of the element to read text from (e.g., 'page2-map-table-R1C1' - a table cell)
+    // destinationId: ID of the element to update (e.g., 'page2-number-pad' - number pad target, or any other element ID)
+    window.updateTargetIDText = (sourceId, destinationId, retryCount = 0) => {
+      try {
+        const maxRetries = 5;
+        const retryDelay = 200;
+
+        const attemptUpdate = () => {
+          const sourceElement = document.getElementById(sourceId);
+
+          if (sourceElement) {
+            const sourceText =
+              sourceElement.textContent?.trim() ||
+              sourceElement.innerText?.trim() ||
+              "";
+            console.log(
+              `🎯 [PageConfig] Reading text from source ${sourceId}:`,
+              sourceText,
+            );
+
+            // Try to update number pad target first (if destination is a number pad)
+            if (
+              window.numberPadCallbacks &&
+              window.numberPadCallbacks[destinationId]
+            ) {
+              window.numberPadCallbacks[destinationId].updateTarget(sourceText);
+              console.log(
+                `✅ [PageConfig] Updated number pad ${destinationId} target to:`,
+                sourceText,
+              );
+              return;
+            }
+
+            // Otherwise, update destination element's text content
+            const destinationElement = document.getElementById(destinationId);
+            if (destinationElement) {
+              destinationElement.textContent = sourceText;
+              destinationElement.innerText = sourceText;
+              console.log(
+                `✅ [PageConfig] Updated element ${destinationId} text to:`,
+                sourceText,
+              );
+            } else {
+              // Retry if destination element not found yet
+              if (retryCount < maxRetries) {
+                console.log(
+                  `🔄 [PageConfig] Destination element ${destinationId} not found, retrying... (${retryCount + 1}/${maxRetries})`,
+                );
+                setTimeout(() => {
+                  window.updateTargetIDText(
+                    sourceId,
+                    destinationId,
+                    retryCount + 1,
+                  );
+                }, retryDelay);
+              } else {
+                console.warn(
+                  `⚠️ [PageConfig] Destination element not found: ${destinationId} after ${maxRetries} retries`,
+                );
+              }
+            }
+          } else {
+            // Retry if source element not found yet
+            if (retryCount < maxRetries) {
+              console.log(
+                `🔄 [PageConfig] Source element ${sourceId} not found, retrying... (${retryCount + 1}/${maxRetries})`,
+              );
+              setTimeout(() => {
+                window.updateTargetIDText(
+                  sourceId,
+                  destinationId,
+                  retryCount + 1,
+                );
+              }, retryDelay);
+            } else {
+              console.warn(
+                `⚠️ [PageConfig] Source element not found: ${sourceId} after ${maxRetries} retries`,
+              );
+            }
+          }
+        };
+
+        // Initial delay to ensure DOM is ready
+        if (retryCount === 0) {
+          setTimeout(attemptUpdate, retryDelay);
+        } else {
+          attemptUpdate();
+        }
+      } catch (error) {
+        console.error("❌ [PageConfig] Error updating target text:", error);
+      }
+    };
+
+    // Listen for page changes to update number pad target on page 2
+    // DISABLED: Elements don't exist in this applet
+    /*
+    if (typeof window !== 'undefined') {
+      window.addEventListener('pageChanged', (event) => {
+        const pageNumber = event.detail?.page;
+        if (pageNumber === 2) {
+          // Copy text from table cell R1C1 (row 1, column 1) to number pad target
+          // sourceId: 'page2-map-table-R1C1' - the table cell to read from
+          // destinationId: 'page2-number-pad' - the number pad to update
+          window.updateTargetIDText('page2-map-table-R1C1', 'page2-number-pad');
+        }
+      });
+    }
+    */
+
+    console.log(
+      "✅ PageConfig initialized - pages and functions available globally",
+    );
+    console.log(
+      "💡 [PageConfig] Use window.clearAllPageStates() to manually clear page states",
+    );
+    console.log(
+      "💡 [PageConfig] Use window.updateTargetIDText(sourceId, destinationId) to copy text from any source element to any destination element",
+    );
+  }
+
+  return optimizedPages;
+};
+
+// Initialize immediately
+console.log("🔄 [PageConfig] About to call initializePageConfig...");
+const OptimizedGridPositionPages = initializePageConfig();
+console.log(
+  "🔄 [PageConfig] initializePageConfig completed, result:",
+  typeof OptimizedGridPositionPages,
+);
+
+// Export for module systems
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    OptimizedGridPositionPages,
+  };
+} else {
+  // Browser global export
+  window.PageConfigOptimized = {
+    OptimizedGridPositionPages,
+  };
+}
+
+console.log("🎉 PageConfig optimization complete!");
