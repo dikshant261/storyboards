@@ -253,6 +253,20 @@ const createOptimizedGridPositionPages = () => {
           impFormulae: []
         }
       },
+      // Tap Animation GIF
+      {
+        id: 'page1-tap-animation-quiz',
+        name: 'tap-animation',
+        type: 'custom',
+        coordinates: [750, 480, 820, 580],
+        zIndex: '999',
+        props: {
+          componentType: 'TapGifComponent',
+          imageSrc: 'assets/tap.gif',
+          imageAlt: 'Tap',
+          initialVisible: true,
+        }
+      },
       {
         id: 'page1-instruction-text',
         name: 'page1-instruction-text',
@@ -421,6 +435,20 @@ const createOptimizedGridPositionPages = () => {
           options: getI18nText("pages.page2.quizPanel.options"),
           keyConcepts: [],
           impFormulae: []
+        }
+      },
+      // Tap Animation GIF
+      {
+        id: 'page2-tap-animation-quiz',
+        name: 'tap-animation',
+        type: 'custom',
+        coordinates: [750, 480, 820, 580],
+        zIndex: '999',
+        props: {
+          componentType: 'TapGifComponent',
+          imageSrc: 'assets/tap.gif',
+          imageAlt: 'Tap',
+          initialVisible: true,
         }
       },
       {
@@ -593,6 +621,20 @@ const createOptimizedGridPositionPages = () => {
           impFormulae: []
         }
       },
+      // Tap Animation GIF
+      {
+        id: 'page3-tap-animation-quiz',
+        name: 'tap-animation',
+        type: 'custom',
+        coordinates: [750, 480, 820, 580],
+        zIndex: '999',
+        props: {
+          componentType: 'TapGifComponent',
+          imageSrc: 'assets/tap.gif',
+          imageAlt: 'Tap',
+          initialVisible: true,
+        }
+      },
       {
         id: 'page3-instruction-text',
         name: 'page3-instruction-text',
@@ -761,6 +803,20 @@ const createOptimizedGridPositionPages = () => {
           options: getI18nText("pages.page4.quizPanel.options"),
           keyConcepts: [],
           impFormulae: []
+        }
+      },
+      // Tap Animation GIF
+      {
+        id: 'page4-tap-animation-quiz',
+        name: 'tap-animation',
+        type: 'custom',
+        coordinates: [750, 480, 820, 580],
+        zIndex: '999',
+        props: {
+          componentType: 'TapGifComponent',
+          imageSrc: 'assets/tap.gif',
+          imageAlt: 'Tap',
+          initialVisible: true,
         }
       },
       {

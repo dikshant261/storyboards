@@ -1,0 +1,376 @@
+/* ============================================================================
+ * ANIMATION LIBRARY
+ * Keyframes, animation classes, and transition utilities
+ * ============================================================================ */
+
+/* ========================================
+ * BUTTON ANIMATIONS
+ * Pulse effects for user attention and feedback
+ * ======================================== */
+
+/**
+ * Next Button Pulse Animation
+ * Usage: Add 'math-app-pulse-animation' class to next button
+ * Purpose: Draws attention to primary action button
+ * Duration: 2 seconds, infinite loop
+ */
+@keyframes nextButtonPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 153, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
+    }
+}
+
+.math-app-pulse-animation {
+    animation: nextButtonPulse var(--animation-pulse-duration) infinite;
+}
+
+/**
+ * Start Button Pulse Animation
+ * Usage: Add 'start-button-pulse' class to start button
+ * Purpose: Draws attention to the start button with orange glow
+ * Duration: 2 seconds, infinite loop
+ */
+@keyframes startButtonPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(255, 149, 0, 0.3), 0 0 0 0 rgba(255, 149, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(255, 149, 0, 0.4), 0 0 0 15px rgba(255, 149, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(255, 149, 0, 0.3), 0 0 0 0 rgba(255, 149, 0, 0);
+    }
+}
+
+.start-button-pulse {
+    animation: startButtonPulse var(--animation-pulse-duration) infinite;
+}
+
+/* ========================================
+ * HIGHLIGHT ANIMATIONS
+ * Visual emphasis for interactive elements
+ * ======================================== */
+
+/**
+ * Pulsate Animation
+ * Usage: Applied automatically to '.math-app-grid-cell-highlighted'
+ * Purpose: Highlights interactive grid cells with breathing effect
+ * Duration: 1.5 seconds, infinite loop
+ * Colors: Green glow effect
+ */
+@keyframes pulsate {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: var(--shadow-glow) #00ff00;
+    }
+    50% { 
+        transform: scale(1.1);
+        opacity: 0.8;
+        box-shadow: var(--shadow-glow) #00ff00, 0 0 50px #00ff00;
+    }
+}
+
+.math-app-grid-cell-highlighted {
+    animation: pulsate var(--animation-highlight-duration) infinite;
+}
+
+.math-app-grid-cell-highlighted:hover {
+    background-color: rgba(255, 255, 0, 0.3);
+    transform: none;
+    cursor: pointer;
+}
+
+/* ========================================
+ * PAGE TRANSITION ANIMATIONS
+ * Smooth transitions between content states
+ * ======================================== */
+
+/**
+ * Fade In Animation
+ * Usage: Add 'fadeIn' class to elements
+ * Purpose: Smooth element appearance
+ * Duration: 0.5 seconds
+ */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 0.5s var(--transition-normal);
+}
+
+/* ========================================
+ * REACT 18 ANIMATIONS
+ * Animations used in math-applet.js
+ * ======================================== */
+
+/**
+ * Glow Animation
+ * Usage: Applied via CSS-in-JS in React components
+ * Purpose: Creates a glowing effect for elements
+ */
+@keyframes glow {
+    from { box-shadow: 0 0 5px currentColor; }
+    to { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+}
+
+/**
+ * Pulsate Animation (React version)
+ * Usage: Applied via CSS-in-JS in React components
+ * Purpose: Creates a pulsating scale effect
+ */
+@keyframes pulsate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/**
+ * Pulsate Glow Animation
+ * Usage: Applied via CSS-in-JS in React components
+ * Purpose: Combines pulsating and glowing effects
+ */
+@keyframes pulsateGlow {
+    0% { transform: scale(1); box-shadow: 0 0 5px currentColor; }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+    100% { transform: scale(1); box-shadow: 0 0 5px currentColor; }
+}
+
+/**
+ * Spin Animation
+ * Usage: Applied via CSS-in-JS in React components
+ * Purpose: Creates a spinning effect
+ */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+ * ANIMATION UTILITY CLASSES
+ * Quick animation helpers
+ * ======================================== */
+
+.math-app-pulse-animation {
+    animation: pulsate 1.5s ease-in-out infinite;
+}
+
+.feedback-text-component {
+    transition: all 0.3s ease;
+}
+
+.progress-dot {
+    transition: all 0.3s ease;
+}
+
+.progress-dot:hover {
+    transform: scale(1.1);
+}
+
+.progress-dot:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* ========================================
+ * TRANSITION UTILITIES
+ * Smooth transitions for interactive elements
+ * ======================================== */
+
+.smooth-transition {
+    transition: all var(--transition-normal);
+}
+
+.hover-scale {
+    transition: transform var(--transition-fast);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* ========================================
+ * GLASS SHATTER ANIMATION
+ * Dramatic reveal effect for step overlay
+ * ======================================== */
+
+/**
+ * Glass Shatter Animation
+ * Usage: Applied to .step-overlay when step is correctly placed
+ * Purpose: Creates glass-breaking effect with fragments flying outward
+ * Duration: 1.5 seconds
+ */
+@keyframes glassShatter {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    20% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes shatterFragment1 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-80px, -100px) rotate(-45deg);
+        opacity: 0;
+    }
+}
+
+@keyframes shatterFragment2 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(80px, -90px) rotate(35deg);
+        opacity: 0;
+    }
+}
+
+@keyframes shatterFragment3 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-60px, 80px) rotate(-55deg);
+        opacity: 0;
+    }
+}
+
+@keyframes shatterFragment4 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(70px, 90px) rotate(50deg);
+        opacity: 0;
+    }
+}
+
+@keyframes shatterFragment5 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, -120px) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+@keyframes shatterFragment6 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, 100px) rotate(-25deg);
+        opacity: 0;
+    }
+}
+
+@keyframes shatterFragment7 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-100px, 0) rotate(-60deg);
+        opacity: 0;
+    }
+}
+
+@keyframes shatterFragment8 {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(100px, 0) rotate(40deg);
+        opacity: 0;
+    }
+}
+
+/* ========================================
+ * ANIMATION PERFORMANCE OPTIMIZATIONS
+ * Hardware acceleration and performance hints
+ * ======================================== */
+
+.math-app-pulse-animation,
+.start-button-pulse,
+.math-app-grid-cell-highlighted,
+.fadeIn {
+    will-change: transform, opacity, box-shadow;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* ========================================
+ * RESPONSIVE ANIMATION SCALING
+ * Adjust animation intensity based on screen size
+ * ======================================== */
+
+@media (max-width: 768px) {
+    .math-app-pulse-animation,
+    .start-button-pulse {
+        animation-duration: calc(var(--animation-pulse-duration) * 0.8);
+    }
+    
+    .math-app-grid-cell-highlighted {
+        animation-duration: calc(var(--animation-highlight-duration) * 0.8);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .math-app-pulse-animation,
+    .start-button-pulse,
+    .math-app-grid-cell-highlighted,
+    .fadeIn {
+        animation: none;
+    }
+    
+    .smooth-transition,
+    .hover-scale {
+        transition: none;
+    }
+}

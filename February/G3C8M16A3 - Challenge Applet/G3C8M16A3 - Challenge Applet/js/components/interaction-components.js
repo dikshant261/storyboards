@@ -111,6 +111,10 @@ const TapGifComponent = React.memo((props) => {
   
   // State for visibility - starts with initialVisible value
   const [isVisible, setIsVisible] = React.useState(initialVisible);
+  // When the quiz is completed, invert the initial state:
+  // - initially visible hints should hide
+  // - initially hidden hints should show
+  const completedVisibility = !initialVisible;
   
   // Reset to initialVisible on mount and when initialVisible changes
   // But check if quiz is already completed first
@@ -153,8 +157,8 @@ const TapGifComponent = React.memo((props) => {
           }
           
           if (isQuizCompleted) {
-            console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, showing tap animation`);
-            setIsVisible(true);
+            console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, setting visibility to ${completedVisibility}`);
+            setIsVisible(completedVisibility);
             return;
           }
         }
@@ -163,7 +167,7 @@ const TapGifComponent = React.memo((props) => {
     
     console.log(`🔍 [TapGif] Resetting to initialVisible: ${initialVisible} (page: ${pageNumber})`);
     setIsVisible(initialVisible);
-  }, [initialVisible, getPageNumber]);
+  }, [initialVisible, getPageNumber, completedVisibility]);
   
   // Listen for showOnEvent to show the component
   React.useEffect(() => {
@@ -203,8 +207,8 @@ const TapGifComponent = React.memo((props) => {
     const handleQuizCompleted = (event) => {
       const eventPageNumber = event.detail?.pageNumber;
       if (eventPageNumber === getPageNumber) {
-        console.log(`🔍 [TapGif] Quiz completed for page ${getPageNumber}, showing tap animation`);
-        setIsVisible(true);
+        console.log(`🔍 [TapGif] Quiz completed for page ${getPageNumber}, setting visibility to ${completedVisibility}`);
+        setIsVisible(completedVisibility);
       }
     };
     
@@ -213,7 +217,7 @@ const TapGifComponent = React.memo((props) => {
     return () => {
       window.removeEventListener('quizCompleted', handleQuizCompleted);
     };
-  }, [getPageNumber]);
+  }, [getPageNumber, completedVisibility]);
   
   // Reset to initialVisible when page changes (to handle navigation between pages)
   // But check if quiz is already completed first
@@ -258,8 +262,8 @@ const TapGifComponent = React.memo((props) => {
             }
             
             if (isQuizCompleted) {
-              console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, hiding tap animation`);
-              setIsVisible(false);
+              console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, setting visibility to ${completedVisibility}`);
+              setIsVisible(completedVisibility);
               return;
             }
           }
@@ -308,8 +312,8 @@ const TapGifComponent = React.memo((props) => {
           }
           
           if (isQuizCompleted) {
-            console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, showing tap animation`);
-            setIsVisible(true);
+            console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, setting visibility to ${completedVisibility}`);
+            setIsVisible(completedVisibility);
             return;
           }
         }
@@ -324,7 +328,7 @@ const TapGifComponent = React.memo((props) => {
     return () => {
       window.removeEventListener('pageChanged', handlePageChange);
     };
-  }, [initialVisible, getPageNumber]);
+  }, [initialVisible, getPageNumber, completedVisibility]);
   
   // Determine visibility based on state
   const shouldHide = !isVisible;

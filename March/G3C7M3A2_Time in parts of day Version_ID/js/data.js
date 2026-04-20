@@ -56,12 +56,12 @@ const AppData = {
           timeOfDay: 'BREAKFAST',
           options: [
             {
-              text: "7:00 night",
+              text: "7:00 malam",
               iscorrect: false,
               feedback: "Oops! Try again!",
             },
             {
-              text: "7:00 morning",
+              text: "7:00 pagi",
               iscorrect: true,
               feedback: "That’s correct!",
             },
@@ -73,12 +73,12 @@ const AppData = {
           options: [
             
             {
-              text: "8:00 morning",
+              text: "8:00 pagi",
               iscorrect: true,
               feedback: "That’s correct!",
             },
             {
-              text: "8:00 night",
+              text: "8:00 malam",
               iscorrect: false,
               feedback: "Oops! Try again!",
             },
@@ -89,12 +89,12 @@ const AppData = {
           timeOfDay: 'EVENING GAMES',
           options: [
             {
-              text: "5:00 early morning",
+              text: "5:00 dini hari",
               iscorrect: false,
               feedback: "Oops! Try again!",
             },
             {
-              text: "5:00 evening",
+              text: "5:00 sore",
               iscorrect: true,
               feedback: "That’s correct!",
             },
@@ -106,12 +106,12 @@ const AppData = {
           options: [
             
             {
-              text: "9:00 night",
+              text: "9:00 malam",
               iscorrect: true,
               feedback: "That’s correct!",
             },
             {
-              text: "9:00 morning",
+              text: "9:00 pagi",
               iscorrect: false,
               feedback: "Oops! Try again!",
             },
@@ -122,12 +122,12 @@ const AppData = {
           timeOfDay: 'BEDTIME',
           options: [
             {
-              text: "10:00 morning",
+              text: "10:00 pagi",
               iscorrect: false,
               feedback: "Oops! Try again!",
             },
             {
-              text: "10:00 night",
+              text: "10:00 malam",
               iscorrect: true,
               feedback: "That’s correct!",
             },
