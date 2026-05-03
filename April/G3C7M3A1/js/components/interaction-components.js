@@ -111,66 +111,39 @@ const TapGifComponent = React.memo((props) => {
   
   // State for visibility - starts with initialVisible value
   const [isVisible, setIsVisible] = React.useState(initialVisible);
-  // State for position override (e.g. page2-tap-animation-1 move after clock click)
-  const [positionOverride, setPositionOverride] = React.useState(null);
 
-  // Page 2: when clock is clicked, move tap animation (+170gc right, −75gc on y from [950, 75, 1000, 125])
+  // Pages 2/4/6/8: hide the initial tap hint as soon as the correct clock answer is clicked.
   React.useEffect(() => {
-    if (elementId !== 'page2-tap-animation-1') return;
-    const handler = () => {
-      const coordinates = [1120, 0, 1170, 50];
-      const [x1, y1, x2, y2] = coordinates;
-      let css = null;
-      const gridPositions = typeof window !== 'undefined' ? window.gridPositions : undefined;
-      if (gridPositions && typeof gridPositions.convertToCSS === 'function') {
-        const result = gridPositions.convertToCSS(coordinates, 'page2-tap-animation-1', 'page', 'custom');
-        css = result?.css || null;
-      }
-      if (!css && typeof GridPrecisionConfig !== 'undefined') {
-        const config = GridPrecisionConfig.precisionSettings[GridPrecisionConfig.currentPrecision];
-        if (config) {
-          const left = ((x1 - 1) / config.cols) * 100;
-          const top = ((y1 - 1) / config.rows) * 100;
-          const width = ((x2 - x1) / config.cols) * 100;
-          const height = ((y2 - y1) / config.rows) * 100;
-          css = {
-            position: 'absolute',
-            left: `${left.toFixed(2)}%`,
-            top: `${top.toFixed(2)}%`,
-            width: `${width.toFixed(2)}%`,
-            height: `${height.toFixed(2)}%`
-          };
-        }
-      }
-      if (css) setPositionOverride(css);
-    };
-    window.addEventListener('page2ClockTimeChanged', handler);
-    return () => window.removeEventListener('page2ClockTimeChanged', handler);
-  }, [elementId]);
-
-  // Page 2: hide tap hint when the page 2 quiz completes (correct number clicked)
-  React.useEffect(() => {
-    if (elementId !== 'page2-tap-animation-1') return;
+    const match = elementId.match(/^page(2|4|6|8)-tap-animation-1$/);
+    if (!match) return;
+    const pageNumber = parseInt(match[1], 10);
+    const correctAnimationEvent = `page${pageNumber}CorrectAnimationStarted`;
     const handler = (e) => {
-      if (e.detail && e.detail.pageNumber === 2) {
+      if (e.detail && e.detail.pageNumber === pageNumber) {
         setIsVisible(false);
       }
     };
+    window.addEventListener(correctAnimationEvent, handler);
     window.addEventListener('quizCompleted', handler);
-    return () => window.removeEventListener('quizCompleted', handler);
+    return () => {
+      window.removeEventListener(correctAnimationEvent, handler);
+      window.removeEventListener('quizCompleted', handler);
+    };
   }, [elementId]);
 
-  // Page 2: show tap hint again and clear position override on replay
+  // Pages 2/4/6/8: show the initial tap hint again on replay.
   React.useEffect(() => {
-    if (elementId !== 'page2-tap-animation-1') return;
+    const match = elementId.match(/^page(2|4|6|8)-tap-animation-1$/);
+    if (!match) return;
+    const pageNumber = parseInt(match[1], 10);
+    const replayEvent = `page${pageNumber}Replay`;
     const handler = (e) => {
-      if (e.detail && e.detail.pageNumber === 2) {
-        setPositionOverride(null);
+      if (e.detail && e.detail.pageNumber === pageNumber) {
         setIsVisible(true);
       }
     };
-    window.addEventListener('page2Replay', handler);
-    return () => window.removeEventListener('page2Replay', handler);
+    window.addEventListener(replayEvent, handler);
+    return () => window.removeEventListener(replayEvent, handler);
   }, [elementId]);
 
   // Page 2: hide “next” tap GIF when replay resets the activity
@@ -183,40 +156,6 @@ const TapGifComponent = React.memo((props) => {
     };
     window.addEventListener('page2Replay', handler);
     return () => window.removeEventListener('page2Replay', handler);
-  }, [elementId]);
-
-  // Page 2: when "o'clock" is clicked, move tap animation (+170gc right, −75gc on y from [900, 75, 950, 125])
-  React.useEffect(() => {
-    if (elementId !== 'page2-tap-animation-1') return;
-    const handler = () => {
-      const coordinates = [1070, 0, 1120, 50];
-      const [x1, y1, x2, y2] = coordinates;
-      let css = null;
-      const gridPositions = typeof window !== 'undefined' ? window.gridPositions : undefined;
-      if (gridPositions && typeof gridPositions.convertToCSS === 'function') {
-        const result = gridPositions.convertToCSS(coordinates, 'page2-tap-animation-1', 'page', 'custom');
-        css = result?.css || null;
-      }
-      if (!css && typeof GridPrecisionConfig !== 'undefined') {
-        const config = GridPrecisionConfig.precisionSettings[GridPrecisionConfig.currentPrecision];
-        if (config) {
-          const left = ((x1 - 1) / config.cols) * 100;
-          const top = ((y1 - 1) / config.rows) * 100;
-          const width = ((x2 - x1) / config.cols) * 100;
-          const height = ((y2 - y1) / config.rows) * 100;
-          css = {
-            position: 'absolute',
-            left: `${left.toFixed(2)}%`,
-            top: `${top.toFixed(2)}%`,
-            width: `${width.toFixed(2)}%`,
-            height: `${height.toFixed(2)}%`
-          };
-        }
-      }
-      if (css) setPositionOverride(css);
-    };
-    window.addEventListener('page2OclockClicked', handler);
-    return () => window.removeEventListener('page2OclockClicked', handler);
   }, [elementId]);
 
   // Reset to initialVisible on mount and when initialVisible changes
@@ -260,8 +199,8 @@ const TapGifComponent = React.memo((props) => {
           }
           
           if (isQuizCompleted) {
-            console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, showing tap animation`);
-            setIsVisible(true);
+            console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, setting completed visibility`);
+            setIsVisible(!initialVisible);
             return;
           }
         }
@@ -310,8 +249,8 @@ const TapGifComponent = React.memo((props) => {
     const handleQuizCompleted = (event) => {
       const eventPageNumber = event.detail?.pageNumber;
       if (eventPageNumber === getPageNumber) {
-        console.log(`🔍 [TapGif] Quiz completed for page ${getPageNumber}, showing tap animation`);
-        setIsVisible(true);
+        console.log(`🔍 [TapGif] Quiz completed for page ${getPageNumber}, updating visibility for completed state`);
+        setIsVisible(!initialVisible);
       }
     };
     
@@ -320,7 +259,7 @@ const TapGifComponent = React.memo((props) => {
     return () => {
       window.removeEventListener('quizCompleted', handleQuizCompleted);
     };
-  }, [getPageNumber]);
+  }, [getPageNumber, initialVisible]);
   
   // Reset to initialVisible when page changes (to handle navigation between pages)
   // But check if quiz is already completed first
@@ -365,8 +304,8 @@ const TapGifComponent = React.memo((props) => {
             }
             
             if (isQuizCompleted) {
-              console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, hiding tap animation`);
-              setIsVisible(false);
+              console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, setting completed visibility`);
+              setIsVisible(!initialVisible);
               return;
             }
           }
@@ -415,8 +354,8 @@ const TapGifComponent = React.memo((props) => {
           }
           
           if (isQuizCompleted) {
-            console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, showing tap animation`);
-            setIsVisible(true);
+            console.log(`✅ [TapGif] Quiz already completed for page ${pageNumber}, setting completed visibility`);
+            setIsVisible(!initialVisible);
             return;
           }
         }
@@ -444,7 +383,7 @@ const TapGifComponent = React.memo((props) => {
   });
   
   const containerStyle = {
-    ...(positionOverride || position?.css || {}),
+    ...(position?.css || {}),
     ...processedStyles,
     display: shouldHide ? 'none' : 'flex',
     alignItems: 'center',

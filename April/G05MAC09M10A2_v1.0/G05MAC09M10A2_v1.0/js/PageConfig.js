@@ -1659,12 +1659,12 @@ const createOptimizedGridPositionPages = () => {
         id: "page3-clickable-AB",
         name: "page3-clickable-AB",
         type: "textbox",
-        coordinates: [670, 180, 960, 225],
+        coordinates: [660, 195, 1040, 202],
         zIndex: 1050,
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",
+          borderRadius: "0gc",
           cursor: "pointer",
           onClick: () => {
             if (window.page3Lines) window.page3Lines.toggle("AB");
@@ -1676,12 +1676,12 @@ const createOptimizedGridPositionPages = () => {
         id: "page3-clickable-CD",
         name: "page3-clickable-CD",
         type: "textbox",
-        coordinates: [620, 500, 920, 545],
+        coordinates: [545, 515, 930, 522],
         zIndex: 1050,
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",
+          borderRadius: "0gc",
           cursor: "pointer",
           onClick: () => {
             if (window.page3Lines) window.page3Lines.toggle("CD");
@@ -1693,13 +1693,14 @@ const createOptimizedGridPositionPages = () => {
         id: "page3-clickable-DA",
         name: "page3-clickable-DA",
         type: "textbox",
-        coordinates: [600, 225, 700, 500],
+        coordinates: [595, 190, 602, 530],
         zIndex: 1050,
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",
+          borderRadius: "0gc",
           cursor: "pointer",
+          transform: "rotate(20deg)", // Rotate to match the slant of the DA side
           onClick: () => {
             if (window.page3Lines) window.page3Lines.toggle("DA");
           },
@@ -1710,13 +1711,15 @@ const createOptimizedGridPositionPages = () => {
         id: "page3-clickable-BC",
         name: "page3-clickable-BC",
         type: "textbox",
-        coordinates: [880, 225, 980, 500],
+        coordinates: [984, 190, 991, 530],
         zIndex: 1050,
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",
+          borderRadius: "0gc",
           cursor: "pointer",
+          transform: "rotate(20deg)", // Rotate to match the slant of the DA side
+
           onClick: () => {
             if (window.page3Lines) window.page3Lines.toggle("BC");
           },
@@ -2040,7 +2043,7 @@ const createOptimizedGridPositionPages = () => {
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",    
+          borderRadius: "6gc",
         },
       },
       {
@@ -3112,7 +3115,7 @@ const createOptimizedGridPositionPages = () => {
 
 
 
-      
+
       //12 units top
       {
         id: "page7-top-length-12-units",
@@ -3334,12 +3337,12 @@ const createOptimizedGridPositionPages = () => {
         id: "page7-clickable-AB",
         name: "page7-clickable-AB",
         type: "textbox",
-        coordinates: [610, 180, 920, 225],
+        coordinates: [565, 220, 940, 227],
         zIndex: 1050,
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",
+          borderRadius: "0gc",
           cursor: "pointer",
           onClick: () => {
             if (window.page7Lines) window.page7Lines.toggle("AB");
@@ -3351,12 +3354,12 @@ const createOptimizedGridPositionPages = () => {
         id: "page7-clickable-CD",
         name: "page7-clickable-CD",
         type: "textbox",
-        coordinates: [690, 500, 1000, 545],
+        coordinates: [675, 515, 1045, 522],
         zIndex: 1050,
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",
+          borderRadius: "0gc",
           cursor: "pointer",
           onClick: () => {
             if (window.page7Lines) window.page7Lines.toggle("CD");
@@ -3368,13 +3371,14 @@ const createOptimizedGridPositionPages = () => {
         id: "page7-clickable-DA",
         name: "page7-clickable-DA",
         type: "textbox",
-        coordinates: [570, 225, 760, 500],
+        coordinates: [613, 215, 620, 530],
         zIndex: 1050,
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",
+          borderRadius: "0gc",
           cursor: "pointer",
+          transform: "rotate(-20deg)", // Rotate to match the slant of the side
           onClick: () => {
             if (window.page7Lines) window.page7Lines.toggle("DA");
           },
@@ -3385,13 +3389,15 @@ const createOptimizedGridPositionPages = () => {
         id: "page7-clickable-BC",
         name: "page7-clickable-BC",
         type: "textbox",
-        coordinates: [915, 225, 1080, 500],
+        coordinates: [992, 215, 1000, 530],
         zIndex: 1050,
         props: {
           text: "",
           backgroundColor: "transparent",
-          borderRadius: "6gc",
+          borderRadius: "0gc",
           cursor: "pointer",
+          transform: "rotate(-20deg)", // Rotate to match the slant of the side
+
           onClick: () => {
             if (window.page7Lines) window.page7Lines.toggle("BC");
           },
@@ -3448,7 +3454,7 @@ const createOptimizedGridPositionPages = () => {
           backgroundColor: "transparent"
         }
       },
-// Instruction Text
+      // Instruction Text
       {
         id: 'page7-instruction-text',
         name: 'page7-instruction-text',

@@ -761,7 +761,7 @@ const createOptimizedGridPositionPages = () => {
           placedContentByDraggableId: {
             "page2-star": { imageSrc: "assets/star.png" },
           },
-          placedItemDraggable: true,
+          placedItemDraggable: false,
           equalRowHeights: true,
           borderColor: "transparent",
           borderWidth: "2gc",
@@ -1167,7 +1167,12 @@ const createOptimizedGridPositionPages = () => {
             expectedPlacementCount: 1,
             onAddSuccess: {
               componentId: "page3-feedback-textbox",
-              callback: createFeedbackCallback("page3-feedback-textbox"),
+              callback: (...args) => {
+                if (typeof window !== "undefined" && window.playCarClickSound) {
+                  window.playCarClickSound("correct");
+                }
+                createFeedbackCallback("page3-feedback-textbox")(...args);
+              },
               text: getI18nText("feedback.correct"),
               mode: "correct",
               getText: (droppableId) => {
@@ -1342,8 +1347,8 @@ const createOptimizedGridPositionPages = () => {
             },
           ],
 
-          hideImageOnQuizComplete: true, // Hide first image
-          showImageOnQuizComplete: [1],
+          hideImageOnQuizComplete: false, // Hide first image
+          showImageOnQuizComplete: [0],
         },
       },
       // // Feedback Textbox Component
@@ -1402,7 +1407,7 @@ const createOptimizedGridPositionPages = () => {
           componentType: "TapGifComponent",
           imageSrc: "assets/tap.gif",
           imageAlt: getI18nText("common.tapAlt"),
-          initialVisible: true,
+          initialVisible: false,
         },
       },
 
@@ -1414,6 +1419,9 @@ const createOptimizedGridPositionPages = () => {
         coordinates: [1450, 820, 1595, 895],
         zIndex: "var(--z-button)",
         props: {
+          initialEnabled: false, // Start disabled until quiz is completed
+          enableOnEvent:'quizCompleted', // Listen for quizCompleted event to enable
+          enableOnEventFilter:{pageNumber: 3}, // Only enable if quizCompleted event is for this page
           get text() {
             const pageNumber = extractPageNumberFromId("page3-next-button");
             return getNextButtonText(pageNumber);
@@ -3363,9 +3371,9 @@ const createOptimizedGridPositionPages = () => {
               acceptValidator: () => false,
               onDrop: onDropTableCell,
               enabled: true,
-              placedItemDraggable: true,
+              placedItemDraggable:false,
               placedItemTransferable: false,
-              clearPlacementOnDropOutside: true,
+              clearPlacementOnDropOutside: false,
             },
             {
               rowIndex: 3,

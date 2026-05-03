@@ -572,7 +572,7 @@ const createOptimizedGridPositionPages = () => {
         id: "page2-tap-animation-1",
         name: "tap-animation-1",
         type: "custom",
-        coordinates: [895, 200, 945, 250],
+        coordinates: [855, 250, 900, 300],
         // coordinates: [950, 75, 1000, 125],
         zIndex: "999",
         props: {
@@ -1762,7 +1762,7 @@ const createOptimizedGridPositionPages = () => {
         id: "page6-tap-animation-1",
         name: "tap-animation-1",
         type: "custom",
-        coordinates: [895, 200, 945, 250],
+        coordinates: [1125, 340, 1165, 390],
         // coordinates: [950, 75, 1000, 125],
         zIndex: "999",
         props: {
@@ -1958,7 +1958,7 @@ const createOptimizedGridPositionPages = () => {
           componentType: "ClockComponent",
           clockShape: "circle",
           size: "200gc",
-          time: { hour: 3, minute: 0, second: 0 },
+          time: { hour: 7, minute: 0, second: 0 },
           dialArcStartTime: { hour: 5, minute: 0, second: 0 },
           realTime: false,
           showHourHand: true,
@@ -2357,7 +2357,7 @@ const createOptimizedGridPositionPages = () => {
         id: "page8-tap-animation-1",
         name: "tap-animation-1",
         type: "custom",
-        coordinates: [895, 200, 945, 250],
+        coordinates: [895, 490, 945, 540],
         // coordinates: [950, 75, 1000, 125],
         zIndex: "999",
         props: {

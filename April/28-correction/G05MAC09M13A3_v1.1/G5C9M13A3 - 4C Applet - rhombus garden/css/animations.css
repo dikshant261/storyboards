@@ -1,0 +1,668 @@
+/* ============================================================================
+ * ANIMATION LIBRARY
+ * Keyframes, animation classes, and transition utilities
+ * ============================================================================ */
+
+/* ========================================
+ * TABLE CELL BLINK ANIMATIONS
+ * Blinking effects for table cells
+ * ======================================== */
+
+/**
+ * Table Cell Background Blink Animation
+ * Usage: Add 'table-cell-blink-bg' class to table cell
+ * Purpose: Makes cell background blink to draw attention
+ * Duration: 1 second, infinite loop
+ */
+@keyframes tableCellBlinkBg {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.table-cell-blink-bg {
+    animation: tableCellBlinkBg 1s infinite;
+}
+
+/**
+ * Table Cell Border Blink Animation
+ * Usage: Add 'table-cell-blink-border' class to table cell
+ * Purpose: Makes cell border blink to draw attention
+ * Duration: 1 second, infinite loop
+ */
+@keyframes tableCellBlinkBorder {
+    0%, 100% {
+        border-color: currentColor;
+        box-shadow: 0 0 0 0 currentColor;
+    }
+    50% {
+        border-color: #ff6b6b;
+        box-shadow: 0 0 8px 2px rgba(255, 107, 107, 0.6);
+    }
+}
+
+.table-cell-blink-border {
+    animation: tableCellBlinkBorder 1s infinite;
+}
+
+/**
+ * Table Cell Wiggle Animation (for incorrect mode)
+ * Usage: Applied automatically when cell mode is 'incorrect'
+ * Purpose: Makes cell wiggle to indicate incorrect answer
+ * Duration: 1 second, single iteration
+ */
+@keyframes tableCellWiggle {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+.table-cell-wiggle {
+    animation: tableCellWiggle 1s ease-in-out;
+}
+
+/**
+ * Table Cell Focus Blink Animation (for focus mode)
+ * Usage: Applied automatically when cell mode is 'focus'
+ * Purpose: Makes cell background blink to draw attention
+ * Duration: 1 second, infinite loop
+ */
+@keyframes tableCellFocusBlink {
+    0%, 100% {
+        background-color: #FFEB3B; /* yellow */
+    }
+    50% {
+        background-color: #FFF59D; /* lighter yellow */
+    }
+}
+
+.table-cell-focus-blink {
+    animation: tableCellFocusBlink 1s infinite;
+}
+
+/* ========================================
+ * HOTSPOT ANIMATIONS
+ * Pulse effects for clickable hotspots
+ * ======================================== */
+
+/**
+ * Hotspot Pulse Animation
+ * Usage: Applied automatically when animated prop is true
+ * Purpose: Draws attention to clickable hotspot areas
+ * Duration: 2 seconds, infinite loop
+ */
+@keyframes hotspotPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+        opacity: 1;
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(255, 153, 0, 0);
+        opacity: 0.9;
+    }
+}
+
+.hotspot-pulse {
+    animation: hotspotPulse 2s ease-in-out infinite;
+}
+
+.hotspot-component {
+    will-change: transform, opacity, box-shadow;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* ========================================
+ * BUTTON ANIMATIONS
+ * Pulse effects for user attention and feedback
+ * ======================================== */
+
+/**
+ * Next Button Pulse Animation
+ * Usage: Add 'math-app-pulse-animation' class to next button
+ * Purpose: Draws attention to primary action button
+ * Duration: 2 seconds, infinite loop
+ */
+@keyframes nextButtonPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 153, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 153, 0, 0);
+    }
+}
+
+.math-app-pulse-animation {
+    animation: nextButtonPulse var(--animation-pulse-duration) infinite;
+}
+
+/**
+ * Start Button Pulse Animation
+ * Usage: Add 'start-button-pulse' class to start button
+ * Purpose: Draws attention to the start button with orange glow
+ * Duration: 2 seconds, infinite loop
+ */
+@keyframes startButtonPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(255, 149, 0, 0.3), 0 0 0 0 rgba(255, 149, 0, 0.7);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(255, 149, 0, 0.4), 0 0 0 15px rgba(255, 149, 0, 0.3);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(255, 149, 0, 0.3), 0 0 0 0 rgba(255, 149, 0, 0);
+    }
+}
+
+.start-button-pulse {
+    animation: startButtonPulse var(--animation-pulse-duration) infinite;
+}
+
+/* ========================================
+ * HIGHLIGHT ANIMATIONS
+ * Visual emphasis for interactive elements
+ * ======================================== */
+
+/**
+ * Pulsate Animation
+ * Usage: Applied automatically to '.math-app-grid-cell-highlighted'
+ * Purpose: Highlights interactive grid cells with breathing effect
+ * Duration: 1.5 seconds, infinite loop
+ * Colors: Green glow effect
+ */
+@keyframes pulsate {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: var(--shadow-glow) #00ff00;
+    }
+    50% { 
+        transform: scale(1.1);
+        opacity: 0.8;
+        box-shadow: var(--shadow-glow) #00ff00, 0 0 50px #00ff00;
+    }
+}
+
+.math-app-grid-cell-highlighted {
+    animation: pulsate var(--animation-highlight-duration) infinite;
+}
+
+.math-app-grid-cell-highlighted:hover {
+    background-color: rgba(255, 255, 0, 0.3);
+    transform: none;
+    cursor: pointer;
+}
+
+/* ========================================
+ * PAGE TRANSITION ANIMATIONS
+ * Smooth transitions between content states
+ * ======================================== */
+
+/**
+ * Fade In Animation
+ * Usage: Add 'fadeIn' class to elements
+ * Purpose: Smooth element appearance
+ * Duration: 0.5 seconds
+ */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+    }
+    to { 
+        opacity: 1; 
+    }
+}
+
+.fadeIn {
+    animation: fadeIn 0.5s var(--transition-normal);
+}
+
+/* ========================================
+ * REACT 18 ANIMATIONS
+ * Animations used in math-applet.js
+ * ======================================== */
+
+/**
+ * Glow Animation
+ * Usage: Applied via CSS-in-JS in React components
+ * Purpose: Creates a glowing effect for elements
+ */
+@keyframes glow {
+    from { box-shadow: 0 0 5px currentColor; }
+    to { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+}
+
+/**
+ * Pulsate Animation (React version)
+ * Usage: Applied via CSS-in-JS in React components
+ * Purpose: Creates a pulsating scale effect
+ */
+@keyframes pulsate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/**
+ * Pulsate Glow Animation
+ * Usage: Applied via CSS-in-JS in React components
+ * Purpose: Combines pulsating and glowing effects
+ */
+@keyframes pulsateGlow {
+    0% { transform: scale(1); box-shadow: 0 0 5px currentColor; }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
+    100% { transform: scale(1); box-shadow: 0 0 5px currentColor; }
+}
+
+/**
+ * Spin Animation
+ * Usage: Applied via CSS-in-JS in React components
+ * Purpose: Creates a spinning effect
+ */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+ * ANIMATION UTILITY CLASSES
+ * Quick animation helpers
+ * ======================================== */
+
+.math-app-pulse-animation {
+    animation: pulsate 1.5s ease-in-out infinite;
+}
+
+.feedback-text-component {
+    transition: all 0.3s ease;
+}
+
+.progress-dot {
+    transition: all 0.3s ease;
+}
+
+.progress-dot:hover {
+    transform: scale(1.1);
+}
+
+.progress-dot:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
+}
+
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* ========================================
+ * TRANSITION UTILITIES
+ * Smooth transitions for interactive elements
+ * ======================================== */
+
+.smooth-transition {
+    transition: all var(--transition-normal);
+}
+
+.hover-scale {
+    transition: transform var(--transition-fast);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* ========================================
+ * ANIMATION PERFORMANCE OPTIMIZATIONS
+ * Hardware acceleration and performance hints
+ * ======================================== */
+
+.math-app-pulse-animation,
+.start-button-pulse,
+.math-app-grid-cell-highlighted,
+.fadeIn {
+    will-change: transform, opacity, box-shadow;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* ========================================
+ * RESPONSIVE ANIMATION SCALING
+ * Adjust animation intensity based on screen size
+ * ======================================== */
+
+/* Media queries removed - using coordinate and gc system for responsiveness */
+/* Note: Accessibility media query for reduced motion was also removed */
+
+/* ========================================
+ * QUADRILATERAL EDGE BLINK ANIMATION
+ * Blinking effect for quadrilateral edges
+ * ======================================== */
+
+/**
+ * Quadrilateral Edge Blink Animation
+ * Usage: Add 'quad-edge-blink' class to SVG line element
+ * Purpose: Makes edge blink to draw attention
+ * Duration: 1 second, infinite loop
+ */
+@keyframes quadEdgeBlink {
+    0%, 100% {
+        opacity: 1;
+        stroke-opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+        stroke-opacity: 0.3;
+    }
+}
+
+.quad-edge-blink {
+    animation: quadEdgeBlink 1s infinite;
+}
+
+/**
+ * Quadrilateral shape fill blink (default mode polygon)
+ * Usage: Add 'quad-shape-fill-blink' to the fill polygon; base fill-opacity from element (e.g. 0.35)
+ */
+@keyframes quadShapeFillBlink {
+    0%, 100% {
+        fill-opacity: 0.35;
+    }
+    50% {
+        fill-opacity: 0.06;
+    }
+}
+
+.quad-shape-fill-blink {
+    animation: quadShapeFillBlink 1.2s ease-in-out infinite;
+}
+
+/* ========================================
+ * ANGLE ARC ANIMATIONS
+ * Blinking and drawing animations for angle arcs
+ * ======================================== */
+
+/**
+ * Angle Arc Fill Blink Animation
+ * Usage: Add 'angle-arc-blink' class to arc path element
+ * Purpose: Makes arc fill blink to draw attention
+ * Duration: 1 second, infinite loop
+ */
+@keyframes angleArcBlink {
+    0%, 100% {
+        fill-opacity: 0.3;
+    }
+    50% {
+        fill-opacity: 0.8;
+    }
+}
+
+.angle-arc-blink {
+    animation: angleArcBlink 1s infinite;
+}
+
+/**
+ * Angle Arc Draw Animation
+ * Usage: Applied via inline style with stroke-dasharray and stroke-dashoffset
+ * Purpose: Animates the arc being drawn from start to end
+ * Duration: Configurable (default 2s)
+ * Note: stroke-dasharray should be set to path length, animation animates dashoffset from large value to 0
+ */
+@keyframes angleArcDraw {
+    from {
+        stroke-dashoffset: 10000px; /* Large value, will be clamped by stroke-dasharray */
+    }
+    to {
+        stroke-dashoffset: 0px;
+    }
+}
+
+/* ========================================
+ * BUILD MODE WIREFRAME ANIMATIONS
+ * Blinking effect for target wireframe in build mode
+ * ======================================== */
+
+/**
+ * Wireframe Blink Animation
+ * Usage: Add 'wireframe-blink' class to SVG polygon/path element
+ * Purpose: Makes target wireframe blink to draw attention
+ * Duration: 1 second by default (can be overridden with inline style animationDuration)
+ */
+@keyframes wireframeBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.wireframe-blink {
+    animation: wireframeBlink 1s infinite;
+}
+
+/* ========================================
+ * BUILD MODE SUCCESS ANIMATIONS
+ * Visual feedback when user achieves target shape
+ * ======================================== */
+
+/**
+ * Build Success Pulse Animation
+ * Usage: Add 'build-success-pulse' class to the quadrilateral container
+ * Purpose: Celebrates successful shape transformation
+ * Duration: 1.5 seconds, plays twice
+ */
+@keyframes buildSuccessPulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(0, 170, 0, 0));
+    }
+    50% {
+        transform: scale(1.02);
+        filter: drop-shadow(0 0 15px rgba(0, 170, 0, 0.6));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(0, 170, 0, 0));
+    }
+}
+
+.build-success-pulse {
+    animation: buildSuccessPulse 0.75s ease-in-out 2;
+}
+
+/**
+ * Build Success Glow Animation
+ * Usage: Applied to edges when target is achieved
+ * Purpose: Makes edges glow green briefly
+ * Duration: 1.5 seconds
+ */
+@keyframes buildSuccessGlow {
+    0%, 100% {
+        stroke: currentColor;
+        filter: none;
+    }
+    50% {
+        stroke: #00AA00;
+        filter: drop-shadow(0 0 8px rgba(0, 170, 0, 0.8));
+    }
+}
+
+.build-success-glow {
+    animation: buildSuccessGlow 1.5s ease-in-out;
+}
+
+/* ========================================
+ * BUILD MODE ANIMATIONS
+ * Animations for quadrilateral build mode
+ * ======================================== */
+
+/**
+ * Wireframe Blink Animation
+ * Usage: Add 'wireframe-blink' class to SVG polygon element
+ * Purpose: Makes target wireframe blink to draw attention
+ * Duration: 1 second (default), configurable via inline style
+ */
+@keyframes wireframeBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.wireframe-blink {
+    animation: wireframeBlink 1s infinite;
+}
+
+/**
+ * Build Mode Success Animation
+ * Usage: Add 'build-success-pulse' class to element
+ * Purpose: Celebrates successful target achievement with glow effect
+ * Duration: 0.6 seconds, 3 iterations
+ */
+@keyframes buildSuccessPulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 0 rgba(0, 200, 0, 0));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(0, 200, 0, 0.8));
+    }
+}
+
+.build-success-pulse {
+    animation: buildSuccessPulse 0.6s ease-in-out 3;
+}
+
+/**
+ * Build Mode Success Message Fade In
+ * Usage: Add 'build-success-message' class to message element
+ * Purpose: Fades in success message with scale effect
+ * Duration: 0.4 seconds
+ */
+@keyframes buildSuccessMessageIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.build-success-message {
+    animation: buildSuccessMessageIn 0.4s ease-out forwards;
+}
+
+/* ========================================
+ * SYMMETRY ANIMATION
+ * Fold and mismatch animations for symmetry demonstration
+ * ======================================== */
+
+/**
+ * Symmetry Fold Vertical Animation
+ * Usage: Applied via inline style for vertical axis fold
+ * Purpose: Flips left region over vertical axis
+ * Duration: Configurable (default 1.5s)
+ */
+@keyframes symmetryFoldVertical {
+    0% { 
+        transform: scaleX(1);
+    }
+    100% { 
+        transform: scaleX(-1);
+    }
+}
+
+/**
+ * Symmetry Fold Horizontal Animation
+ * Usage: Applied via inline style for horizontal axis fold
+ * Purpose: Flips top region over horizontal axis
+ * Duration: Configurable (default 1.5s)
+ */
+@keyframes symmetryFoldHorizontal {
+    0% { 
+        transform: scaleY(1);
+    }
+    100% { 
+        transform: scaleY(-1);
+    }
+}
+
+/**
+ * Symmetry Line Draw Animation
+ * Usage: Applied via stroke-dashoffset animation
+ * Purpose: Animates the dashed symmetry line being drawn
+ * Duration: 0.4s
+ */
+@keyframes symmetryLineDraw {
+    0% { 
+        stroke-dashoffset: 1000;
+    }
+    100% { 
+        stroke-dashoffset: 0;
+    }
+}
+
+/**
+ * Symmetry Mismatch Blink Animation
+ * Usage: Add 'symmetry-mismatch-blink' class or use inline
+ * Purpose: Blinks the folded region to highlight mismatch
+ * Duration: 0.8s, infinite loop
+ */
+@keyframes symmetryMismatchBlink {
+    0%, 100% { 
+        opacity: 0.8;
+    }
+    50% { 
+        opacity: 0.4;
+    }
+}
+
+.symmetry-mismatch-blink {
+    animation: symmetryMismatchBlink 0.8s ease-in-out infinite;
+}
+
+/**
+ * Symmetry Region Fade In Animation
+ * Usage: Applied to colored regions when they appear
+ * Purpose: Smooth fade-in for the split regions
+ * Duration: 0.3s
+ */
+@keyframes symmetryRegionFadeIn {
+    0% { 
+        opacity: 0;
+    }
+    100% { 
+        opacity: 0.6;
+    }
+}
+
+.symmetry-region-fade-in {
+    animation: symmetryRegionFadeIn 0.3s ease-out forwards;
+}

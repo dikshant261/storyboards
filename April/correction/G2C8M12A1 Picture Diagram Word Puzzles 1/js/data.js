@@ -132,7 +132,7 @@ const AppData = {
         },
         page3: {
           headerText: 'Let’s Complete the Picture Diagram.',
-          footerInstruction: "Tap » to continue.",
+          footerInstruction: "Drag the star.",
           instructionAfterQuiz: 'Tap » to proceed',
           verticalTextDiagram: 'Vertical Picture Diagram',
           letRecordNumberText: "Drag the star and place it in the<br/> correct row.<br/>Drag it out of the picture <br/>diagram to remove it.",

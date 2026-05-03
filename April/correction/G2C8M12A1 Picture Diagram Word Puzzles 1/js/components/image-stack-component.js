@@ -139,6 +139,9 @@ const ImageStackComponent = React.memo((props) => {
     };
 
     const handleQuizCompleted = (event) => {
+      // Prevent fruit-plate image change on page 3
+      if (parsedPageNumber === 3) return;
+
       console.log(`🎯 [ImageStack] Quiz completed for page ${event.detail?.pageNumber}`);
 
       const isCorrect = event.detail?.isCorrect;
