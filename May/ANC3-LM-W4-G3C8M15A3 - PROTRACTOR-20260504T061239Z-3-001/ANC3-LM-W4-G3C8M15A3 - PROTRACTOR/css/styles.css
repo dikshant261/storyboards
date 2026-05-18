@@ -1,0 +1,321 @@
+/* ============================================================================
+ * MATH LEARNING APP STYLES
+ * Component-specific styles and animations
+ * ============================================================================ */
+
+/* Import core design system */
+@import url('./core.css');
+
+/* Import animations */
+@import url('./animations.css');
+
+
+/* ============================================================================
+ * GRID POSITIONING SYSTEM
+ * ============================================================================ */
+
+/* Grid-positioned elements base styles */
+.main-container .header-container[data-grid-position],
+.main-container .character-container[data-grid-position],
+.main-container .dialog-container[data-grid-position] {
+    position: absolute;
+    z-index: var(--z-content);
+    margin: 0;
+    /* padding: 0; - Remove this to allow coordinate-based padding */
+    box-sizing: border-box;
+}
+
+/* Container positioning */
+.main-container .container1[data-grid-position],
+.main-container .container2[data-grid-position] {
+    position: absolute;
+    z-index: var(--z-content);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Table element positioning */
+.main-container .table-element[data-grid-position],
+.main-container [data-grid-position="visual-rep-table"] {
+    position: absolute !important;
+    z-index: var(--z-content);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* All grid-positioned elements reset */
+[data-grid-position]:not([data-grid-position="quizPanel"]) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Override pointer-events for interactive elements */
+[data-grid-position="next-button"],
+[data-grid-position="previous-button"],
+[data-grid-position="question-dropdown"] {
+    pointer-events: auto;
+}
+
+/* Dialog container styling */
+.dialog-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: var(--z-content);
+}
+
+/* ========================================
+ * CHARACTER & CONTENT COMPONENTS
+ * Visual elements and content display
+ * ======================================== */
+
+/* Character Container */
+.character-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-content);
+}
+
+.character-container .character-image {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    border: 3px solid transparent;
+    border-radius: var(--border-radius-md);
+    margin: 0;
+    padding: 0;
+}
+
+/* Dialog Content Styling */
+.dialog-container .dialog-content,
+.dialog-container .dialogue-content {
+    font-size: clamp(1rem, 2.5vw, 1.8rem);
+    color: var(--color-dialog-text);
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.4;
+    text-shadow: var(--shadow-sm);
+    margin: 0;
+    padding: 0;
+}
+
+/* Instruction Header */
+.instruction-header[data-grid-position] {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    pointer-events: auto;
+    user-select: text;
+    -webkit-user-select: text;
+    white-space: normal;
+    overflow: visible;
+    word-wrap: break-word;
+    position: absolute;
+    z-index: var(--z-notification);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Question dropdown styling - consolidated in Dropdown Components section above */
+
+/* ============================================================================
+ * CRITICAL OVERRIDES
+ * High-specificity rules to ensure component functionality
+ * ============================================================================ */
+
+/* ========================================
+ * BUTTON CLICKABILITY OVERRIDES
+ * Ensures buttons remain functional despite layout changes
+ * ======================================== */
+
+/* CRITICAL: Next Button Clickability Override */
+[data-grid-position="next-button"],
+.main-container [data-grid-position="next-button"],
+*[data-grid-position="next-button"],
+div[data-grid-position="next-button"],
+button[data-grid-position="next-button"] {
+    position: absolute;
+    display: block;
+    visibility: visible;
+    z-index: var(--z-button);
+    pointer-events: auto;
+    cursor: pointer;
+    isolation: isolate;
+    clip: auto;
+    clip-path: none;
+    overflow: visible;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    transform: none;
+    contain: none;
+}
+
+/* CRITICAL: Previous Button Clickability Override */
+[data-grid-position="previous-button"],
+.main-container [data-grid-position="previous-button"],
+*[data-grid-position="previous-button"],
+div[data-grid-position="previous-button"],
+button[data-grid-position="previous-button"] {
+    /* position: absolute; - REMOVED: Let grid positioning handle this */
+    display: block;
+    visibility: visible;
+    z-index: var(--z-button);
+    pointer-events: auto;
+    cursor: pointer;
+    isolation: isolate;
+    clip: auto;
+    clip-path: none;
+    overflow: visible;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    transform: none;
+    contain: none;
+}
+
+
+/* ============================================================================
+ * GLOBAL STYLES AND OVERRIDES
+ * Global styles that don't belong to specific components
+ * ============================================================================ */
+
+/* ============================================================================
+ * GRID OVERLAY SYSTEM
+ * Development and debugging tools
+ * ============================================================================ */
+
+/* ========================================
+ * Grid Overlay Container
+ * Development tool for visual grid positioning
+ * ======================================== */
+
+/* Grid overlay container - Development tool for positioning */
+#grid-overlay {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    z-index: var(--z-overlay);
+}
+
+/* Grid overlay control panel */
+#grid-overlay .grid-control-panel {
+    pointer-events: auto;
+    user-select: auto;
+    -webkit-user-select: auto;
+}
+
+/* Grid overlay highlights */
+.grid-highlight {
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+/* Ensure main container is visible for grid overlay calculations */
+.main-container {
+    border: 1px solid var(--color-overlay-light);
+}
+
+/* ============================================================================
+ * PAGE-SPECIFIC STYLES
+ * Styles for individual pages
+ * ============================================================================ */
+
+/* Page 1: Dark blue background with darker blue abstract shapes */
+.main-container[data-current-page="1"] {
+    background: linear-gradient(135deg, #1a3a5c 0%, #0d1f33 100%) !important;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(13, 31, 51, 0.8) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(13, 31, 51, 0.6) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(13, 31, 51, 0.4) 0%, transparent 60%) !important;
+    background-size: 100% 100%, 100% 100%, 100% 100% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Override background image for page 1 */
+.main-container[data-current-page="1"]::before {
+    background-color: transparent !important;
+    opacity: 0 !important;
+}
+
+/* ============================================================================
+ * PAGE 1 - PROTRACTOR INTRO (match reference layout)
+ * Dark blue background, no prev/next buttons on this page
+ * ============================================================================ */
+.main-container.math-app-container[data-current-page="1"] {
+    background-color: #1A2B42;
+    min-height: 100vh;
+}
+
+/* Page 1 Start button: orange/gold with 3D embossed effect */
+.main-container[data-current-page="1"] .page1-start-button.start-button-container,
+.main-container[data-current-page="1"] [data-element-name="start-button"] {
+    background-color: #FFA500 !important;
+    color: #fff !important;
+    box-shadow: 0 4px 0 0 rgba(180, 100, 0, 0.7) !important;
+    border: none !important;
+}
+
+.main-container[data-current-page="1"] .page1-start-button.start-button-container:hover,
+.main-container[data-current-page="1"] [data-element-name="start-button"]:hover {
+    box-shadow: 0 5px 0 0 rgba(180, 100, 0, 0.7) !important;
+}
+
+/* Page 1 left box: optional protractor-style background (semi-circle) */
+#page1-protractor-box.textbox-element {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Cpath fill='%23999' d='M20 20 A80 80 0 0 1 180 20 L180 95 L20 95 Z'/%3E%3Cline x1='100' y1='20' x2='100' y2='95' stroke='%23333' stroke-width='1'/%3E%3Cline x1='20' y1='95' x2='180' y2='95' stroke='%23333' stroke-width='1'/%3E%3Cline x1='100' y1='95' x2='140' y2='55' stroke='%23FFB347' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Page 2 - Understand PROTRACTOR (dark blue, same as page 1) */
+.main-container.math-app-container[data-current-page="2"] {
+    background-color: #1A2B42;
+    min-height: 100vh;
+}
+
+/* Page 2 part buttons: gold-orange gradient, rounded, white text */
+[data-element-name="page2-button-bring-protractor"],
+[data-element-name="page2-button-align-vertex"],
+[data-element-name="page2-button-align-base"],
+[data-element-name="page2-button-align-second-arm"] {
+    background: linear-gradient(180deg, #FFB347 0%, #E69500 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Page 2 nav buttons (prev/next) - gold-orange like page 1 */
+.main-container[data-current-page="2"] [data-element-name="previous-button"],
+.main-container[data-current-page="2"] [data-element-name="next-button"] {
+    background: linear-gradient(180deg, #FFB347 0%, #E69500 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+
+
+
+
+

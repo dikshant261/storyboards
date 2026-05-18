@@ -2219,7 +2219,7 @@ const createOptimizedGridPositionPages = () => {
           optionButtonWidth: 100,
           optionButtonHeight: 95,
           questionTextFontSize: '36gc', // Font size for question text (in gc units)
-          optionButtonTextSize: '26gc', // Font size for option button text (in gc units)
+          optionButtonTextSize: '24gc', // Font size for option button text (in gc units)
           optionButtonTextColor: '#000000', // Black text color for option buttons
           // Options data for QT4R (4 options in vertical layout)
           options: getI18nText("pages.page9.quizPanel.options"),
