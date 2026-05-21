@@ -789,6 +789,15 @@ const createOptimizedGridPositionPages = () => {
           loop: false,
           useSvgActionClicks: true,
           playClickSoundOnLottieActions: true,
+          autoLottieTouchTargets: false,
+          lottieTouchTargets: {
+            serve: {
+              left: "35.5%",
+              top: "60.5%",
+              width: "30.5%",
+              height: "11.5%",
+            },
+          },
           svgClickDataNames: {
             fill: ["refill", "FILL"],
             serve: ["serve", "SERVE"],
@@ -857,7 +866,7 @@ const createOptimizedGridPositionPages = () => {
         id: "page2-tap-animation-serve",
         name: "tap-animation",
         type: "custom",
-        coordinates: [1040, 410, 1110, 480],
+        coordinates: [970, 400, 1100, 450],
         zIndex: "999",
         props: {
           componentType: "ServeTapHintComponent",
@@ -1042,6 +1051,15 @@ const createOptimizedGridPositionPages = () => {
           loop: false,
           useSvgActionClicks: true,
           playClickSoundOnLottieActions: true,
+            autoLottieTouchTargets: false,
+            lottieTouchTargets: {
+              serve: {
+                left: "35.5%",
+                top: "60.5%",
+                width: "30.5%",
+                height: "11.5%",
+              },
+            },
           svgClickDataNames: {
             fill: ["refill", "FILL"],
             serve: ["serve", "SERVE"],
@@ -1264,7 +1282,7 @@ const createOptimizedGridPositionPages = () => {
         id: "page3-tap-animation-serve",
         name: "tap-animation",
         type: "custom",
-        coordinates: [980, 400, 1050, 470],
+        coordinates: [970, 400, 1100, 450],
         zIndex: "999",
         props: {
           componentType: "ServeTapHintComponent",
@@ -1439,7 +1457,7 @@ const createOptimizedGridPositionPages = () => {
         id: "page4-tap-animation",
         name: "tap-animation",
         type: "custom",
-        coordinates: [650, 790, 700, 890],
+        coordinates: [920, 810, 970, 910],
         zIndex: "999",
         props: {
           componentType: "TapGifComponent",

@@ -238,9 +238,9 @@ const QuestionComponent = React.memo((props) => {
     ...(processedIconMarginLeft ? { marginLeft: processedIconMarginLeft } : {}),
     ...(processedIconSize
       ? {
-          width: processedIconSize,
-          height: processedIconSize,
-        }
+        width: processedIconSize,
+        height: processedIconSize,
+      }
       : {}),
   };
 
@@ -248,8 +248,8 @@ const QuestionComponent = React.memo((props) => {
   const separatorStyle = {
     ...(processedIconSize
       ? {
-          height: processedIconSize,
-        }
+        height: processedIconSize,
+      }
       : {}),
   };
 
@@ -468,48 +468,48 @@ const QuestionComponent = React.memo((props) => {
       },
       Array.isArray(parsedText)
         ? parsedText.map((part, index) => {
-            if (part.type === "highlight") {
-              let highlightStyle = {
-                fontSize: part.fontSize,
-                fontWeight: part.bold ? "bold" : "normal",
-                textDecoration: part.underline ? "underline" : "none",
-              };
+          if (part.type === "highlight") {
+            let highlightStyle = {
+              fontSize: part.fontSize,
+              fontWeight: part.bold ? "bold" : "normal",
+              textDecoration: part.underline ? "underline" : "none",
+            };
 
-              // Apply highlight color as background and font color
-              if (part.highlightColor) {
-                highlightStyle.backgroundColor = part.highlightColor;
-                highlightStyle.padding = "2px 4px";
-                highlightStyle.borderRadius = "4px";
-              }
-
-              // Apply font color
-              if (part.fontColor) {
-                highlightStyle.color = part.fontColor;
-              }
-
-              return React.createElement(
-                "span",
-                {
-                  key: index,
-                  style: highlightStyle,
-                },
-                part.text,
-              );
-            } else {
-              // Handle HTML content like <br> tags or fraction spans
-              if (
-                part.text &&
-                (part.text.includes("<br>") || part.text.includes("<span"))
-              ) {
-                return React.createElement("span", {
-                  key: index,
-                  dangerouslySetInnerHTML: { __html: part.text },
-                });
-              } else {
-                return part.text;
-              }
+            // Apply highlight color as background and font color
+            if (part.highlightColor) {
+              highlightStyle.backgroundColor = part.highlightColor;
+              highlightStyle.padding = "2px 4px";
+              highlightStyle.borderRadius = "4px";
             }
-          })
+
+            // Apply font color
+            if (part.fontColor) {
+              highlightStyle.color = part.fontColor;
+            }
+
+            return React.createElement(
+              "span",
+              {
+                key: index,
+                style: highlightStyle,
+              },
+              part.text,
+            );
+          } else {
+            // Handle HTML content like <br> tags or fraction spans
+            if (
+              part.text &&
+              (part.text.includes("<br>") || part.text.includes("<span"))
+            ) {
+              return React.createElement("span", {
+                key: index,
+                dangerouslySetInnerHTML: { __html: part.text },
+              });
+            } else {
+              return part.text;
+            }
+          }
+        })
         : parsedText,
     ),
   );
@@ -603,10 +603,10 @@ const InformationAnalysisComponent = React.memo((props) => {
           typeof newFactsArray[0] === "object"
             ? newFactsArray
             : newFactsArray.map((fact) => ({
-                text: fact,
-                size: bodyTextSize,
-                color: "#FFD700",
-              }));
+              text: fact,
+              size: bodyTextSize,
+              color: "#FFD700",
+            }));
         console.log(
           "🔍 [InformationAnalysis] Appending to factsArray:",
           newFacts,
@@ -640,10 +640,10 @@ const InformationAnalysisComponent = React.memo((props) => {
           typeof newValueArray[0] === "object"
             ? newValueArray
             : newValueArray.map((value) => ({
-                text: value,
-                size: bodyTextSize,
-                color: "#00FF7F",
-              }));
+              text: value,
+              size: bodyTextSize,
+              color: "#00FF7F",
+            }));
         console.log(
           "🔍 [InformationAnalysis] Appending to valueArray:",
           newValues,
@@ -677,10 +677,10 @@ const InformationAnalysisComponent = React.memo((props) => {
           typeof newToFindArray[0] === "object"
             ? newToFindArray
             : newToFindArray.map((toFind) => ({
-                text: toFind,
-                size: bodyTextSize,
-                color: "#8A2BE2",
-              }));
+              text: toFind,
+              size: bodyTextSize,
+              color: "#8A2BE2",
+            }));
         console.log(
           "🔍 [InformationAnalysis] Appending to toFindArray:",
           newToFind,
@@ -1000,9 +1000,9 @@ const InformationAnalysisComponent = React.memo((props) => {
     borderRadius: processedBorderRadius,
     ...(processedSectionLeftBorderRadius
       ? {
-          borderTopLeftRadius: processedSectionLeftBorderRadius,
-          borderBottomLeftRadius: processedSectionLeftBorderRadius,
-        }
+        borderTopLeftRadius: processedSectionLeftBorderRadius,
+        borderBottomLeftRadius: processedSectionLeftBorderRadius,
+      }
       : {}),
     padding: processedCardPadding,
     marginBottom: processedCardSpacing,
@@ -1133,13 +1133,13 @@ const InformationAnalysisComponent = React.memo((props) => {
                 // Process gc units for size if needed
                 const processedItemSize =
                   itemSize &&
-                  typeof itemSize === "string" &&
-                  itemSize.includes("gc")
+                    typeof itemSize === "string" &&
+                    itemSize.includes("gc")
                     ? window.GridCellFontUtils?.processGcProperty
                       ? window.GridCellFontUtils.processGcProperty(
-                          itemSize,
-                          "fontSize",
-                        )
+                        itemSize,
+                        "fontSize",
+                      )
                       : itemSize
                     : itemSize;
 
@@ -1180,10 +1180,10 @@ const InformationAnalysisComponent = React.memo((props) => {
                       },
                       hasHTML
                         ? React.createElement("span", {
-                            dangerouslySetInnerHTML: {
-                              __html: textWithFractions,
-                            },
-                          })
+                          dangerouslySetInnerHTML: {
+                            __html: textWithFractions,
+                          },
+                        })
                         : textWithFractions,
                     ),
                   ],
@@ -1671,9 +1671,9 @@ const ConceptSummaryComponent = React.memo((props) => {
     borderRadius: processedBorderRadius,
     ...(processedSectionLeftBorderRadius
       ? {
-          borderTopLeftRadius: processedSectionLeftBorderRadius,
-          borderBottomLeftRadius: processedSectionLeftBorderRadius,
-        }
+        borderTopLeftRadius: processedSectionLeftBorderRadius,
+        borderBottomLeftRadius: processedSectionLeftBorderRadius,
+      }
       : {}),
     padding: processedCardPadding,
     marginBottom: processedCardSpacing,
@@ -1804,13 +1804,13 @@ const ConceptSummaryComponent = React.memo((props) => {
                 // Process gc units for size if needed
                 const processedItemSize =
                   itemSize &&
-                  typeof itemSize === "string" &&
-                  itemSize.includes("gc")
+                    typeof itemSize === "string" &&
+                    itemSize.includes("gc")
                     ? window.GridCellFontUtils?.processGcProperty
                       ? window.GridCellFontUtils.processGcProperty(
-                          itemSize,
-                          "fontSize",
-                        )
+                        itemSize,
+                        "fontSize",
+                      )
                       : itemSize
                     : itemSize;
 
@@ -1864,26 +1864,26 @@ const ConceptSummaryComponent = React.memo((props) => {
                     }),
                     hasHTML
                       ? React.createElement("span", {
+                        key: "text",
+                        style: {
+                          color: itemColor,
+                          fontSize: processedItemSize,
+                        },
+                        dangerouslySetInnerHTML: {
+                          __html: textWithFractions,
+                        },
+                      })
+                      : React.createElement(
+                        "span",
+                        {
                           key: "text",
                           style: {
                             color: itemColor,
                             fontSize: processedItemSize,
                           },
-                          dangerouslySetInnerHTML: {
-                            __html: textWithFractions,
-                          },
-                        })
-                      : React.createElement(
-                          "span",
-                          {
-                            key: "text",
-                            style: {
-                              color: itemColor,
-                              fontSize: processedItemSize,
-                            },
-                          },
-                          textWithFractions,
-                        ),
+                        },
+                        textWithFractions,
+                      ),
                   ],
                 );
               }),
@@ -2161,10 +2161,48 @@ const TeacherNoteComponent = React.memo((props) => {
   }, [componentId]);
 
   useEffect(() => {
+    if (componentId !== "page6-talk-text-box-black-background") return;
     const handler = (event) => {
-      if (componentId !== "page6-talk-text-box-black-background") return;
-      if (event.detail?.pageNumber === 6) {
+      if (event.detail?.page !== 6) return;
+      const choice = typeof window !== "undefined" ? window.page10SelectedChoice : null;
+      if (choice === "lessThan5") {
+        setCurrentTeacherText(getI18nText("pages.page6.talkBoxTextLessThan5", ""));
+      } else if (choice === "moreThan5") {
+        setCurrentTeacherText(getI18nText("pages.page6.talkBoxTextMoreThan5", ""));
+      }
+    };
+    window.addEventListener("pageChanged", handler);
+    return () => window.removeEventListener("pageChanged", handler);
+  }, [componentId]);
+
+  useEffect(() => {
+    if (componentId !== "page6-talk-text-box-black-background") return;
+    const handler = (event) => {
+      if (event.detail?.pageNumber !== 6) return;
+      const choice = typeof window !== "undefined" ? window.page10SelectedChoice : null;
+      if (choice === "lessThan5") {
+        setCurrentTeacherText(getI18nText("pages.page6.talkBoxTextAfterServeLessThan5", ""));
+      } else if (choice === "moreThan5") {
+        setCurrentTeacherText(getI18nText("pages.page6.talkBoxTextAfterServeMoreThan5", ""));
+      } else {
         setCurrentTeacherText(getI18nText("pages.page6.talkBoxText2", ""));
+      }
+    };
+    window.addEventListener("quizCompleted", handler);
+    return () => window.removeEventListener("quizCompleted", handler);
+  }, [componentId]);
+
+  useEffect(() => {
+    const handler = (event) => {
+      if (componentId !== "page10-talk-text-box-black-background") return;
+      if (event.detail?.pageNumber !== 10) return;
+
+      if (event.detail?.selectedChoice === "moreThan5") {
+        setCurrentTeacherText(getI18nText("pages.page10.talkBoxTextMoreThan5", ""));
+        return;
+      }
+      if (event.detail?.selectedChoice === "lessThan5") {
+        setCurrentTeacherText(getI18nText("pages.page10.talkBoxTextLessThan5", ""));
       }
     };
 
@@ -2188,9 +2226,9 @@ const TeacherNoteComponent = React.memo((props) => {
     },
     hasHtml
       ? React.createElement("span", {
-          style: contentStyle,
-          dangerouslySetInnerHTML: { __html: currentTeacherText },
-        })
+        style: contentStyle,
+        dangerouslySetInnerHTML: { __html: currentTeacherText },
+      })
       : React.createElement("span", { style: contentStyle }, currentTeacherText),
   );
 });
@@ -2360,7 +2398,7 @@ const SectionHeaderComponent = React.memo((props) => {
         const eventPageNumber = event.detail?.pageNumber;
         if (eventPageNumber === 10) {
           console.log('🔍 [SectionHeader] Quiz completed for page 8, updating instruction text');
-          setCurrentText(getI18nText("pages.page10.instructionAfterQuiz"));
+          setCurrentText(getI18nText("pages.page10.instructionAfterServe"));
         }
       };
 
@@ -2474,7 +2512,7 @@ const SectionHeaderComponent = React.memo((props) => {
         const eventPageNumber = event.detail?.pageNumber;
         if (eventPageNumber === 15) {
           console.log('🔍 [SectionHeader] Quiz completed for page 15, updating instruction text');
-          
+
         }
       };
 
@@ -2490,7 +2528,7 @@ const SectionHeaderComponent = React.memo((props) => {
         const eventPageNumber = event.detail?.pageNumber;
         if (eventPageNumber === 16) {
           console.log('🔍 [SectionHeader] Quiz completed for page 16, updating instruction text');
-                    setCurrentText(getI18nText('pages.page16.instructionAfterQuiz', 'Tap » to summarize'));
+          setCurrentText(getI18nText('pages.page16.instructionAfterQuiz', 'Tap » to summarize'));
 
         }
       };
@@ -4131,9 +4169,9 @@ const QuizPanelComponent = React.memo((props) => {
         return {
           ...baseStyle,
           color: '#ffff', // Vibrant green text color
-          backgroundColor:'#027139', // Transparent background
+          backgroundColor: '#027139', // Transparent background
           border: '3px dashed #05341c', // No outer border
-          borderRadius:'13px'
+          borderRadius: '13px'
         };
       case 'incorrect':
         return {
@@ -4141,7 +4179,7 @@ const QuizPanelComponent = React.memo((props) => {
           color: '#ffff', // Vibrant salmon text color
           backgroundColor: '#ed3131', // Transparent background
           border: '3px dashed #910505', // No outer border
-          borderRadius:'13px'
+          borderRadius: '13px'
         };
       case 'default':
       default:
@@ -4354,9 +4392,9 @@ const CalculationsDetailComponent = React.memo((props) => {
           Array.isArray(newToFindArray) && typeof newToFindArray[0] === "object"
             ? newToFindArray
             : newToFindArray.map((toFind) => ({
-                text: toFind,
-                color: "#8A2BE2",
-              }));
+              text: toFind,
+              color: "#8A2BE2",
+            }));
         console.log(
           "🔍 [CalculationsDetail] Appending to toFindArray:",
           newToFind,
@@ -4670,9 +4708,9 @@ const CalculationsDetailComponent = React.memo((props) => {
     borderRadius: processedBorderRadius,
     ...(processedSectionLeftBorderRadius
       ? {
-          borderTopLeftRadius: processedSectionLeftBorderRadius,
-          borderBottomLeftRadius: processedSectionLeftBorderRadius,
-        }
+        borderTopLeftRadius: processedSectionLeftBorderRadius,
+        borderBottomLeftRadius: processedSectionLeftBorderRadius,
+      }
       : {}),
     padding: processedCardPadding,
     marginBottom: processedCardSpacing,
@@ -5210,28 +5248,28 @@ const ComputeBoxComponent = React.memo((props) => {
       // Header Row (10% height)
       headerText
         ? React.createElement(
-            "div",
-            {
-              key: "header-row",
-              className: "compute-box-header-row",
-              style: headerRowStyle,
-            },
-            [
-              headerText,
-              React.createElement("div", {
-                key: "header-underline",
-                style: {
-                  position: "absolute",
-                  bottom: "0",
-                  left: "0",
-                  right: "0",
-                  height: processedHeaderRowUnderlineThickness,
-                  backgroundColor: headerRowUnderlineColor,
-                  marginTop: "8px",
-                },
-              }),
-            ],
-          )
+          "div",
+          {
+            key: "header-row",
+            className: "compute-box-header-row",
+            style: headerRowStyle,
+          },
+          [
+            headerText,
+            React.createElement("div", {
+              key: "header-underline",
+              style: {
+                position: "absolute",
+                bottom: "0",
+                left: "0",
+                right: "0",
+                height: processedHeaderRowUnderlineThickness,
+                backgroundColor: headerRowUnderlineColor,
+                marginTop: "8px",
+              },
+            }),
+          ],
+        )
         : null,
 
       // Main Content (90% height)

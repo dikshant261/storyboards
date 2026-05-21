@@ -32,6 +32,8 @@ const AppData = {
         lottieServe: "SERVE",
         machineFill: "Fill",
         machineServe: "Serve",
+        lessThan5: "Less than 5",
+        moreThan5: "More than 5",
       },
 
       common: {
@@ -104,12 +106,23 @@ const AppData = {
           instructionText: "Tap » to try a different machine.",
         },
         page6: {
-          talkBoxText:
-            "Let’s look at another kapsul machine!<br/><br/>It also has <span style='background-color:#D81629;padding:2px;'>RED</span> and <span style='background-color:#44D57A;padding:2px;'>GREEN</span> kapsuls.<br/><br/>Let’s see what happens when we try 10 serves.",
-          talkBoxText2:
-            '<span>Out of 10 kapsul serves, only 2 are <span style="background-color:#D81629;padding:2px;">RED</span>.<br/><br/>This gives us an idea of how likely getting <span style="background-color:#D81629;padding:2px;">RED</span> is.</span>',
+          talkBoxTextLessThan5: "<span>Your guess – <br/><span style='background-color:#D81629;padding:2px;'>RED</span> capsules in less than 5 out of 10 serves.<br/><br/>Let’s see what happens when we try 10 serves.</span>",
+          talkBoxTextMoreThan5: "<span>Your guess – <br/><span style='background-color:#D81629;padding:2px;'>RED</span> capsules in more than 5 out of 10 serves.<br/><br/>Let’s see what happens when we try 10 serves.</span>",
+          talkBoxTextAfterServeLessThan5: "<span>Your guess was correct! <br/>As this time, there were fewer  <span style='background-color:#D81629;padding:2px;'>RED</span> tubes, out of 10 capsule serves, only 2 are <span style='background-color:#D81629;padding:2px;'>RED</span>.</span>",
+          talkBoxTextAfterServeMoreThan5: "<span>Oh! Your guess was incorrect! <br/>As this time, there were fewer  <span style='background-color:#D81629;padding:2px;'>RED</span> tubes, out of 10 capsule serves, only 2 are  <span style='background-color:#D81629;padding:2px;'>RED</span>.</span>",
           instructionText: "Tap ‘Serve’ button 10 times.",
           instructionAfterServe: "Tap » to understand what this means.",
+          headerAfterQuiz: "What do you notice?",
+        },
+        page10: {
+          talkBoxText:
+            "Let’s look at another kapsul machine!<br/><br/>It also has <span style='background-color:#D81629;padding:2px;'>RED</span> and <span style='background-color:#44D57A;padding:2px;'>GREEN</span> kapsuls.<br/><br/>In 10 serves, how many  RED. capsules we will get this time?",
+          talkBoxTextMoreThan5:
+            '<span>Your guess – <br/><span style="background-color:#D81629;padding:2px;">RED</span> capsules in more than 5 out of 10 serves.<br/><br/> Let’s find out!</span>',
+          talkBoxTextLessThan5:
+            '<span>Your guess – <br/><span style="background-color:#D81629;padding:2px;">RED</span> capsules in less than 5 out of 10 serves.<br/><br/> Let’s find out!</span>',
+          instructionText: "Tap to choose one of the options.",
+          instructionAfterServe: "Tap » to find how many out of 10 come out RED.",
           headerAfterQuiz: "What do you notice?",
         },
         page7: {
@@ -173,6 +186,8 @@ const AppData = {
         lottieServe: "SAJI",
         machineFill: "Isi",
         machineServe: "Saji",
+        lessThan5: "Kurang dari 5",
+        moreThan5: "Lebih dari 5",
       },
 
       common: {
@@ -247,12 +262,35 @@ const AppData = {
           instructionText: "Ketuk » untuk mencoba mesin lain.",
         },
         page6: {
+          talkBoxTextLessThan5:
+            "<span>Tebakanmu – <br/><span style='background-color:#D81629;padding:2px;'>MERAH</span> kapsul kurang dari 5 dari 10 sajian.<br/><br/>Mari kita lihat apa yang terjadi saat kita mencoba 10 kali sajian.</span>",
+
+          talkBoxTextMoreThan5:
+            "<span>Tebakanmu – <br/><span style='background-color:#D81629;padding:2px;'>MERAH</span> kapsul lebih dari 5 dari 10 sajian.<br/><br/>Mari kita lihat apa yang terjadi saat kita mencoba 10 kali sajian.</span>",
+
+          talkBoxTextAfterSajiLessThan5:
+            "<span>Tebakanmu benar! <br/>Karena kali ini jumlah tabung <span style='background-color:#D81629;padding:2px;'>MERAH</span> lebih sedikit, dari 10 kali sajian kapsul, hanya 2 yang berwarna <span style='background-color:#D81629;padding:2px;'>MERAH</span>.</span>",
+
+          talkBoxTextAfterSajiMoreThan5:
+            "<span>Oh! Tebakanmu salah! <br/>Karena kali ini jumlah tabung <span style='background-color:#D81629;padding:2px;'>MERAH</span> lebih sedikit, dari 10 kali sajian kapsul, hanya 2 yang berwarna <span style='background-color:#D81629;padding:2px;'>MERAH</span>.</span>",
+
+          instructionText: "Ketuk tombol ‘Saji’ sebanyak 10 kali.",
+          instructionAfterSaji: "Ketuk » untuk memahami artinya.",
+          headerAfterQuiz: "Apa yang kamu perhatikan?",
+        },
+
+        page10: {
           talkBoxText:
-            "Mari kita lihat mesin kapsul lain!<br/><br/>Mesin ini juga berisi kapsul <span style='background-color:#D81629;padding:2px;'>MERAH</span> dan <span style='background-color:#44D57A;padding:2px;'>HIJAU</span>.<br/><br/>Mari kita lihat apa yang terjadi jika kita melakukan 10 kali saji.",
-          talkBoxText2:
-            '<span>Dari 10 kali saji, hanya 2 yang <span style="background-color:#D81629;padding:2px;">MERAH</span>.<br/><br/>Ini memberi gambaran seberapa besar peluang mendapat <span style="background-color:#D81629;padding:2px;">MERAH</span>.</span>',
-          instructionText: "Ketuk tombol ‘Saji’ 10 kali.",
-          instructionAfterServe: "Ketuk » untuk memahami maksudnya.",
+            "Mari kita lihat mesin kapsul lainnya!<br/><br/>Mesin ini juga memiliki kapsul <span style='background-color:#D81629;padding:2px;'>MERAH</span> dan <span style='background-color:#44D57A;padding:2px;'>HIJAU</span>.<br/><br/>Dalam 10 kali sajian, berapa banyak kapsul MERAH yang akan kita dapatkan kali ini?",
+
+          talkBoxTextMoreThan5:
+            '<span>Tebakanmu – <br/><span style="background-color:#D81629;padding:2px;">MERAH</span> kapsul lebih dari 5 dari 10 sajian.<br/><br/> Mari kita cari tahu!</span>',
+
+          talkBoxTextLessThan5:
+            '<span>Tebakanmu – <br/><span style="background-color:#D81629;padding:2px;">MERAH</span> kapsul kurang dari 5 dari 10 sajian.<br/><br/> Mari kita cari tahu!</span>',
+
+          instructionText: "Ketuk untuk memilih salah satu opsi.",
+          instructionAfterSaji: "Ketuk » untuk melihat berapa banyak dari 10 yang keluar berwarna MERAH.",
           headerAfterQuiz: "Apa yang kamu perhatikan?",
         },
         page7: {
@@ -287,10 +325,7 @@ const AppData = {
           instructionAfterQuiz:
             "Ketuk ‘Mulai Ulang’ jika ingin mencoba pelajaran ini lagi.",
         },
-        page10: {
-          talkBoxText: "Luar biasa Jax. Terakhir, angkat dua benda ini.",
-          instructionText: "Ketuk » untuk melihat cara Jax mengangkatnya.",
-        },
+
         page11: {
           talkBoxText: "Ya! Tentu,<br/> DeeTee.",
           instructionText: "Ketuk tombol untuk melihat cara Jax mengangkatnya.",

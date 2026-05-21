@@ -123,7 +123,7 @@ const AppData = {
           tubeColor2: Color2,
           tubeColor3: Color3,
           tubeColor4: Color4,
-          questionColor: Color2,
+          questionColor: Color5,
           answer: "noChance",
           maxServe: 1,
           serveFeedback:
@@ -219,7 +219,7 @@ const AppData = {
         page2: {
           talkBoxText:
             "Welcome to the KAPSUL factory! <br/><br/>Let’s try a kapsul from this machine.",
-          talkBoxText2: "<span>Yay!2, you got a <span style='background-color:#008DCE; padding:2px'>BLUE</span>  kapsul!<br/><br/>Out of the 4 pills, we can get one of them.</span>",
+          talkBoxText2: "<span>Yay! you got a <span style='background-color:#008DCE; padding:2px'>BLUE</span>  kapsul!<br/><br/>Out of the 4 pills, we can get one of them.</span>",
           instructionText: "Tap ‘Serve’ to get a kapsul.",
           instructionAfterServe: "Tap » to continue.",
         },
@@ -237,7 +237,7 @@ const AppData = {
         },
         page4: {
           title: 'Now you understand chance more clearly.',
-          mainText: " <span style='background-color:#3DDC84;padding:4px;'>Sure chance</span> means the event will happen every time because there is no other possible result.<br/><br/> <span style='background-color:#FFB347;padding:4px;'>Some chance</span> means the event may or may not happen because more than one result is possible.<br/><br/> <span style='background-color:#FF6B6B;padding:4px;'>No chance</span> means the event cannot happen because it is not possible at all.<br/><br/> Tap ‘Start Over’ to repeat this activity.",
+          mainText: " <span style='background-color:#3DDC84;padding:4px;color:black'>Sure chance</span> means the event will happen every time because there is no other possible result.<br/><br/> <span style='background-color:#FFB347;padding:4px;color:black'>Some chance</span> means the event may or may not happen because more than one result is possible.<br/><br/> <span style='background-color:#FF6B6B;padding:4px;color:black'>No chance</span> means the event cannot happen because it is not possible at all.<br/><br/> Tap ‘Start Over’ to repeat this activity.",
           sevenOfTenText: "<span style='color:#FFD966'>2 of 10 serves</span><br/>are  <span style='background-color:#D81629;padding:2px;'>RED</span>. kapsuls",
         },
         page5: {
@@ -500,7 +500,7 @@ const AppData = {
         page4: {
           title: "Sekarang kamu memahami peluang lebih jelas.",
           mainText:
-            " <span style='background-color:#3DDC84;padding:4px;'>Peluang pasti</span> berarti peristiwa itu akan terjadi setiap kali karena tidak ada hasil lain yang mungkin.<br/><br/> <span style='background-color:#FFB347;padding:4px;'>Ada peluang</span> berarti peristiwa itu mungkin terjadi atau tidak, karena lebih dari satu hasil yang mungkin.<br/><br/> <span style='background-color:#FF6B6B;padding:4px;'>Tidak ada peluang</span> berarti peristiwa itu tidak bisa terjadi karena sama sekali tidak mungkin.<br/><br/> Ketuk ‘Mulai Ulang’ untuk mengulang aktivitas ini.",
+            " <span style='background-color:#3DDC84;padding:4px; color:black'>Peluang pasti</span> berarti peristiwa itu akan terjadi setiap kali karena tidak ada hasil lain yang mungkin.<br/><br/> <span style='background-color:#FFB347;padding:4px; color:black'>Ada peluang</span> berarti peristiwa itu mungkin terjadi atau tidak, karena lebih dari satu hasil yang mungkin.<br/><br/> <span style='background-color:#FF6B6B;padding:4px; color:black'>Tidak ada peluang</span> berarti peristiwa itu tidak bisa terjadi karena sama sekali tidak mungkin.<br/><br/> Ketuk ‘Mulai Ulang’ untuk mengulang aktivitas ini.",
           sevenOfTenText:
             "<span style='color:#FFD966'>2 dari 10 kali saji</span><br/>adalah kapsul <span style='background-color:#D81629;padding:2px;'>MERAH</span>.",
         },

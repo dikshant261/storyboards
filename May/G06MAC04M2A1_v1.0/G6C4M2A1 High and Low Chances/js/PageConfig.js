@@ -21,12 +21,12 @@ const pageNavigation = {
   2: { prev: 1, next: 3 },
   3: { prev: 2, next: 4 },
   4: { prev: 3, next: 5 },
-  5: { prev: 4, next: 6 },
-  6: { prev: 5, next: 7 },
+  5: { prev: 4, next: 10 },
+  6: { prev: 10, next: 7 },
   7: { prev: 6, next: 8 },
   8: { prev: 7, next: 9 },
   9: { prev: 8, next: null },
-  10: { prev: 9, next: null },
+  10: { prev: 5, next: 6 },
   11: { prev: 10, next: 12 },
   12: { prev: 11, next: 13 },
   13: { prev: 12, next: 14 },
@@ -241,6 +241,43 @@ const setPageCompletedForSequence = (pageNumber) => {
     typeof window.PageCompletionManager.setPageCompleted === "function"
   ) {
     window.PageCompletionManager.setPageCompleted(pageNumber, false);
+  }
+};
+
+const applyPage10ChoiceButtonState = (selectedChoice) => {
+  if (typeof document === "undefined") return;
+  const selectedButtonName = selectedChoice === "moreThan5"
+    ? "more-than-5-button"
+    : selectedChoice === "lessThan5"
+      ? "less-than-5-button"
+      : null;
+  ["more-than-5-button", "less-than-5-button"].forEach((buttonName) => {
+    const buttonEl = document.querySelector(`[data-element-name="${buttonName}"]`);
+    if (!buttonEl) return;
+    if (buttonName === selectedButtonName) {
+      buttonEl.style.backgroundColor = "#7FAEDA";
+    }
+    buttonEl.style.pointerEvents = "none";
+    buttonEl.style.opacity = "0.6";
+    buttonEl.classList.add("disabled");
+    if (buttonEl.tagName === "BUTTON") {
+      buttonEl.disabled = true;
+    }
+  });
+};
+
+const handlePage10ChoiceClick = (selectedChoice) => {
+  if (typeof window !== "undefined" && typeof window.playCarClickSound === "function") {
+    window.playCarClickSound("correct");
+  }
+  applyPage10ChoiceButtonState(selectedChoice);
+  if (typeof window !== "undefined") {
+    window.page10SelectedChoice = selectedChoice;
+    window.dispatchEvent(
+      new CustomEvent("quizCompleted", {
+        detail: { pageNumber: 10, selectedChoice },
+      }),
+    );
   }
 };
 
@@ -1047,6 +1084,7 @@ const createOptimizedGridPositionPages = () => {
             1: "#D81629",
             4: "#6AA94C",
           },
+
         },
       },
       // maintext
@@ -1269,6 +1307,8 @@ const createOptimizedGridPositionPages = () => {
             1: "#D81629",
             4: "#6AA94C",
           },
+          dehighlightColors: ["#D81629"],
+
         },
       },
       // page5-instruction-text
@@ -1411,7 +1451,14 @@ const createOptimizedGridPositionPages = () => {
         zIndex: 55,
         props: {
           componentType: "TeacherNoteComponent",
-          text: getI18nText("pages.page6.talkBoxText", ""),
+          get text() {
+            if (window.page10SelectedChoice === "moreThan5") {
+              return getI18nText("pages.page6.talkBoxTextMoreThan5", "");
+            } else {
+              return getI18nText("pages.page6.talkBoxTextLessThan5", "");
+
+            }
+          },
           backgroundColor: "rgb(0,0,0,0.7)",
           border: "2px solid #70ACC7",
           borderRadius: "15gc",
@@ -1540,6 +1587,7 @@ const createOptimizedGridPositionPages = () => {
             1: "#6AA94C",
             3: "#D81629",
           },
+
         },
       },
       // page6-instruction-text
@@ -2033,6 +2081,8 @@ const createOptimizedGridPositionPages = () => {
             1: "#6AA94C",
             3: "#D81629",
           },
+          dehighlightColors: ["#6AA94C"],
+
         },
       },
       // page8-instruction-text
@@ -2165,11 +2215,11 @@ const createOptimizedGridPositionPages = () => {
         },
       },
     ],
-    
+
     9: [
 
-      
-      
+
+
       {
         id: "page9-chance-Depends-Text",
         name: "page9-chance-Depends-Text",
@@ -2203,7 +2253,7 @@ const createOptimizedGridPositionPages = () => {
           borderRadius: "15gc",
           textColor: "#ffff",
           fontSize: "44gc",
-          textAlign:'right',
+          textAlign: 'right',
           padding: "15gc",
           allowHtml: true,
         },
@@ -2223,7 +2273,7 @@ const createOptimizedGridPositionPages = () => {
           borderRadius: "15gc",
           textColor: "#ffff",
           fontSize: "44gc",
-          textAlign:'right',
+          textAlign: 'right',
           padding: "15gc",
           allowHtml: true,
         },
@@ -2243,7 +2293,7 @@ const createOptimizedGridPositionPages = () => {
           borderRadius: "15gc",
           textColor: "#ffff",
           fontSize: "44gc",
-          textAlign:'left',
+          textAlign: 'left',
           padding: "15gc",
           allowHtml: true,
         },
@@ -2469,7 +2519,7 @@ const createOptimizedGridPositionPages = () => {
           borderRadius: "15gc",
           textColor: "#ffff",
           fontSize: "44gc",
-          textAlign:'right',
+          textAlign: 'right',
           padding: "15gc",
           allowHtml: true,
         },
@@ -2489,7 +2539,7 @@ const createOptimizedGridPositionPages = () => {
           borderRadius: "15gc",
           textColor: "#ffff",
           fontSize: "44gc",
-          textAlign:'right',
+          textAlign: 'right',
           padding: "15gc",
           allowHtml: true,
         },
@@ -2509,7 +2559,7 @@ const createOptimizedGridPositionPages = () => {
           borderRadius: "15gc",
           textColor: "#ffff",
           fontSize: "44gc",
-          textAlign:'left',
+          textAlign: 'left',
           padding: "15gc",
           allowHtml: true,
         },
@@ -2575,6 +2625,310 @@ const createOptimizedGridPositionPages = () => {
                 window.advanceToNextQuestion();
               } else if (window.changePageAndNotify) {
                 window.changePageAndNotify(1);
+              }
+            }
+          },
+        },
+      },
+    ],
+    10: [
+      // page10 talk text box black background
+      {
+        id: "page10-talk-text-box-black-background",
+        name: "page10-talk-text-box-black-background",
+        type: "custom",
+        coordinates: [10, 5, 450, 800], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: getI18nText("pages.page10.talkBoxText", ""),
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "45gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+
+      // page10  black background
+      {
+        id: "page10-image1-black-background",
+        name: "page10-image1-black-background",
+        type: "custom",
+        coordinates: [455, 5, 1595, 800], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "TeacherNoteComponent",
+          text: "",
+          backgroundColor: "rgb(0,0,0,0.7)",
+          border: "2px solid #70ACC7",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+        },
+      },
+      // page2 kapsul machine 
+      {
+        id: "page10-kapsul-machine",
+        name: "page10-kapsul-machine",
+        type: "custom",
+        coordinates: [455, 5, 1595, 600], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "CapsuleMachineLottiePagePanel",
+          get animationData() {
+            return typeof window !== "undefined"
+              ? window.capsuleMachineAnimationData
+              : null;
+          },
+          assetBasePath: "assets/",
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "36gc",
+          padding: "15gc",
+          allowHtml: true,
+          showControls: false,
+          showActions: false,
+          showScenes: false,
+          autoplay: false,
+          loop: false,
+          playClickSoundOnLottieActions: false,
+          useSvgActionClicks: false,
+          svgClickDataNames: {
+            fill: ["refill", "FILL"],
+            serve: ["serve", "SERVE"],
+          },
+          pillPathMarkers: ["85,-12.518", "12.518999"],
+          invertPillFillServeOrder: false,
+          lottieScale: 1.296,
+          disableFillAction: true,
+          disableServeAction: true,
+          interactionPageNumber: 6,
+          serveColorOrder: [1, 1, 1, 1, 1, 3, 1, 3, 1, 1], // optional: any length, 1–4 = color1–4, repeats; Fill uses [0] for drop new
+          prefillMachine: true, // optional: start as after Fill (serves=1, hold last frame of fill scene)
+          maxDraws: 10,
+          color1: "#6AA94C",
+          color2: "#6AA94C",
+          color3: "#D81629",
+          color4: "#6AA94C",
+          onFill: () => {
+            if (typeof window === "undefined") return;
+            window.dispatchEvent(
+              new CustomEvent("capsuleServeReset", {
+                detail: { pageNumber: 6 },
+              }),
+            );
+          },
+          onServe: ({ drawCount, colorNumber }) => {
+            if (typeof window === "undefined") return;
+            window.dispatchEvent(
+              new CustomEvent("capsuleServeLockChanged", {
+                detail: { pageNumber: 6, locked: true },
+              }),
+            );
+            window.dispatchEvent(
+              new CustomEvent("capsuleServeProgress", {
+                detail: { pageNumber: 6, drawCount, colorNumber },
+              }),
+            );
+            if (drawCount === 10) {
+              window.dispatchEvent(
+                new CustomEvent("quizCompleted", {
+                  detail: { pageNumber: 6 },
+                }),
+              );
+            }
+          },
+        },
+      },
+      //more than 5 button
+      {
+        id: "page10-more-than-5-button",
+        name: "more-than-5-button",
+        type: "button",
+        coordinates: [650, 670, 940, 750],
+        zIndex: "var(--z-button)",
+        props: {
+          initialEnabled: false, // Disabled until quiz is completed
+          enableOnEvent: 'quizCompleted', // Listen for quiz completion
+          enableOnEventFilter: { pageNumber: 10 }, // Only enable for specific page
+          get text() {
+            return getI18nText("buttons.moreThan5", "");
+          },
+          onClick: () => {
+            handlePage10ChoiceClick("moreThan5");
+          },
+          fontSize: "40gc",
+          backgroundColor: "#F9A63B",
+          border: 'none',
+          borderRadius: "10gc",
+          padding: "15gc",
+          color: "#fff",
+          fontWeight: "bold",
+          cursor: "pointer",
+        },
+      },
+      //less than 5 button
+      {
+        id: "page10-less-than-5-button",
+        name: "less-than-5-button",
+        type: "button",
+        coordinates: [1040, 670, 1330, 750],
+        zIndex: "var(--z-button)",
+        props: {
+          initialEnabled: false, // Disabled until quiz is completed
+          enableOnEvent: 'quizCompleted', // Listen for quiz completion
+          enableOnEventFilter: { pageNumber: 10 }, // Only enable for specific page
+          get text() {
+            return getI18nText("buttons.lessThan5", "");
+          },
+          onClick: () => {
+            handlePage10ChoiceClick("lessThan5");
+          },
+          fontSize: "40gc",
+          backgroundColor: "#F9A63B",
+          border: 'none',
+          borderRadius: "10gc",
+          padding: "15gc",
+          color: "#fff",
+          fontWeight: "bold",
+          cursor: "pointer",
+        },
+      },
+      // page10-instruction-text
+      {
+        id: "page10-instruction-text",
+        name: "page10-instruction-text",
+        type: "custom",
+        coordinates: [150, 820, 1450, 895], // Positioned below question text box
+        zIndex: 55,
+        props: {
+          componentType: "SectionHeaderComponent",
+          text: getI18nText("pages.page10.instructionText", ""),
+          backgroundColor: "transparent",
+          border: "none",
+          borderRadius: "15gc",
+          textColor: "#ffff",
+          fontSize: "42gc",
+          padding: "15gc",
+          textAlign: "center",
+          underlineFirstWord: false,
+          allowHtml: true,
+        },
+      },
+      // Tap Animation GIF
+      {
+        id: "page10-tap-animation",
+        name: "tap-animation",
+        type: "custom",
+        coordinates: [1450, 840, 1500, 890],
+        zIndex: "999",
+        props: {
+          componentType: "TapGifComponent",
+          imageSrc: "assets/tap.gif",
+          imageAlt: getI18nText("common.tapAlt", ""),
+          initialVisible: false, // Hidden until quiz is completed
+        },
+      },
+
+      // Optimized Next button - Three Layer Structure
+      {
+        id: "page10-next-button",
+        name: "next-button",
+        type: "button",
+        coordinates: [1450, 820, 1595, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          initialEnabled: false, // Disabled until quiz is completed
+          enableOnEvent: 'quizCompleted', // Listen for quiz completion
+          enableOnEventFilter: { pageNumber: 10 }, // Only enable for specific page
+          get text() {
+            const pageNumber = extractPageNumberFromId("page10-next-button");
+            return getNextButtonText(pageNumber);
+          },
+          onClick: () => {
+            if (typeof window !== "undefined" && window.playCarClickSound) {
+              window.playCarClickSound("next");
+            }
+            const pageNumber = extractPageNumberFromId("page10-next-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.next !== null && typeof window !== "undefined") {
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.next);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.next);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.next },
+                  }),
+                );
+                console.log(
+                  "📄 [Next Button]",
+                  getI18nText("messages.nextButtonpage10", ""),
+                );
+              }
+            } else if (nav && nav.next === null) {
+              // On last page, "Start Over" functionality
+              console.log(
+                "🔄 [Next Button]",
+                getI18nText(
+                  "messages.lastPageStartingOver",
+                  "Last page - Starting over",
+                ),
+              );
+              if (window.advanceToNextQuestion) {
+                window.advanceToNextQuestion();
+              } else if (window.changePageAndNotify) {
+                window.changePageAndNotify(1);
+              }
+            }
+          },
+        },
+      },
+
+      // Previous button - Three Layer Structure
+      {
+        id: "page10-previous-button",
+        name: "previous-button",
+        type: "button",
+        coordinates: [5, 820, 150, 895],
+        zIndex: "var(--z-button)",
+        props: {
+          get text() {
+            return getI18nText("buttons.previous", "");
+          },
+          get disabled() {
+            const pageNumber = extractPageNumberFromId("page10-previous-button");
+            return isPrevButtonDisabled(pageNumber);
+          },
+          onClick: () => {
+            const pageNumber = extractPageNumberFromId("page10-previous-button");
+            const nav = getPageNavigation(pageNumber);
+            if (nav && nav.prevPage !== null && typeof window !== "undefined") {
+              if (window.playCarClickSound) {
+                window.playCarClickSound("previous");
+              }
+              if (window.changePageAndNotify) {
+                window.changePageAndNotify(nav.prev);
+              } else if (window.navigateToPage) {
+                window.navigateToPage(nav.prev);
+              } else {
+                window.dispatchEvent(
+                  new CustomEvent("pageChanged", {
+                    detail: { page: nav.prev },
+                  }),
+                );
+                console.log(
+                  "📄 [Previous Button]",
+                  getI18nText("messages.previousButtonPage1", ""),
+                );
               }
             }
           },

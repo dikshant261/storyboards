@@ -219,7 +219,7 @@ function bindSvgDataNameClicks(svg, names, action, getMachineApi, playSound, bou
           ? api.isFillDisabled?.() === true
           : api.isServeDisabled?.() === true;
         if (isDisabled) return;
-        playSound();
+        if (action !== "fill") playSound();
         if (action === "fill") api.fill?.();
         else api.serve?.();
       };
@@ -305,7 +305,7 @@ function bindFillServeByPillPathParents(
         ? api.isFillDisabled?.() === true
         : api.isServeDisabled?.() === true;
       if (isDisabled) return;
-      playSound();
+      if (action !== "fill") playSound();
       if (action === "fill") api.fill?.();
       else api.serve?.();
     };
@@ -1966,13 +1966,13 @@ const CapsuleMachineLottiePagePanel = memo(function CapsuleMachineLottiePagePane
             key: `lottie-hit-${action}`,
             "aria-label": action === "fill" ? faceFillLabel : faceServeLabel,
             onClick: () => {
-              playOverlayClickSound();
               const api = lottieMachineRef.current;
               if (!api) return;
               const isDisabled = action === "fill"
                 ? api.isFillDisabled?.() === true
                 : api.isServeDisabled?.() === true;
               if (isDisabled) return;
+              if (action !== "fill") playOverlayClickSound();
               if (action === "fill") api.fill?.();
               else api.serve?.();
             },
@@ -2095,6 +2095,7 @@ const CapsuleServeTrackerComponent = memo(function CapsuleServeTrackerComponent(
     numberColor = "#f2f2f2",
     capsuleStrokeColor = "rgba(255, 255, 255, 0.2)",
     slotBackgroundColor = "rgba(16, 54, 78, 0.45)",
+    dehighlightColors = [],
   } = props;
 
   const slotCount = Math.max(1, Math.floor(Number(totalSlots)) || 10);
@@ -2266,6 +2267,7 @@ const CapsuleServeTrackerComponent = memo(function CapsuleServeTrackerComponent(
     Array.from({ length: slotCount }, (_, index) => {
       const capsuleColor = servedSlots[index];
       const isFilled = Boolean(capsuleColor);
+      const isDehighlighted = capsuleColor && Array.isArray(dehighlightColors) && dehighlightColors.includes(capsuleColor);
       return React.createElement(
         "div",
         {
@@ -2296,6 +2298,7 @@ const CapsuleServeTrackerComponent = memo(function CapsuleServeTrackerComponent(
             boxShadow: capsuleColor
               ? "inset -9px -12px 0 rgba(0, 0, 0, 0.18), inset 4px 6px 0 rgba(255, 255, 255, 0.08)"
               : "none",
+            opacity: isDehighlighted ? 0.6 : 1,
             position: "relative",
           },
         },
